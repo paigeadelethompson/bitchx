@@ -373,6 +373,7 @@ static	IrcVariable irc_variable[] =
 	{ "SHOW_WHO_HOPCOUNT",0, 	BOOL_TYPE_VAR,	DEFAULT_SHOW_WHO_HOPCOUNT, NULL, NULL, 0, 0 },
 	{ "SOCKS_HOST",0,		STR_TYPE_VAR,	0, NULL, set_use_socks, 0, VF_BITCHX },
 	{ "SOCKS_PORT",0,		INT_TYPE_VAR,	DEFAULT_SOCKS_PORT, NULL, NULL, 0, VF_BITCHX },
+	{ "SSL_VERIFY",0,		BOOL_TYPE_VAR,	1, NULL, NULL, 0, VF_BITCHX },
 	{ "STATUS_AWAY",0,		STR_TYPE_VAR,	0, NULL, BX_build_status, 0, 0 },
 	{ "STATUS_CDCCCOUNT",0,		STR_TYPE_VAR,	0, NULL, BX_build_status, 0, 0 },
 	{ "STATUS_CHANNEL",0,		STR_TYPE_VAR,	0, NULL, BX_build_status, 0, 0 },

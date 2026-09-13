@@ -491,7 +491,7 @@ static int finalize_server_connect(int refnum, int c_server)
 			 */
 			if (!server_list[refnum].ctx)
 			{
-				server_list[refnum].ctx = SSL_CTX_new(SSLv23_client_method());
+				server_list[refnum].ctx = SSL_CTX_new(TLS_client_method());
 
 				if (!server_list[refnum].ctx)
 				{
@@ -500,6 +500,9 @@ static int finalize_server_connect(int refnum, int c_server)
 					close_server(refnum, NULL);
 					return -1;
 				}
+
+				/* Use the system trust store for hostname/cert verification. */
+				SSL_CTX_set_default_verify_paths(server_list[refnum].ctx);
 			}
 
 			/* Allocate an SSL for this connection.  This will be freed at close time. */
@@ -511,6 +514,14 @@ static int finalize_server_connect(int refnum, int c_server)
 				close_server(refnum, NULL);
 				return -1;
 			}
+
+			/* Advertise the server name (SNI) and verify the certificate
+			 * unless the user disabled verification with /set ssl_verify.
+			 */
+			SSL_set_tlsext_host_name(server_list[refnum].ssl_fd, server_list[refnum].name);
+			SSL_set_verify(server_list[refnum].ssl_fd,
+				BX_get_int_var(SSL_VERIFY_VAR) ? SSL_VERIFY_PEER : SSL_VERIFY_NONE,
+				NULL);
 
 			SSL_set_fd (server_list[refnum].ssl_fd, server_list[refnum].read);
 		}
@@ -538,6 +549,21 @@ static int finalize_server_connect(int refnum, int c_server)
 			SSL_show_errors();
 			close_server(refnum, NULL);
 			return -2;
+		}
+
+		if (BX_get_int_var(SSL_VERIFY_VAR))
+		{
+			long verify_result = SSL_get_verify_result(server_list[refnum].ssl_fd);
+
+			if (verify_result != X509_V_OK)
+			{
+				say("SSL certificate verification failed for %s: %s",
+					server_list[refnum].name,
+					X509_verify_cert_error_string(verify_result));
+				SSL_show_errors();
+				close_server(refnum, NULL);
+				return -2;
+			}
 		}
 
 		say("SSL server %s connected using %s (%s)",
@@ -2367,12 +2393,18 @@ int	BX_check_server_redirect (char *who)
 
 void	register_server (int ssn_index, char *nick)
 {
-	int old_from_server = from_server;
+int	old_from_server = from_server;
 	if (server_list[ssn_index].password)
 		my_send_to_server(ssn_index, "PASS %s", server_list[ssn_index].password);
 
+	server_list[ssn_index].cap_flag = 0;
+	my_send_to_server(ssn_index, "CAP LS 302");
+
 	if (server_list[ssn_index].sasl_nick && server_list[ssn_index].sasl_pass)
+	{
 		my_send_to_server(ssn_index, "CAP REQ :sasl");
+		server_list[ssn_index].cap_flag |= (CAP_REQ_SENT | CAP_SASL);
+	}
 		
 	my_send_to_server(ssn_index, "USER %s %s %s :%s", username, 
 			(send_umode && *send_umode) ? send_umode : 
@@ -3413,7 +3445,7 @@ void show_server_map (void)
 #ifdef ONLY_STD_CHARS
 	char *ascii="-> ";
 #else
-	char *ascii = "юд> ";
+	char *ascii = "О©╫О©╫> ";
 #endif			    
 	if (map) prevdist = map->hopcount;
 

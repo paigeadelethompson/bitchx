@@ -11,6 +11,10 @@
  */
 #ifndef SERVER_H_
 #define SERVER_H_
+
+/* IRCv3 CAP negotiation state (server_list[i].cap_flag). */
+#define CAP_REQ_SENT	0x01	/* CAP REQ has been sent */
+#define CAP_SASL	0x02	/* SASL was requested */
   
 /* for ChannelList */
 #include "who.h"
@@ -165,6 +169,7 @@ typedef	struct
 #endif
 	char *sasl_nick;
 	char *sasl_pass;
+	int cap_flag;		/* IRCv3 CAP negotiation state, see source/parse.c */
 
 /* recv_nick: the nickname of the last person to send you a privmsg */
 	char *recv_nick;

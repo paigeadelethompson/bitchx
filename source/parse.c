@@ -38,6 +38,7 @@ CVS_REVISION(parse_c)
 #include "notify.h"
 #include "status.h"
 #include "list.h"
+#include "server.h"
 #include "userlist.h"
 #include "misc.h"
 #include "whowas.h"
@@ -879,36 +880,98 @@ static	void p_error(char *from, char **ArgList)
  * This only handles negotiating the SASL capability with the PLAIN method. It would
  * be good to add DH-BLOWFISH, and later, full capability support.
  */
+static	Server *cap_server (int idx)
+{
+	Server *list = get_server_list();
+	return list ? list + idx : NULL;
+}
+
 static	void p_cap(char *from, char **ArgList)
 {
 	char *caps, *p;
+	Server *srv;
 
-	if (!strcmp(ArgList[1], "ACK"))
+	if (!strncmp(ArgList[1], "LS", 2))
+	{
+		/* Server advertises its capabilities. Unless we already sent a
+		 * CAP REQ (SASL), ask for the passive capabilities we support. */
+		if (!is_server_connected(from_server) && (srv = cap_server(from_server)) != NULL
+		    && !(srv->cap_flag & CAP_REQ_SENT))
+		{
+			srv->cap_flag |= CAP_REQ_SENT;
+			my_send_to_server(from_server, "CAP REQ :away-notify multi-prefix");
+		}
+		return;
+	}
+	else if (!strncmp(ArgList[1], "NEW", 3) || !strncmp(ArgList[1], "DEL", 3))
+		return;
+
+	if (!strncmp(ArgList[1], "ACK", 3))
 	{
 		caps = LOCAL_COPY(ArgList[2]);
 		while ((p = next_arg(caps, &caps)) != NULL)
 		{
 			/* Only AUTHENTICATE before registration */
-			if (!strcmp(p, "sasl") && !is_server_connected(from_server))
+			if (!strncmp(p, "sasl", 4) && (srv = cap_server(from_server)) != NULL
+			    && (srv->cap_flag & CAP_SASL) && !is_server_connected(from_server))
 			{
 				my_send_to_server(from_server, "AUTHENTICATE PLAIN");
 				break;
 			}
 		}
+
+		/* No SASL in flight: our request is answered, so we are done. */
+		if ((srv = cap_server(from_server)) != NULL && !(srv->cap_flag & CAP_SASL))
+			my_send_to_server(from_server, "CAP END");
 	}
-	else if (!strcmp(ArgList[1], "NAK"))
+	else if (!strncmp(ArgList[1], "NAK", 3))
 	{
 		caps = LOCAL_COPY(ArgList[2]);
 		while ((p = next_arg(caps, &caps)) != NULL)
 		{
 			/* End capability negotiation to continue registration */
-			if (!strcmp(p, "sasl") && !is_server_connected(from_server))
+			if (!strncmp(p, "sasl", 4) && !is_server_connected(from_server))
 			{
 				my_send_to_server(from_server, "CAP END");
 				break;
 			}
 		}
+
+		/* Nothing was requested for us, or we didn't ask for SASL: done. */
+		if ((srv = cap_server(from_server)) != NULL && !(srv->cap_flag & CAP_SASL))
+			my_send_to_server(from_server, "CAP END");
 	}
+}
+
+static	void p_away(char *from, char **ArgList)
+{
+	ChannelList *chan;
+	NickList *n;
+	char *message = ArgList[0];
+
+	if (!from || !*from)
+		return;
+
+	/* Update the away status of everyone who shares a channel with us. */
+	for (chan = walk_channels(from, 1, from_server); chan;
+		chan = walk_channels(from, 0, -1))
+	{
+		if ((n = find_nicklist_in_channellist(from, chan, 0)) != NULL)
+		{
+			if (message)
+				n->flags |= NICK_AWAY;
+			else
+				n->flags &= ~NICK_AWAY;
+		}
+	}
+
+	if (!my_stricmp(from, get_server_nickname(from_server)))
+		return;
+
+	if (message)
+		put_it("%s", convert_output_format("$G $0- is away: $1-", "%s %s", from, message));
+	else
+		put_it("%s", convert_output_format("$G $0- is no longer away", "%s", from));
 }
 
 static	void p_authenticate(char *from, char **ArgList)
@@ -1825,7 +1888,7 @@ static void p_rpong (char *from, char **ArgList)
 protocol_command rfc1459[] = {
 {	"ADMIN",	NULL,		NULL,		0,		0, 0},
 {	"AUTHENTICATE",	p_authenticate,	NULL,		0,		0, 0},
-{	"AWAY",		NULL,		NULL,		0,		0, 0},
+{	"AWAY",		p_away,		NULL,		0,		0, 0},
 {	"CAP",		p_cap,		NULL,		0,		0, 0},
 { 	"CONNECT",	NULL,		NULL,		0,		0, 0},
 {	"ERROR",	p_error,	NULL,		0,		0, 0},

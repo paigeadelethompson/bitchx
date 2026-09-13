@@ -27,6 +27,24 @@ CVS_REVISION(newio_c)
 #include "winbitchx.h"
 #endif
 
+/*
+ * Polling backends.  epoll on Linux and kqueue on the BSD/macOS family
+ * replace select() to scale past FD_SETSIZE; everything else continues
+ * to use the traditional select() path.
+ */
+#ifdef HAVE_SYS_EPOLL_H
+# define BX_POLL_EPOLL
+#endif
+#ifdef HAVE_SYS_EVENT_H
+# define BX_POLL_KQUEUE
+#endif
+#ifdef BX_POLL_EPOLL
+#include <sys/epoll.h>
+#endif
+#ifdef BX_POLL_KQUEUE
+#include <sys/event.h>
+#endif
+
 #define MAIN_SOURCE
 #include "modval.h"
 
@@ -375,6 +393,202 @@ int BX_dgets (char *str, int des, int buffer, int buffersize, void *ssl_fd)
 
 static int global_max_fd = -1;
 
+#if defined(BX_POLL_EPOLL) || defined(BX_POLL_KQUEUE)
+#define MAX_POLL_EVENTS 256
+static int   io_poll_fd = -1;
+static fd_set poll_reads, poll_writes;
+
+/*
+ * Lazily create the epoll/kqueue descriptor and reset our mirror of
+ * what interest we have registered.
+ */
+static void io_poll_ensure (void)
+{
+	if (io_poll_fd >= 0)
+		return;
+
+	FD_ZERO(&poll_reads);
+	FD_ZERO(&poll_writes);
+
+#ifdef BX_POLL_EPOLL
+#ifdef EPOLL_CLOEXEC
+	io_poll_fd = epoll_create1(EPOLL_CLOEXEC);
+#endif
+	if (io_poll_fd < 0)
+		io_poll_fd = epoll_create(MAX_POLL_EVENTS);
+#else
+	io_poll_fd = kqueue();
+#endif
+}
+
+/*
+ * Bring the epoll/kqueue interest list in line with what the caller
+ * wants for a single fd.  This is level-triggered on both backends, so
+ * the semantics match select() exactly: an fd reports ready whenever it
+ * is ready to read/write, not just on the next transition.
+ */
+static void io_poll_sync_one (int fd, int want_read, int want_write)
+{
+	int have_read, have_write;
+
+	if (fd < 0 || fd >= FD_SETSIZE)
+		return;
+
+	io_poll_ensure();
+	if (io_poll_fd < 0)
+		return;
+
+	have_read = FD_ISSET(fd, &poll_reads) ? 1 : 0;
+	have_write = FD_ISSET(fd, &poll_writes) ? 1 : 0;
+	if (have_read == want_read && have_write == want_write)
+		return;
+
+#ifdef BX_POLL_EPOLL
+	{
+		struct epoll_event ev;
+
+		memset(&ev, 0, sizeof(ev));
+		ev.events = (want_read ? EPOLLIN : 0) |
+			(want_write ? EPOLLOUT : 0) | EPOLLERR | EPOLLHUP;
+		ev.data.fd = fd;
+
+		if (!have_read && !have_write)
+		{
+			if (epoll_ctl(io_poll_fd, EPOLL_CTL_ADD, fd, &ev) == -1)
+				return;			/* closed, or not pollable */
+		}
+		else if (!want_read && !want_write)
+		{
+			if (epoll_ctl(io_poll_fd, EPOLL_CTL_DEL, fd, NULL) == -1)
+				return;
+		}
+		else
+		{
+			if (epoll_ctl(io_poll_fd, EPOLL_CTL_MOD, fd, &ev) == -1)
+				return;
+		}
+	}
+#else
+	{
+		struct kevent changes[2];
+		int n = 0;
+
+		if (want_read && !have_read)
+			EV_SET(&changes[n++], fd, EVFILT_READ, EV_ADD, 0, 0, NULL);
+		else if (!want_read && have_read)
+			EV_SET(&changes[n++], fd, EVFILT_READ, EV_DELETE, 0, 0, NULL);
+		if (want_write && !have_write)
+			EV_SET(&changes[n++], fd, EVFILT_WRITE, EV_ADD, 0, 0, NULL);
+		else if (!want_write && have_write)
+			EV_SET(&changes[n++], fd, EVFILT_WRITE, EV_DELETE, 0, 0, NULL);
+
+		if (n && kevent(io_poll_fd, changes, n, NULL, 0, NULL) == -1)
+			return;
+	}
+#endif
+
+	if (want_read)
+		FD_SET(fd, &poll_reads);
+	else
+		FD_CLR(fd, &poll_reads);
+	if (want_write)
+		FD_SET(fd, &poll_writes);
+	else
+		FD_CLR(fd, &poll_writes);
+}
+
+/*
+ * Drop all interest for a freshly closed fd.
+ */
+static void io_poll_remove (int fd)
+{
+	if (io_poll_fd < 0)
+		return;
+	io_poll_sync_one(fd, 0, 0);
+}
+
+/*
+ * Wait for readiness, stamping the ready bits into *rd and *wd exactly
+ * the way select() used to.
+ */
+static int io_poll_wait (fd_set *rd, fd_set *wd, const struct timeval *timeout)
+{
+	int i, n, cnt = 0;
+
+	io_poll_ensure();
+	if (io_poll_fd < 0)
+		return -1;
+
+#ifdef BX_POLL_EPOLL
+	{
+		struct epoll_event events[MAX_POLL_EVENTS];
+		int msec = timeout ?
+			(timeout->tv_sec * 1000 + timeout->tv_usec / 1000) : -1;
+
+		n = epoll_wait(io_poll_fd, events, MAX_POLL_EVENTS, msec);
+		if (n < 0)
+			return -1;
+
+		for (i = 0; i < n; i++)
+		{
+			int fd = events[i].data.fd;
+			u_32int_t flags = events[i].events;
+
+			if (fd < 0 || fd >= FD_SETSIZE)
+				continue;
+			if ((flags & (EPOLLIN | EPOLLERR | EPOLLHUP)) &&
+			    !FD_ISSET(fd, rd))
+			{
+				FD_SET(fd, rd);
+				cnt++;
+			}
+			if (wd && (flags & EPOLLOUT) && !FD_ISSET(fd, wd))
+			{
+				FD_SET(fd, wd);
+				cnt++;
+			}
+		}
+	}
+#else
+	{
+		struct kevent events[MAX_POLL_EVENTS];
+		struct timespec ts, *tsp = NULL;
+
+		if (timeout)
+		{
+			ts.tv_sec = timeout->tv_sec;
+			ts.tv_nsec = timeout->tv_usec * 1000;
+			tsp = &ts;
+		}
+
+		n = kevent(io_poll_fd, NULL, 0, events, MAX_POLL_EVENTS, tsp);
+		if (n < 0)
+			return -1;
+
+		for (i = 0; i < n; i++)
+		{
+			int fd = events[i].ident;
+
+			if (fd < 0 || fd >= FD_SETSIZE)
+				continue;
+			if (wd && events[i].filter == EVFILT_WRITE &&
+			    !FD_ISSET(fd, wd))
+			{
+				FD_SET(fd, wd);
+				cnt++;
+			}
+			if (events[i].filter == EVFILT_READ && !FD_ISSET(fd, rd))
+			{
+				FD_SET(fd, rd);
+				cnt++;
+			}
+		}
+	}
+#endif
+	return cnt;
+}
+#endif /* BX_POLL_EPOLL || BX_POLL_KQUEUE */
+
 /*
  * new_select: works just like select(), execpt I trimmed out the excess
  * parameters I didn't need.  
@@ -429,6 +643,17 @@ int new_select (fd_set *rd, fd_set *wd, struct timeval *timeout)
 		}
 	}
 	return i;
+#elif defined(BX_POLL_EPOLL) || defined(BX_POLL_KQUEUE)
+	{
+		int fd;
+
+		/* Reconcile the interest list with what the caller wants. */
+		for (fd = 0; fd < FD_SETSIZE; fd++)
+			io_poll_sync_one(fd, FD_ISSET(fd, rd),
+				(wd && FD_ISSET(fd, wd)) ? 1 : 0);
+
+		return io_poll_wait(rd, wd, newtimeout);
+	}
 #else
 	return (select(global_max_fd + 1, rd, wd, NULL, newtimeout));
 #endif
@@ -489,6 +714,9 @@ int	BX_new_close (int des)
 	        new_free(&(io_rec[des]->buffer));
         	new_free((char **)&(io_rec[des]));
 	}
+#if defined(BX_POLL_EPOLL) || defined(BX_POLL_KQUEUE)
+	io_poll_remove(des);
+#endif
 	close(des);
 
 	/*
@@ -519,6 +747,9 @@ int	new_close_write (int des)
 	        new_free(&(io_rec[des]->buffer));
         	new_free((char **)&(io_rec[des]));
 	}
+#if defined(BX_POLL_EPOLL) || defined(BX_POLL_KQUEUE)
+	io_poll_remove(des);
+#endif
 	close(des);
 
 #if 0

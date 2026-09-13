@@ -1591,18 +1591,10 @@ int main(int argc, char *argv[], char *envp[])
 	add_tcl_vars();
 #endif
 #ifdef HAVE_LIBSSL
+	if (!OPENSSL_init_ssl(OPENSSL_INIT_LOAD_SSL_STRINGS | OPENSSL_INIT_LOAD_CRYPTO_STRINGS, NULL))
 	{
-		char *entropy = malloc(100);
-		int i;
-
-		for(i=0;i<100;i++)
-			entropy[i] = (char) getrandom(0, 255);
-
-		/* Many systems don't have /dev/random so we seed */
-		RAND_seed(entropy, 100);
-		SSLeay_add_ssl_algorithms();
-		SSL_load_error_strings();
-		free(entropy);
+		put_it("SSL initialization failed");
+		SSL_show_errors();
 	}
 #endif
 
