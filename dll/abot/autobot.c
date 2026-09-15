@@ -70,7 +70,7 @@ ChannelList *cptr;
 	return 0;
 }
 
-int join_proc (char *which, char *str, char **unused)
+int join_proc (char *which __attribute__((unused)), char *str, char **unused __attribute__((unused)))
 {
 char channel[BIG_BUFFER_SIZE];
 char *p;
@@ -159,7 +159,7 @@ done:
 	}
 }
 
-char *auto_Version(IrcCommandDll **intp)
+char *auto_Version(IrcCommandDll **intp __attribute__((unused)))
 {
 	return auto_bot_version;
 }
@@ -220,13 +220,13 @@ UserList *new;
 	}
 	fclose(f);
 }
-char *Autobot_Version(IrcCommandDll **intp)
+char *Autobot_Version(IrcCommandDll **intp __attribute__((unused)))
 {
 	return AUTO_VERSION;
 }
 
 
-int Autobot_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Autobot_Init(IrcCommandDll **intp __attribute__((unused)), BXGlobalEntry *global_table)
 {
 char buffer[BIG_BUFFER_SIZE+1];
 	initialize_module("Autobot");

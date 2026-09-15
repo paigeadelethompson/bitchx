@@ -18,7 +18,7 @@
 #define MODULE_NAME	"Autocycle"
 #define _MODULE_VERSION	"0.01"
 
-int auto_cycle(IrcCommandDll *interp, char *command, char *args, char *subargs)
+int auto_cycle(IrcCommandDll *interp __attribute__((unused)), char *command __attribute__((unused)), char *args, char *subargs __attribute__((unused)))
 {
 	char *		channel	= current_window->current_channel;
 	int		netsplit = (next_arg(args, &args) != NULL);
@@ -45,7 +45,7 @@ int auto_cycle(IrcCommandDll *interp, char *command, char *args, char *subargs)
 	return 0;
 }
 
-int Autocycle_Cleanup(IrcCommandDll **interp, Function_ptr *global_table)
+int Autocycle_Cleanup(IrcCommandDll **interp __attribute__((unused)), BXGlobalEntry *global_table __attribute__((unused)))
 {
 	remove_module_proc(VAR_PROC, MODULE_NAME, NULL, NULL);
 	remove_module_proc(HOOK_PROC, MODULE_NAME, NULL, NULL);
@@ -53,7 +53,7 @@ int Autocycle_Cleanup(IrcCommandDll **interp, Function_ptr *global_table)
 	return 2;
 }
 
-int Autocycle_Init(IrcCommandDll **interp, Function_ptr *global_table)
+int Autocycle_Init(IrcCommandDll **interp __attribute__((unused)), BXGlobalEntry *global_table)
 {
 	initialize_module(MODULE_NAME);
 	add_module_proc(VAR_PROC, MODULE_NAME, "AUTO_CYCLE", NULL, INT_TYPE_VAR, 0, NULL, NULL);

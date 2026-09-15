@@ -353,7 +353,7 @@ BUILT_IN_FUNCTION(ircii_decrypt)
 	return m_strdup(empty_string);
 }
 
-int Blowfish_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Blowfish_Init(IrcCommandDll **intp __attribute__((unused)), BXGlobalEntry *global_table)
 {
 	int i;
 	initialize_module("Blowfish");
@@ -376,7 +376,7 @@ int Blowfish_Init(IrcCommandDll **intp, Function_ptr *global_table)
   return 0;
 }
 
-int Blowfish_Cleanup(IrcCommandDll **intp)
+int Blowfish_Cleanup(IrcCommandDll **intp __attribute__((unused)))
 {
 #ifdef WANT_TCL
 	Tcl_DeleteCommand(tcl_interp, "encrypt");

@@ -32,7 +32,6 @@ CVS_REVISION(window_c)
 #include "misc.h"
 #include "cset.h"
 #include "module.h"
-#include "gui.h"
 #define MAIN_SOURCE
 #include "modval.h"
 
@@ -90,7 +89,7 @@ static	Window	*window_previous (Window *window, char **args, char *usage);
 
 	Window	*current_window = NULL;
 
-void *default_output_function = BX_add_to_window;
+void (*default_output_function)(Window *, const char *) = BX_add_to_window;
 
 
 #ifdef GUI

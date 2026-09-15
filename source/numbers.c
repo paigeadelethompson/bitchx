@@ -41,7 +41,6 @@ CVS_REVISION(numbers_c)
 #include "timer.h"
 #include "userlist.h"
 #include "tcl_bx.h"
-#include "gui.h"
 #define MAIN_SOURCE
 #include "modval.h"
 
@@ -1209,7 +1208,7 @@ void numbered_command(char *from, int comm, char **ArgList)
 			close_server(from_server, empty_string);
 			if (!dumb_mode)
 			{
-				strcpy(server_num, ltoa(from_server));
+				strlcpy(server_num, ltoa(from_server), sizeof(server_num));
 				add_wait_prompt("Server Password:", 
 					password_sendline, server_num, 
 					WAIT_PROMPT_LINE, 0);
@@ -1558,7 +1557,7 @@ void numbered_command(char *from, int comm, char **ArgList)
 				break;
 			sscanf(ArgList[1], "%lu", &ts);
 			tme = ts;
-			strcpy(this_sucks, ctime(&tme));
+			strlcpy(this_sucks, ctime(&tme), sizeof(this_sucks));
 			this_sucks[strlen(this_sucks)-1] = '\0';		
 
 			set_display_target(ArgList[0], LOG_CRAP);
@@ -1570,7 +1569,7 @@ void numbered_command(char *from, int comm, char **ArgList)
 				char cts[80], pts[80], ots[80];
 				sscanf(ArgList[2], "%lu", &ts);
 				tme = ts;
-				strcpy(cts, ctime(&tme));
+				strlcpy(cts, ctime(&tme), sizeof(cts));
 				cts[strlen(cts)-1] = '\0';		
 				sscanf(ArgList[2], "%lu", &ts);
 				tme = ts;

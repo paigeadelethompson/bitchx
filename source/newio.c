@@ -24,7 +24,6 @@ CVS_REVISION(newio_c)
 #include <sys/filio.h>
 #endif
 #ifdef WIN32
-#include "winbitchx.h"
 #endif
 
 /*

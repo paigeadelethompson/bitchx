@@ -69,7 +69,7 @@ BUILT_IN_COMMAND(queuecmd)
 	 * I wish ultrix wasnt so darn forgiving...
 	 */
 	char this_sucks[4];
-	strcpy(this_sucks,"Top");
+	strlcpy(this_sucks, "Top", sizeof(this_sucks));
 	if (Queuelist == NULL)
                 Queuelist = make_new_queue(NULL, this_sucks);
 

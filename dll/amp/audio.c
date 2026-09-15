@@ -184,7 +184,7 @@ int hours, minutes, seconds;
 	return m_sprintf("[%02d:%02d:%02d]", hours, minutes, seconds);
 }
 
-int Amp_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Amp_Init(IrcCommandDll **intp __attribute__((unused)), BXGlobalEntry *global_table)
 {
 	initialize_module("amp");
 

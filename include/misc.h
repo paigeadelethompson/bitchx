@@ -82,7 +82,7 @@ extern LastMsg last_sent_ctcp[2];
 ChannelList *	BX_prepare_command (int *, char *, int);
 void putlog(int type, const char *chname, const char *format, ...);
 
-	void	add_mode_buffer ( char *, int);
+	void	add_mode_buffer ( char *);
 	void	flush_mode (ChannelList *);
 	void	flush_mode_all (ChannelList *);
 	void	add_mode (ChannelList *, char *, int, char *, char *, int);

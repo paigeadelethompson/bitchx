@@ -84,7 +84,7 @@ unsigned short port = 113;
 	return 0;
 }
 
-int Identd_Cleanup(IrcCommandDll **intp, Function_ptr *global_table)
+int Identd_Cleanup(IrcCommandDll **intp, BXGlobalEntry *global_table)
 {
 	if (identd != -1)
 	{
@@ -95,7 +95,7 @@ int Identd_Cleanup(IrcCommandDll **intp, Function_ptr *global_table)
 	return 0;
 }
 
-int Identd_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Identd_Init(IrcCommandDll **intp, BXGlobalEntry *global_table)
 {
 #if !defined(__EMX__) && !defined(WINNT)
 	if (getuid() && geteuid())

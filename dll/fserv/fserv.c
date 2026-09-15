@@ -1124,7 +1124,7 @@ BUILT_IN_DLL(help_fserv)
 	put_it("%s    more help available with /help", FSstr);
 }
 
-int Fserv_Lock(IrcCommandDll **intp, Function_ptr *global_table)
+int Fserv_Lock(IrcCommandDll **intp, BXGlobalEntry *global_table)
 {
 	return 1;
 }
@@ -1135,7 +1135,7 @@ char *Fserv_Version(IrcCommandDll **intp)
 }
 
 
-int Fserv_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Fserv_Init(IrcCommandDll **intp, BXGlobalEntry *global_table)
 {
 char buffer[BIG_BUFFER_SIZE+1];
 	initialize_module("Fserv");

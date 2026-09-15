@@ -199,7 +199,7 @@ void display_socket_list(const char *path, int unl, char *arg)
 			continue;
 		if (dir->d_name[0] == '.')
 			continue;
-		sprintf(buffer, "%s/%s", path, dir->d_name);
+		snprintf(buffer, sizeof(buffer), "%s/%s", path, dir->d_name);
 		if ((stat(buffer, &st) == -1))
 			continue;
 		if (arg && strstr(dir->d_name, arg))

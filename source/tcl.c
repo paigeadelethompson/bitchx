@@ -974,9 +974,9 @@ char s[81]; time_t t;
 	
 	BADARGS(1,1,"");
 	t = now; 
-	strcpy(s,my_ctime(t));
+	strlcpy(s, my_ctime(t), sizeof(s));
 	s[10]=s[24]=0; 
-	strcpy(s,&s[8]); 
+	strlcpy(s, &s[8], sizeof(s)); 
 	strcpy(&s[8],&s[20]);
 	strcpy(&s[2],&s[3]);
 	Tcl_AppendResult(irp,s,NULL);
@@ -990,8 +990,8 @@ char s[81]; time_t t;
 	
 	BADARGS(1,1,"");
 	t = now; 
-	strcpy(s,my_ctime(t));
-	strcpy(s,&s[11]); 
+	strlcpy(s, my_ctime(t), sizeof(s));
+	strlcpy(s, &s[11], sizeof(s)); 
 	s[5]=0;
 	Tcl_AppendResult(irp,s,NULL);
 	return TCL_OK;
@@ -1538,7 +1538,7 @@ int f=0,atrok,x;
 		int top=0,bot=0,try=0,xx; 
 		char pr[81];
 		
-		strcpy(pr,&proc[1]); 
+		strlcpy(pr, &proc[1], sizeof(pr)); 
 		f=0;
 		while (builtin[bot].access!=(-1)) bot++;  /* find bottom */
 		
@@ -1818,14 +1818,14 @@ int check_on_hook(int which, char *buffer)
 	if (which > -1 && which < NUMBER_OF_LISTS)
 	{
 		Tcl_SetVar(tcl_interp, "_a", hook_functions[which].name, TCL_GLOBAL_ONLY);
-		strcpy(name, hook_functions[which].name);
+		strlcpy(name, hook_functions[which].name, sizeof(name));
 	}
 	else 
 	{
-		strcpy(name, ltoa(which));
+		strlcpy(name, ltoa(which), sizeof(name));
 		Tcl_SetVar(tcl_interp, "_a", name, TCL_GLOBAL_ONLY);
 	}
-	strcat(name, " ");
+	strlcat(name, " ", sizeof(name));
 	Tcl_SetVar(tcl_interp, "_aa", buffer, TCL_GLOBAL_ONLY);
 	strlcat(name, buffer, sizeof name);
 	return check_tcl_bind(&H_hook, name, -1, " $_a $_aa", MATCH_MASK | BIND_STACKABLE | BIND_WANTRET, NULL);

@@ -163,7 +163,7 @@ extern	int	in_window_command;
 extern	unsigned int	window_display;
 extern	Window	*target_window;
 extern	Window	*current_window;
-extern	void	*default_output_function;
+extern void (*default_output_function)(Window *, const char *);
 extern	int	status_update_flag;
 
 #define BUILT_IN_WINDOW(x) Window *x (Window *window, char **args, char *usage) 

@@ -158,7 +158,7 @@ typedef int socklen_t;
 #include <limits.h>
    
 #define SIGNAL_HANDLER(x) \
-	RETSIGTYPE x (int unused)
+	RETSIGTYPE x (int unused __attribute__((unused)))
 
 typedef SIGNAL_HANDLER(sigfunc);
 sigfunc *my_signal (int, sigfunc *, int);
@@ -205,10 +205,13 @@ char *	getpass (const char * prompt);
 #endif
 
 #define BUILT_IN_COMMAND(x) \
-	void x (char *command, char *args, char *subargs, char *helparg)
+	void x (char *command __attribute__((unused)), \
+		char *args __attribute__((unused)), \
+		char *subargs __attribute__((unused)), \
+		char *helparg __attribute__((unused)))
 
 #define BUILT_IN_FUNCTION(x) \
-	char * x (char *fn, char *input)
+	char * x (char *fn __attribute__((unused)), char *input __attribute__((unused)))
 
 #if defined(_AIX)
 int getpeername (int s, struct sockaddr *, int *);

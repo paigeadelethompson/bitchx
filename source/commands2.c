@@ -66,7 +66,6 @@ CVS_REVISION(commands2_c)
 #include "hash2.h"
 #include "notice.h"
 #include "who.h"
-#include "gui.h"
 #define MAIN_SOURCE
 #include "modval.h"
 
@@ -1177,7 +1176,7 @@ char *pgm = NULL;
 int direct = 0;
 
 	
-	sprintf(name, "%%%s", command);
+	snprintf(name, sizeof(name), "%%%s", command);
 	if (command && !my_stricmp(command, "shell"))
 	{
 		pgm = get_string_var(SHELL_VAR);

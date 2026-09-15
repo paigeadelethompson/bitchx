@@ -151,9 +151,9 @@ void show_notify_list(int all)
 					put_it("%s", convert_output_format(fget_string_var(FORMAT_NOTIFY_ON_FSET), "%s %s %s %s %s", "Nick", "UserHost", "Times", "Period", "Last seen"));
 				}
 			}
-			strcpy(period, ltoa(tmp->period));
-			strcpy(timeson, ltoa(tmp->times));
-			strcpy(lastseen, ltoa(now - tmp->added));
+			strlcpy(period, ltoa(tmp->period), sizeof(period));
+			strlcpy(timeson, ltoa(tmp->times), sizeof(timeson));
+			strlcpy(lastseen, ltoa(now - tmp->added), sizeof(lastseen));
 			if (do_hook(NOTIFY_LIST, "%s %s %d %s %s %s", tmp->nick, tmp->host?tmp->host:"unknown@unknown", tmp->flag, timeson, period, lastseen))
 				put_it("%s", convert_output_format(fget_string_var(FORMAT_NOTIFY_ON_FSET), "%s %s %s %s %s", tmp->nick, tmp->host?tmp->host:tmp->looking, timeson, lastseen, "now" ));
 			count++;
@@ -173,9 +173,9 @@ void show_notify_list(int all)
 					put_it("%s", convert_output_format(fget_string_var(FORMAT_NOTIFY_OFF_FSET), "%s %s %s %s %s", "Nick", "UserHost", "Times", "Period", "Last seen"));
 				}
 			}
-			strcpy(period, ltoa(tmp->period));
-			strcpy(timeson, ltoa(tmp->times));
-			strcpy(lastseen, ltoa(now - tmp->lastseen));
+			strlcpy(period, ltoa(tmp->period), sizeof(period));
+			strlcpy(timeson, ltoa(tmp->times), sizeof(timeson));
+			strlcpy(lastseen, ltoa(now - tmp->lastseen), sizeof(lastseen));
 			if (do_hook(NOTIFY_LIST, "%s %s %d %s %s %s", tmp->nick, tmp->host?tmp->host:"unknown@unknown", tmp->flag, timeson, period, lastseen))
 			{
 				if (!tmp->times)
@@ -550,7 +550,7 @@ void make_notify_list (int servnum)
 	char *list = NULL;
 	int i;
 
-	server_list[servnum].notify_list.func = (alist_func)global[MY_STRICMP];
+	server_list[servnum].notify_list.func = global[MY_STRNICMP].my_strnicmp_slot;
 	server_list[servnum].notify_list.hash = HASH_INSENSITIVE;
 
 	if (!get_int_var(NOTIFY_VAR))
@@ -668,7 +668,7 @@ void make_watch_list (int servnum)
 	char *list = NULL;
 	int i;
 
-	server_list[servnum].watch_list.func = (alist_func)global[MY_STRICMP];
+	server_list[servnum].watch_list.func = global[MY_STRNICMP].my_strnicmp_slot;
 	server_list[servnum].watch_list.hash = HASH_INSENSITIVE;
 
 	for (i = 0; i < WATCH_MAX(0); i++)
@@ -716,9 +716,9 @@ NotifyItem *tmp;
 		tmp = WATCH_ITEM(from_server, i);
 		if (tmp->flag)
 		{
-			strcpy(period, ltoa(tmp->period));
-			strcpy(timeson, ltoa(tmp->times));
-			strcpy(lastseen, ltoa(now - tmp->added));
+			strlcpy(period, ltoa(tmp->period), sizeof(period));
+			strlcpy(timeson, ltoa(tmp->times), sizeof(timeson));
+			strlcpy(lastseen, ltoa(now - tmp->added), sizeof(lastseen));
 			if (do_hook(WATCH_LIST, "%s %s %d %s %s %s", tmp->nick, tmp->host?tmp->host:"unknown@unknown", tmp->flag, timeson, period, lastseen))
 			{
 				if (!count)
@@ -737,9 +737,9 @@ NotifyItem *tmp;
 		tmp = WATCH_ITEM(from_server, i);
 		if ((all && !tmp->flag) || (tmp->times && !tmp->flag))
 		{
-			strcpy(period, ltoa(tmp->period));
-			strcpy(timeson, ltoa(tmp->times));
-			strcpy(lastseen, ltoa(now - tmp->lastseen));
+			strlcpy(period, ltoa(tmp->period), sizeof(period));
+			strlcpy(timeson, ltoa(tmp->times), sizeof(timeson));
+			strlcpy(lastseen, ltoa(now - tmp->lastseen), sizeof(lastseen));
 			if (do_hook(WATCH_LIST, "%s %s %d %s %s %s", tmp->nick, tmp->host?tmp->host:"unknown@unknown", tmp->flag, timeson, period, lastseen))
 			{
 				if (!count)

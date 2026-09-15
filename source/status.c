@@ -837,7 +837,7 @@ static	char	my_buffer[MY_BUFFER+1];
 				RETURN_EMPTY;
 		}
 		else
-			strcpy(my_buffer, " No Server");
+			strlcpy(my_buffer, " No Server", sizeof(my_buffer));
 	}
 	else
 		RETURN_EMPTY;
@@ -1165,7 +1165,7 @@ static  char	my_buffer[MY_BUFFER/2+1];
 		if (get_server_lag(window->server) > -1)
 		{
 			char p[40];
-			sprintf(p, "%2d",get_server_lag(window->server)); 
+			snprintf(p, sizeof(p), "%2d", get_server_lag(window->server)); 
 			snprintf(my_buffer,MY_BUFFER/2, window->wset->lag_format, p);
 		}
 		else
@@ -1269,7 +1269,7 @@ static char my_buffer[2 * MY_BUFFER+1];
 	if (window->wset->dcccount_format && send_count_stat)
 	{
 		char tmp[30];
-		strcpy(tmp, ltoa(send_count_stat));
+		strlcpy(tmp, ltoa(send_count_stat), sizeof(tmp));
 		snprintf(my_buffer, 2 * MY_BUFFER, window->wset->dcccount_format, ltoa(get_count_stat), tmp);
 		return my_buffer;
 	}
@@ -1284,7 +1284,7 @@ static char my_buffer[2 * MY_BUFFER+1];
 	if (window->wset->cdcc_format && cdcc_numpacks)
 	{
 		char tmp[30];
-		strcpy(tmp, ltoa(cdcc_numpacks));
+		strlcpy(tmp, ltoa(cdcc_numpacks), sizeof(tmp));
 		snprintf(my_buffer, 2 * MY_BUFFER, window->wset->cdcc_format, ltoa(send_numpacks), tmp);
 		return my_buffer;
 	}
@@ -1330,7 +1330,7 @@ int serv = window->server;
 				if (nick->userlist)
 					friends++;
 			}
-			strcpy(buff, ltoa(ops)); 
+			strlcpy(buff, ltoa(ops), sizeof(buff)); 
 			strcpy(buff1, ltoa(nonops));
 			strcpy(buff2,ltoa(ircop)); 
 			strcpy(buff3, ltoa(voice));
@@ -1450,7 +1450,7 @@ int serv = window->server;
 static char my_buffer[40] = "\0";
 int on, off;
 	notify_count(serv, &on, &off);
-	sprintf(my_buffer, "%d %d", on, off);
+	snprintf(my_buffer, sizeof(my_buffer), "%d %d", on, off);
 	return my_buffer;
 }
 

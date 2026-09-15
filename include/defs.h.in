@@ -283,6 +283,9 @@
 /* Define to 1 if you have the <termios.h> header file. */
 #cmakedefine HAVE_TERMIOS_H
 
+/* Define to 1 if you have the <langinfo.h> header file. */
+#cmakedefine HAVE_LANGINFO_H
+
 /* Define to 1 if you have the <term.h> header file. */
 #cmakedefine HAVE_TERM_H
 

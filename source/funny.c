@@ -119,7 +119,7 @@ void funny_print_widelist(void)
 			if (do_hook(WIDELIST_LIST, "%s", buffer1))
 				put_it("%s", convert_output_format(fget_string_var(FORMAT_WIDELIST_FSET), "%s %s", update_clock(GET_TIME), buffer1));
 			*buffer1 = 0;
-			strcat(buffer1, buffer2);
+			strlcat(buffer1, buffer2, sizeof(buffer1));
 		}
 		else
 			strcpy(ptr, buffer2);
@@ -334,7 +334,7 @@ int user_count = 0;
 				(unsigned char) last_width,
 				(unsigned char) last_width);
 		else
-			strcpy(format, "%s: %s\t%s");
+			strlcpy(format, "%s: %s\t%s", sizeof(format));
 	}
 	if (funny_min && (user_count < funny_min))
 		return;

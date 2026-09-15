@@ -1379,7 +1379,7 @@ static	int	connect_to_server_direct (char *server_name, int port)
 	pw=getpwuid(getuid());
 	if(!pw)
 		goto noidentwd;
-	sprintf(lockfile, "%s/.identwd", pw->pw_dir);
+	snprintf(lockfile, sizeof(lockfile), "%s/.identwd", pw->pw_dir);
 	
 	if(*server_name=='/')
 		goto noidentwd;
@@ -1397,8 +1397,7 @@ static	int	connect_to_server_direct (char *server_name, int port)
 		goto noidentwd;
 	
 	memcpy(&raddr.sin_addr, hp->h_addr, hp->h_length);
-	sprintf(lockfile, "%s/.identwd/%s.%i.LOCK", pw->pw_dir,
-		inet_ntoa((struct in_addr)raddr.sin_addr), port);
+	snprintf(lockfile, sizeof(lockfile), "%s/.identwd/%s.%i.LOCK", pw->pw_dir, inet_ntoa((struct in_addr)raddr.sin_addr), port);
 	if ((fp=fopen(lockfile, "w")))
 	{
 		fprintf(fp, "WAIT\n");
@@ -2984,7 +2983,7 @@ void BX_reset_nickname (int servnum)
 	if (!dumb_mode)
 	{
 		say("Please enter your nickname");
-		strcpy(server_num, ltoa(servnum));
+		strlcpy(server_num, ltoa(servnum), sizeof(server_num));
 		add_wait_prompt("Nickname: ", nickname_sendline, server_num,
 			WAIT_PROMPT_LINE, 1);
 	}
@@ -3068,7 +3067,7 @@ unsigned int lport = 0, rport = 0;
 			already_identd = 0;
 			return;
 		}
-		sprintf(buffer, "%hu , %hu : USERID : UNIX : %s", lport, rport, username);
+		snprintf(buffer, sizeof(buffer), "%hu, %hu : USERID : UNIX : %s", lport, rport, username);
 		dcc_printf(s, "%s\r\n", buffer);
 #if 0
 		put_it("'Sent IDENTD request %s", buffer);
@@ -3092,7 +3091,7 @@ int sock = -1;
 
 #endif
 
-void start_identd(void)
+int start_identd(void)
 {
 #if defined(WINNT) || defined(__EMX__) || defined(__CYGWIN__) || defined(WANT_IDENTD)
 int sock = -1;
@@ -3100,6 +3099,9 @@ unsigned short port = 113;
 	if ((sock = connect_by_number(NULL, &port, SERVICE_SERVER, PROTOCOL_TCP, 1)) > -1)
 		add_socketread(sock, port, 0, NULL, identd_handler, NULL);
 	identd = sock;
+	return 0;
+#else
+	return -1;
 #endif
 }
 

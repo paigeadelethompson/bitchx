@@ -428,7 +428,7 @@ int var_index, cnt = 0;
 		{
 			case BOOL_TYPE_VAR:
 			{
-				strcpy(s, get_cset_int_var(chan->csets, var_index)?var_settings[ON] : var_settings[OFF]);
+				strlcpy(s, get_cset_int_var(chan->csets, var_index)?var_settings[ON] : var_settings[OFF], sizeof(s));
 				if (value)
 				{
 					int val = -1;

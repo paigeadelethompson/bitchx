@@ -5,7 +5,7 @@ prec *player = NULL;
 vrec *voter = NULL;
 grec *game = NULL;
 
-int Acro_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Acro_Init(IrcCommandDll **intp __attribute__((unused)), BXGlobalEntry *global_table)
 {
 	initialize_module("Acromania");
 	add_module_proc(RAW_PROC, "acro", "PRIVMSG", NULL, 0, 0, acro_main, NULL);
@@ -18,7 +18,7 @@ int Acro_Init(IrcCommandDll **intp, Function_ptr *global_table)
 	return 0;
 }
 
-static int acro_main (char *comm, char *from, char *userhost, char **args)
+static int acro_main (char *comm __attribute__((unused)), char *from, char *userhost, char **args)
 {
 	if (*args[1] && !strncasecmp(args[1], "acro ", 5) && !strcasecmp(args[0], get_server_nickname(from_server)))
 	{
@@ -76,7 +76,7 @@ BUILT_IN_DLL(put_scores)
 */
 }
 
-int warn_acro(void *arg, char *subarg)
+int warn_acro(void *arg, char *subarg __attribute__((unused)))
 {
 	char *chan = arg;
 
@@ -85,7 +85,7 @@ int warn_acro(void *arg, char *subarg)
 	return 0;
 }
 
-int start_vote(void *arg, char *subarg)
+int start_vote(void *arg, char *subarg __attribute__((unused)))
 {
 	char *chan = arg;
 
@@ -112,7 +112,7 @@ int start_vote(void *arg, char *subarg)
 	return 0;
 }
  
-int warn_vote(void *arg, char *subarg)
+int warn_vote(void *arg, char *subarg __attribute__((unused)))
 {
 	char *chan = arg;
 
@@ -121,7 +121,7 @@ int warn_vote(void *arg, char *subarg)
 	return 0;
 }
 
-int end_voting(void *arg, char *subarg)
+int end_voting(void *arg, char *subarg __attribute__((unused)))
 {
 	char *chan = arg;
 
@@ -203,7 +203,8 @@ void make_acro(grec *acro)
 
 int valid_acro(grec *acro, char *p)
 {
-	int spaces = 0, len = 0, gotsp = 1;
+	size_t spaces = 0, len = 0;
+	int gotsp = 1;
 	if (!p)
 		return 0;
 	if (!acro)

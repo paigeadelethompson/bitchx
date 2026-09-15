@@ -307,7 +307,7 @@ static int check_xmms(void)
 	return xmms_running;
 }
 
-int Xmms_Cleanup(IrcCommandDll **interp, Function_ptr *global_table)
+int Xmms_Cleanup(IrcCommandDll **interp, BXGlobalEntry *global_table)
 {
 	remove_module_proc(COMMAND_PROC, MODULE_NAME, NULL, NULL);
 	put_it("%s", convert_output_format(xmms_format, "%s",
@@ -315,7 +315,7 @@ int Xmms_Cleanup(IrcCommandDll **interp, Function_ptr *global_table)
 	return 2;
 }
 
-int Xmms_Init(IrcCommandDll **interp, Function_ptr *global_table)
+int Xmms_Init(IrcCommandDll **interp, BXGlobalEntry *global_table)
 {
 	initialize_module(MODULE_NAME);
 	add_module_proc(COMMAND_PROC, "Xmms", "Xmms", NULL, 0, 0, xmms_cmd, empty_string);

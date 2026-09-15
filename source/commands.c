@@ -3113,7 +3113,7 @@ int silent = 0;
 	if (get_int_var(MSGLOG_VAR))
 	{
 		char tmp[100];
-		sprintf(tmp, " read /away msgs (%d msg%s) log [Y/n]? ", get_int_var(MSGCOUNT_VAR), plural(get_int_var(MSGCOUNT_VAR)));
+		snprintf(tmp, sizeof(tmp), " read /away msgs (%d msg%s) log [Y/n]? ", get_int_var(MSGCOUNT_VAR), plural(get_int_var(MSGCOUNT_VAR)));
 		add_wait_prompt(tmp, read_away_log, empty_string, WAIT_PROMPT_LINE, 1); 
 	}
 	set_int_var(MSGCOUNT_VAR, 0);
@@ -3215,11 +3215,11 @@ BUILT_IN_COMMAND(e_quit)
 	
 	
 	if (args && *args)
-		strcpy(Reason, args);
+		strlcpy(Reason, args, sizeof(Reason));
 	else
-		strcpy(Reason, get_signoffreason(get_server_nickname(from_server)));
+		strlcpy(Reason, get_signoffreason(get_server_nickname(from_server)), sizeof(Reason));
 	if (!*Reason)
-		strcpy(Reason, irc_version);
+		strlcpy(Reason, irc_version, sizeof(Reason));
 	
 	active_dcc = get_active_count();
 	if (active_dcc)
@@ -3678,7 +3678,7 @@ int	command_exist (char *command)
 	if (!command || !*command)
 		return 0;
 
-	strcpy(buf, command);
+	strlcpy(buf, command, sizeof(buf));
 	upper(buf);
 
 	if (find_command(buf, &num))
@@ -5380,8 +5380,8 @@ BUILT_IN_COMMAND(e_debug)
 	{
 		if (FD_ISSET(x, &readables))
 		{
-			strcat(buffer, space);
-			strcat(buffer, ltoa(x));
+			strlcat(buffer, space, sizeof(buffer));
+			strlcat(buffer, ltoa(x), sizeof(buffer));
 		}
 	}
 	yell(buffer);

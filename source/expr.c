@@ -1893,7 +1893,7 @@ static	void	TruncateAndQuote(char **buff, const char *add, int length, const cha
 	return;
 }
 
-static void	do_alias_string (char *unused, char *input)
+static void	do_alias_string (char *unused __attribute__((unused)), char *input)
 {
 	malloc_strcpy(&alias_string, input);
 }

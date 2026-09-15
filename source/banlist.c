@@ -41,7 +41,7 @@ static int mode_str_len = 0;
 static int push_len = 0;
 static char plus_mode[20] = "\0";
 
-void add_mode_buffer(char *buffer, int mode_str_len)
+void add_mode_buffer(char *buffer)
 {
 	malloc_strcat(&mode_buf, buffer);
 	mode_len += push_len;
@@ -56,7 +56,7 @@ void flush_mode(ChannelList *chan)
 	mode_len = 0;
 }
 
-int delay_flush_all(void *arg, char *sub)
+int delay_flush_all(void *arg, char *sub __attribute__((unused)))
 {
 	char *channel, *serv_num, *args = (char *)arg;
 	int ofs = from_server;
@@ -67,9 +67,9 @@ int delay_flush_all(void *arg, char *sub)
 		from_server = atoi(serv_num);
 	if (channel && *channel && mode_str && user)
 	{
-		sprintf(buffer, "MODE %s %s%s %s\r\n", channel, plus_mode, mode_str, user);
+		snprintf(buffer, sizeof(buffer), "MODE %s %s%s %s\r\n", channel, plus_mode, mode_str, user);
 		push_len = strlen(buffer);
-		add_mode_buffer(buffer, push_len);
+		add_mode_buffer(buffer);
 		mode_str_len = 0;
 		new_free(&mode_str);
 		new_free(&user);
@@ -88,9 +88,9 @@ void flush_mode_all(ChannelList *chan)
 	
 	if (mode_str && user)
 	{
-		sprintf(buffer, "MODE %s %s%s %s\r\n", chan->channel, plus_mode, mode_str, user);
+		snprintf(buffer, sizeof(buffer), "MODE %s %s%s %s\r\n", chan->channel, plus_mode, mode_str, user);
 		push_len = strlen(buffer);
-		add_mode_buffer(buffer, push_len);
+		add_mode_buffer(buffer);
 		mode_str_len = 0;
 		new_free(&mode_str);
 		new_free(&user);
@@ -112,21 +112,21 @@ void add_mode(ChannelList *chan, char *mode, int plus, char *nick, char *reason,
 
 	if (reason)
 	{
-		sprintf(buffer, "KICK %s %s :%s\r\n", chan->channel, nick, reason);
+		snprintf(buffer, sizeof(buffer), "KICK %s %s :%s\r\n", chan->channel, nick, reason);
 		push_len = strlen(buffer);
-		add_mode_buffer(buffer, push_len);
+		add_mode_buffer(buffer);
 	}
 	else
 	{
 		mode_str_len++;
-		strcat(plus_mode, plus ? "+" : "-");
+		strlcat(plus_mode, plus ? "+" : "-", sizeof(plus_mode));
 		malloc_strcat(&mode_str, mode);
 		m_s3cat(&user, space, nick);
 		if (mode_str_len >= max_modes)
 		{
-			sprintf(buffer, "MODE %s %s%s %s\r\n", chan->channel, plus_mode, mode_str, user);
+			snprintf(buffer, sizeof(buffer), "MODE %s %s%s %s\r\n", chan->channel, plus_mode, mode_str, user);
 			push_len = strlen(buffer);
-			add_mode_buffer(buffer, push_len);
+			add_mode_buffer(buffer);
 			new_free(&mode_str);
 			new_free(&user);
 			memset(plus_mode, 0, sizeof(plus_mode));
@@ -150,7 +150,7 @@ BUILT_IN_COMMAND(fuckem)
 		add_mode(chan, "b", 0, Bans->ban, NULL, get_int_var(NUM_BANMODES_VAR));
 	for (c = 'a'; c <= 'z'; c++)
 	{
-		sprintf(buffer, "*!*@*%c*", c);
+		snprintf(buffer, sizeof(buffer), "*!*@*%c*", c);
 		add_mode(chan, "b", 1, buffer, NULL, get_int_var(NUM_BANMODES_VAR));
 	}         
 	flush_mode_all(chan);
@@ -260,6 +260,7 @@ char * ban_it(char *nick, char *user, char *host, char *ip)
 					cluster(ip));
 				break;
 			}
+			/* fall through */
 		case 2: /* Better 	*/
 			snprintf(banstr, sizeof banstr, "*!*%s@%s", t1, 
 				cluster(host));
@@ -513,7 +514,7 @@ BUILT_IN_COMMAND(massdeop)
 
 	for (nicks = next_nicklist(chan, NULL); nicks; nicks = next_nicklist(chan, nicks))
 	{
-		sprintf(buffer, "%s!%s", nicks->nick, nicks->host);
+		snprintf(buffer, sizeof(buffer), "%s!%s", nicks->nick, nicks->host);
 		if ((all || (!isvoice && nick_isop(nicks)) || (isvoice && nick_isvoice(nicks))) &&
 		    my_stricmp(nicks->nick, get_server_nickname(from_server)) &&
 		    wild_match(spec, buffer))
@@ -625,7 +626,7 @@ BUILT_IN_COMMAND(massop)
 
 	for (nicks = next_nicklist(chan, NULL); nicks; nicks = next_nicklist(chan, nicks))
 	{
-		sprintf(buffer, "%s!%s", nicks->nick, nicks->host);
+		snprintf(buffer, sizeof(buffer), "%s!%s", nicks->nick, nicks->host);
 		if ((my_stricmp(nicks->nick, get_server_nickname(from_server)) && wild_match(spec, buffer)))
 		{
 			if (!(nick_isop(nicks) || (massvoice && nick_isvoice(nicks))))
@@ -1315,7 +1316,7 @@ static const char *bantypes[] = { "*Unknown*", "\002N\002ormal",
 	"\002B\002etter", "\002H\002ost", "\002D\002omain", 
 	"\002U\002ser", "\002S\002crew", "\002I\002P" };
 
-static void set_default_bantype(char value, char *helparg)
+static void set_default_bantype(char value)
 {
 	switch(toupper(value))
 	{
@@ -1350,7 +1351,7 @@ static void set_default_bantype(char value, char *helparg)
 BUILT_IN_COMMAND(bantype)
 {
 	if (args && *args)
-		set_default_bantype(*args, helparg);
+		set_default_bantype(*args);
 	else
 		bitchsay("Current BanType is %s", 
 			bantypes[defban >= 1 && defban <= 7 ? defban : 0]);

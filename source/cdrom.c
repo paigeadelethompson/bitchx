@@ -396,16 +396,16 @@ char	*status_cdrom(window)
 	if ((drive) && (get_string_var(CD_DEVICE_VAR)))
 	{
 		rc=ioctl(drive,CDROMSUBCHNL,&subchnl);
-		strcpy(text,"[CD:");
+		strlcpy(text, "[CD:", sizeof(text));
 		if (subchnl.cdsc_audiostatus==CDROM_AUDIO_PLAY)
 		{
-			strcat(text,"P");
-			strcat(text,":");
-			strcat(text,ltoa((long)subchnl.cdsc_trk));
+			strlcat(text, "P", sizeof(text));
+			strlcat(text, ":", sizeof(text));
+			strlcat(text, ltoa((long)subchnl.cdsc_trk), sizeof(text));
 		} else {
-			strcat(text,"S");
+			strlcat(text, "S", sizeof(text));
 		}
-		strcat(text,"]");
+		strlcat(text, "]", sizeof(text));
 		return(text);
 	}
 	else

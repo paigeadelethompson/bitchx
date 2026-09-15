@@ -92,9 +92,9 @@ char	* bits_to_lastlog_level(unsigned long level)
 	static char buffer[512];
 
 	if (level == LOG_ALL)
-		strcpy(buffer, "ALL");
+		strlcpy(buffer, "ALL", sizeof(buffer));
 	else if (level == 0)
-		strcpy(buffer, "NONE");
+		strlcpy(buffer, "NONE", sizeof(buffer));
 	else
 	{
 		for (*buffer = i = 0, p = 1; i < NUMBER_OF_LEVELS; i++, p <<= 1)

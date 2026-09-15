@@ -224,47 +224,47 @@ void ignore_nickname(char *nick, long type, int flag)
 			}
 			else if (type)
 			{
-				strcpy(buffer, msg);
+				strlcpy(buffer, msg, sizeof(buffer));
 				if (type & IGNORE_MSGS)
-					strcat(buffer, " MSGS");
+					strlcat(buffer, " MSGS", sizeof(buffer));
 				if (type & IGNORE_PUBLIC)
-					strcat(buffer, " PUBLIC");
+					strlcat(buffer, " PUBLIC", sizeof(buffer));
 				if (type & IGNORE_WALLS)
-					strcat(buffer, " WALLS");
+					strlcat(buffer, " WALLS", sizeof(buffer));
 				if (type & IGNORE_WALLOPS)
-					strcat(buffer, " WALLOPS");
+					strlcat(buffer, " WALLOPS", sizeof(buffer));
 				if (type & IGNORE_INVITES)
-					strcat(buffer, " INVITES");
+					strlcat(buffer, " INVITES", sizeof(buffer));
 				if (type & IGNORE_NOTICES)
-					strcat(buffer, " NOTICES");
+					strlcat(buffer, " NOTICES", sizeof(buffer));
 				if (type & IGNORE_NOTES)
-					strcat(buffer, " NOTES");
+					strlcat(buffer, " NOTES", sizeof(buffer));
 				if (type & IGNORE_CTCPS)
-					strcat(buffer, " CTCPS");
+					strlcat(buffer, " CTCPS", sizeof(buffer));
 				if (type & IGNORE_CRAP)
-					strcat(buffer, " CRAP");
+					strlcat(buffer, " CRAP", sizeof(buffer));
 				if (type & IGNORE_CDCC)
-					strcat(buffer, " CDCC");
+					strlcat(buffer, " CDCC", sizeof(buffer));
 				if (type & IGNORE_KICKS)
-					strcat(buffer, " KICKS");
+					strlcat(buffer, " KICKS", sizeof(buffer));
 				if (type & IGNORE_MODES)
-					strcat(buffer, " MODES");
+					strlcat(buffer, " MODES", sizeof(buffer));
 				if (type & IGNORE_SMODES)
-					strcat(buffer, " SMODES");
+					strlcat(buffer, " SMODES", sizeof(buffer));
 				if (type & IGNORE_JOINS)
-					strcat(buffer, " JOINS");
+					strlcat(buffer, " JOINS", sizeof(buffer));
 				if (type & IGNORE_TOPICS)
-					strcat(buffer, " TOPICS");
+					strlcat(buffer, " TOPICS", sizeof(buffer));
 				if (type & IGNORE_QUITS)
-					strcat(buffer, " QUITS");
+					strlcat(buffer, " QUITS", sizeof(buffer));
 				if (type & IGNORE_PARTS)
-					strcat(buffer, " PARTS");
+					strlcat(buffer, " PARTS", sizeof(buffer));
 				if (type & IGNORE_NICKS)
-					strcat(buffer, " NICKS");
+					strlcat(buffer, " NICKS", sizeof(buffer));
 				if (type & IGNORE_PONGS)
-					strcat(buffer, " PONGS");
+					strlcat(buffer, " PONGS", sizeof(buffer));
 				if (type & IGNORE_SPLITS)
-					strcat(buffer, " SPLITS");
+					strlcat(buffer, " SPLITS", sizeof(buffer));
 				say("%s from %s", buffer, new->nick);
 			}
 		}

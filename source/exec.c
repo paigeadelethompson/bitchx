@@ -26,7 +26,6 @@ CVS_REVISION(exec_c)
 #include "output.h"
 #include "parse.h"
 #include "newio.h"
-#include "gui.h"
 #define MAIN_SOURCE
 #include "modval.h"
 

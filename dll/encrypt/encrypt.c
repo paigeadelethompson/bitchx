@@ -45,7 +45,7 @@ char *Encode_Version(IrcCommandDll **intp)
 }
 
 
-int Encrypt_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Encrypt_Init(IrcCommandDll **intp, BXGlobalEntry *global_table)
 {
 	int i;
 	char buffer[BIG_BUFFER_SIZE+1];

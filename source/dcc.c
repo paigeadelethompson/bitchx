@@ -58,7 +58,6 @@ CVS_REVISION(dcc_c)
 #include "tcl_bx.h"
 #include "userlist.h"
 #include "hash2.h"
-#include "gui.h"
 #define MAIN_SOURCE
 #include "modval.h"
 
@@ -1250,7 +1249,7 @@ static void show_dcc_fileoffer(const DCC_int *n, const char *dcc_name)
 	if (!dcc_quiet)
 	{
 		char buf[40];
-		sprintf(buf, "%2.4g", _GMKv(n->filesize));
+		snprintf(buf, sizeof(buf), "%2.4g", _GMKv(n->filesize));
 		put_it("%s", convert_output_format(fget_string_var(FORMAT_DCC_REQUEST_FSET), 
 			"%s %s \"%s\" %s %s %s %d %s %s", 
 			update_clock(GET_TIME), dcc_name, n->filename, n->user, n->userhost,
@@ -1342,7 +1341,7 @@ static int rename_file(char **new_file)
 	do {
 		if (fp != NULL)
 			fclose(fp);
-		sprintf(c, "%03i.", getrandom(0, 999));
+		snprintf(c, sizeof(c), "%03i.", getrandom(0, 999));
 		tmp = dcc_fullname(c);
 		malloc_strcat(&tmp, buffer);
 		fp = fopen(tmp, "r");
@@ -1742,10 +1741,10 @@ void close_dcc_file(int snum)
 	if (xtime == 0.0)
 		xtime = 1.0;
 	temp = xfer / xtime;
-	sprintf(lame_ultrix, "%2.4g %s", _GMKv(temp), _GMKs(temp));
+	snprintf(lame_ultrix, sizeof(lame_ultrix), "%2.4g %s", _GMKv(temp), _GMKs(temp));
 	/* Can't pass %g to put_it (lame ultrix/dgux), fix suggested by sheik. */
-	sprintf(lame_ultrix2, "%2.4g%s", _GMKv(xfer), _GMKs(xfer));
-	sprintf(lame_ultrix3, "%2.4g", xtime);
+	snprintf(lame_ultrix2, sizeof(lame_ultrix2), "%2.4g%s", _GMKv(xfer), _GMKs(xfer));
+	snprintf(lame_ultrix3, sizeof(lame_ultrix3), "%2.4g", xtime);
 
 	filename = LOCAL_COPY(n->filename);
 	p = filename;
@@ -2085,9 +2084,9 @@ void real_file_send(char *nick, char *filename, char *passwd, char *port, int td
 		if (!dcc_quiet)
 		{
 			char buff[30];
-			strcpy(buff, "file");
+			strlcpy(buff, "file", sizeof(buff));
 			if (count > 1)
-				strcat(buff, "s");
+				strlcat(buff, "s", sizeof(buff));
 			if (count)
 				put_it("%s", convert_output_format("$G %RDCC%n Sent DCC SEND request to $0 for $1 $2-", "%s %s %s", nick, buff, filename));
 			else
@@ -2805,7 +2804,7 @@ register int		i = 0;
 			strmopencat(transfer_buffer, BIG_BUFFER_SIZE, ltoa((int)perc), "% ", NULL);
 #if 0
 			sprintf(temp_str,"%d%% ",(int) perc);
-			strcat(transfer_buffer,temp_str);
+			strlcat(transfer_buffer, temp_str, sizeof(transfer_buffer));
 #endif
 		}
 		if (count++ > 9)
@@ -2915,10 +2914,10 @@ char min_rate_in[20];
 char max_rate_out[20];
 char min_rate_out[20];
 
-	sprintf(max_rate_in, "%6.2f", dcc_max_rate_in/1024.0);
-	sprintf(min_rate_in, "%6.2f", ((dcc_min_rate_in != DBL_MAX )?dcc_min_rate_in/1024.0: 0.0));
-	sprintf(max_rate_out, "%6.2f", dcc_max_rate_out/1024.0);
-	sprintf(min_rate_out, "%6.2f", ((dcc_min_rate_out != DBL_MAX) ? dcc_min_rate_out/1024.0: 0.0));
+	snprintf(max_rate_in, sizeof(max_rate_in), "%6.2f", dcc_max_rate_in/1024.0);
+	snprintf(min_rate_in, sizeof(min_rate_in), "%6.2f", ((dcc_min_rate_in != DBL_MAX )?dcc_min_rate_in/1024.0: 0.0));
+	snprintf(max_rate_out, sizeof(max_rate_out), "%6.2f", dcc_max_rate_out/1024.0);
+	snprintf(min_rate_out, sizeof(min_rate_out), "%6.2f", ((dcc_min_rate_out != DBL_MAX) ? dcc_min_rate_out/1024.0: 0.0));
 	if (do_hook(DCC_TRANSFER_STAT_LIST, "%lu %s %s %lu %s %s %lu %u %u %s %s %s %s", 
 		(unsigned long)dcc_bytes_in, max_rate_in, min_rate_in,
 		(unsigned long)dcc_bytes_out, max_rate_out, min_rate_out,
@@ -2928,7 +2927,7 @@ char min_rate_out[20];
 		on_off(dcc_quiet), on_off(dcc_overwrite_var)))
 	{
 		char in[50], out[50];
-		sprintf(in,  "%3.2f%s", _GMKv(dcc_bytes_in),  _GMKs(dcc_bytes_in));
+		snprintf(in, sizeof(in), "%3.2f%s", _GMKv(dcc_bytes_in), _GMKs(dcc_bytes_in));
 		sprintf(out, "%3.2f%s", _GMKv(dcc_bytes_out), _GMKs(dcc_bytes_out));
 
 #ifdef ONLY_CTD_CHARS
@@ -3358,8 +3357,8 @@ unsigned long flags;
 					this_speed = (double)((double) sent / (double)(now- n->starttime.tv_sec));
 					if (this_speed < (float)cdcc_minspeed)
 					{
-						sprintf(lame_ultrix, "%2.4g", (double)(sent / (now - n->starttime.tv_sec)));
-						sprintf(lame_ultrix1,"%2.4g", (double)cdcc_minspeed);
+						snprintf(lame_ultrix, sizeof(lame_ultrix), "%2.4g", (double)(sent / (now - n->starttime.tv_sec)));
+						snprintf(lame_ultrix1, sizeof(lame_ultrix1), "%2.4g", (double)cdcc_minspeed);
 						if (!last_notify || strcmp(s->server,last_notify))
 						{
 							send_to_server("NOTICE %s :CDCC Slow dcc %s Auto Closed. Require %sKB/s got %sKB/s", s->server, dcc_types[flags]->name, lame_ultrix1, lame_ultrix);
@@ -3700,8 +3699,8 @@ DCC_dllcommands *dcc_comm = NULL;
 	c = 0;
 	for (dcc_comm = dcc_dllcommands; dcc_comm; dcc_comm = dcc_comm->next)
 	{
-		strcat(buffer, dcc_comm->name);
-		strcat(buffer, space);
+		strlcat(buffer, dcc_comm->name, sizeof(buffer));
+		strlcat(buffer, space, sizeof(buffer));
 		if (++c == 5)
 		{
 			put_it("%s", convert_output_format("$G $[13]0 $[13]1 $[13]2 $[13]3 $[13]4", "%s", buffer));
@@ -3715,8 +3714,8 @@ DCC_dllcommands *dcc_comm = NULL;
 	c = 0;
 	for (i = 0; dcc_commands[i].name; i++)
 	{
-		strcat(buffer, dcc_commands[i].name);
-		strcat(buffer, space);
+		strlcat(buffer, dcc_commands[i].name, sizeof(buffer));
+		strlcat(buffer, space, sizeof(buffer));
 		if (++c == 5)
 		{
 			put_it("%s", convert_output_format("$G $[13]0 $[13]1 $[13]2 $[13]3 $[13]4", "%s", buffer));

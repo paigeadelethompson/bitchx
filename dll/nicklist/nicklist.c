@@ -275,12 +275,12 @@ BUILT_IN_DLL(nicklist_add)
 #endif
 }
 
-int Nicklist_Lock(IrcCommandDll **intp, Function_ptr *global_table)
+int Nicklist_Lock(IrcCommandDll **intp, BXGlobalEntry *global_table)
 {
 	return 1;
 }
 
-int Nicklist_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Nicklist_Init(IrcCommandDll **intp, BXGlobalEntry *global_table)
 {
 #ifdef GTK
 /* For paranoia's sake make sure the colors are in the color map */

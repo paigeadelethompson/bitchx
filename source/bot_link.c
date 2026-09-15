@@ -278,8 +278,8 @@ int i = 0;
 
 int handle_tcl_chan(int idx, char *user, char *host, char *text)
 {
-	tandout_but(idx, "chan %s %d %s@%s %s\n", get_server_nickname(from_server), 0, user, get_server_nickname(from_server), text);
-	chanout_but(idx, "[%s@%s] %s\n", user, get_server_nickname(from_server), text);
+	tandout_but(idx, "chan %s %d %s@%s %s\n", get_server_nickname(from_server), 0, user, host, text);
+	chanout_but(idx, "[%s@%s] %s\n", user, host, text);
 	put_it("%s", convert_output_format("%K(%R$1%K(%rxlink%K))%n $2-", "%s %s %s", update_clock(GET_TIME), user, text));
 	return 0;
 }
@@ -395,7 +395,7 @@ char *bot, *nick;
 	return 0;
 }
 
-int send_who_to(int idx, char *from, int arg)
+int send_who_to(int idx, char *from, int arg __attribute__((unused)))
 {
 /*	dcc_printf(idx, "priv %s %s testing\n", get_server_nickname(from_server), from);*/
 SocketList *s;
@@ -436,7 +436,7 @@ char buffer[IRCD_BUFFER_SIZE+1];
 	return 0;   
 }
 
-void do_command(int idx, char *from, char *par)
+void do_command(int idx __attribute__((unused)), char *from, char *par)
 {
 	logmsg(LOG_TCL, from, 0, "[command] %s", par);
 	parse_line("BOT", par, NULL, 0, 0, 1);
@@ -480,7 +480,7 @@ char buffer[IRCD_BUFFER_SIZE+1];
 	return 0;
 }
 
-int tell_who(int idx, char *arg)
+int tell_who(int idx, char *arg __attribute__((unused)))
 {
 SocketList *s;
 int i;
@@ -549,7 +549,7 @@ int found = 0;
 	return 0;
 }
 
-int tell_whom(int idx, char *arg)
+int tell_whom(int idx, char *arg __attribute__((unused)))
 {
 DCC_int *n;
 int found = 0;
@@ -722,21 +722,21 @@ SocketList *s;
 	return TCL_OK;
 }
 
-int cmd_msg(int idx, char *par)
+int cmd_msg(int idx __attribute__((unused)), char *par)
 {
 	char *nick = next_arg(par, &par);
 	send_to_server("PRIVMSG %s :%s\n",nick, par);
 	return TCL_OK;
 }
 
-int cmd_say(int idx, char *par)
+int cmd_say(int idx __attribute__((unused)), char *par)
 {
 	char *nick = next_arg(par, &par);
 	send_to_server("PRIVMSG %s :%s\n",nick, par);
 	return TCL_OK;
 }
 
-int cmd_tcl(int idx, char *par)
+int cmd_tcl(int idx __attribute__((unused)), char *par __attribute__((unused)))
 {
 #ifdef WANT_TCL
 	if (!get_int_var(BOT_TCL_VAR))
@@ -752,7 +752,7 @@ int cmd_tcl(int idx, char *par)
 	return TCL_OK;
 }
 
-int cmd_ircii(int idx, char *par)
+int cmd_ircii(int idx __attribute__((unused)), char *par)
 {
 
 	parse_line("BOT", par, NULL, 0, 0, 1);
@@ -866,7 +866,7 @@ char *pass = NULL;
 	return TCL_OK;
 }
 
-int cmd_quit(int idx, char *par)
+int cmd_quit(int idx __attribute__((unused)), char *par __attribute__((unused)))
 {
 SocketList *s;
 char buffer[IRCD_BUFFER_SIZE+1];
@@ -958,13 +958,13 @@ int tand_clink(int idx, char *par)
 	return TCL_OK;
 }
 
-int cmd_adduser(int idx, char *par)
+int cmd_adduser(int idx __attribute__((unused)), char *par __attribute__((unused)))
 {
 /*	add_user();*/
 	return TCL_OK;
 }
 
-int cmd_whoami(int idx, char *par)
+int cmd_whoami(int idx __attribute__((unused)), char *par __attribute__((unused)))
 {
 char *host;
 unsigned long atr = 0;

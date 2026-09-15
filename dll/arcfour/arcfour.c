@@ -52,7 +52,6 @@ typedef struct _DCC_List
 
 static arclist *keyboxes[16];
 
-static const double arc_ver = 1.0;
 static unsigned int typenum = 0;
 
 /*
@@ -118,7 +117,7 @@ static inline char *arcfourCrypt(arckey *arc, char *data, int len)
 	return data;					/* Return pointer to ciphertext */
 }
 
-int Arcfour_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Arcfour_Init(IrcCommandDll **intp __attribute__((unused)), BXGlobalEntry *global_table)
 {
 	static const struct dcc_ops schat_ops = { NULL, start_dcc_crypt, dcc_schat_input, send_dcc_encrypt, end_dcc_crypt };
 
@@ -161,7 +160,7 @@ static int send_dcc_encrypt (int type, int sock, char *buf, int len)
 	return -1;
 }
 
-static int dcc_schat_input(int type, int sock, char *buf, int parm, int buf_size)
+static int dcc_schat_input(int type __attribute__((unused)), int sock, char *buf, int parm, int buf_size)
 {
 	int len;
 
@@ -181,7 +180,7 @@ static int dcc_schat_input(int type, int sock, char *buf, int parm, int buf_size
  * an encrypted connection.
  */
 
-static int start_dcc_crypt (int s, int type, unsigned long d_addr, unsigned short d_port)
+static int start_dcc_crypt (int s, int type __attribute__((unused)), unsigned long d_addr __attribute__((unused)), unsigned short d_port __attribute__((unused)))
 {
 	arclist *tmpbox;
 	put_it("start_dcc_crypt");
@@ -211,7 +210,7 @@ static int start_dcc_crypt (int s, int type, unsigned long d_addr, unsigned shor
 	return -1;
 }
 
-static int end_dcc_crypt(int s, unsigned long d_addr, unsigned short d_port)
+static int end_dcc_crypt(int s, unsigned long d_addr __attribute__((unused)), unsigned short d_port __attribute__((unused)))
 {
 	int i;
 	for(i = 0; i < 16; i++) {	

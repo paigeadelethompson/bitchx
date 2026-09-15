@@ -746,8 +746,17 @@ void init_variables()
 	set_msglog_level(current_window, irc_variable[MSGLOG_LEVEL_VAR].string, 0);
 
 #ifdef TRANSLATE
-	set_string_var(TRANSLATION_VAR, "LATIN1");
-	set_translation(current_window, "LATIN1", 0);
+	if (term_is_utf8())
+	{
+		/* UTF-8 is a superset of Latin-1 and is byte-clean already. */
+		set_string_var(TRANSLATION_VAR, NULL);
+		set_translation(current_window, NULL, 0);
+	}
+	else
+	{
+		set_string_var(TRANSLATION_VAR, "LATIN1");
+		set_translation(current_window, "LATIN1", 0);
+	}
 #endif
 	create_fsets(current_window, get_int_var(DISPLAY_ANSI_VAR));
 	set_input_prompt(current_window, DEFAULT_INPUT_PROMPT, 0);
@@ -1473,7 +1482,7 @@ int i = 0;
 			default:
 				continue;
 		}
-		strcpy(varname, irc_variable[i].name);
+		strlcpy(varname, irc_variable[i].name, sizeof(varname));
 		lower(varname);
 		Tcl_LinkVar(tcl_interp, varname, 
 			(irc_variable[i].type == STR_TYPE_VAR) ? 

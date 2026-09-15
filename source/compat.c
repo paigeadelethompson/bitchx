@@ -441,7 +441,7 @@ char *tparm(const char *str, ...) {
 				if (conv_char == 's') {
 					if (popstring(&s))
 						return OOPS;
-					sprintf(sbuf, fmt, s);
+					snprintf(sbuf, sizeof(sbuf), fmt, s);
 				} else {
 					if (termcap) {
 						if (getarg(termcap++ - 1,
@@ -453,7 +453,7 @@ char *tparm(const char *str, ...) {
 					if (i == 0 && conv_char == 'c')
 						*sbuf = 0;
 					else
-						sprintf(sbuf, fmt, i);
+						snprintf(sbuf, sizeof(sbuf), fmt, i);
 				}
 				sp++;
 				fmt = sbuf;
@@ -1564,7 +1564,7 @@ snprintf_convert_float(char *buffer, size_t buf_size,
   *format_str_ptr++ = format_char;
   *format_str_ptr++ = '\0';
 
-  sprintf(print_buf, format_str, dbl_val);
+  snprintf(print_buf, sizeof(print_buf), format_str, dbl_val);
   print_buf_len = strlen(print_buf);
 
   if (print_buf_len > buf_size)

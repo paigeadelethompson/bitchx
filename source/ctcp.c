@@ -567,7 +567,7 @@ int server;
 			log_denied("UNBAN", from, FromUserHost, to, cmd);
 			return NULL;
 		}
-		sprintf(ban, "%s!%s", from, FromUserHost);
+		snprintf(ban, sizeof(ban), "%s!%s", from, FromUserHost);
 		if (chan && chan->have_op)
 		{
 			if ((b = ban_is_on_channel(ban, chan)))

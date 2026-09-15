@@ -2252,7 +2252,7 @@ int Nap_Lock(IrcCommandDll **intp)
 }
 
 
-int Nap_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Nap_Init(IrcCommandDll **intp, BXGlobalEntry *global_table)
 {
 char buffer[BIG_BUFFER_SIZE+1];
 char *p;

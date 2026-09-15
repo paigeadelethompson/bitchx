@@ -196,8 +196,7 @@ static	void	help_prompt (char *name, char *line)
 		{
 			char	tmp[BIG_BUFFER_SIZE + 1];
 
-			sprintf(tmp, "%s%sHelp? ", help_topic_list,
-				*help_topic_list ? space : empty_string);
+			snprintf(tmp, sizeof(tmp), "%s%sHelp? ", help_topic_list, *help_topic_list ? space : empty_string);
 			if (!dumb_mode)
 				add_wait_prompt(tmp, help_me, help_topic_list,
 					WAIT_PROMPT_LINE, 1);
@@ -310,7 +309,7 @@ static	void	help_show_paused_topic (char *name, char *line)
 		{
 			char	buf[BIG_BUFFER_SIZE];
 
-			sprintf(buf, "%s%sHelp? ", name, (name && *name) ? space : empty_string);
+			snprintf(buf, sizeof(buf), "%s%sHelp? ", name, (name && *name) ? space : empty_string);
 			if (!dumb_mode)
 				add_wait_prompt(buf, help_me, name, WAIT_PROMPT_LINE, 1);
 		}
@@ -346,10 +345,10 @@ static	void	help_me (char *topics, char *args)
 	char	buffer[BIG_BUFFER_SIZE+1];
 	char *	pattern = NULL;
 
-	strcpy(help_topic_list, topics);
+	strlcpy(help_topic_list, topics, sizeof(help_topic_list));
 	ptr = get_string_var(HELP_PATH_VAR);
 
-	sprintf(path, "%s/%s", ptr, topics);
+	snprintf(path, sizeof(path), "%s/%s", ptr, topics);
 	for (ptr = path; (ptr = strchr(ptr, ' '));)
 		*ptr = '/';
 
@@ -545,11 +544,11 @@ switch (entries)
 		stat(tmp, &stat_buf);
 		if (stat_buf.st_mode & S_IFDIR)
 		{
-			strcpy(path, tmp);
+			strlcpy(path, tmp, sizeof(path));
 			if (*help_topic_list)
-				strcat(help_topic_list, space);
+				strlcat(help_topic_list, space, sizeof(help_topic_list));
 
-			strcat(help_topic_list, g.gl_pathv[0]);
+			strlcat(help_topic_list, g.gl_pathv[0], sizeof(help_topic_list));
 
 			if (!(this_arg = next_arg(args, &args)))
 			{
@@ -572,12 +571,12 @@ switch (entries)
 	default:
 	{
 		help_show_directory = 1;
-		strcpy(paused_topic, help_topic_list);
+		strlcpy(paused_topic, help_topic_list, sizeof(paused_topic));
 		help_pause_add_line("*** %s choices:", help_topic_list);
 		entry_size += 2;
 		cols = (current_term->TI_cols - 10) / entry_size;
 
-		strcpy(buffer, empty_string);
+		strlcpy(buffer, empty_string, sizeof(buffer));
 		cnt = 0;
 
 		for (i = 0; i < entries; i++)
@@ -586,7 +585,7 @@ switch (entries)
 				chop(g.gl_pathv[i], 3);
 			else if (!end_strcmp(g.gl_pathv[i], ".bz2", 4))
 				chop(g.gl_pathv[i], 4);
-			strcat(buffer, g.gl_pathv[i]);
+			strlcat(buffer, g.gl_pathv[i], sizeof(buffer));
 
 			/*
 			 * Since we already know how many columns each
@@ -597,7 +596,7 @@ switch (entries)
 			if (++cnt == cols)
 			{
 				help_pause_add_line("%s", buffer);
-				strcpy(buffer, empty_string);
+				strlcpy(buffer, empty_string, sizeof(buffer));
 				cnt = 0;
 			}
 

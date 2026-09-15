@@ -36,7 +36,6 @@ CVS_REVISION(screen_c)
 #include "misc.h"
 #include "cset.h"
 #include "tcl_bx.h"
-#include "gui.h"
 #define MAIN_SOURCE
 #include "modval.h"
 
@@ -689,8 +688,8 @@ char **BX_prepare_display(const char *orig_str,
 			pos_copy = alloca(strlen(buffer) + strlen(cont) + 20);
 			strcpy(pos_copy, word_break);
 			
-			strcpy(buffer, cont);
-			strcat(buffer, pos_copy);
+			strlcpy(buffer, cont, sizeof(buffer));
+			strlcat(buffer, pos_copy, sizeof(buffer));
 			pds.col = strlen(buffer);
 			pds.dest = &buffer[pds.col];
 
@@ -2996,11 +2995,11 @@ void put_color(int fore, int back)
 
 	retbuf[0] = '\0';
 	if (back == 58)
-		strcat(retbuf, current_term->TI_sgrstrs[TERM_SGR_BLINK_ON - 1]);
+		strlcat(retbuf, current_term->TI_sgrstrs[TERM_SGR_BLINK_ON - 1], sizeof(retbuf));
 	if (fore > -1 && fore < 58)
-		strcat(retbuf, current_term->TI_forecolors[fore_conv[fore]]);
+		strlcat(retbuf, current_term->TI_forecolors[fore_conv[fore]], sizeof(retbuf));
 	if (back > -1 && back < 58)
-		strcat(retbuf, current_term->TI_backcolors[back_conv[back]]);
+		strlcat(retbuf, current_term->TI_backcolors[back_conv[back]], sizeof(retbuf));
 
 	last_fore = fore;
 	last_back = back;

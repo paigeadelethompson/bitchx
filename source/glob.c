@@ -791,7 +791,7 @@ static DIR *g_opendir		(	register Char *str,
 	char buf[MAXPATHLEN];
 
 	if (!*str)
-		strcpy(buf, ".");
+		strlcpy(buf, ".", sizeof(buf));
 	else
 		g_Ctoc(str, buf);
 

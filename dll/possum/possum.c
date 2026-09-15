@@ -69,7 +69,7 @@ char *Possum_Version(IrcCommandDll **intp)
 	return PM_VERSION;
 }
 
-int Possum_Init(IrcCommandDll **intp, Function_ptr *global_table) {
+int Possum_Init(IrcCommandDll **intp, BXGlobalEntry *global_table) {
   char *tmp = getenv("MAIL");
   
   initialize_module("possum");

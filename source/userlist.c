@@ -510,11 +510,11 @@ BUILT_IN_COMMAND(add_user)
 		{
 			char format[80];
 			
-			strcpy(format, "%d %d %s");
+			strlcpy(format, "%d %d %s", sizeof(format));
 			if (capabilities)
-				strcat(format, " %s");
+				strlcat(format, " %s", sizeof(format));
 			if (passwd)
-				strcat(format, " %s");
+				strlcat(format, " %s", sizeof(format));
 			if (passwd)
 				userhostbase(nick, prepare_adduser, 1, format, type, ppp, 
 					channels, capabilities, passwd);

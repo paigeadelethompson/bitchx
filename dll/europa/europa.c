@@ -346,7 +346,7 @@ BUILT_IN_DLL(cmdExplain)
   return;
 }
 
-int Europa_Init(IrcCommandDll **intp, Function_ptr *global_table) {
+int Europa_Init(IrcCommandDll **intp, BXGlobalEntry *global_table) {
   initialize_module(MOD_NAME);
 
   add_module_proc(COMMAND_PROC, MOD_NAME, "europa", NULL, 0, 0, europa, NULL);

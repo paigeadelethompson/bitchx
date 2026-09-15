@@ -391,7 +391,7 @@ char *Cdrom_Version (IrcCommandDll **interp)
 	return CDROM_VERSION;
 }
 
-int Cdrom_Init(IrcCommandDll **interp, Function_ptr *global_table)
+int Cdrom_Init(IrcCommandDll **interp, BXGlobalEntry *global_table)
 {
 char *name = "cdrom";
 	initialize_module(name);

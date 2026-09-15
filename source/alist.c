@@ -126,7 +126,7 @@ Array_item *BX_remove_all_from_array (Array *array, char *name)
 	return NULL;	/* Can't delete what's not there */
 }
 
-Array_item *BX_array_lookup (Array *array, char *name, int wild, int delete)
+Array_item *BX_array_lookup (Array *array, char *name, int wild __attribute__((unused)), int delete)
 {
 	int count, location;
 
@@ -353,8 +353,8 @@ Array_item *BX_find_array_item (Array *set, char *name, int *cnt, int *loc)
  */
 void * BX_find_fixed_array_item (void *list, size_t size, int howmany, const char *name, int *cnt, int *loc)
 {
-	int	len = strlen(name),
-		min = 0,
+	size_t	len = strlen(name);
+	int	min = 0,
 		max = howmany,
 		old_pos = -1,
 		pos,

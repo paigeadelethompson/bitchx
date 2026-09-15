@@ -298,7 +298,7 @@ extern	SGroup	*server_group_list;
 
 	void	set_server_ircop_flags		(int, unsigned long);
 unsigned long	get_server_ircop_flags		(int);	
-extern		void	start_identd		(void);
+extern int start_identd(void);
 
 	void	set_server_in_timed		(int, int);
 	int	get_server_in_timed		(int);

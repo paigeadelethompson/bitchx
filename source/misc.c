@@ -57,7 +57,6 @@ CVS_REVISION(misc_c)
 #include "timer.h"
 #include "userlist.h"
 #include "misc.h"
-#include "gui.h"
 #include "cdns.h"
 #include "flood.h"
 #include "parse.h"
@@ -146,7 +145,7 @@ char *convert_time (time_t ltime)
 	ltime = (ltime - minutes) / 60;
 	hours = ltime % 24;
 	days = (ltime - hours) / 24;
-	sprintf(buffer, "%2lud %2luh %2lum %2lus", days, hours, minutes, seconds);
+	snprintf(buffer, sizeof(buffer), "%2lud %2luh %2lum %2lus", days, hours, minutes, seconds);
 	return(*buffer ? buffer : empty_string);
 }
 
@@ -1566,7 +1565,7 @@ BUILT_IN_COMMAND(ChanWallOp)
 			new_free(&channel);
 		}
 		set_display_target(channel, LOG_WALL);
-		sprintf(buffer, "[\002BX-Wall\002/\002%s\002] %s", channel, args);
+		snprintf(buffer, sizeof(buffer), "[\002BX-Wall\002/\002%s\002] %s", channel, args);
 		if (ver >= Server_u2_10 || enable_all)
 		{
 			send_to_server(enable_all?"NOTICE @%s :%s":"WALLCHOPS %s :%s", channel, buffer);
@@ -1794,9 +1793,9 @@ struct in_addr ip;
 	{
 		int i;
 		if (rptr->nick && rptr->user)
-			sprintf(buffer, "%s!%s@%s ", n, u, h);
+			snprintf(buffer, sizeof(buffer), "%s!%s@%s ", n, u, h);
 		else
-			sprintf(buffer, "%s ", h);
+			snprintf(buffer, sizeof(buffer), "%s ", h);
 		for (i = 0; rptr->re_he.h_addr_list[i].s_addr; i++)
 		{
 			memcpy(&ip, &rptr->re_he.h_addr_list[i], sizeof ip);
@@ -1834,9 +1833,9 @@ void print_ns_fail(struct reslist *rptr)
 	{
 		char buffer[BIG_BUFFER_SIZE];
 		if (rptr->nick && rptr->user)
-			sprintf(buffer, "%s!%s@%s ", rptr->nick, rptr->user, rptr->host);
+			snprintf(buffer, sizeof(buffer), "%s!%s@%s ", rptr->nick, rptr->user, rptr->host);
 		else
-			sprintf(buffer, "%s ", rptr->host);
+			snprintf(buffer, sizeof(buffer), "%s ", rptr->host);
 		parse_line("NSLOOKUP", rptr->command, buffer, 0, 0, 1);
 		return;
 	}
@@ -2508,9 +2507,7 @@ static	int	do_query_number(struct resinfo *resi, char *numb, register struct res
 	 * name to get more names to query!.
 	 */
 	cp = (unsigned char *)numb;
-	(void)sprintf(ipbuf,"%u.%u.%u.%u.in-addr.arpa.",
-			(unsigned int)(cp[3]), (unsigned int)(cp[2]),
-			(unsigned int)(cp[1]), (unsigned int)(cp[0]));
+	(void)snprintf(ipbuf, sizeof(ipbuf), "%u.%u.%u.%u.in-addr.arpa.", (unsigned int)(cp[3]), (unsigned int)(cp[2]), (unsigned int)(cp[1]), (unsigned int)(cp[0]));
 
 	if (!rptr)
 	    {
@@ -3075,7 +3072,7 @@ char *cluster (char *hostname)
 	atsign = strchr(hostname, '@');
 	if (atsign) {
 		if (*hostname == '~') {
-			strcpy(result, "~*@");
+			strlcpy(result, "~*@", sizeof(result));
 		} else {
 			size_t ident_len = atsign - hostname;
 			
@@ -3084,7 +3081,7 @@ char *cluster (char *hostname)
 				strncat(result, hostname, ident_len + 1);
 			} else {
 				strncat(result, hostname, 8);
-				strcat(result, "*@");
+				strlcat(result, "*@", sizeof(result));
 			}
 		}
 		hostname = atsign + 1;
@@ -3139,9 +3136,9 @@ char *cluster (char *hostname)
 		/* We don't need strlcat for these first two, because
 		 * at this point the maximum length of the string in
 		 * result is 11 */
-		strcat(result, "*");
+		strlcat(result, "*", sizeof(result));
 		if (my_stricmp(host, temphost))
-			strcat(result, ".");
+			strlcat(result, ".", sizeof(result));
 		strlcat(result, host, sizeof result);
 	}
 	return result;
@@ -3702,18 +3699,18 @@ void userhost_ignore (UserhostItem *uhi, char *nick1, char *args)
 
 	arg = next_arg(args, &args);
 	if (!arg || !*arg || !my_stricmp(arg, "+HOST"))
-		sprintf(ignorebuf, "*!*@%s ALL -CRAP -PUBLIC", cluster(host));
+		snprintf(ignorebuf, sizeof(ignorebuf), "*!*@%s ALL -CRAP -PUBLIC", cluster(host));
 	else if (!my_stricmp(arg, "+USER"))
-		sprintf(ignorebuf, "*%s@%s ALL -CRAP -PUBLIC", user, cluster(host));
+		snprintf(ignorebuf, sizeof(ignorebuf), "*%s@%s ALL -CRAP -PUBLIC", user, cluster(host));
 	else if (!my_stricmp(arg, "-USER") || !my_stricmp(arg, "-HOST"))
 	{
 		Ignore *igptr, *igtmp;
 		int found = 0;
 
 		if (!my_stricmp(arg, "-HOST"))
-			sprintf(ignorebuf, "*!*@%s", cluster(host));
+			snprintf(ignorebuf, sizeof(ignorebuf), "*!*@%s", cluster(host));
 		else
-			sprintf(ignorebuf, "%s!%s@%s", nick, user, host);
+			snprintf(ignorebuf, sizeof(ignorebuf), "%s!%s@%s", nick, user, host);
 		igptr = ignored_nicks;
 		while (igptr != NULL)
 		{
@@ -3721,7 +3718,7 @@ void userhost_ignore (UserhostItem *uhi, char *nick1, char *args)
 			if (wild_match(igptr->nick, ignorebuf) ||
 			    wild_match(nick, igptr->nick))
 			{
-				sprintf(ignorebuf, "%s NONE", igptr->nick);
+				snprintf(ignorebuf, sizeof(ignorebuf), "%s NONE", igptr->nick);
 				old_window_display = window_display;
 				window_display = 0;
 				ignore(NULL, ignorebuf, ignorebuf, NULL);
@@ -3845,7 +3842,7 @@ BUILT_IN_COMMAND(do_ig)
 		if (*nick == '-' || *nick == '+')
 		{
 			if (!my_stricmp(nick, "-USER") || !my_stricmp(nick, "+HOST") || !my_stricmp(nick, "+USER") || !my_stricmp(nick, "-HOST"))
-				strcpy(ignore_type, nick);
+				strlcpy(ignore_type, nick, sizeof(ignore_type));
 			if (!args || !*args)
 				goto bad_ignore;
 			got_ignore_type++;
@@ -3854,13 +3851,13 @@ BUILT_IN_COMMAND(do_ig)
 		else if (!got_ignore_type)
 		{
 			if (command && !my_strnicmp(command, "IGH",3))
-				strcpy(ignore_type, "+HOST");
+				strlcpy(ignore_type, "+HOST", sizeof(ignore_type));
 			else if (command && !my_strnicmp(command, "IG",2))
-				strcpy(ignore_type, "+USER");
+				strlcpy(ignore_type, "+USER", sizeof(ignore_type));
 			if (command && !my_strnicmp(command, "UNIGH", 5))
-				strcpy(ignore_type, "-HOST");
+				strlcpy(ignore_type, "-HOST", sizeof(ignore_type));
 			else if (command && !my_strnicmp(command, "UNIG", 4))
-				strcpy(ignore_type, "-USER");
+				strlcpy(ignore_type, "-USER", sizeof(ignore_type));
 			if (command && toupper(command[strlen(command)-1]) == 'T')
 				need_time ++;
 		}
@@ -4014,12 +4011,11 @@ int	count = 0,
 	sortl = sorted_nicklist(chan, sorted);
 	for (nicks = sortl; nicks; nicks = nicks->next)
 	{
-		sprintf(modebuf, "%s!%s", nicks->nick,
-		      nicks->host ? nicks->host : "<UNKNOWN@UNKNOWN>");
+		snprintf(modebuf, sizeof(modebuf), "%s!%s", nicks->nick, nicks->host ? nicks->host : "<UNKNOWN@UNKNOWN>");
 		if (msg == 7 && nicks->ip)
 		{
-			strcat(modebuf, space); 
-			strcat(modebuf, nicks->ip);
+			strlcat(modebuf, space, sizeof(modebuf)); 
+			strlcat(modebuf, nicks->ip, sizeof(modebuf));
 		}
 		if (((!not && wild_match(spec, modebuf)) || (not && !wild_match(spec, modebuf))) && 
 					(!ops ||
@@ -4047,7 +4043,7 @@ int	count = 0,
 					{
 						if (*msgbuf)
 							strcat(msgbuf, ",");
-						strcat(msgbuf, nicks->nick);
+						strlcat(msgbuf, nicks->nick, sizeof(msgbuf));
 						num_kicks++;
 					} else 
 						count--;
@@ -4082,7 +4078,7 @@ int	count = 0,
 				{
 					if (*msgbuf)
 						strcat(msgbuf, ",");
-					strcat(msgbuf, nicks->nick);
+					strlcat(msgbuf, nicks->nick, sizeof(msgbuf));
 					if (strlen(msgbuf)+strlen(args) >= 490)
 					{
 						put_it("%s", convert_output_format(fget_string_var((msg == 1)?FORMAT_SEND_MSG_FSET:FORMAT_SEND_NOTICE_FSET), "%s %s %s %s", update_clock(GET_TIME),msgbuf, get_server_nickname(from_server), args));
@@ -4246,10 +4242,10 @@ char *convert_output_format_raw(const char *format, const char *str, va_list arg
 				}
 				*q = 0;
 				if (*buff)
-					strcat(buffer2, buff);
+					strlcat(buffer2, buff, sizeof(buffer2));
 #else
 				if (s)
-					strcat(buffer2, s);
+					strlcat(buffer2, s, sizeof(buffer2));
 #endif
 				break;
 			}

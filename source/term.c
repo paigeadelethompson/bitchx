@@ -43,6 +43,11 @@ DWORD gdwPlatform;
 #include "translat.h"
 #endif
 
+#include <locale.h>
+#ifdef HAVE_LANGINFO_H
+#include <langinfo.h>
+#endif
+
 #define MAIN_SOURCE
 #include "modval.h"
 
@@ -631,19 +636,6 @@ static	char	termcap[2048];	/* bigger than we need, just in case */
 static	char	termcap2[2048];	/* bigger than we need, just in case */
 #endif
 
-/* 
- * Any GUI system modules must be included here to make the GUI support
- *  routines accessible to the rest of BitchX. 
- */
-#ifndef WTERM_C
-#ifdef __EMXPM__
-#include "PMBitchX.c"
-#elif defined(GTK)
-#include "gtkbitchx.c"
-#elif defined(WIN32)
-#include "winbitchx.c"
-#endif
-#endif
 /*
  * term_echo: if 0, echo is turned off (all characters appear as blanks), if
  * non-zero, all is normal.  The function returns the old value of the
@@ -755,7 +747,7 @@ extern int foreground;
 /*
  * term_pause: sets terminal back to pre-program days, then SIGSTOPs itself. 
  */
-extern void term_pause (char unused, char *not_used)
+extern void term_pause (char unused __attribute__((unused)), char *not_used __attribute__((unused)))
 {
 #ifndef PUBLIC_ACCESS
 #ifdef WINNT
@@ -810,7 +802,7 @@ PROCESS_INFORMATION pi = { 0 };
  */
 int termfeatures = 0;
 
-int term_init (char *term)
+int term_init (char *term __attribute__((unused)))
 {
 #ifndef WTERM_C
 	int i;
@@ -1153,15 +1145,15 @@ int term_init (char *term)
 
 		cbuf[0] = '\0';
 		if (i >= 8)
-			strcpy(cbuf, current_term->TI_sgrstrs[TERM_SGR_BOLD_ON-1]);
+			strlcpy(cbuf, current_term->TI_sgrstrs[TERM_SGR_BOLD_ON-1], sizeof(cbuf));
 		if (current_term->TI_setaf) 
-			strcat(cbuf, tparm2(current_term->TI_setaf, i & 0x07, 0));
+			strlcat(cbuf, tparm2(current_term->TI_setaf, i & 0x07, 0), sizeof(cbuf));
 		else if (current_term->TI_setf)
-			strcat(cbuf, tparm2(current_term->TI_setf, i & 0x07, 0));
+			strlcat(cbuf, tparm2(current_term->TI_setf, i & 0x07, 0), sizeof(cbuf));
 		else if (i >= 8)
-			sprintf(cbuf, "\033[1;%dm", (i & 0x07) + 30);
+			snprintf(cbuf, sizeof(cbuf), "\033[1;%dm", (i & 0x07) + 30);
 		else
-			sprintf(cbuf, "\033[%dm", (i & 0x07) + 30);
+			snprintf(cbuf, sizeof(cbuf), "\033[%dm", (i & 0x07) + 30);
 
 		current_term->TI_forecolors[i] = m_strdup(cbuf);
 	}
@@ -1172,16 +1164,16 @@ int term_init (char *term)
 
 		cbuf[0] = '\0';
 		if (i >= 8)
-			strcpy(cbuf, current_term->TI_sgrstrs[TERM_SGR_BLINK_ON - 1]);
+			strlcpy(cbuf, current_term->TI_sgrstrs[TERM_SGR_BLINK_ON - 1], sizeof(cbuf));
 
 		if (current_term->TI_setab)
-			strcat(cbuf, tparm2(current_term->TI_setab, i & 0x07, 0));
+			strlcat(cbuf, tparm2(current_term->TI_setab, i & 0x07, 0), sizeof(cbuf));
 		else if (current_term->TI_setb)
-			strcat(cbuf, tparm2(current_term->TI_setb, i & 0x07, 0));
+			strlcat(cbuf, tparm2(current_term->TI_setb, i & 0x07, 0), sizeof(cbuf));
 		else if (i >= 8)
-			sprintf(cbuf, "\033[1;%dm", (i & 0x07) + 40);
+			snprintf(cbuf, sizeof(cbuf), "\033[1;%dm", (i & 0x07) + 40);
 		else
-			sprintf(cbuf, "\033[%dm", (i & 0x07) + 40);
+			snprintf(cbuf, sizeof(cbuf), "\033[%dm", (i & 0x07) + 40);
 
 		current_term->TI_backcolors[i] = m_strdup(cbuf);
 	}
@@ -1575,10 +1567,10 @@ void term_scroll (int top, int bot, int n)
 			if (current_term->TI_indn)
 			{
 				oneshot = 1;
-				strcpy(thing, tparm2(current_term->TI_indn, rn, rn));
+				strlcpy(thing, tparm2(current_term->TI_indn, rn, rn), sizeof(thing));
 			}
 			else
-				strcpy(thing, current_term->TI_ind);
+				strlcpy(thing, current_term->TI_ind, sizeof(thing));
 		}
 		else
 		{
@@ -1587,10 +1579,10 @@ void term_scroll (int top, int bot, int n)
 			if (current_term->TI_rin)
 			{
 				oneshot = 1;
-				strcpy(thing, tparm2(current_term->TI_rin, rn, rn));
+				strlcpy(thing, tparm2(current_term->TI_rin, rn, rn), sizeof(thing));
 			}
 			else
-				strcpy(thing, current_term->TI_ri);
+				strlcpy(thing, current_term->TI_ri, sizeof(thing));
 		}
 	}
 
@@ -1606,10 +1598,10 @@ void term_scroll (int top, int bot, int n)
 			if (current_term->TI_indn)
 			{
 				oneshot = 1;
-				strcpy(thing, tparm2(current_term->TI_indn, rn, rn));
+				strlcpy(thing, tparm2(current_term->TI_indn, rn, rn), sizeof(thing));
 			}
 			else
-				strcpy(thing, current_term->TI_ind);
+				strlcpy(thing, current_term->TI_ind, sizeof(thing));
 		}
 		else
 		{
@@ -1618,10 +1610,10 @@ void term_scroll (int top, int bot, int n)
 			if (current_term->TI_rin)
 			{
 				oneshot = 1;
-				strcpy(thing, tparm2(current_term->TI_rin, rn, rn));
+				strlcpy(thing, tparm2(current_term->TI_rin, rn, rn), sizeof(thing));
 			}
 			else
-				strcpy (thing, current_term->TI_ri);
+				strlcpy(thing, current_term->TI_ri, sizeof(thing));
 		}
 	}
 
@@ -1635,10 +1627,10 @@ void term_scroll (int top, int bot, int n)
 			if (current_term->TI_dl)
 			{
 				oneshot = 1;
-				strcpy(thing, tparm2(current_term->TI_dl, rn, rn));
+				strlcpy(thing, tparm2(current_term->TI_dl, rn, rn), sizeof(thing));
 			}
 			else
-				strcpy (thing, current_term->TI_dl1);
+				strlcpy(thing, current_term->TI_dl1, sizeof(thing));
 
 			if (current_term->TI_il)
 			{
@@ -1655,10 +1647,10 @@ void term_scroll (int top, int bot, int n)
 			if (current_term->TI_il)
 			{
 				oneshot = 1;
-				strcpy(thing, tparm2(current_term->TI_il, rn, rn));
+				strlcpy(thing, tparm2(current_term->TI_il, rn, rn), sizeof(thing));
 			}
 			else
-				strcpy (thing, current_term->TI_il1);
+				strlcpy(thing, current_term->TI_il1, sizeof(thing));
 
 			if (current_term->TI_dl)
 			{
@@ -1751,7 +1743,7 @@ char *term_getsgr (int opt, int fore, int back)
 			ret = current_term->TI_forecolors[fore & 0x0f];
 			break;
 		case TERM_SGR_BACKGROUND:
-			ret = current_term->TI_backcolors[fore & 0x0f];
+			ret = current_term->TI_backcolors[back & 0x0f];
 			break;
 		case TERM_SGR_GCHAR:
 			if (current_term->TI_dispc)
@@ -1776,6 +1768,27 @@ extern	int term_eight_bit (void)
 		return 1;
 	return (((newb.c_cflag) & CSIZE) == CS8) ? 1 : 0;
 #endif
+}
+
+/* term_is_utf8:  True when the current locale's codeset is UTF-8.
+ * Cached: the locale only changes between exec's (after setlocale in
+ * main), never while we are running. */
+int term_is_utf8(void)
+{
+	static int	checked = 0,
+			utf8 = 0;
+	char		*codeset;
+
+	if (!checked)
+	{
+		checked = 1;
+#ifdef HAVE_LANGINFO_H
+		codeset = nl_langinfo(CODESET);
+		if (codeset && (!my_stricmp(codeset, "UTF-8") || !my_stricmp(codeset, "UTF8")))
+			utf8 = 1;
+#endif
+	}
+	return utf8;
 }
 
 extern	void term_beep (void)
@@ -1808,7 +1821,7 @@ extern	void	set_term_eight_bit (int value)
 	tcsetattr(tty_des, TCSADRAIN, &newb);
 }
 
-void	set_meta_8bit (Window *w, char *u, int value)
+void	set_meta_8bit (Window *w __attribute__((unused)), char *u __attribute__((unused)), int value)
 {
 	if (dumb_mode)
 		return;
@@ -2008,7 +2021,7 @@ SIGNAL_HANDLER(term_cont)
 /*
  * term_pause: sets terminal back to pre-program days, then SIGSTOPs itself.
  */
-extern void term_pause (char unused, char *not_used)
+extern void term_pause (char unused __attribute__((unused)), char *not_used __attribute__((unused)))
 {
 char *shell;
 DWORD dwmode;

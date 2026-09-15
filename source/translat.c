@@ -147,6 +147,15 @@ unsigned char	get_digraph(unsigned char c1)
  */
 void set_translation(Window *win, char *tablename, int unused)
 {
+	/* Transparent / UTF-8: pass 8-bit bytes through untranslated.
+	 * The byte-wise tables would corrupt multibyte UTF-8 sequences. */
+	if (!tablename || !*tablename
+	    || !my_stricmp(tablename, "UTF-8") || !my_stricmp(tablename, "UTF8"))
+	{
+		translation = 0;
+		return;
+	}
+
 	FILE	*table;
 	unsigned char	temp_table[512];
 	char	*filename = NULL, *s;
@@ -367,9 +376,8 @@ BUILT_IN_COMMAND(digraph)
 		i = 0;
 		while(dig_table_lo[i])
 		{
-			sprintf(buffer1, "%c%c %c   ", dig_table_lo[i],
-			    dig_table_hi[i], dig_table_di[i]);
-			strcat(buffer2, buffer1);
+			snprintf(buffer1, sizeof(buffer1), "%c%c %c   ", dig_table_lo[i], dig_table_hi[i], dig_table_di[i]);
+			strlcat(buffer2, buffer1, sizeof(buffer2));
 			if ((++i % 10) == 0)
 			{
 				put_it(buffer2);
@@ -378,7 +386,7 @@ BUILT_IN_COMMAND(digraph)
 		}
 		if (buffer2[0])
 			put_it(buffer2);
-		sprintf(buffer2, "%d digraphs listed.", i);
+		snprintf(buffer2, sizeof(buffer2), "%d digraphs listed.", i);
 		say(buffer2);
 	}
 }

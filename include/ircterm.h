@@ -57,7 +57,6 @@ void avio_refresh_screen(void);
 #endif
 
 #ifdef GUI
-#include "gui.h"
 #endif
 
 #ifdef TRANSLATE
@@ -722,8 +721,9 @@ SIGNAL_HANDLER(term_cont);
 	void		term_clear_screen		(void);
 	void		term_gotoxy		(int, int);
 	void		term_reset		(void);
-	int		term_eight_bit		(void);
-	void		set_term_eight_bit	(int);
+int		term_eight_bit		(void);
+ 	int		term_is_utf8		(void);
+ 	void		set_term_eight_bit	(int);
 	void		set_meta_8bit		(Window *, char *, int);
 	char *		term_getsgr		(int, int, int);
 	void		reinit_term		(int);

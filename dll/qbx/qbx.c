@@ -287,7 +287,7 @@ BUILT_IN_DLL(qbx_cmd)
 	userage("QBX", helparg);
 }
 
-int Qbx_Init(IrcCommandDll **intp, Function_ptr *global_table) {
+int Qbx_Init(IrcCommandDll **intp, BXGlobalEntry *global_table) {
 	initialize_module("qbx");
 	add_module_proc(HOOK_PROC, "qbx", NULL, "* % !q*", PUBLIC_LIST, 1, NULL, pub_proc);
 	add_module_proc(HOOK_PROC, "qbx", NULL, "* % !q*", PUBLIC_OTHER_LIST, 1, NULL, pub_proc);

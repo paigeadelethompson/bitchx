@@ -195,7 +195,7 @@ extern void	BX_update_input (int update)
 		if (get_int_var(HEBREW_TOGGLE_VAR))
 		{
 			update = UPDATE_ALL;
-			strcpy(prehebbuff, get_input());
+			strlcpy(prehebbuff, get_input(), sizeof(prehebbuff));
 			hebrew_process(get_input());
 		}
 #endif
@@ -1093,7 +1093,7 @@ char *line = NULL;
 	if (tmp && *tmp)
 	{
 		add_autonick_input(tmp, line);
-		strcpy(new_nick, tmp);
+		strlcpy(new_nick, tmp, sizeof(new_nick));
 	}
 	else
 	{
@@ -1103,7 +1103,7 @@ char *line = NULL;
 		if (tmp)
 		{
 			add_autonick_input(tmp, line);
-			strcpy(new_nick, tmp);
+			strlcpy(new_nick, tmp, sizeof(new_nick));
 		}
 	}
 	malloc_strcpy(&input_lastmsg, nick);
@@ -2507,7 +2507,7 @@ char	buffer[BIG_BUFFER_SIZE+1];
 			snprintf(buffer, sizeof buffer, "%s%s%s", inp, space, i ? completes[0] : old);
 	}
 	else
-		strcpy(buffer, completes[0]);
+		strlcpy(buffer, completes[0], sizeof(buffer));
 	if (strcmp(buffer, get_input()))
 		set_input(buffer);
 	if (strchr(completes[0], ' '))

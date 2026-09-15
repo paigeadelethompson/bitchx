@@ -1392,7 +1392,7 @@ static void	delete_all_var_alias (char *name)
 {
 	Alias *item;
 	int i;
-	int count = 0;
+
 	upper(name);
 	while ((item = (Alias *) remove_all_from_array((Array *)&var_alias, name)))
 	{
@@ -1406,7 +1406,6 @@ static void	delete_all_var_alias (char *name)
 		new_free(&(item->stuff));
 		new_free(&(item->stub));
 		new_free((char **)&item);
-		count++;
 	}
 }
 
@@ -1670,7 +1669,7 @@ void debug_alias(char *name, int x)
 	if (name && *name)
 	{
 		if ((item = find_cmd_alias(name, &cnt)) && cnt < 0)
-			item->debug = DEBUG_CMDALIAS;
+			item->debug = x ? DEBUG_CMDALIAS : 0;
 	}
 }
 

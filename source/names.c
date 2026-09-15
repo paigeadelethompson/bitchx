@@ -39,7 +39,6 @@ CVS_REVISION(names_c)
 #include "userlist.h"
 #include "hash2.h"
 #include "cset.h"
-#include "gui.h"
 #define MAIN_SOURCE
 #include "modval.h"
 

@@ -632,7 +632,7 @@ void load_scripts(void)
 		never_connected = 0;
 #if !defined(WINNT) && !defined(__EMX__)
 		window_display = 0;
-		sprintf(buffer, "%s/bxglobal", SCRIPT_PATH);
+		snprintf(buffer, sizeof(buffer), "%s/bxglobal", SCRIPT_PATH);
 		loading_global = 1;
 		load("LOAD", buffer, empty_string, NULL);
 		loading_global = 0;
@@ -858,7 +858,7 @@ BUILT_IN_COMMAND(s_watch)
 		int i;
 		char buffer[BIG_BUFFER_SIZE];
 
-		strcpy(buffer, all);
+		strlcpy(buffer, all, sizeof(buffer));
 		for (i = 0; opflags[i]; i++)
 		{
 			strlcat(buffer, space, sizeof buffer);

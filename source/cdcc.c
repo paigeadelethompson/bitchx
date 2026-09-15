@@ -238,7 +238,7 @@ BUILT_IN_COMMAND(cdcc)
 	return;
 }
 			
-static int l_help(char *cmd, char *args)
+static int l_help(char *cmd, char *args __attribute__((unused)))
 {
 	int i;
 	char buffer[BIG_BUFFER_SIZE];
@@ -365,7 +365,7 @@ static int r_info(char *args, char *rest)
 	return 0;
 }
  
-static int r_queue(char *args, char *rest)
+static int r_queue(char *args, char *rest __attribute__((unused)))
 {
 queue *new = NULL;
 int count;
@@ -646,7 +646,7 @@ static int r_send(char *from, char *args)
 			
 
 /* remote pack list */
-static int r_list(char *from, char *args)
+static int r_list(char *from, char *args __attribute__((unused)))
 {
 	pack *ptr;
 	char size[30];
@@ -657,11 +657,11 @@ static int r_list(char *from, char *args)
 	char speed_out[30];
 	int once = 0;
 
-	sprintf(mrate_out, "%1.3g", dcc_max_rate_out);
-	sprintf(mrate_in, "%1.3g", dcc_max_rate_in);
-	sprintf(bytes_out, "%1.3g", dcc_bytes_out);
-	sprintf(bytes_in, "%1.3g", dcc_bytes_in);
-	sprintf(speed_out, "%1.3g", cdcc_minspeed);
+	snprintf(mrate_out, sizeof(mrate_out), "%1.3g", dcc_max_rate_out);
+	snprintf(mrate_in, sizeof(mrate_in), "%1.3g", dcc_max_rate_in);
+	snprintf(bytes_out, sizeof(bytes_out), "%1.3g", dcc_bytes_out);
+	snprintf(bytes_in, sizeof(bytes_in), "%1.3g", dcc_bytes_in);
+	snprintf(speed_out, sizeof(speed_out), "%1.3g", cdcc_minspeed);
 
 	for (ptr = offerlist; ptr; ptr = ptr->next) 
 	{
@@ -682,10 +682,9 @@ static int r_list(char *from, char *args)
 				queue_send_to_server(from_server, "NOTICE %s :    [%u pack%s]", from, cdcc_numpacks,plural(cdcc_numpacks));
 		}
 	 	if (ptr->size / 1024 > 999)
-			sprintf(size, "\002%4.1f\002mb",
-				(((double)ptr->size) / 1024) / 1024);
+			snprintf(size, sizeof(size), "\002%4.1f\002mb", (((double)ptr->size) / 1024) / 1024);
 		else
-			sprintf(size, "\002%4.1f\002kb", (((double)ptr->size) / 1024)); 
+			snprintf(size, sizeof(size), "\002%4.1f\002kb", (((double)ptr->size) / 1024)); 
 				
 		if (do_hook(CDCC_PACK_LIST, "%s %s %d %d %lu %d %s", 
 			"NOTICE", from, ptr->num, ptr->numfiles, ptr->size, ptr->gets, ptr->desc))
@@ -766,7 +765,7 @@ static int l_doffer(char *args, char *rest)
 }
 
 /* localy list the packs you have offered */
-static int l_list(char *args, char *rest)
+static int l_list(char *args, char *rest __attribute__((unused)))
 {
 	pack *ptr;
 	char temp[30];
@@ -841,7 +840,7 @@ char *tmp = NULL;
 }
 
 /* display the offerlist to current channel */
-int l_plist(char *args, char *rest)
+int l_plist(char *args, char *rest __attribute__((unused)))
 {
 	const unsigned stxt_flags = (do_notice_list ? STXT_NOTICE : 0) | (do_cdcc_echo ? 0 : STXT_QUIET);
 	const char * const type_msg = do_notice_list ? "NOTICE" : "PRIVMSG";
@@ -871,11 +870,11 @@ int l_plist(char *args, char *rest)
 	blocksize = get_int_var(DCC_BLOCK_SIZE_VAR);
 	maxqueue = get_int_var(DCC_QUEUE_LIMIT_VAR);
 	set_display_target(chan, LOG_CRAP);
-	sprintf(mrate_out, "%1.3g", dcc_max_rate_out);
-	sprintf(mrate_in, "%1.3g", dcc_max_rate_in);
-	sprintf(bytes_out, "%1.3g", dcc_bytes_out);
-	sprintf(bytes_in, "%1.3g", dcc_bytes_in);
-	sprintf(speed_out, "%1.3g", cdcc_minspeed);
+	snprintf(mrate_out, sizeof(mrate_out), "%1.3g", dcc_max_rate_out);
+	snprintf(mrate_in, sizeof(mrate_in), "%1.3g", dcc_max_rate_in);
+	snprintf(bytes_out, sizeof(bytes_out), "%1.3g", dcc_bytes_out);
+	snprintf(bytes_in, sizeof(bytes_in), "%1.3g", dcc_bytes_in);
+	snprintf(speed_out, sizeof(speed_out), "%1.3g", cdcc_minspeed);
 	if (do_hook(CDCC_PREPACK_LIST, "%s %s %s %u %d %d %d %d %s %s %s %s %lu %s", type_msg, chan, get_server_nickname(from_server), cdcc_numpacks, get_int_var(DCC_SEND_LIMIT_VAR)-get_active_count(), get_int_var(DCC_SEND_LIMIT_VAR), numqueue, get_int_var(DCC_QUEUE_LIMIT_VAR), mrate_out, bytes_out, mrate_in, bytes_in, total_size_of_packs, speed_out))
 	{
 		char *msg1 = 
@@ -903,10 +902,9 @@ int l_plist(char *args, char *rest)
 	for (ptr = offerlist; ptr; ptr = ptr->next) 
 	{
 	 	if (ptr->size / 1024 > 999)
-			sprintf(size, "\002%3.2f\002mb",
-				(float) (ptr->size / 1024) / 1024);
+			snprintf(size, sizeof(size), "\002%3.2f\002mb", (float) (ptr->size / 1024) / 1024);
 		else
-			sprintf(size, "\002%3.2f\002kb", (float) ptr->size / 1024); 
+			snprintf(size, sizeof(size), "\002%3.2f\002kb", (float) ptr->size / 1024); 
 				
 		if (do_hook(CDCC_PACK_LIST, "%s %s %d %d %lu %d %s", 
 			type_msg, chan, ptr->num, ptr->numfiles, ptr->size, ptr->gets, ptr->desc))
@@ -947,7 +945,7 @@ int l_plist(char *args, char *rest)
 }
 		
 /* notify the current channel that packs are offered */
-static int l_notice(char *args, char *rest)
+static int l_notice(char *args, char *rest __attribute__((unused)))
 {
 	char *chan = NULL;
 	char mrate_out[30];
@@ -969,11 +967,11 @@ static int l_notice(char *args, char *rest)
 		malloc_strcpy(&chan, get_current_channel_by_refnum(0));
 
 	set_display_target(chan, LOG_CRAP);	
-	sprintf(mrate_out, "%1.3g", dcc_max_rate_out);
-	sprintf(mrate_in, "%1.3g", dcc_max_rate_in);
-	sprintf(bytes_out, "%1.3g", dcc_bytes_out);
-	sprintf(bytes_in, "%1.3g", dcc_bytes_in);
-	sprintf(speed_out, "%1.3g", cdcc_minspeed);
+	snprintf(mrate_out, sizeof(mrate_out), "%1.3g", dcc_max_rate_out);
+	snprintf(mrate_in, sizeof(mrate_in), "%1.3g", dcc_max_rate_in);
+	snprintf(bytes_out, sizeof(bytes_out), "%1.3g", dcc_bytes_out);
+	snprintf(bytes_in, sizeof(bytes_in), "%1.3g", dcc_bytes_in);
+	snprintf(speed_out, sizeof(speed_out), "%1.3g", cdcc_minspeed);
 	if (do_hook(CDCC_PREPACK_LIST, "%s %s %s %u %d %d %d %d %s %s %s %s %lu %s", "NOTICE", chan, get_server_nickname(from_server), cdcc_numpacks, get_int_var(DCC_SEND_LIMIT_VAR)-get_active_count(), get_int_var(DCC_SEND_LIMIT_VAR), numqueue, get_int_var(DCC_QUEUE_LIMIT_VAR), mrate_out, bytes_out, mrate_in, bytes_in, total_size_of_packs, speed_out))
 	{
 		char *msg = m_sprintf("\037[\037cdcc\037]\037 \002%u\002 file%s offered\037-\037 \037\"\037/ctcp \002%s\002 cdcc list\037\"\037 for pack list",   
@@ -1066,7 +1064,7 @@ static int l_queue(char *args, char *rest)
 } 
 
 /* save all of your offered packs */
-static int l_save(char *args, char *rest)
+static int l_save(char *args, char *rest __attribute__((unused)))
 {
 #ifdef PUBLIC_ACCESS
 	bitchsay("This command has been disabled on a public access system");
@@ -1125,7 +1123,7 @@ static int l_save(char *args, char *rest)
 } 
 
 /* load packs from cdcc.save */
-static int l_load(char *args, char *rest)
+static int l_load(char *args, char *rest __attribute__((unused)))
 {
 	FILE *file;
 	char *buffer = NULL, *expand = NULL, *temp;
@@ -1244,7 +1242,7 @@ static int l_load(char *args, char *rest)
 /* --- Misc functions --- */
 
 /* add file/files to a pack */
-static void add_files(char *args, char *rest)
+static void add_files(char *args __attribute__((unused)), char *rest)
 {
 	char *thefile = NULL, *expand = NULL, *path = NULL;
 	char *temp = NULL, *filebuf = NULL;
@@ -1331,7 +1329,7 @@ static void add_files(char *args, char *rest)
 }
 
 /* add a notes type description to the pack */
-static void add_note(char *args, char *rest)
+static void add_note(char *args __attribute__((unused)), char *rest)
 {
 	if (rest && *rest)
 	{
@@ -1341,7 +1339,7 @@ static void add_note(char *args, char *rest)
 }
 
 /* add a description to the new pack, and add to list */
-static void add_desc(char *args, char *rest)
+static void add_desc(char *args __attribute__((unused)), char *rest)
 {
 	pack *ptr, *last = NULL; 
 	char size[20];
@@ -1359,9 +1357,9 @@ static void add_desc(char *args, char *rest)
 	newpack->next = NULL;
 			
 	if (newpack->size / 1024 > 999)
-		sprintf(size, "\002%3.2f\002mb", (double) (newpack->size / 1024) / 1024);
+		snprintf(size, sizeof(size), "\002%3.2f\002mb", (double) (newpack->size / 1024) / 1024);
 	else
-		sprintf(size, "\002%3.2f\002kb", (double) newpack->size / 1024); 
+		snprintf(size, sizeof(size), "\002%3.2f\002kb", (double) newpack->size / 1024); 
 	put_it("%s: added pack #\002%d\002, \002%d\002 file%s (%s)", cparse(get_string_var(CDCC_PROMPT_VAR)),
 		newpack->num, newpack->numfiles,
 		plural(newpack->numfiles == 1), size);
@@ -1372,7 +1370,7 @@ static void add_desc(char *args, char *rest)
 }
 
 /* handle the actual removing of packs / all packs */
-static void del_pack(char *args, char *rest)
+static void del_pack(char *args __attribute__((unused)), char *rest)
 {
 	pack *ptr, *last = offerlist;
 	int packnum;
@@ -1550,7 +1548,7 @@ void dcc_sendfrom_queue(void)
 }
 
 static time_t plist_last_time = 0;
-static void get_minspeed(char *args, char *rest)
+static void get_minspeed(char *args __attribute__((unused)), char *rest)
 {
 char *last = NULL;
 unsigned long cdcc_mintime = 0;
@@ -1573,7 +1571,7 @@ unsigned long cdcc_mintime = 0;
 	
 }
 
-static int l_minspeed(char *args, char *rest)
+static int l_minspeed(char *args, char *rest __attribute__((unused)))
 {
 char *temp = NULL;
 	malloc_sprintf(&temp, "%s min-speed (0 to disable): ", cparse(get_string_var(CDCC_PROMPT_VAR)));
@@ -1585,7 +1583,7 @@ char *temp = NULL;
 	return 0;
 }
 
-static void get_ptimer(char *args, char *rest)
+static void get_ptimer(char *args __attribute__((unused)), char *rest)
 {
 	if (rest && *rest)
 		ptimer = strtoul(rest, NULL, 10);
@@ -1596,7 +1594,7 @@ static void get_ptimer(char *args, char *rest)
 		plist_last_time = 0;
 }
 
-static int l_timer(char *args, char *rest)
+static int l_timer(char *args, char *rest __attribute__((unused)))
 {
 char *temp = NULL;
 	malloc_sprintf(&temp, "%s p-timer interval(s) (0 to disable): ", cparse(get_string_var(CDCC_PROMPT_VAR)));
@@ -1608,7 +1606,7 @@ char *temp = NULL;
 	return 0;
 }
 
-static void get_pchannel(char *args, char *rest)
+static void get_pchannel(char *args __attribute__((unused)), char *rest)
 {
 	if (rest && *rest && is_channel(rest))
 		malloc_strcpy(&public_channel, rest);
@@ -1632,7 +1630,7 @@ static void get_pchannel(char *args, char *rest)
 		put_it("%s: Disabled %s public timer channel(s)", cparse(get_string_var(CDCC_PROMPT_VAR)), cparse(get_string_var(CDCC_PROMPT_VAR)));
 }
 
-static int l_channel(char *args, char *rest)
+static int l_channel(char *args, char *rest __attribute__((unused)))
 {
 	if (args && *args)
 		get_pchannel(NULL, args);
@@ -1661,7 +1659,7 @@ void cdcc_timer_offer(void)
 static void add_note1(unsigned long pnum, char *note)
 {
 pack *this_pack = NULL;
-int i;
+unsigned long i;
 	if (pnum && note)
 	{
 		for (i = 1, this_pack = offerlist; this_pack; this_pack = this_pack->next, i++)
@@ -1685,7 +1683,7 @@ int i;
 static void add_describe(unsigned long pnum, char *describe)
 {
 pack *this_pack = NULL;
-int i;
+unsigned long i;
 	if (pnum && describe)
 	{
 		for (i = 1, this_pack = offerlist; this_pack; this_pack = this_pack->next, i++)
@@ -1704,21 +1702,21 @@ int i;
 static unsigned long got_pnum = 0;
 static unsigned long got_dnum = 0;
 
-static void get_pnote1(char *args, char *rest)
+static void get_pnote1(char *args __attribute__((unused)), char *rest)
 {
 	if (got_pnum && rest)
 		add_note1(got_pnum, rest);
 	got_pnum = 0;
 }
 
-static void get_desc(char *args, char *rest)
+static void get_desc(char *args __attribute__((unused)), char *rest)
 {
 	if (got_dnum && rest)
 		add_describe(got_dnum, rest);
 	got_dnum = 0;
 }
 
-static void get_pnote(char *args, char *rest)
+static void get_pnote(char *args __attribute__((unused)), char *rest)
 {
 unsigned long pnum = 0;
 char *temp = NULL;
@@ -1736,7 +1734,7 @@ char *p;
 	}
 }
 
-static void get_describe(char *args, char *rest)
+static void get_describe(char *args __attribute__((unused)), char *rest)
 {
 unsigned long pnum = 0;
 char *temp = NULL;
@@ -1754,7 +1752,7 @@ char *p;
 	}
 }
 
-static int l_note(char *args, char *rest)
+static int l_note(char *args, char *rest __attribute__((unused)))
 {
 char *temp = NULL;
 	if (!offerlist)
@@ -1768,7 +1766,7 @@ char *temp = NULL;
 	return 1;
 }
 
-static int l_describe(char *args, char *rest)
+static int l_describe(char *args, char *rest __attribute__((unused)))
 {
 char *temp = NULL;
 	if (!offerlist)
@@ -1782,7 +1780,7 @@ char *temp = NULL;
 	return 1;
 }
 
-static int l_type(char *args, char *rest)
+static int l_type(char *args, char *rest __attribute__((unused)))
 {
 	if (args && *args)
 		do_notice_list = do_notice_list ? 0 : 1;
@@ -1790,7 +1788,7 @@ static int l_type(char *args, char *rest)
 	return 0;
 }
 
-static int l_echo(char *args, char *rest)
+static int l_echo(char *args, char *rest __attribute__((unused)))
 {
 	if (args && *args)
 		do_cdcc_echo = do_cdcc_echo ? 0 : 1;
@@ -1798,10 +1796,10 @@ static int l_echo(char *args, char *rest)
 	return 0;
 }
 
-static int l_stats(char *args, char *rest)
+static int l_stats(char *args __attribute__((unused)), char *rest __attribute__((unused)))
 {
 	char cdcc_minspeed_s[80];
-	sprintf(cdcc_minspeed_s, "%1.3f", cdcc_minspeed);
+	snprintf(cdcc_minspeed_s, sizeof(cdcc_minspeed_s), "%1.3f", cdcc_minspeed);
 	put_it("%s",convert_output_format("       %Gีอออออออออออออออออออออออ%K[%C    cdcc stat     %K]%Gออออออออออออออออออออออธ", NULL));
 	put_it("%s",convert_output_format("       %Gณ                                                                 ณ", NULL));
 	put_it("%s",convert_output_format("       %Gณ%gึฤ%K[%Cp%ctimer  %K]%gฤึ-%K[%Ct%cype     %K]%gฤทฤ%K[%Ct%cotal %Cp%cacks%K]%gฤึฤ%K[%Cs%cent  %K]%gฤทฤ[%Cq%cueue%K]%gฤท%Gณ", NULL));
@@ -1858,7 +1856,7 @@ int old_window_display = window_display;
 static void add_password(unsigned long pnum, char *password)
 {
 pack *this_pack = NULL;
-int i;
+unsigned long i;
 	if (pnum && password)
 	{
 		for (i = 1, this_pack = offerlist; this_pack; this_pack = this_pack->next, i++)
@@ -1883,14 +1881,14 @@ int i;
 }
 
 
-static void get_passwd(char *args, char *rest)
+static void get_passwd(char *args __attribute__((unused)), char *rest)
 {
 	if (got_dnum && rest)
 		add_password(got_dnum, rest);
 	got_dnum = 0;
 }
 
-static void get_password(char *args, char *rest)
+static void get_password(char *args __attribute__((unused)), char *rest)
 {
 unsigned long pnum = 0;
 char *temp = NULL;
@@ -1908,7 +1906,7 @@ char *p;
 	}
 }
 
-static int l_secure(char *args, char *rest)
+static int l_secure(char *args, char *rest __attribute__((unused)))
 {
 char *temp = NULL;
 	if (!offerlist)

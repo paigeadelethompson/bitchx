@@ -42,7 +42,6 @@ CVS_REVISION(functions_c)
 #include "struct.h"
 #include "cset.h"
 #include "log.h"
-#include "gui.h"
 #define MAIN_SOURCE
 #include "modval.h"
 
@@ -3131,7 +3130,7 @@ BUILT_IN_FUNCTION(function_sar, word)
 			break;
 
 			case 'i':
-			func = &stristr;
+			func = stristr;
 			break;
 		}
 		word++;
@@ -3236,7 +3235,7 @@ BUILT_IN_FUNCTION(function_msar, word)
 			break;
 
 			case 'i':
-			func = &stristr;
+			func = stristr;
 			break;
 		}
 		word++;
@@ -6474,7 +6473,7 @@ int winx, winy, wincx, wincy;
 		RETURN_EMPTY;
 	memset(flags, 0, sizeof(flags));
 	if (window->log)
-		strcat(flags, "L");
+		strlcat(flags, "L", sizeof(flags));
 #ifdef GUI
 	fontinfo[0] = 0;
 	gui_query_window_info(window->screen, fontinfo, &winx, &winy, &wincx, &wincy);

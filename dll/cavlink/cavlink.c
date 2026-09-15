@@ -1258,7 +1258,7 @@ char *Cavlink_Version(IrcCommandDll **intp)
 	return cav_version;
 }
 
-int Cavlink_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Cavlink_Init(IrcCommandDll **intp, BXGlobalEntry *global_table)
 {
 char buffer[BIG_BUFFER_SIZE+1];
 char *p;

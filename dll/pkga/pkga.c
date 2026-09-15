@@ -128,7 +128,7 @@ int new_dcc_output(int type, int s, char *buf, int len)
 	return 0;
 }
 
-int Pkga_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Pkga_Init(IrcCommandDll **intp, BXGlobalEntry *global_table)
 {
 	static const struct dcc_ops pkga_ops = { NULL, NULL, NULL, new_dcc_output, NULL };
 	int i;

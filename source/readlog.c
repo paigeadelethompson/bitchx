@@ -88,7 +88,7 @@ BUILT_IN_COMMAND(readlog)
 			if (args && !my_strnicmp(args, "-resume", 2))
 			{
 				next_arg(args, &args);
-				read_log_func = &rfgets;
+				read_log_func = rfgets;
 			}
 		}
 	}

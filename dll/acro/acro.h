@@ -93,7 +93,7 @@ struct settings {
 static char letters[] = "ABCDEFGHIJKLMNOPRSTUVWY";
 
 static int acro_main (char *, char *, char *, char **);
-int Acro_Init(IrcCommandDll **, Function_ptr *);
+int Acro_Init(IrcCommandDll **, BXGlobalEntry *);
 BUILT_IN_DLL(put_scores);
 grec *init_acro(grec *);
 void make_acro(grec *);

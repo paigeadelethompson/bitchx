@@ -183,7 +183,7 @@ BUILT_IN_DLL(wav_play)
 
 
 
-int Wavplay_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Wavplay_Init(IrcCommandDll **intp, BXGlobalEntry *global_table)
 {
 	initialize_module("wavplay");
 	add_module_proc(COMMAND_PROC, "Wavplay", "wavplay", NULL, 0, 0, wav_play, NULL);

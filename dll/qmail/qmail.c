@@ -140,7 +140,7 @@ static  int	i = 0;
 
 char *name = "Qmail";
 
-int Qmail_Cleanup(IrcCommandDll **interp, Function_ptr *global_table)
+int Qmail_Cleanup(IrcCommandDll **interp, BXGlobalEntry *global_table)
 {
 	remove_module_proc(VAR_PROC, name, NULL, NULL);
 	remove_module_proc(CHECK_EXT_MAIL_STATUS|TABLE_PROC, name, NULL, NULL);
@@ -148,11 +148,11 @@ int Qmail_Cleanup(IrcCommandDll **interp, Function_ptr *global_table)
 	return 3;
 }
 
-int Qmail_Init(IrcCommandDll **interp, Function_ptr *global_table)
+int Qmail_Init(IrcCommandDll **interp, BXGlobalEntry *global_table)
 {
 	initialize_module(name);
 	add_module_proc(VAR_PROC, name, "qmaildir", "~/Maildir", STR_TYPE_VAR, 0, NULL, NULL);
-	global[CHECK_EXT_MAIL_STATUS] = (Function_ptr) check_qmail_status;
-	global[CHECK_EXT_MAIL] = (Function_ptr) check_qmail;
+	global[CHECK_EXT_MAIL_STATUS].check_ext_mail_status_slot = check_qmail_status;
+	global[CHECK_EXT_MAIL].check_ext_mail_slot = check_qmail;
 	return 0;
 }

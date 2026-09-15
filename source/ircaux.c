@@ -2877,7 +2877,7 @@ char *BX_stripdev(char *ttynam)
 	if (strbegins(ttynam, "/dev/pts") && ttynam[8] >= '0' && ttynam[8] <= '9')
 	{
 		static char b[13];
-		sprintf(b, "pts/%d", atoi(ttynam + 8));
+		snprintf(b, sizeof(b), "pts/%d", atoi(ttynam + 8));
 		return b;
 	}
 #endif /* SVR4 */
@@ -3063,7 +3063,7 @@ char buffer[40];
 static char buff[40];
 char *s = buff;
 int i = 0, j = 0, len;
-	sprintf(buffer, "%ld", val);
+	snprintf(buffer, sizeof(buffer), "%ld", val);
 	len = strlen(buffer);
 	for (i = len % 3; i > 0; i--)
 		*s++ = buffer[j++];	 
@@ -3086,7 +3086,7 @@ char buffer[40];
 static char buff[40];
 char *s = buff;
 int i = 0, j = 0, len;
-	sprintf(buffer, "%lu", val);
+	snprintf(buffer, sizeof(buffer), "%lu", val);
 	len = strlen(buffer);
 	for (i = len % 3; i > 0; i--)
 		*s++ = buffer[j++];	 

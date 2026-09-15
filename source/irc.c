@@ -17,6 +17,7 @@ CVS_REVISION(irc_c)
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <pwd.h>
+#include <locale.h>
 #ifdef USING_CURSES
 #include <curses.h>
 #endif
@@ -49,7 +50,6 @@ CVS_REVISION(irc_c)
 #include "timer.h"
 #include "whowas.h"
 #include "misc.h"
-#include "gui.h"
 #include "cdns.h"
 #include "tcl_bx.h"
 #include "ssl.h"
@@ -402,7 +402,7 @@ void BX_irc_exit (int really_quit, char *reason, char *format, ...)
 		va_end(arglist);
 	}
 	else
-		sprintf(buffer, "%s -- just do it.",irc_version);
+		snprintf(buffer, sizeof(buffer), "%s -- just do it.", irc_version);
 
 	if (really_quit)
 	{
@@ -1429,6 +1429,9 @@ int main(int argc, char *argv[], char *envp[])
 	time(&start_time);
 	time(&idle_time);
 	time(&now);
+
+	/* Make ncurses and nl_langinfo() aware of the locale (UTF-8). */
+	setlocale(LC_ALL, "");
 
 	/* We need to zero these early */
 	FD_ZERO(&readables);

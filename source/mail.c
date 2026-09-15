@@ -86,11 +86,6 @@ int count_maildir_mail(void)
 #endif
 
 
-#ifdef WANT_DLL
-#define check_ext_mail ((char *(*)(void))global_table[CHECK_EXT_MAIL])
-#define check_ext_mail_status ((int (*)(void))global_table[CHECK_EXT_MAIL_STATUS])
-#endif
-
 /*
  * check_mail_status: returns 0 if mail status has not changed, 1 if mail
  * status has changed 

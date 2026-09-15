@@ -766,7 +766,7 @@ static int show_numeric_list (int numeric)
 
 	if (numeric)
 	{
-		sprintf(buf, "%3.3d", numeric);
+		snprintf(buf, sizeof(buf), "%3.3d", numeric);
 		if ((tmp = find_numeric_list(numeric)))
 		{
 			for (list = tmp->list; list; list = list->next, cnt++)

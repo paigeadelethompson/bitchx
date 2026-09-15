@@ -166,7 +166,7 @@ BUILT_IN_DLL(hhelp)
   }
 }
 
-int Hint_Init(IrcCommandDll **intp, Function_ptr *global_table)
+int Hint_Init(IrcCommandDll **intp, BXGlobalEntry *global_table)
 {
 FILE *fp;
 char *f = NULL;

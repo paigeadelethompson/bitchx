@@ -48,7 +48,6 @@ CVS_REVISION(parse_c)
 #include "cset.h"
 #include "module.h"
 #include "hash2.h"
-#include "gui.h"
 #include "tcl_bx.h"
 #define MAIN_SOURCE
 #include "modval.h"
@@ -1068,9 +1067,9 @@ static	void p_channel(char *from, char **ArgList)
 		}
 	}
 	if (op)
-		strcat(extra, " (+o)");
+		strlcat(extra, " (+o)", sizeof(extra));
 	if (vo)
-		strcat(extra, " (+v)");
+		strlcat(extra, " (+v)", sizeof(extra));
                                                 
 	if (!my_stricmp(from, get_server_nickname(from_server)))
 	{
@@ -1574,7 +1573,7 @@ static	void p_mode(char *from, char **ArgList)
 
 	if (target && line)
 	{
-		strcpy(buffer, line);
+		strlcpy(buffer, line, sizeof(buffer));
 		if (get_int_var(MODE_STRIPPER_VAR))
 			strip_modes(from, target, line);
 		if (is_channel(target))
@@ -1643,7 +1642,7 @@ static void strip_modes (char *from, char *channel, char *line)
         char    *copy = NULL;
 	char	free_copy[BIG_BUFFER_SIZE+1];
 
-	strcpy(free_copy, line);
+	strlcpy(free_copy, line, sizeof(free_copy));
 	
 	copy = free_copy;
 	mode = next_arg(copy, &copy);
