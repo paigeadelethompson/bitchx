@@ -36,6 +36,7 @@ CVS_REVISION(misc_c)
 #include "commands.h"
 #include "vars.h"
 #include "ircaux.h"
+#include "ircterm.h"
 #include "lastlog.h"
 #include "window.h"
 #include "screen.h"
@@ -192,16 +193,16 @@ BUILT_IN_COMMAND(do_uptime) {
 #else
   put_it("%s",
          convert_output_format(
-             "%G┌─[ %WBitchX%g─%wClient%g─%RStatistics "
-             "%G]────---%g─--──%K-%g─────--%G─--──%K-%g───────--- %K--%g  -",
+             "%G��[ %WBitchX%g�%wClient%g�%RStatistics "
+             "%G]����---%g�--��%K-%g�����--%G�--��%K-%g�������--- %K--%g  -",
              NULL));
   put_it("%s", convert_output_format("%G| %CClient Version: %W$0 $1", "%s %s",
                                      irc_version, internal_version));
-  put_it("%s", convert_output_format("%G│ %CClient Running Since %W$0-", "%s",
+  put_it("%s", convert_output_format("%G� %CClient Running Since %W$0-", "%s",
                                      my_ctime(start_time)));
   put_it("%s", convert_output_format("%G| %CClient Uptime: %W$0-", "%s",
                                      convert_time(now - start_time)));
-  put_it("%s", convert_output_format("%G│ %CCurrent UserName: %W$0-", "%s",
+  put_it("%s", convert_output_format("%G� %CCurrent UserName: %W$0-", "%s",
                                      username));
   put_it("%s", convert_output_format("%G: %CCurrent RealName: %W$0-", "%s",
                                      realname));
@@ -220,13 +221,13 @@ BUILT_IN_COMMAND(do_uptime) {
                                          ? last_sent_notice[0].last_msg
                                          : "None"));
   put_it("%s",
-         convert_output_format("%G│ %CLast Channel invited to: %R$0-", "%s",
+         convert_output_format("%G� %CLast Channel invited to: %R$0-", "%s",
                                invite_channel ? invite_channel : "None"));
   put_it("%s",
          convert_output_format("%G| %cTotal Users on Userlist: %K[%R$0%K]",
                                "%d", user_count));
   put_it("%s",
-         convert_output_format("%G│ %cTotal Users on Shitlist: %K[%R$0%K]",
+         convert_output_format("%G� %cTotal Users on Shitlist: %K[%R$0%K]",
                                "%d", shit_count));
 
 #endif
@@ -4330,6 +4331,105 @@ done:
   return s;
 }
 
+/*
+ * CP437 -> Unicode translation for the ASCII-art and line-drawing glyphs
+ * used by the client.  The art is stored as raw CP437 bytes in the source;
+ * when the terminal is UTF-8 the bytes are translated here so they render
+ * as the intended glyphs.  Input that is already valid UTF-8 is returned
+ * unchanged.
+ */
+static const unsigned short cp437_to_unicode_table[128] = {
+    0x00C7, 0x00FC, 0x00E9, 0x00E2, 0x00E4, 0x00E0, 0x00E5, 0x00E7,
+    0x00EA, 0x00EB, 0x00E8, 0x00EF, 0x00EE, 0x00EC, 0x00C4, 0x00C5,
+    0x00C9, 0x00E6, 0x00C6, 0x00F4, 0x00F6, 0x00F2, 0x00FB, 0x00F9,
+    0x00FF, 0x00D6, 0x00DC, 0x00A2, 0x00A3, 0x00A5, 0x20A7, 0x0192,
+    0x00E1, 0x00ED, 0x00F3, 0x00FA, 0x00F1, 0x00D1, 0x00AA, 0x00BA,
+    0x00BF, 0x2310, 0x00AC, 0x00BD, 0x00BC, 0x00A1, 0x00AB, 0x00BB,
+    0x2591, 0x2592, 0x2593, 0x2502, 0x2524, 0x00C1, 0x00C2, 0x2556,
+    0x2555, 0x2563, 0x2551, 0x2557, 0x255D, 0x255C, 0x00A5, 0x2510,
+    0x2514, 0x2534, 0x252C, 0x251C, 0x2500, 0x253C, 0x00E3, 0x00C3,
+    0x255A, 0x2554, 0x2569, 0x2566, 0x2560, 0x2550, 0x256C, 0x00A4,
+    0x00F0, 0x00D0, 0x00CA, 0x2559, 0x00C8, 0x2552, 0x2553, 0x00CE,
+    0x00CF, 0x2518, 0x250C, 0x2588, 0x2584, 0x258C, 0x2590, 0x2580,
+    0x03B1, 0x00DF, 0x0393, 0x03C0, 0x03A3, 0x03C3, 0x00B5, 0x03C4,
+    0x03A6, 0x0398, 0x03A9, 0x03B4, 0x221E, 0x03C6, 0x03B5, 0x2229,
+    0x2261, 0x00B1, 0x2265, 0x2264, 0x2320, 0x2321, 0x00F7, 0x2248,
+    0x00B0, 0x2219, 0x00B7, 0x221A, 0x207F, 0x00B2, 0x25A0, 0x00A0,
+};
+
+char *cp437_to_utf8(const char *str) {
+  static char conv[3 * 10 * BIG_BUFFER_SIZE + 1];
+  const unsigned char *in;
+  unsigned char *out;
+  const unsigned char *end;
+  const unsigned char *p;
+  int n;
+  int i;
+  int valid;
+
+  if (!str)
+    return (char *)str;
+
+  /* If the whole string is already valid UTF-8, pass it through untouched. */
+  valid = 1;
+  p = (const unsigned char *)str;
+  while (*p) {
+    if (*p < 0x80) {
+      p++;
+      continue;
+    }
+    if (*p >= 0xC2 && *p <= 0xDF)
+      n = 2;
+    else if (*p >= 0xE0 && *p <= 0xEF)
+      n = 3;
+    else if (*p >= 0xF0 && *p <= 0xF4)
+      n = 4;
+    else {
+      valid = 0;
+      break;
+    }
+    for (i = 1; i < n; i++) {
+      if (!(p[i] >= 0x80 && p[i] <= 0xBF)) {
+        valid = 0;
+        break;
+      }
+    }
+    if (!valid)
+      break;
+    p += n;
+  }
+  if (valid)
+    return (char *)str;
+
+  out = (unsigned char *)conv;
+  end = (unsigned char *)conv + sizeof(conv) - 1;
+  for (in = (const unsigned char *)str; *in; in++) {
+    unsigned short u;
+
+    if (*in < 0x80) {
+      if (out >= end)
+        break;
+      *out++ = *in;
+    } else {
+      u = cp437_to_unicode_table[*in - 0x80];
+      if (u < 0x800) {
+        if (out + 1 >= end)
+          break;
+        *out++ = (unsigned char)(0xC0 | (u >> 6));
+        *out++ = (unsigned char)(0x80 | (u & 0x3F));
+      } else {
+        if (out + 2 >= end)
+          break;
+        *out++ = (unsigned char)(0xE0 | (u >> 12));
+        *out++ = (unsigned char)(0x80 | ((u >> 6) & 0x3F));
+        *out++ = (unsigned char)(0x80 | (u & 0x3F));
+      }
+    }
+  }
+  *out = 0;
+  return conv;
+}
+
 char *BX_convert_output_format(const char *format, const char *str, ...) {
   char *s;
   int old_alias_debug = alias_debug;
@@ -4341,6 +4441,7 @@ char *BX_convert_output_format(const char *format, const char *str, ...) {
   va_end(args);
   if (*s)
     strcat(s, color_str[NO_COLOR]);
+  s = cp437_to_utf8(s);
   alias_debug = old_alias_debug;
   return s;
 }

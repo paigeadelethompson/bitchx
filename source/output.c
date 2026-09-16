@@ -144,6 +144,7 @@ int init_screen(void) {
 }
 
 void put_echo(char *str) {
+  str = cp437_to_utf8(str);
   add_to_log(irclog_fp, 0, str, logfile_line_mangler);
   add_to_screen(str);
 }

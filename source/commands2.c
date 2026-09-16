@@ -135,8 +135,8 @@ BUILT_IN_COMMAND(nwhois) {
                              NULL, NULL));
 #else
             put_it("%s", convert_output_format(
-                             "%Bâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€"
-                             "â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€",
+                             "%BÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ"
+                             "ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ",
                              NULL, NULL));
 #endif
             once++;
@@ -146,8 +146,8 @@ BUILT_IN_COMMAND(nwhois) {
                            "$[4]7 $[4]8$[-4]9  $[-4]10 $[-6]11",
                            "%s %c %c %s %u %u %u %u %u %u %u %u",
                            to_chan ? tmp->channel : user->nick,
-                           nick_isop(user) ? '@' : ' ',
-                           nick_isvoice(user) ? 'v' : ' ',
+                           nick_isop(user) ? '@' : 'ÿ',
+                           nick_isvoice(user) ? 'v' : 'ÿ',
 #ifdef WANT_USERLIST
                            user->userlist ? convert_flags(user->userlist->flags)
                                           : "none",
@@ -722,11 +722,11 @@ BUILT_IN_COMMAND(do_toggle) {
     put_it(
         "%s",
         convert_output_format(
-            "%Gâ”Œâ”€â”€â”€â”€â”€---%gâ”€%G-%K[ %WBitchX %wToggles "
-            "%K]-%gâ”€â”€%G-%gâ”€â”€â”€â”€â”€â”€---%Kâ”€%g--%Kâ”€â”€%g-%Kâ”€â”€â”€â”€â”€â”€â”€â”€â”€--- --  - --- -- -",
+            "%GÚÄÄÄÄÄ---%gÄ%G-%K[ %WBitchX %wToggles "
+            "%K]-%gÄÄ%G-%gÄÄÄÄÄÄ---%KÄ%g--%KÄÄ%g-%KÄÄÄÄÄÄÄÄÄ--- --  - --- -- -",
             NULL));
     put_it("%s", convert_output_format(
-                     "%Gâ”‚   %Cauto_ns%clookup %K[%W$[-3]0%K]    "
+                     "%G³   %Cauto_ns%clookup %K[%W$[-3]0%K]    "
                      "%Cctcp_f%clood_protection %K[%W$[-3]1%K]    %Cbeep%c     "
                      "   %K[%W$[-3]2%K]",
                      "%s %s %s", on_off(get_int_var(AUTO_NSLOOKUP_VAR)),
@@ -734,21 +734,21 @@ BUILT_IN_COMMAND(do_toggle) {
                      on_off(get_int_var(BEEP_VAR))));
     put_it("%s",
            convert_output_format(
-               "%Gâ”‚   %Cpub%cflood      %K[%W$[-3]0%K]    %Cflood_p%crotection "
+               "%G³   %Cpub%cflood      %K[%W$[-3]0%K]    %Cflood_p%crotection "
                "     %K[%W$[-3]1%K]    %Ckickf%clood   %K[%W$[-3]2%K]",
                "%s %s %s", on_off(get_int_var(PUBFLOOD_VAR)),
                on_off(get_int_var(FLOOD_PROTECTION_VAR)),
                on_off(get_int_var(KICKFLOOD_VAR))));
     put_it("%s",
            convert_output_format(
-               "%gâ”‚   %Cdcc_a%cutoget   %K[%W$[-3]0%K]    %Cflood_k%cick       "
+               "%g³   %Cdcc_a%cutoget   %K[%W$[-3]0%K]    %Cflood_k%cick       "
                "     %K[%W$[-3]1%K]    %Cmsg%clog      %K[%W$[-3]2%K]",
                "%s %s %s", on_off(get_int_var(DCC_AUTOGET_VAR)),
                on_off(get_int_var(FLOOD_KICK_VAR)),
                on_off(get_int_var(MSGLOG_VAR))));
     put_it("%s",
            convert_output_format(
-               "%Gâ”‚   %Cll%cook         %K[%W$[-3]0%K]    %Cdeop%cflood        "
+               "%G³   %Cll%cook         %K[%W$[-3]0%K]    %Cdeop%cflood        "
                "     %K[%W$[-3]1%K]    %Cjoin%cflood   %K[%W$[-3]2%K]",
                "%s %s %s", on_off(get_int_var(LLOOK_VAR)),
                on_off(get_int_var(DEOPFLOOD_VAR)),
@@ -1668,16 +1668,16 @@ BUILT_IN_COMMAND(serv_stat) {
   put_it(
       "%s",
       convert_output_format(
-          "%Gâ”Œâ”€â”€â”€â”€â”€---%gâ”€%G-%K[ %WServer %wStats "
-          "%K]-%gâ”€â”€%G-%gâ”€â”€â”€â”€â”€â”€---%Kâ”€%g--%Kâ”€â”€%g-%Kâ”€â”€â”€â”€â”€â”€â”€â”€â”€--- --  - --- -- -",
+          "%GÚÄÄÄÄÄ---%gÄ%G-%K[ %WServer %wStats "
+          "%K]-%gÄÄ%G-%gÄÄÄÄÄÄ---%KÄ%g--%KÄÄ%g-%KÄÄÄÄÄÄÄÄÄ--- --  - --- -- -",
           NULL));
-  put_it("%s", convert_output_format("%Gâ”‚ %CN%cick Collisions %K[%W$[-4]0%K]   "
+  put_it("%s", convert_output_format("%G³ %CN%cick Collisions %K[%W$[-4]0%K]   "
                                      " %CO%cper Kills   %K[%W$[-4]1%K]",
                                      "%l %l", nick_collisions, oper_kills));
-  put_it("%s", convert_output_format("%Gâ”‚ %CF%cake Modes      %K[%W$[-4]0%K]   "
+  put_it("%s", convert_output_format("%G³ %CF%cake Modes      %K[%W$[-4]0%K]   "
                                      " %CU%cnauth       %K[%W$[-4]1%K]",
                                      "%l %l", serv_fakes, serv_unauth));
-  put_it("%s", convert_output_format("%Gâ”‚ %CT%cotal Clients   %K[%W$[-4]0%K]   "
+  put_it("%s", convert_output_format("%G³ %CT%cotal Clients   %K[%W$[-4]0%K]   "
                                      " %CS%cerv rehash  %K[%W$[-4]1%K]",
                                      "%l %l", client_connects, serv_rehash));
   put_it("%s", convert_output_format("%g| %CC%client exits    %K[%W$[-4]0%K]   "

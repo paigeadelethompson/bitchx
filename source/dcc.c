@@ -2448,17 +2448,17 @@ static const char *get_stat_format(double pcomplete) {
       STAT_FORMAT_PREFIX "%K-=*%1%K=-. %R.-=%n" STAT_FORMAT_SUFFIX}; /* 100 */
 #else
   static const char *const bar_format[] = {
-      STAT_FORMAT_PREFIX "%Kâ–’â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘%n" STAT_FORMAT_SUFFIX,           /*  0 */
-      STAT_FORMAT_PREFIX "%Kâ–’â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘%n" STAT_FORMAT_SUFFIX,           /* 10 */
-      STAT_FORMAT_PREFIX "%Kâ–’â–“â–‘â–‘â–‘â–‘â–‘â–‘â–‘â–‘%n" STAT_FORMAT_SUFFIX,           /* 20 */
-      STAT_FORMAT_PREFIX "%Kâ–’â–“â–ˆâ–‘â–‘â–‘â–‘â–‘â–‘â–‘%n" STAT_FORMAT_SUFFIX,           /* 30 */
-      STAT_FORMAT_PREFIX "%Kâ–’â–“â–ˆ%1%Kâ–“%0%Kâ–‘â–‘â–‘â–‘â–‘â–‘%n" STAT_FORMAT_SUFFIX,   /* 40 */
-      STAT_FORMAT_PREFIX "%Kâ–’â–“â–ˆ%1%Kâ–“â–’%0%Kâ–‘â–‘â–‘â–‘â–‘%n" STAT_FORMAT_SUFFIX,   /* 50 */
-      STAT_FORMAT_PREFIX "%Kâ–’â–“â–ˆ%1%Kâ–“â–’â–‘%0%Kâ–‘â–‘â–‘â–‘%n" STAT_FORMAT_SUFFIX,   /* 60 */
-      STAT_FORMAT_PREFIX "%Kâ–’â–“â–ˆ%1%Kâ–“â–’â–‘Â %0%Kâ–‘â–‘â–‘%n" STAT_FORMAT_SUFFIX,   /* 70 */
-      STAT_FORMAT_PREFIX "%Kâ–’â–“â–ˆ%1%Kâ–“â–’â–‘Â %Râ–‘%0%Kâ–‘â–‘%n" STAT_FORMAT_SUFFIX, /* 80 */
-      STAT_FORMAT_PREFIX "%Kâ–’â–“â–ˆ%1%Kâ–“â–’â–‘Â %Râ–‘â–’%0%Kâ–‘%n" STAT_FORMAT_SUFFIX, /* 90 */
-      STAT_FORMAT_PREFIX "%Kâ–’â–“â–ˆ%1%Kâ–“â–’â–‘Â %Râ–‘â–’â–“%n" STAT_FORMAT_SUFFIX}; /* 100 */
+      STAT_FORMAT_PREFIX "%K±°°°°°°°°°%n" STAT_FORMAT_SUFFIX,           /*  0 */
+      STAT_FORMAT_PREFIX "%K±°°°°°°°°°%n" STAT_FORMAT_SUFFIX,           /* 10 */
+      STAT_FORMAT_PREFIX "%K±²°°°°°°°°%n" STAT_FORMAT_SUFFIX,           /* 20 */
+      STAT_FORMAT_PREFIX "%K±²Û°°°°°°°%n" STAT_FORMAT_SUFFIX,           /* 30 */
+      STAT_FORMAT_PREFIX "%K±²Û%1%K²%0%K°°°°°°%n" STAT_FORMAT_SUFFIX,   /* 40 */
+      STAT_FORMAT_PREFIX "%K±²Û%1%K²±%0%K°°°°°%n" STAT_FORMAT_SUFFIX,   /* 50 */
+      STAT_FORMAT_PREFIX "%K±²Û%1%K²±°%0%K°°°°%n" STAT_FORMAT_SUFFIX,   /* 60 */
+      STAT_FORMAT_PREFIX "%K±²Û%1%K²±°ÿ%0%K°°°%n" STAT_FORMAT_SUFFIX,   /* 70 */
+      STAT_FORMAT_PREFIX "%K±²Û%1%K²±°ÿ%R°%0%K°°%n" STAT_FORMAT_SUFFIX, /* 80 */
+      STAT_FORMAT_PREFIX "%K±²Û%1%K²±°ÿ%R°±%0%K°%n" STAT_FORMAT_SUFFIX, /* 90 */
+      STAT_FORMAT_PREFIX "%K±²Û%1%K²±°ÿ%R°±²%n" STAT_FORMAT_SUFFIX}; /* 100 */
 #endif
   const int idx = pcomplete * 10;
 
@@ -2501,14 +2501,14 @@ void dcc_glist(char *command __attribute__((unused)), char *args __attribute__((
 #else
     put_it("%s",
            convert_output_format(
-               "%G#  %Wâ”‚%n %GT%gype  %Wâ”‚%n %GN%gick      %Wâ”‚%n %GP%gercent "
-               "%GC%gomplete        %Wâ”‚%n %GK%g/s   %Wâ”‚%n %GF%gile",
+               "%G#  %W³%n %GT%gype  %W³%n %GN%gick      %W³%n %GP%gercent "
+               "%GC%gomplete        %W³%n %GK%g/s   %W³%n %GF%gile",
                NULL, NULL));
     put_it(
         "%s",
         convert_output_format(
-            "%Kâ”€â”€%nâ”€%Wâ”€%nâ”€%Kâ”€â”€â”€â”€â”€%nâ”€%Wâ”€%nâ”€%Kâ”€â”€â”€â”€â”€â”€â”€â”€â”€%nâ”€%Wâ”€%nâ”€%Kâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€"
-            "%nâ”€%Wâ”€%nâ”€%Kâ”€â”€â”€â”€â”€%nâ”€%Wâ”€%nâ”€%Kâ”€â”€â”€â”€â”€%nâ”€%Wâ”€%nâ”€%Kâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€",
+            "%KÄÄ%nÄ%WÄ%nÄ%KÄÄÄÄÄ%nÄ%WÄ%nÄ%KÄÄÄÄÄÄÄÄÄ%nÄ%WÄ%nÄ%KÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ"
+            "%nÄ%WÄ%nÄ%KÄÄÄÄÄ%nÄ%WÄ%nÄ%KÄÄÄÄÄ%nÄ%WÄ%nÄ%KÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ",
             NULL, NULL));
 #endif
   }
@@ -2532,7 +2532,7 @@ void dcc_glist(char *command __attribute__((unused)), char *args __attribute__((
                 n->encrypt ? "E" : empty_string)) {
       put_it("%s", convert_output_format(DCC_FORMAT_STAT_PENDING,
                                          "%d %s %s %s %s %s %s", n->dccnum,
-                                         type_name, n->encrypt ? "E" : "Â ",
+                                         type_name, n->encrypt ? "E" : "ÿ",
                                          c->sock.server, dcc_get_state(s),
                                          "N/A", strip_path(filename)));
     }
@@ -2571,7 +2571,7 @@ void dcc_glist(char *command __attribute__((unused)), char *args __attribute__((
                   n->encrypt ? "E" : empty_string))
         put_it("%s", convert_output_format(
                          DCC_FORMAT_STAT, "%d %s %s %s %s %s %s %s", n->dccnum,
-                         type_name, n->encrypt ? "E" : "Â ", s->server,
+                         type_name, n->encrypt ? "E" : "ÿ", s->server,
                          dcc_get_state(s), convert_time(xtime), "N/A",
                          strip_path(filename)));
     }
@@ -2619,7 +2619,7 @@ void dcc_glist(char *command __attribute__((unused)), char *args __attribute__((
 
         put_it("%s", convert_output_format(
                          stat_format, "%d %s %s %s %s %s %s %s %s", n->dccnum,
-                         type_name, n->encrypt ? "E" : "Â ", s->server,
+                         type_name, n->encrypt ? "E" : "ÿ", s->server,
                          dcc_get_state(s), percent, eta, kilobytes,
                          strip_path(filename)));
       }
@@ -2956,51 +2956,51 @@ void dcc_stats(char *command __attribute__((unused)), char *unused __attribute__
 #else
 
     put_it("%s",
-           convert_output_format("       %Gâ•’â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•%K[%Cdcc "
-                                 "transfer stats%K]%Gâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â••",
+           convert_output_format("       %GÕÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ%K[%Cdcc "
+                                 "transfer stats%K]%GÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸",
                                  NULL));
-    put_it("%s", convert_output_format("       %Gâ”‚                             "
-                                       "                                    â”‚",
+    put_it("%s", convert_output_format("       %G³                             "
+                                       "                                    ³",
                                        NULL));
     put_it("%s",
            convert_output_format(
-               "       %Gâ”‚%gâ•“â”€%K[%Cx%cferd %Ci%cn%K]%gâ”€â•“-%K[%Cx%cferd "
-               "%Co%cut%K]%gâ”€â•–â”€%K[%Ct%cotal "
-               "%Cf%ciles%K]%gâ”€â•“â”€%K[%Ca%cctive%K]%gâ”€â•–â”€[%Cl%cimit%K]%gâ”€â•–%Gâ”‚",
+               "       %G³%gÖÄ%K[%Cx%cferd %Ci%cn%K]%gÄÖ-%K[%Cx%cferd "
+               "%Co%cut%K]%gÄ·Ä%K[%Ct%cotal "
+               "%Cf%ciles%K]%gÄÖÄ%K[%Ca%cctive%K]%gÄ·Ä[%Cl%cimit%K]%gÄ·%G³",
                NULL));
     put_it("%s",
            convert_output_format(
-               "       %Gâ”‚%gâ•‘ %W$[-10]0 %gâ•‘  %W$[-10]1 %gâ•‘    %W$[-10]2 %gâ•‘ "
-               "%W$[-8]3 %gâ•‘ %W$[-7]4 %gâ•‘%Gâ”‚",
+               "       %G³%gº %W$[-10]0 %gº  %W$[-10]1 %gº    %W$[-10]2 %gº "
+               "%W$[-8]3 %gº %W$[-7]4 %gº%G³",
                "%s %s %d %d %d", in, out, send_count_stat + get_count_stat,
                get_active_count(), get_int_var(DCC_SEND_LIMIT_VAR)));
     put_it("%s", convert_output_format("       "
-                                       "%Gâ”‚%gâ•™â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•™â”€â”€â”€â”€â”€â”€"
-                                       "â”€â”€â”€â”€â”€â”€â”€â”€â”€â•œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•™â”€â”€â”€â”€â”€â”€â”€â”€â”€â•œ%Gâ”‚",
+                                       "%G³%gÓÄÄÄÄÄÄÄÄÄÄÄÄ½ÄÄÄÄÄÄÄÄÄÄÄÄÄÓÄÄÄÄÄÄ"
+                                       "ÄÄÄÄÄÄÄÄÄ½ÄÄÄÄÄÄÄÄÄÄÓÄÄÄÄÄÄÄÄÄ½%G³",
                                        NULL));
-    put_it("%s", convert_output_format("       %Gâ”‚                             "
-                                       "                                    â”‚",
+    put_it("%s", convert_output_format("       %G³                             "
+                                       "                                    ³",
                                        NULL));
     put_it("%s",
            convert_output_format(
-               "       %gâ•“â”€â”€â”€â”€%K[%Ci%cn %Cs%ctats%K]%gâ”€â”€â”€â•“â”€â”€â”€%K[%Co%cut "
-               "%Cs%ctats%K]%gâ”€â”€â”€â•–â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€%K[%Ct%coggles%K]%gâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•–",
+               "       %gÖÄÄÄÄ%K[%Ci%cn %Cs%ctats%K]%gÄÄÄÖÄÄÄ%K[%Co%cut "
+               "%Cs%ctats%K]%gÄÄÄ·ÄÄÄÄÄÄÄÄÄÄ%K[%Ct%coggles%K]%gÄÄÄÄÄÄÄÄÄÄ·",
                NULL));
     put_it("%s", convert_output_format(
-                     "       %gâ•‘ %Cm%nax: %W$[-6]0%n%Rkb/s %gâ•‘ %Cm%nax: "
-                     "%W$[-6]1%n%Rkb/s %gâ•‘   %Ca%nutoget: %W$[-3]2%n   "
-                     "%Cp%naths: %W$[-3]3 %gâ•‘",
+                     "       %gº %Cm%nax: %W$[-6]0%n%Rkb/s %gº %Cm%nax: "
+                     "%W$[-6]1%n%Rkb/s %gº   %Ca%nutoget: %W$[-3]2%n   "
+                     "%Cp%naths: %W$[-3]3 %gº",
                      "%s %s %s %s", max_rate_in, max_rate_out,
                      on_off(get_int_var(DCC_AUTOGET_VAR)), on_off(dcc_paths)));
     put_it("%s",
-           convert_output_format("       %gâ•‘ %Cm%nin: %W$[-6]0%n%Rkb/s %gâ•‘ "
-                                 "%Cm%nin: %W$[-6]1%n%Rkb/s %gâ•‘ %Co%nverwrite: "
-                                 "%W$[-3]2%n   %Cq%nuiet: %W$[-3]3 %gâ•‘",
+           convert_output_format("       %gº %Cm%nin: %W$[-6]0%n%Rkb/s %gº "
+                                 "%Cm%nin: %W$[-6]1%n%Rkb/s %gº %Co%nverwrite: "
+                                 "%W$[-3]2%n   %Cq%nuiet: %W$[-3]3 %gº",
                                  "%s %s %s %s", min_rate_in, min_rate_out,
                                  on_off(dcc_overwrite_var), on_off(dcc_quiet)));
     put_it("%s", convert_output_format("       "
-                                       "%gâ•™â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•™"
-                                       "â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•œ",
+                                       "%gÓÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ½ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÓ"
+                                       "ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ½",
                                        NULL));
 
 #endif

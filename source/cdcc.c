@@ -1764,51 +1764,51 @@ static int l_stats(char *args __attribute__((unused)),
   char cdcc_minspeed_s[80];
   snprintf(cdcc_minspeed_s, sizeof(cdcc_minspeed_s), "%1.3f", cdcc_minspeed);
   put_it("%s",
-         convert_output_format("       %Gâ•’â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•%K[%C    cdcc "
-                               "stat     %K]%Gâ•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â••",
+         convert_output_format("       %GÕÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ%K[%C    cdcc "
+                               "stat     %K]%GÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸",
                                NULL));
-  put_it("%s", convert_output_format("       %Gâ”‚                               "
-                                     "                                  â”‚",
+  put_it("%s", convert_output_format("       %G³                               "
+                                     "                                  ³",
                                      NULL));
   put_it("%s", convert_output_format(
-                   "       %Gâ”‚%gâ•“â”€%K[%Cp%ctimer  %K]%gâ”€â•“-%K[%Ct%cype     "
-                   "%K]%gâ”€â•–â”€%K[%Ct%cotal %Cp%cacks%K]%gâ”€â•“â”€%K[%Cs%cent  "
-                   "%K]%gâ”€â•–â”€[%Cq%cueue%K]%gâ”€â•–%Gâ”‚",
+                   "       %G³%gÖÄ%K[%Cp%ctimer  %K]%gÄÖ-%K[%Ct%cype     "
+                   "%K]%gÄ·Ä%K[%Ct%cotal %Cp%cacks%K]%gÄÖÄ%K[%Cs%cent  "
+                   "%K]%gÄ·Ä[%Cq%cueue%K]%gÄ·%G³",
                    NULL));
   put_it("%s",
-         convert_output_format("       %Gâ”‚%gâ•‘ %W$[-10]0 %gâ•‘  %W$[-10]1 %gâ•‘    "
-                               "%W$[-10]2 %gâ•‘ %W$[-8]3 %gâ•‘ %W$[-7]4 %gâ•‘%Gâ”‚",
+         convert_output_format("       %G³%gº %W$[-10]0 %gº  %W$[-10]1 %gº    "
+                               "%W$[-10]2 %gº %W$[-8]3 %gº %W$[-7]4 %gº%G³",
                                "%d %s %d %d %d", ptimer,
                                do_notice_list ? "notice" : "privmsg",
                                cdcc_numpacks, send_numpacks, numqueue));
   put_it("%s", convert_output_format("       "
-                                     "%Gâ”‚%gâ•™â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•™â”€â”€â”€â”€â”€â”€â”€â”€"
-                                     "â”€â”€â”€â”€â”€â”€â”€â•œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•™â”€â”€â”€â”€â”€â”€â”€â”€â”€â•œ%Gâ”‚",
+                                     "%G³%gÓÄÄÄÄÄÄÄÄÄÄÄÄ½ÄÄÄÄÄÄÄÄÄÄÄÄÄÓÄÄÄÄÄÄÄÄ"
+                                     "ÄÄÄÄÄÄÄ½ÄÄÄÄÄÄÄÄÄÄÓÄÄÄÄÄÄÄÄÄ½%G³",
                                      NULL));
-  put_it("%s", convert_output_format("       %Gâ”‚ CDCC channel                  "
-                                     "                                  â”‚",
+  put_it("%s", convert_output_format("       %G³ CDCC channel                  "
+                                     "                                  ³",
                                      NULL));
-  put_it("%s", convert_output_format("       %Gâ”‚ %W$[63]0-%G â”‚", "%s",
+  put_it("%s", convert_output_format("       %G³ %W$[63]0-%G ³", "%s",
                                      !public_channel ? "current channel"
                                                      : public_channel));
   put_it("%s", convert_output_format(
-                   "       %gâ•“â”€â”€â”€â”€%K[%C %c  %C %c    %K]%gâ”€â”€â”€â•“â”€â”€â”€%K[%C %c   %C "
-                   "%c    %K]%gâ”€â”€â”€â•–â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€%K[%Ct%coggles%K]%gâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•–",
+                   "       %gÖÄÄÄÄ%K[%C %c  %C %c    %K]%gÄÄÄÖÄÄÄ%K[%C %c   %C "
+                   "%c    %K]%gÄÄÄ·ÄÄÄÄÄÄÄÄÄÄ%K[%Ct%coggles%K]%gÄÄÄÄÄÄÄÄÄÄ·",
                    NULL));
   put_it("%s",
          convert_output_format(
-             "       %gâ•‘ %C %n    %W$[-6]0%n%R     %gâ•‘ %C %n    %W$[-6]1%n%R   "
-             "  %gâ•‘   %Ct%nimer:   %W$[-3]2%n   %Ce%ncho:  %W$[-3]3 %gâ•‘",
+             "       %gº %C %n    %W$[-6]0%n%R     %gº %C %n    %W$[-6]1%n%R   "
+             "  %gº   %Ct%nimer:   %W$[-3]2%n   %Ce%ncho:  %W$[-3]3 %gº",
              "1 1 %s %s", on_off(ptimer), on_off(do_cdcc_echo)));
   put_it("%s",
          convert_output_format(
-             "       %gâ•‘ %C %n    %W$[-6]0%n%R     %gâ•‘ %C %n    %W$[-6]1%n%R   "
-             "  %gâ•‘ %Cm%ninspeed:  %W$[-3]2%n   %Cs%necure:%W$[-3]3 %gâ•‘",
+             "       %gº %C %n    %W$[-6]0%n%R     %gº %C %n    %W$[-6]1%n%R   "
+             "  %gº %Cm%ninspeed:  %W$[-3]2%n   %Cs%necure:%W$[-3]3 %gº",
              "1 1 %s %s", cdcc_minspeed == 0.0 ? "off" : cdcc_minspeed_s,
              on_off(get_string_var(CDCC_SECURITY_VAR) ? 1 : 0)));
   put_it("%s", convert_output_format("       "
-                                     "%gâ•™â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•™â”€â”€"
-                                     "â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•œ",
+                                     "%gÓÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ½ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÓÄÄ"
+                                     "ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ½",
                                      NULL));
   return 0;
 }

@@ -651,11 +651,11 @@ char *nick, *host;
 			if (*(ArgList+7))
 				malloc_sprintf(&idle,"idle: %s", *(ArgList+7));
 		}
-		cav_say("%s",cparse("%g$[10]0%g$[-10]1%G!%g$[30]2 %G$[3]3 $4-", "%s %s %s %s %s",chan ? chan:"*none*",nick,host,flags,idle?idle:"Â Â "));
+		cav_say("%s",cparse("%g$[10]0%g$[-10]1%G!%g$[30]2 %G$[3]3 $4-", "%s %s %s %s %s",chan ? chan:"*none*",nick,host,flags,idle?idle:"ÿÿ"));
 #if 0
 		if (remote)
-/*			cav_say("%s",cparse("%G$[20]0%G$[-10]1%g!%g$[25]2 %g$[3]3 $4-", "%s %s %s %s %s",chan ? chan:"*none*",nick,host,flags,idle?idle:"Â Â "));*/
-			cav_say("%s",cparse("$0-", "%s %s %s %s %s",chan ? chan:"*none*",nick,host,flags,idle?idle:"Â Â "));
+/*			cav_say("%s",cparse("%G$[20]0%G$[-10]1%g!%g$[25]2 %g$[3]3 $4-", "%s %s %s %s %s",chan ? chan:"*none*",nick,host,flags,idle?idle:"ÿÿ"));*/
+			cav_say("%s",cparse("$0-", "%s %s %s %s %s",chan ? chan:"*none*",nick,host,flags,idle?idle:"ÿÿ"));
 		else
 #endif
 		new_free(&idle);
@@ -1192,23 +1192,23 @@ Window *tmp;
 
 BUILT_IN_DLL(cavhelp)
 {
-	put_it("%s", cparse("%Kâ•“â”€â”€â”€ %YCavLink%n module ver %W$0%n %Kby %Ppanasync %Kâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•–", "%s", cav_version));
-	put_it(      cparse("%Kâ•‘ [%Wcavlink cavlink_prompt cavlink_window cavlink_pass%K]             â•‘ ", NULL, NULL));
-	put_it(      cparse("%Kâ•‘ [%Wcavlink_attack cavlink_attack_times%K]                            â•‘ ", NULL, NULL));
-	put_it(      cparse("%Kâ•‘ [%Rcavlink_floodspawn cavlink_floodping%K]                           â•‘ ", NULL, NULL));
-	put_it(      cparse("%Kâ•‘ [%Rcavlink_floodquote cavlink_floodmsg%K]                            â•‘ ", NULL, NULL));
-	put_it(      cparse("%Kâ•‘ [%Rcavlink_floodnick cavlink_floodversion%K]                         â•‘ ", NULL, NULL));
-	put_it(      cparse("%Kâ•‘ [%Rcavlink_flooddccbomb cavlink_floodcycle%K]                        â•‘ ", NULL, NULL));
+	put_it("%s", cparse("%KÖÄÄÄ %YCavLink%n module ver %W$0%n %Kby %Ppanasync %KÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ·", "%s", cav_version));
+	put_it(      cparse("%Kº [%Wcavlink cavlink_prompt cavlink_window cavlink_pass%K]             º ", NULL, NULL));
+	put_it(      cparse("%Kº [%Wcavlink_attack cavlink_attack_times%K]                            º ", NULL, NULL));
+	put_it(      cparse("%Kº [%Rcavlink_floodspawn cavlink_floodping%K]                           º ", NULL, NULL));
+	put_it(      cparse("%Kº [%Rcavlink_floodquote cavlink_floodmsg%K]                            º ", NULL, NULL));
+	put_it(      cparse("%Kº [%Rcavlink_floodnick cavlink_floodversion%K]                         º ", NULL, NULL));
+	put_it(      cparse("%Kº [%Rcavlink_flooddccbomb cavlink_floodcycle%K]                        º ", NULL, NULL));
 
-	put_it(      cparse("%Kâ•‘ [%Wcsay cgeneral clsay cwho cmsg cjoin cpart cping cver cversion%K]  â•‘ ", NULL, NULL));
-	put_it(      cparse("%Kâ•‘ [%Wcwall cluser cunlink clink cattack ckline cboot cmode csplit%K]   â•‘ ", NULL, NULL));
-	put_it(      cparse("%Kâ•‘ [%Wcpong cinfo cwhois cme cmotd cquit cconnect cdie ckill chelp%K]   â•‘ ", NULL, NULL));
-	put_it(      cparse("%Kâ•‘ [%Wcgrab crwho crwall chubs cstats cuptime csave%K]                  â•‘ ", NULL, NULL));
+	put_it(      cparse("%Kº [%Wcsay cgeneral clsay cwho cmsg cjoin cpart cping cver cversion%K]  º ", NULL, NULL));
+	put_it(      cparse("%Kº [%Wcwall cluser cunlink clink cattack ckline cboot cmode csplit%K]   º ", NULL, NULL));
+	put_it(      cparse("%Kº [%Wcpong cinfo cwhois cme cmotd cquit cconnect cdie ckill chelp%K]   º ", NULL, NULL));
+	put_it(      cparse("%Kº [%Wcgrab crwho crwall chubs cstats cuptime csave%K]                  º ", NULL, NULL));
 
-	put_it(      cparse("%Kâ•‘ [%Rcbomb cvfld cpfld cmfld cqfld ccfld cnfld cefld cspawn%K]         â•‘ ", NULL, NULL));
+	put_it(      cparse("%Kº [%Rcbomb cvfld cpfld cmfld cqfld ccfld cnfld cefld cspawn%K]         º ", NULL, NULL));
 
-	put_it(      cparse("%Kâ•‘ [%Wcavlink clink%K]                                                  â•‘ ", NULL, NULL));
-	put_it(      cparse("%Kâ•™â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â•œ ", NULL, NULL));
+	put_it(      cparse("%Kº [%Wcavlink clink%K]                                                  º ", NULL, NULL));
+	put_it(      cparse("%KÓÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ½ ", NULL, NULL));
 
 }
 

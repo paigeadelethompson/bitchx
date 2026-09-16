@@ -136,6 +136,7 @@ char *get_signoffreason(const char *nick);
 int isme(char *);
 
 char *BX_convert_output_format(const char *, const char *, ...);
+char *cp437_to_utf8(const char *str);
 #ifdef GUI
 char *convert_output_format2(const char *);
 #endif

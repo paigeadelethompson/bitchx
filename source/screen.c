@@ -341,6 +341,73 @@ struct prepare_display_state {
  * PRINTED Characters not buffer positions :-)
  */
 #define SPLIT_EXTENT 40
+
+/* Length in bytes of the UTF-8 character starting at s, or 0 if s is not a
+ * valid UTF-8 lead byte (a continuation byte, a lone high byte, or a
+ * truncated sequence).  Plain high bytes like the CP437 art glyphs map to
+ * UTF-8 earlier in the output path and always arrive here as complete
+ * sequences. */
+static int utf8_char_len(const unsigned char *s) {
+  int n, i;
+
+  if (!s || !*s)
+    return 0;
+  if (*s < 0x80)
+    return 1;
+  if (*s >= 0xC2 && *s <= 0xDF)
+    n = 2;
+  else if (*s >= 0xE0 && *s <= 0xEF)
+    n = 3;
+  else if (*s >= 0xF0 && *s <= 0xF4)
+    n = 4;
+  else
+    return 0;
+  for (i = 1; i < n; i++)
+    if (!(s[i] >= 0x80 && s[i] <= 0xBF))
+      return 0;
+  return n;
+}
+
+/* Number of terminal columns used by str.  A UTF-8 character takes up one
+ * column; a lone high byte takes up one as well. */
+static int utf8_cols(const char *str) {
+  int col = 0;
+
+  while (*str) {
+    int n = utf8_char_len((const unsigned char *)str);
+    if (n > 1)
+      str += n;
+    else
+      str++;
+    col++;
+  }
+  return col;
+}
+
+/* Returns the byte pointer in str where the given number of columns has
+ * been consumed.  Lines are always broken on a complete character. */
+static char *utf8_char_offset(char *str, int cols) {
+  char *p = str;
+
+  while (*p && cols > 0) {
+    int n = utf8_char_len((const unsigned char *)p);
+    if (n > 1)
+      p += n;
+    else
+      p++;
+    cols--;
+  }
+  return p;
+}
+
+/* Given a pointer that may land inside a UTF-8 sequence, back up to the
+ * start of the character it belongs to. */
+static char *utf8_char_start(char *p, char *min) {
+  while (p > min && ((unsigned char)*p & 0xC0) == 0x80)
+    p--;
+  return p;
+}
+
 char **BX_prepare_display(const char *orig_str, int max_cols, int *lused,
                           int flags) {
   static int recursion = 0, output_size = 0;
@@ -540,6 +607,26 @@ char **BX_prepare_display(const char *orig_str, int max_cols, int *lused,
     }
 
     default: {
+      if ((unsigned char)*pds.src >= 0x80) {
+        /* A UTF-8 character (or a lone high byte).  Copy the whole
+         * sequence and count it as one column so that art, once
+         * transliterated to UTF-8, wraps like it did with 8-bit
+         * characters instead of being split in the middle. */
+        int n = utf8_char_len((const unsigned char *)pds.src);
+        int k;
+
+        if (n > 1) {
+          for (k = 0; k < n && pds.dest < &buffer[BIG_BUFFER_SIZE - 8]; k++) {
+            *pds.dest++ = *pds.src;
+            if (k < n - 1)
+              pds.src++;
+          }
+        } else {
+          *pds.dest++ = *pds.src;
+        }
+        pds.col++;
+        break;
+      }
       if (*pds.src == ' ' || strchr(words, *pds.src)) {
         if (indent == 0) {
           indent = -1;
@@ -570,9 +657,9 @@ char **BX_prepare_display(const char *orig_str, int max_cols, int *lused,
       char *pos_copy;
 
       if (word_break == buffer || (flags & PREPARE_NOWRAP))
-        word_break = &buffer[max_cols] /*pds.pos - 1*/;
+        word_break = utf8_char_offset(buffer, max_cols);
       else if (pds.col > max_cols)
-        word_break = pds.dest - 1;
+        word_break = utf8_char_start(pds.dest - 1, buffer);
 
       /*
        * XXXX Massive hackwork here.
@@ -632,7 +719,7 @@ char **BX_prepare_display(const char *orig_str, int max_cols, int *lused,
 
       strlcpy(buffer, cont, sizeof(buffer));
       strlcat(buffer, pos_copy, sizeof(buffer));
-      pds.col = strlen(buffer);
+      pds.col = utf8_cols(buffer);
       pds.dest = &buffer[pds.col];
 
       word_break = buffer;

@@ -3076,7 +3076,7 @@ void show_server_map(void) {
 #ifdef ONLY_STD_CHARS
   char *ascii = "-> ";
 #else
-  char *ascii = "â””â”€> ";
+  char *ascii = "ÀÄ> ";
 #endif
   if (map)
     prevdist = map->hopcount;
