@@ -1073,9 +1073,8 @@ void remove_wsets_for_window(Window *tmp) {
   new_free(&tmp->wset);
 }
 
-void log_channel(CSetArray *var, CSetList *cs) {
+void log_channel(CSetArray *var __attribute__((unused)), CSetList *cs) {
   ChannelList *chan;
-  (void)var;
   if (!cs->channel_log_file) {
     bitchsay("Try setting a channel log file first");
     set_cset_int_var(cs, CHANNEL_LOG_CSET, 0);
@@ -1085,8 +1084,8 @@ void log_channel(CSetArray *var, CSetList *cs) {
     do_log(cs->channel_log, cs->channel_log_file, &chan->msglog_fp);
 }
 
-void set_msglog_channel_level(CSetArray *var, CSetList *cs) {
-  (void)var;
+void set_msglog_channel_level(CSetArray *var __attribute__((unused)),
+                                 CSetList *cs) {
   cs->channel_log_level = parse_lastlog_level(cs->log_level, 1);
   set_cset_str_var(cs, CHANNEL_LOG_LEVEL_CSET,
                    bits_to_lastlog_level(cs->channel_log_level));
@@ -1134,9 +1133,8 @@ void check_channel_limit(ChannelList *chan) {
   }
 }
 
-void limit_channel(CSetArray *var, CSetList *cs) {
+void limit_channel(CSetArray *var __attribute__((unused)), CSetList *cs) {
   ChannelList *chan;
-  (void)var;
   if ((chan = lookup_channel(cs->channel, from_server, 0))) {
     if (cs->set_auto_limit) {
       int count = 0;

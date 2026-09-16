@@ -76,25 +76,21 @@ extern char **Argv;    /* pointer to argument vector */
 extern char *LastArgv; /* end of argv */
 #endif
 
-char *n_m_strdup(const char *str, const char *module, const char *file,
-                 const int line) {
+char *n_m_strdup(const char *str, const char *module __attribute__((unused)),
+                 const char *file __attribute__((unused)),
+                 const int line __attribute__((unused))) {
   char *ptr;
-  (void)module;
-  (void)file;
-  (void)line;
   if (!str)
     str = empty_string;
   ptr = (char *)malloc(strlen(str) + 1);
   return strcpy(ptr, str);
 }
 
-void ircpanic(char *string, ...) {
-  (void)string;
+void ircpanic(char *string __attribute__((unused)), ...) {
   return;
 }
 
-int get_int_var(enum VAR_TYPES var) {
-  (void)var;
+int get_int_var(enum VAR_TYPES var __attribute__((unused))) {
   return 1;
 }
 

@@ -40,8 +40,8 @@ static int parse_key(const char *sequence, char *term);
 static void refresh_screen_wrapper(char c, char *arg) {
     refresh_screen((unsigned char)c, arg);
 }
-static void BX_update_all_status_wrapper(char c, char *arg) {
-    (void)c; (void)arg;
+static void BX_update_all_status_wrapper(char c __attribute__((unused)),
+                                         char *arg __attribute__((unused))) {
     BX_update_all_status(NULL, NULL, 0);
 }
 

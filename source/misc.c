@@ -193,16 +193,16 @@ BUILT_IN_COMMAND(do_uptime) {
 #else
   put_it("%s",
          convert_output_format(
-             "%Gï¿½ï¿½[ %WBitchX%gï¿½%wClient%gï¿½%RStatistics "
-             "%G]ï¿½ï¿½ï¿½ï¿½---%gï¿½--ï¿½ï¿½%K-%gï¿½ï¿½ï¿½ï¿½ï¿½--%Gï¿½--ï¿½ï¿½%K-%gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½--- %K--%g  -",
+             "%GÚÄ[ %WBitchX%gÄ%wClient%gÄ%RStatistics "
+             "%G]ÄÄÄÄ---%gÄ--ÄÄ%K-%gÄÄÄÄÄ--%GÄ--ÄÄ%K-%gÄÄÄÄÄÄÄ--- %K--%g  -",
              NULL));
   put_it("%s", convert_output_format("%G| %CClient Version: %W$0 $1", "%s %s",
                                      irc_version, internal_version));
-  put_it("%s", convert_output_format("%Gï¿½ %CClient Running Since %W$0-", "%s",
+  put_it("%s", convert_output_format("%G³ %CClient Running Since %W$0-", "%s",
                                      my_ctime(start_time)));
   put_it("%s", convert_output_format("%G| %CClient Uptime: %W$0-", "%s",
                                      convert_time(now - start_time)));
-  put_it("%s", convert_output_format("%Gï¿½ %CCurrent UserName: %W$0-", "%s",
+  put_it("%s", convert_output_format("%G³ %CCurrent UserName: %W$0-", "%s",
                                      username));
   put_it("%s", convert_output_format("%G: %CCurrent RealName: %W$0-", "%s",
                                      realname));
@@ -221,13 +221,13 @@ BUILT_IN_COMMAND(do_uptime) {
                                          ? last_sent_notice[0].last_msg
                                          : "None"));
   put_it("%s",
-         convert_output_format("%Gï¿½ %CLast Channel invited to: %R$0-", "%s",
+         convert_output_format("%G³ %CLast Channel invited to: %R$0-", "%s",
                                invite_channel ? invite_channel : "None"));
   put_it("%s",
          convert_output_format("%G| %cTotal Users on Userlist: %K[%R$0%K]",
                                "%d", user_count));
   put_it("%s",
-         convert_output_format("%Gï¿½ %cTotal Users on Shitlist: %K[%R$0%K]",
+         convert_output_format("%G³ %cTotal Users on Shitlist: %K[%R$0%K]",
                                "%d", shit_count));
 
 #endif

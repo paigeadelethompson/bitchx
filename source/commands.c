@@ -1031,139 +1031,58 @@ Mailing list is at <bitchx-devel@lists.sourceforge.net>\n";
   put_it("[0;25;35;40m [0m");
 #endif
 #ifdef ASCII_LOGO
-  put_it(
-      "                                                                   ,");
-  put_it("                                           .                     ,$");
-  put_it("                 .                                              ,$'");
-  put_it("                                           .        .          ,$'");
-  put_it("                 :      ,g$p,              .         $,       ,$'");
-  put_it("               y&$       `\"` .,.           $&y       `$,     ,$'");
-  put_it("               $$$     o oooy$$$yoo o      $$$        `$,   ,$' "
-         "-acidjazz");
-  put_it(
-      "         .     $$$%%yyyp, gyp`$$$'gyyyyyyp, $$$yyyyp,   `$, ,$'     .");
-  put_it("       . yxxxx $$$\"`\"$$$ $$$ $$$ $y$\"`\"$$$ $$$\"`\"$$$ "
-         "xxx`$,$'xxxxxxy .");
-  put_it("         $     $$7   l$$ $$$ $$$ $$7   \"\"\" $$7   ly$     .$'      "
-         " $");
-  put_it(
-      "         $     $$b   dy$ $$$ $y$ $$b   $$$ $$b   d$$    ,$`$,      $");
-  put_it(
-      "       . $xxxx $$$uuu$$$ $$$ $$$ $$$uuu$$$ $$$   $$$ x ,$'x`$, xxxx$ .");
-  put_it("         .           \"\"\" \"\"\" \"\"\"       \"\"\"       \"\"\"  "
-         ",$'   `$,    .");
-  put_it("           b i t c h    -      x                     ,$'     `$,");
-  put_it("                                                     $'       `$,");
-  put_it("                                                    '          `$,");
-  put_it("                                                                `$,");
-  put_it("                                                                 `$");
-  put_it(
-      "                                                                   `");
-  put_it(empty_string);
-  put_it("[0;30;47m                                                           "
-         "                 [0m");
-  put_it("[0;30;47m Grtz To: Trench, HappyCrappy, Yak, Zircon, Otiluke, "
-         "Masonry, BuddahX, Hob, [0m");
-  put_it("[0;30;47m          Lifendel, JondalaR, JVaughn, Suicide, NovaLogic, "
-         "Jordy, BigHead,  [0m");
-  put_it("[0;30;47m          Ananda, Hybrid, Reefa, BlackJac, GenX, MHacker, "
-         "PSiLiCON,         [0m");
-  put_it("[0;30;47m          hop, Sheik, psykotyk, oweff, icetrey, Power, "
-         "sideshow, Raistlin,  [0m");
-  put_it("[0;30;47m          [Nuke], Rosmo and Bark0de!                       "
-         "                 [0m");
-  put_it("[0;30;47m                                                           "
-         "                 [0m");
-  put_it("[0;30;47m Mailing list is at <bitchx-devel@lists.sourceforge.net>   "
-         "                 [0m");
-  put_it(empty_string);
+	put_it("                                                                   ,");
+	put_it("                                           .                     ,$");
+	put_it("                 .                                              ,$'");
+	put_it("                                           .        .          ,$'");
+	put_it("                 :      ,g$p,              .         $,       ,$'");
+	put_it("               y&$       `\"` .,.           $&y       `$,     ,$'");
+	put_it("               $$$     o oooy$$$yoo o      $$$        `$,   ,$' -acidjazz");
+	put_it("         .     $$$%%yyyp, gyp`$$$'gyyyyyyp, $$$yyyyp,   `$, ,$'     .");
+	put_it("       . yxxxx $$$\"`\"$$$ $$$ $$$ $y$\"`\"$$$ $$$\"`\"$$$ xxx`$,$'xxxxxxy .");
+	put_it("         $     $$7   l$$ $$$ $$$ $$7   \"\"\" $$7   ly$     .$'       $");
+	put_it("         $     $$b   dy$ $$$ $y$ $$b   $$$ $$b   d$$    ,$`$,      $");
+	put_it("       . $xxxx $$$uuu$$$ $$$ $$$ $$$uuu$$$ $$$   $$$ x ,$'x`$, xxxx$ .");
+	put_it("         .           \"\"\" \"\"\" \"\"\"       \"\"\"       \"\"\"  ,$'   `$,    .");
+	put_it("           b i t c h    -      x                     ,$'     `$,");
+	put_it("                                                     $'       `$,");
+	put_it("                                                    '          `$,");
+	put_it("                                                                `$,");
+	put_it("                                                                 `$");
+	put_it("                                                                   `");
+	put_it(empty_string);
+	put_it("[0;30;47m                                                                            [0m");
+	put_it("[0;30;47m Grtz To: Trench, HappyCrappy, Yak, Zircon, Otiluke, Masonry, BuddahX, Hob, [0m");
+	put_it("[0;30;47m          Lifendel, JondalaR, JVaughn, Suicide, NovaLogic, Jordy, BigHead,  [0m");
+	put_it("[0;30;47m          Ananda, Hybrid, Reefa, BlackJac, GenX, MHacker, PSiLiCON,         [0m");
+	put_it("[0;30;47m          hop, Sheik, psykotyk, oweff, icetrey, Power, sideshow, Raistlin,  [0m");   
+	put_it("[0;30;47m          [Nuke], Rosmo and Bark0de!                                        [0m");
+	put_it("[0;30;47m                                                                            [0m");
+	put_it("[0;30;47m Mailing list is at <bitchx-devel@lists.sourceforge.net>                    [0m");
+	put_it(empty_string);
 #else
-  put_it("[35m    "
-         "???????????????????????????????????????????????????????????[1;45m???"
-         "[0;35;40m  [1;45m??[0;35;40m?[1;32m?[42m??[40m?[0;35;40m "
-         "[1;45m?[40m?[0m");
-  put_it("[35m [1;31m??[0m   "
-         "[1;35;45m?[0;35;40m????????????[1;31;41m?[40m?[0m   "
-         "[1;35;45m?[0;35;40m??????????????????[1;31;41m?[40m?[0m   "
-         "[1;35;45m?[0;35;40m??????????[1;32m??[0;35;40m???[1;45m??[0;35;"
-         "40m  [1m?[0;32;40m?[1;42m????[40m?[0;35;40m "
-         "[1;45m?[0;35;40m?[0m");
-  put_it("[35m?[1;31;41m?[0m    [35m?[1;31m?[0;32;40m   "
-         "[35m??[1;31;41m?[40m?[0;32;40m  [1;35m?[45m?[31;41m?[0m    "
-         "[35m????[1;45m?[0;35;40m??[1;31;45m?[40m?[0;32;40m   "
-         "[35m?[1;31m?[0;32;40m  [1;35m ?[45m?[31;41m?[0m    "
-         "[35m?[1;31m?[0;32;40m   ????[1;42m???[0m "
-         "[35m????[1;45m?[0;35;40m "
-         "[32m?[1;42m??[0;32;40m??[1m?[35m?[45m?[0;35;40m "
-         "[1;45m?[0;35;40m?[0m");
-  put_it("[35m?[1;31;41m?[0m    [1;35;45m?[31;41m?[0m    [1;35;45m "
-         "[31m??[0;35;40m????[1;31;41m?[0m    "
-         "[1;35;45m?[31;41m?[40m?[0;32;40m   [1;35;45m?[31;41m?[0m    "
-         "[1;35;45m?[31;41m?[0m    [1;35;45m?[31;41m?[0m    "
-         "[1;35;45m?[31;41m?[0m    "
-         "[35m?[32m????[1;42m??[40m?[0;35;40m?[1;45m?[0;35;40m?[32m???"
-         "[1;35m??[45m?[40m?[0;35;40m [1;45m??[0;35;40m ??[0m");
-  put_it("[35m?[1;31;41m [0m    [1;35;45m?[31;41m?[0m    "
-         "[1;35;45m?[31;41m?[0m    [1;35;45m?[31;41m [0m    "
-         "[1;35;45m?[31;41m?[0m    [1;35;45m?[31;41m?[0m    "
-         "[1;35;45m?[31m?[0;35;40m????[1;45m?[31;41m [0m    "
-         "[1;35;45m?[31;41m?[0m    "
-         "[1;35;45m?[0;35;40m???????[32m?[1m?[0;32;40m?[35m?  "
-         "[1;45m???[0;35;40m? [1;45m??[0;35;40m ?[1;30m?[0m");
-  put_it("[35m?[31;45m?[0m    [1;35;45m?[31;41m?[0m    "
-         "[1;35;45m?[31;41m?[0m    [1;35;45m?[0;31;45m?[0m    "
-         "[1;35;45m?[31;41m?[0m    [1;35;45m?[31;41m?[0m    "
-         "[1;35;45m?[31;41m?[0m    [1;35;45m?[0;31;45m?[0m    "
-         "[1;35;45m?[31;41m?[0m    "
-         "[1;35;45m?[0;35;40m??????[32m??[35m??[1;32m???[0;32;40m?[35m??"
-         "? [1;45m?[0;35;40m? ??[0m");
-  put_it("[35m?[31;45m?[0m    [1;35;45m?[31;41m?[0m    "
-         "[1;35;45m?[31;41m?[0m    [1;35;45m?[0;31;45m?[0m    "
-         "[1;35;45m?[31;41m?[0m    [1;35;45m?[31;41m?[0m    "
-         "[1;35;45m?[31;41m?[0m    [1;35;45m?[0;31;45m?[0m    "
-         "[1;35;45m?[31;41m?[0m    "
-         "[1;35;45m?[0;35;40m????[32m?[1;42m?[0;32;40m?[35m??[1;30;45m?"
-         "[0;35;40m?[1;32m??[42m???[0;32;40m???[35m? ??[0m");
-  put_it(
-      "[35m?[31;45m?[0m    [1;35m?[0;31;40m?[1;34m   "
-      "[35m?[45m?[31;41m [0m   [1;35m?[45m?[0;31;45m?[40m?[1;34m   "
-      "[35m?[0;31;40m?[1;34m   [35m?[45m?[0;31;45m?[40m?[1;34m   "
-      "[35m?[0;31;40m?[1;34m   [35m?[45m?[0;31;45m?[0m   "
-      "[1;35m?[45m?[31;41m [0m   "
-      "[1;35m?[45m?[0;35;40m??[1;32m?[42m??[0;32;40m?[0m [35m????[34m "
-      "[1;32;42m???[0;32;40m?[1;42m?[0;32;40m?????[1;30m?[0m");
-  put_it("[35m???????????????????????????????????????????????????????[1;32m?"
-         "[42m???[0;32;40m??[35m??[1;30;45m?[0;35;40m?[1;30;45m?[0;35;"
-         "40m [34m [1;32;42m???[0;32;40m?????[1;30m?[0;35;40m?");
-  put_it(" ?????????????????????????????????????????????????????[1;32m?[42m??"
-         "?[0;32;40m??[0m [35m???[1;30;45m??[0;35;40m  [34m "
-         "[1;32;42m?[0;32;40m??[35m [1;30m?[45m?[0;35;40m "
-         "[1;30;45m?[40m?[0;35;40m");
-  put_it("    "
-         "???????????????????????????????????????????????????[1;32m?[0;32;"
-         "40m???[35m?[30;45mrE[35;40m?[1;30;45m???[0;35;40m  "
-         "[1;30;45m?[40m?[45m?[40m?[0;35;40m [1;30;45m??[0;35;40m "
-         "[1;30;45m?[40m?[0m");
-  put_it(empty_string);
-  put_it("[1m?????????????????????????????????????????????????????????????????"
-         "????????????[0m?");
-  put_it("[1;47m?[0;30;47m                                                   "
-         "                          [0m");
-  put_it("[1;47m?[0;30;47m Grtz To: Trench, HappyCrappy, Yak, Zircon, "
-         "Otiluke, Masonry, BuddahX, Hob, [1m?[0m");
-  put_it("[1;47m?[0;30;47m          Lifendel, JondalaR, JVaughn, suicide, "
-         "NovaLogic, Jordy, BigHead,  [1m?[0m");
-  put_it("[1;47m?[0;30;47m          Ananda, Hybrid, Reefa, BlackJac, GenX, "
-         "MHacker, PSiLiCON,         [1m?[0m");
-  put_it("[1;47m?[0;30;47m          hop, Sheik, psykotyk, oweff, icetrey, "
-         "Power, sideshow, Raistlin,  [1m?[0m");
-  put_it("[1;47m?[0;30;47m          Mustang, [Nuke], Rosmo, Sellfone, Drago "
-         "and bark0de!              [1m?[0m");
-  put_it("[1;47m?[0;30;47m Mailing list is at "
-         "<bitchx-devel@lists.sourceforge.net>                    [1m?[0m");
-  put_it("?[1;30m?????????????????????????????????????????????????????????????"
-         "????????????????[0m");
-  put_it(empty_string);
+	put_it("[35m    ‹‹‹‹€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€ﬂ€€[1;45m∞±≤[0;35;40m  [1;45m≤±[0;35;40mﬂ[1;32m‹[42m±≤[40m‹[0;35;40m [1;45m≤[40mﬁ[0m");
+	put_it("[35m [1;31m‹ﬂ[0m   [1;35;45m≤[0;35;40m€€€€€€€€€€€€[1;31;41m≤[40mﬂ[0m   [1;35;45m≤[0;35;40m€€€€€€€€€€€€€€€€€€[1;31;41m≤[40mﬂ[0m   [1;35;45m∞[0;35;40m€€€€€€€€ﬂﬂ[1;32m‹›[0;35;40mﬁ€€[1;45m∞±[0;35;40m  [1mﬂ[0;32;40m‹[1;42m∞±≤€[40mﬂ[0;35;40m [1;45m±[0;35;40mﬁ[0m");
+	put_it("[35mﬁ[1;31;41m±[0m    [35m‹[1;31m‹[0;32;40m   [35mﬂ€[1;31;41m≤[40mﬂ[0;32;40m  [1;35m‹[45m≤[31;41m±[0m    [35m‹‹‹‹[1;45mﬂ[0;35;40m€€[1;31;45m‹[40mﬂ[0;32;40m   [35m‹[1;31m‹[0;32;40m  [1;35m ﬂ[45m‹[31;41m±[0m    [35m‹[1;31m‹[0;32;40m   ‹‹‹‹[1;42m∞±≤[0m [35m€€€€[1;45m∞[0;35;40m [32m‹[1;42m∞±[0;32;40mﬂﬂ[1mﬂ[35m‹[45m≤[0;35;40m [1;45m∞[0;35;40mﬁ[0m");
+	put_it("[35m€[1;31;41m∞[0m    [1;35;45m∞[31;41m€[0m    [1;35;45m [31m‹‹[0;35;40mﬂﬂﬂ€[1;31;41m∞[0m    [1;35;45m∞[31;41m€[40mﬂ[0;32;40m   [1;35;45m∞[31;41m€[0m    [1;35;45m∞[31;41m≤[0m    [1;35;45m≤[31;41m∞[0m    [1;35;45m∞[31;41m€[0m    [35m‹[32mﬂﬂﬂﬂ[1;42m±≤[40m‹[0;35;40mﬂ[1;45m∞[0;35;40mﬂ[32m‹ﬂﬂ[1;35m‹‹[45m≤[40m›[0;35;40m [1;45m≤±[0;35;40m €ﬁ[0m");
+	put_it("[35m€[1;31;41m [0m    [1;35;45m±[31;41m≤[0m    [1;35;45m∞[31;41m≤[0m    [1;35;45m∞[31;41m [0m    [1;35;45m±[31;41m≤[0m    [1;35;45m±[31;41m≤[0m    [1;35;45m±[31m‹[0;35;40mﬂﬂﬂﬂ[1;45m‹[31;41m [0m    [1;35;45m±[31;41m≤[0m    [1;35;45m∞[0;35;40m€€€€‹‹‹[32mﬂ[1m˛[0;32;40m‹[35m˛  [1;45m≤±±[0;35;40m› [1;45m±∞[0;35;40m €[1;30mﬁ[0m");
+	put_it("[35m€[31;45m≤[0m    [1;35;45m≤[31;41m±[0m    [1;35;45m±[31;41m±[0m    [1;35;45m±[0;31;45m≤[0m    [1;35;45m≤[31;41m±[0m    [1;35;45m≤[31;41m±[0m    [1;35;45m≤[31;41m±[0m    [1;35;45m±[0;31;45m≤[0m    [1;35;45m≤[31;41m±[0m    [1;35;45m±[0;35;40m€€€€€ﬂ[32m‹ﬂ[35m‹‹[1;32mﬂ‹‹[0;32;40m‹[35mﬂﬂ› [1;45m∞[0;35;40mÀ €ﬁ[0m");
+	put_it("[35m€[31;45m±[0m    [1;35;45m€[31;41m∞[0m    [1;35;45m≤[31;41m∞[0m    [1;35;45m≤[0;31;45m±[0m    [1;35;45m€[31;41m∞[0m    [1;35;45m€[31;41m∞[0m    [1;35;45m€[31;41m∞[0m    [1;35;45m≤[0;31;45m±[0m    [1;35;45m€[31;41m∞[0m    [1;35;45m≤[0;35;40m€€€ﬂ[32m‹[1;42m∞[0;32;40m›[35mﬁ€[1;30;45m∞[0;35;40m›[1;32mﬁ€[42m≤±∞[0;32;40m‹‹‹[35mﬂ €ﬁ[0m");
+	put_it("[35m€[31;45m∞[0m    [1;35mﬂ[0;31;40mﬂ[1;34m   [35m‹[45m€[31;41m [0m   [1;35m‹[45m€[0;31;45mﬂ[40m‹[1;34m   [35mﬂ[0;31;40mﬂ[1;34m   [35m‹[45mﬂ[0;31;45mﬂ[40m‹[1;34m   [35mﬂ[0;31;40mﬂ[1;34m   [35m‹[45mﬂ[0;31;45m∞[0m   [1;35m‹[45m€[31;41m [0m   [1;35m‹[45m€[0;35;40m€ﬂ[1;32m‹[42m±∞[0;32;40m€[0m [35m€€€€[34m [1;32;42m≤±±[0;32;40m€[1;42m∞[0;32;40m€€€‹‹[1;30mﬁ[0m");
+	put_it("[35mﬁ€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€ﬂ[1;32m‹[42m≤±∞[0;32;40m€›[35mﬁ€[1;30;45m∞[0;35;40m€[1;30;45m∞[0;35;40m [34m [1;32;42m±∞∞[0;32;40m€€€ﬂﬂ[1;30m‹[0;35;40mﬁ");
+	put_it(" ﬂ€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€›[1;32mﬁ[42m≤±∞[0;32;40m€€[0m [35m€€€[1;30;45m∞±[0;35;40m  [34m [1;32;42m∞[0;32;40mﬂﬂ[35m [1;30m‹[45m≤[0;35;40m [1;30;45m≤[40mﬁ[0;35;40m");
+	put_it("    ﬂﬂﬂﬂ€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€€‹[1;32mﬂ[0;32;40mﬂﬂﬂ[35m‹[30;45mrE[35;40m€[1;30;45m∞±≤[0;35;40m  [1;30;45m≤[40m‹[45m≤[40m›[0;35;40m [1;30;45m≤±[0;35;40m [1;30;45m±[40mﬁ[0m");
+	put_it(empty_string);
+	put_it("[1m‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹‹≤[0m‹");
+	put_it("[1;47m€[0;30;47m                                                                             [0m");
+	put_it("[1;47m≤[0;30;47m Grtz To: Trench, HappyCrappy, Yak, Zircon, Otiluke, Masonry, BuddahX, Hob, [1m∞[0m");
+	put_it("[1;47m±[0;30;47m          Lifendel, JondalaR, JVaughn, suicide, NovaLogic, Jordy, BigHead,  [1m±[0m");
+	put_it("[1;47m∞[0;30;47m          Ananda, Hybrid, Reefa, BlackJac, GenX, MHacker, PSiLiCON,         [1m≤[0m");
+	put_it("[1;47m∞[0;30;47m          hop, Sheik, psykotyk, oweff, icetrey, Power, sideshow, Raistlin,  [1m≤[0m");
+	put_it("[1;47m∞[0;30;47m          Mustang, [Nuke], Rosmo, Sellfone, Drago and bark0de!              [1m≤[0m");
+	put_it("[1;47m∞[0;30;47m Mailing list is at <bitchx-devel@lists.sourceforge.net>                    [1m≤[0m");
+	put_it("ﬂ[1;30m≤ﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂﬂ[0m");
+	put_it(empty_string);
 #endif
 #if !defined(WINNT) && !defined(__EMX__)
 #if defined(LATIN1)
@@ -3234,8 +3153,7 @@ BUILT_IN_COMMAND(query) {
   update_window_status(current_window, 0);
 }
 
-void read_away_log(char *stuff, char *line) {
-  (void)stuff;
+void read_away_log(char *stuff __attribute__((unused)), char *line) {
   if (!line || !*line || (line && toupper(*line) == 'Y'))
     readlog(NULL, NULL, NULL, NULL);
   update_input(UPDATE_ALL);
@@ -4188,7 +4106,8 @@ BUILT_IN_COMMAND(do_msay) {
  * given command and displays them for the user's lookseeing
  */
 char **get_builtins(char *, int *);
-void command_completion(char unused, char *not_used) {
+void command_completion(char unused __attribute__((unused)),
+                        char *not_used __attribute__((unused))) {
   int do_aliases = 1, do_functions = 1;
   int cmd_cnt = 0, alias_cnt = 0, dll_cnt = 0, function_cnt = 0, i, c;
   char **aliases = NULL;
@@ -4197,8 +4116,6 @@ void command_completion(char unused, char *not_used) {
   char *line = NULL, *com, *rest, firstcmdchar[2] = "/";
   const char *cmdchars = get_string_var(CMDCHARS_VAR);
   const IrcCommand *command;
-  (void)unused;
-  (void)not_used;
 #ifdef WANT_DLL
   IrcCommandDll *dll = NULL;
 #endif
@@ -5356,15 +5273,13 @@ BUILT_IN_COMMAND(pretend_cmd) { parse_server(args); }
  * and the key is accepted.  That's probably not right, I'll work on that.
  */
 static int e_pause_cb_throw = 0;
-static void e_pause_cb(char *u1, char *u2) {
-  (void)u1;
-  (void)u2;
+static void e_pause_cb(char *u1 __attribute__((unused)),
+                       char *u2 __attribute__((unused))) {
   e_pause_cb_throw--;
 }
 
-static int e_pause_timer(void *arg, char *sub) {
-  (void)arg;
-  (void)sub;
+static int e_pause_timer(void *arg __attribute__((unused)),
+                         char *sub __attribute__((unused))) {
   return 0;
 }
 

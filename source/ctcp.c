@@ -170,8 +170,8 @@ void print_ctcp(char *from, char *uh, char *to, char *str, char *cmd) {
              *cmd ? cmd : empty_string));
 }
 
-void log_denied(char *type, char *from, char *uh, char *to, char *cmd) {
-  (void)to;
+void log_denied(char *type, char *from, char *uh, char *to __attribute__((unused)),
+                char *cmd) {
   logmsg(LOG_CTCP, from, 0, "%s %s %s [%s]", type, "! Access Denied from ", uh,
          cmd);
 }

@@ -986,14 +986,15 @@ BUILT_IN_COMMAND(show_version) {
   new_free(&version_buf);
 }
 
-void who_user_kill(WhoEntry *w, char *from, char **ArgList) {
+void who_user_kill(WhoEntry *w, char *from __attribute__((unused)),
+                   char **ArgList) {
   char *match_arg;
   char *arg = NULL;
   int server = 0;
   char *nick_arg = NULL;
   char *reason = NULL;
 
-  (void)from;
+
   if (isme(ArgList[4]))
     return;
   match_arg = alloca(2000);
@@ -1024,12 +1025,11 @@ void who_user_kill(WhoEntry *w, char *from, char **ArgList) {
   }
 }
 
-void who_user_killend(WhoEntry *w, char *unused, char **unused1) {
+void who_user_killend(WhoEntry *w, char *unused __attribute__((unused)),
+                      char **unused1 __attribute__((unused))) {
   char *pattern, *match, *who_buff, *who_reason;
   int server = -1;
 
-  (void)unused;
-  (void)unused1;
   if (w->who_buff) {
     who_buff = LOCAL_COPY(w->who_buff);
     who_reason = strchr(who_buff, ':');
@@ -1129,10 +1129,9 @@ void trace_handlekill(int comm, char *nick) {
   send_to_server("KILL %s :%s (%d)", nick, treason, count);
 }
 
-void handle_tracekill(int comm, char *nick, char *user, char *host) {
+void handle_tracekill(int comm, char *nick, char *user __attribute__((unused)),
+                      char *host __attribute__((unused))) {
   char *q, *n;
-  (void)user;
-  (void)host;
   if (!nick || !*nick) {
     trace_handlekill(comm, NULL);
     return;
@@ -1323,11 +1322,11 @@ int change_orig_nick(int server) {
   return 1;
 }
 
-static void gain_nick(UserhostItem *stuff, char *nick, char *args) {
+static void gain_nick(UserhostItem *stuff, char *nick __attribute__((unused)),
+                      char *args) {
   int gotit = 0;
   int server = -1;
   int old_serv = from_server;
-  (void)nick;
   if (!get_server_orignick(from_server) || !is_server_connected(from_server))
     return;
   server = my_atol(args);
@@ -1342,10 +1341,9 @@ static void gain_nick(UserhostItem *stuff, char *nick, char *args) {
   from_server = old_serv;
 }
 
-static int delay_gain_nick(void *arg, char *sub) {
+static int delay_gain_nick(void *arg __attribute__((unused)),
+                           char *sub __attribute__((unused))) {
   char *nick = get_server_orignick(from_server);
-  (void)arg;
-  (void)sub;
   if (from_server == -1)
     nick = get_server_orignick(0);
   if (nick)

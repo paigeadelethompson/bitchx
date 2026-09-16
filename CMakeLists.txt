@@ -5,9 +5,9 @@ cmake_minimum_required(VERSION 3.16)
 
 project(BitchX C)
 
-set(BITCHX_MAJOR 1)
-set(BITCHX_MINOR 2)
-set(BITCHX_MICRO 1)
+set(BITCHX_MAJOR 2)
+set(BITCHX_MINOR 0)
+set(BITCHX_MICRO 0)
 set(RELEASE_TAG "bitchx-${BITCHX_MAJOR}.${BITCHX_MINOR}.${BITCHX_MICRO}")
 
 if(NOT DEFINED VERSION_NUMBER)

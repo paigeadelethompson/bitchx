@@ -388,11 +388,11 @@ static int dcc_match(const SocketList *s, const char *nick, const char *desc,
  */
 
 SocketList *BX_find_dcc(const char *nick, const char *desc, const char *other,
-                        int type, int create, int active, int num) {
+                        int type, int create __attribute__((unused)), int active,
+                        int num) {
   int i;
   SocketList *s;
 
-  (void)create;
   for (i = 0; i < get_max_fd() + 1; i++) {
     if (!check_dcc_socket(i))
       continue;
@@ -431,10 +431,10 @@ static DCC_List *find_dcc_pending(const char *nick, const char *desc,
   return NULL;
 }
 
-void add_userhost_to_chat(UserhostItem *stuff, char *nick, char *args) {
+void add_userhost_to_chat(UserhostItem *stuff, char *nick,
+                          char *args __attribute__((unused))) {
   SocketList *Client = NULL;
 
-  (void)args;
   if (!stuff || !stuff->nick || !stuff->user || !stuff->host ||
       !strcmp(stuff->user, "<UNKNOWN>"))
     return;

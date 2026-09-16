@@ -111,10 +111,9 @@ int main(int argc, char **argv) {
   my_exit(8);
 }
 
-static void sigint_handler(int value) {
+static void sigint_handler(int value __attribute__((unused))) {
   /* send a ^C */
   static const char ctrl_c = 3;
-  (void)value;
   write(sock, &ctrl_c, 1);
 }
 
@@ -128,10 +127,9 @@ static void my_exit(int value) {
 char *LocalHostName = NULL;
 struct sockaddr_foobar LocalHostAddr;
 char empty_string[] = "";
-int get_int_var(enum VAR_TYPES unused) {
-  (void)unused;
+int get_int_var(enum VAR_TYPES unused __attribute__((unused))) {
   return 5;
 }
-void set_socket_options(int s) { (void)s; }
+void set_socket_options(int s __attribute__((unused))) { }
 
 /* End of file */

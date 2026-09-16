@@ -10,7 +10,8 @@
 #include "irc_std.h"
 #include <string.h>
 
-sigfunc *my_signal(int sig_no, sigfunc *sig_handler, int misc_flags) {
+sigfunc *my_signal(int sig_no, sigfunc *sig_handler,
+                   int misc_flags __attribute__((unused))) {
   /*
    * misc_flags is unused currently.  it's planned to be used
    * to use some of the doovier bits of sigaction(), if at
@@ -18,7 +19,6 @@ sigfunc *my_signal(int sig_no, sigfunc *sig_handler, int misc_flags) {
    */
   struct sigaction sa, osa;
 
-  (void)misc_flags;
   memset(&sa, 0, sizeof sa);
   memset(&osa, 0, sizeof osa);
 
