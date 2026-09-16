@@ -58,11 +58,14 @@ if(NOT DEFINED BITCHX_IRCLIB_INSTALL)
   set(BITCHX_IRCLIB_INSTALL "${CMAKE_INSTALL_LIBDIR}/bx")
 endif()
 set(IRCLIB      "${CMAKE_INSTALL_PREFIX}/${BITCHX_IRCLIB_INSTALL}")
-set(HELPDIR     "${IRCLIB}/help")
 set(INSTALL_SCRIPT "${IRCLIB}/script")
 set(PLUGINDIR   "${IRCLIB}/plugins")
 set(TRANSLATION_PATH "${IRCLIB}/translation")
 set(WSERV_PATH  "${IRCLIB}/wserv")
+# Prefix-relative paths used only for install() destinations, so packages
+# stage cleanly regardless of CMAKE_INSTALL_PREFIX (the absolute *_PATH
+# variables above are baked into the binary at compile time).
+set(IRCLIB_INSTALL_REL "${BITCHX_IRCLIB_INSTALL}")
 set(IRCPATH     "${CMAKE_INSTALL_PREFIX}/share/bx:${CMAKE_INSTALL_PREFIX}/${BITCHX_IRCLIB_INSTALL}:.:${IRCLIB}/plugins:${INSTALL_SCRIPT}:${IRCLIB}")
 set(DEFAULT_CTOOLZ_DIR "~/.BitchX")
 
@@ -269,11 +272,13 @@ if(PkgConfig_FOUND)
   endif()
 endif()
 
-find_library(NCURSES_LIB NAMES ncursesw ncurses)
+find_library(NCURSES_LIB NAMES ncursesw ncurses
+  PATHS ${CURSES_PKG_LIBRARY_DIRS} /usr/local/lib)
 if(NCURSES_LIB)
   list(APPEND NCURSES_LIBRARIES "${NCURSES_LIB}")
 else()
-  find_library(NCURSES_LIB NAMES tinfow tinfo)
+  find_library(NCURSES_LIB NAMES tinfow tinfo
+    PATHS ${CURSES_PKG_LIBRARY_DIRS} /usr/local/lib)
   if(NCURSES_LIB)
     list(APPEND NCURSES_LIBRARIES "${NCURSES_LIB}")
   endif()
@@ -452,13 +457,67 @@ install(FILES
   BitchX.quit
   BitchX.reasons
   BitchX.kill
-  DESTINATION "${IRCLIB}")
+  DESTINATION "${IRCLIB_INSTALL_REL}")
 
 install(DIRECTORY translation/
-  DESTINATION "${TRANSLATION_PATH}")
+  DESTINATION "${IRCLIB_INSTALL_REL}/translation")
 install(DIRECTORY script/
-  DESTINATION "${INSTALL_SCRIPT}")
+  DESTINATION "${IRCLIB_INSTALL_REL}/script")
 install(DIRECTORY bitchx-docs/
-  DESTINATION "${HELPDIR}")
+  DESTINATION "${IRCLIB_INSTALL_REL}/help")
 install(FILES doc/BitchX.1
   DESTINATION "${CMAKE_INSTALL_MANDIR}/man1")
+
+# ---------------------------------------------------------------------------
+# Packaging (CPack)
+#
+# The version used for packages is the bare major.minor.micro release number
+# (git describe output, if any, is only used for the development binary name
+# inside the build tree).
+# ---------------------------------------------------------------------------
+set(CPACK_PACKAGE_NAME "BitchX")
+set(CPACK_PACKAGE_VENDOR "BitchX Project")
+set(CPACK_PACKAGE_VERSION_MAJOR "${BITCHX_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${BITCHX_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH "${BITCHX_MICRO}")
+set(CPACK_PACKAGE_VERSION "${BITCHX_MAJOR}.${BITCHX_MINOR}.${BITCHX_MICRO}")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "BitchX - text mode IRC client")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYRIGHT")
+set(CPACK_PACKAGE_CONTACT "bitchx-devel@lists.sourceforge.net")
+set(CPACK_PACKAGE_MAINTAINER "BitchX Developers <bitchx-devel@lists.sourceforge.net>")
+set(CPACK_PACKAGE_FILE_NAME
+    "BitchX-${CPACK_PACKAGE_VERSION}-${CMAKE_SYSTEM_NAME}-${CMAKE_SYSTEM_PROCESSOR}")
+set(CPACK_PACKAGING_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
+set(CPACK_SET_DESTDIR ON)
+
+# Generic binary archive
+if(NOT CPACK_GENERATOR)
+  set(CPACK_GENERATOR "TGZ")
+endif()
+set(CPACK_ARCHIVE_COMPONENT_INSTALL OFF)
+set(CPACK_STRIP_FILES TRUE)
+
+# Debian / Ubuntu
+set(CPACK_DEBIAN_PACKAGE_SECTION "net")
+set(CPACK_DEBIAN_PACKAGE_PRIORITY "optional")
+# Debian >= 13 uses "-t64" package name variants; list both via alternatives.
+set(CPACK_DEBIAN_PACKAGE_DEPENDS
+    "libc6 (>= 2.31), libncursesw6 (>= 6.1) | libncursesw6t64 (>= 6.1), libtinfo6 | libtinfo6t64, zlib1g (>= 1.2.11)")
+if(OPENSSL_FOUND)
+  string(APPEND CPACK_DEBIAN_PACKAGE_DEPENDS ", libssl3 (>= 3.0) | libssl3t64 (>= 3.0)")
+  set(CPACK_DEBIAN_PACKAGE_GENERATE_SHLIBS FALSE)
+endif()
+
+# RPM / Fedora
+set(CPACK_RPM_PACKAGE_GROUP "Applications/Internet")
+set(CPACK_RPM_PACKAGE_LICENSE "BSD-3-Clause")
+set(CPACK_RPM_PACKAGE_REQUIRES "ncurses-libs, zlib")
+if(OPENSSL_FOUND)
+  string(APPEND CPACK_RPM_PACKAGE_REQUIRES ", openssl-libs")
+endif()
+if(CRYPT_LIB)
+  string(APPEND CPACK_RPM_PACKAGE_REQUIRES ", libxcrypt")
+endif()
+
+include(CPack)

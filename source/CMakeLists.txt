@@ -178,6 +178,6 @@ install(CODE "
   ")
 
 install(TARGETS wserv
-  RUNTIME DESTINATION "lib/bx/wserv")
+  RUNTIME DESTINATION "${BITCHX_IRCLIB_INSTALL}/wserv")
 install(TARGETS scr-bx
   RUNTIME DESTINATION "${CMAKE_INSTALL_BINDIR}")

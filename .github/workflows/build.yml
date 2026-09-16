@@ -1,0 +1,52 @@
+name: build
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    name: Build (Linux, default options)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake libncurses-dev libssl-dev tcl8.6-dev
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build -j"$(nproc)"
+      - name: Configure (Tcl scripting enabled)
+        run: cmake -S . -B build-tcl -DCMAKE_BUILD_TYPE=Release -DBITCHX_TCL=ON
+      - name: Build (Tcl scripting enabled)
+        run: cmake --build build-tcl -j"$(nproc)"
+
+  options:
+    name: Build ${{ matrix.config.name }}
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - name: ssl-off
+            flags: '-DBITCHX_SSL=OFF'
+          - name: minimal
+            flags: '-DBITCHX_SSL=OFF -DBITCHX_IPV6=OFF -DBITCHX_TERMCAP=ON'
+          - name: defaults (repr.)
+            flags: '-DBITCHX_SSL=ON -DBITCHX_TCL=OFF -DBITCHX_PLUGINS=OFF'
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake libncurses-dev libssl-dev
+      - name: Configure
+        run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release ${{ matrix.config.flags }}
+      - name: Build
+        run: cmake --build build -j"$(nproc)"
