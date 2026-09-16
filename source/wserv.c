@@ -39,102 +39,99 @@ extern char **Argv;
 extern char *LastArgv;
 #endif
 
-int main (int argc, char **argv)
-{
-	fd_set		reads;
-	int		nread;
-	unsigned short 	port;
-	char 		*host;
-	char		*tmp;
-	int		t;
-	char		stuff[100];
-	        
+int main(int argc, char **argv) {
+  fd_set reads;
+  int nread;
+  unsigned short port;
+  char *host;
+  char *tmp;
+  int t;
+  char stuff[100];
+
 #ifndef WINNT
-	my_signal(SIGWINCH, SIG_IGN, 0);
+  my_signal(SIGWINCH, SIG_IGN, 0);
 #endif
-	my_signal(SIGHUP, SIG_IGN, 0);
-	my_signal(SIGQUIT, SIG_IGN, 0);
-	my_signal(SIGINT, sigint_handler, 0);
+  my_signal(SIGHUP, SIG_IGN, 0);
+  my_signal(SIGQUIT, SIG_IGN, 0);
+  my_signal(SIGINT, sigint_handler, 0);
 
-	if (argc != 3)    /* no socket is passed */
-		my_exit(1);
+  if (argc != 3) /* no socket is passed */
+    my_exit(1);
 
-	host = argv[1];
-	port = (unsigned short)atoi(argv[2]);
-	if (!port)
-		my_exit(2);		/* what the hey */
+  host = argv[1];
+  port = (unsigned short)atoi(argv[2]);
+  if (!port)
+    my_exit(2); /* what the hey */
 
-	sock = connect_by_number(host, &port, SERVICE_CLIENT, PROTOCOL_TCP, 0);
-	if (sock < 0)
-		my_exit(23);
+  sock = connect_by_number(host, &port, SERVICE_CLIENT, PROTOCOL_TCP, 0);
+  if (sock < 0)
+    my_exit(23);
 
-	/*
-	 * first line from a wserv program is the tty.  this is so ircii
-	 * can grab the size of the tty, and have it changed.
-	 */
-	tmp = ttyname(0);
-	snprintf(stuff, sizeof stuff, "%s\n", tmp);
-	t = write(sock, stuff, strlen(stuff));
-	term_init(NULL);
-	printf("t is %d", t);
+  /*
+   * first line from a wserv program is the tty.  this is so ircii
+   * can grab the size of the tty, and have it changed.
+   */
+  tmp = ttyname(0);
+  snprintf(stuff, sizeof stuff, "%s\n", tmp);
+  t = write(sock, stuff, strlen(stuff));
+  term_init(NULL);
+  printf("t is %d", t);
 
-	/*
-	 * The select call..  reads from the socket, and from the window..
-	 * and pipes the output from out to the other..  nice and simple
-	 */
-	for (;;)
-	{
-		FD_ZERO(&reads);
-		FD_SET(0, &reads);
-		FD_SET(sock, &reads);
-		if (select(sock + 1, &reads, NULL, NULL, NULL) <= 0)
-		{
-			if (errno == EINTR)
-				continue;
-			else
-				break;
-		}
+  /*
+   * The select call..  reads from the socket, and from the window..
+   * and pipes the output from out to the other..  nice and simple
+   */
+  for (;;) {
+    FD_ZERO(&reads);
+    FD_SET(0, &reads);
+    FD_SET(sock, &reads);
+    if (select(sock + 1, &reads, NULL, NULL, NULL) <= 0) {
+      if (errno == EINTR)
+        continue;
+      else
+        break;
+    }
 
-		if (FD_ISSET(0, &reads))
-		{
-			nread = read(0, buffer, sizeof buffer);
-			if (nread > 0)
-				write(sock, buffer, nread);
-			else
-				my_exit(3);
-		}
-		if (FD_ISSET(sock, &reads))
-		{
-			nread = read(sock, buffer, sizeof buffer);
-			if (nread > 0)
-				write(1, buffer, nread);
-			else
-				my_exit(4);
-		}
-	}
+    if (FD_ISSET(0, &reads)) {
+      nread = read(0, buffer, sizeof buffer);
+      if (nread > 0)
+        write(sock, buffer, nread);
+      else
+        my_exit(3);
+    }
+    if (FD_ISSET(sock, &reads)) {
+      nread = read(sock, buffer, sizeof buffer);
+      if (nread > 0)
+        write(1, buffer, nread);
+      else
+        my_exit(4);
+    }
+  }
 
-	my_exit(8);
+  my_exit(8);
 }
 
-static void sigint_handler(int value)
-{
-	/* send a ^C */
-	static const char ctrl_c = 3;
-	write(sock, &ctrl_c, 1);
+static void sigint_handler(int value) {
+  /* send a ^C */
+  static const char ctrl_c = 3;
+  (void)value;
+  write(sock, &ctrl_c, 1);
 }
 
-static void my_exit(int value)
-{
-	printf("exiting with %d!\n", value);
-	printf("errno is %d (%s)\n", errno, strerror(errno));
-	exit(value);
+static void my_exit(int value) {
+  printf("exiting with %d!\n", value);
+  printf("errno is %d (%s)\n", errno, strerror(errno));
+  exit(value);
 }
 
 /* These are here so we can link with network.o */
 char *LocalHostName = NULL;
 struct sockaddr_foobar LocalHostAddr;
 char empty_string[] = "";
-int get_int_var (enum VAR_TYPES unused) { return 5; }
-void set_socket_options (int s) { }
+int get_int_var(enum VAR_TYPES unused) {
+  (void)unused;
+  return 5;
+}
+void set_socket_options(int s) { (void)s; }
 
 /* End of file */

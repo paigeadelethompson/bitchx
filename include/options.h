@@ -1,53 +1,52 @@
 
 static const char compile_time_options[] = {
- 
-					'a',
+
+    'a',
 #ifdef NO_BOTS
- 					'b',
+    'b',
 #endif /* NO_BOTS */
- 
+
 #ifdef BITCHX_DEBUG
- 					'd',
+    'd',
 #endif /* BITCHX_DEBUG */
- 
+
 #ifdef EXEC_COMMAND
- 					'e',
+    'e',
 #endif /* EXEC_COMMAND */
- 
+
 #ifdef INCLUDE_GLOB_FUNCTION
- 					'g',
+    'g',
 #endif /* INCLUDE_GLOB_FUNCTION */
 #ifdef WANT_HEBREW
-					'h',
+    'h',
 #endif
- 
+
 #ifdef MIRC_BROKEN_DCC_RESUME
-					'i',
+    'i',
 #endif /* MIRC_BROKEN_DCC_RESUME */
 
 #ifdef HACKED_DCC_WARNING
-					'k',
+    'k',
 #endif /* HACKED_DCC_WARNING */
 
 #ifdef WANT_DLL
-					'l',
+    'l',
 #endif
 
 #ifdef STRIP_EXTRANEOUS_SPACES
-					's',
+    's',
 #endif /* STRIP_EXTRANEOUS_SPACES */
 
 #ifdef WANT_TCL
-					't',
+    't',
 #endif
 
 #ifdef UNAME_HACK
- 					'u',
+    'u',
 #endif /* UNAME_HACK */
- 
+
 #ifdef ALLOW_STOP_IRC
-					'z',
+    'z',
 #endif /* ALLOW_STOP_IRC */
 
-					'\0'
-};
+    '\0'};

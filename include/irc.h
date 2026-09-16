@@ -1,17 +1,17 @@
 /*
- * irc.h: header file for all of ircII! 
+ * irc.h: header file for all of ircII!
  *
  * Written By Michael Sandrof
- * Copyright(c) 1990 
+ * Copyright(c) 1990
  *
- * See the COPYRIGHT file, or do a HELP IRCII COPYRIGHT 
+ * See the COPYRIGHT file, or do a HELP IRCII COPYRIGHT
  *
  * @(#)$Id$
  */
 #ifndef IRC_H_
 #define IRC_H_
 
-#define IRCII_COMMENT   "\002 Keep it to yourself!\002"
+#define IRCII_COMMENT "\002 Keep it to yourself!\002"
 #define BUG_EMAIL "<bitchx-devel@lists.sourceforge.net>"
 
 #define FSET 1
@@ -20,8 +20,8 @@
 extern const char irc_version[];
 extern const char internal_version[];
 #endif
-extern char	*thing_ansi;
-extern char	thing_star[4];
+extern char *thing_ansi;
+extern char thing_star[4];
 
 /*
  * Here you can set the in-line quote character, normally backslash, to
@@ -40,24 +40,24 @@ extern char	thing_star[4];
 #include <sys/param.h>
 
 #ifdef __EMX__
-# ifdef __EMXPM__
-#   define AVIO_BUFFER 2048
-#   define INCL_GPI
-#   define INCL_AVIO
-#   define INCL_DOS
-# endif
-#define INCL_WIN       /* Window Manager Functions */
+#ifdef __EMXPM__
+#define AVIO_BUFFER 2048
+#define INCL_GPI
+#define INCL_AVIO
+#define INCL_DOS
+#endif
+#define INCL_WIN /* Window Manager Functions */
 #define INCL_BASE
 #define INCL_VIO
 #include <os2.h>
 #elif defined(WINNT)
-#  include <windows.h>
-#  ifdef SOUND
-#    include <mmsystem.h>
-#  endif
+#include <windows.h>
+#ifdef SOUND
+#include <mmsystem.h>
+#endif
 #elif defined(GTK)
-#  include <gtk/gtk.h>
-#  include <gtk/gtkmenu.h>
+#include <gtk/gtk.h>
+#include <gtk/gtkmenu.h>
 #endif
 
 #ifdef HAVE_SYS_SOCKET_H
@@ -76,19 +76,19 @@ extern char	thing_star[4];
 #include <sys/time.h>
 #include <time.h>
 #else
-# ifdef HAVE_SYS_TIME_H
-#  include <sys/time.h>
-# else
-#  include <time.h>
-# endif /* HAVE_SYS_TIME_H */
+#ifdef HAVE_SYS_TIME_H
+#include <sys/time.h>
+#else
+#include <time.h>
+#endif /* HAVE_SYS_TIME_H */
 #endif /* TIME_WITH_SYS_TIME */
 
 #ifdef HAVE_FCNTL_H
 #include <fcntl.h>
 #else
-# ifdef HAVE_SYS_FCNTL_H
-#  include <sys/fcntl.h>
-# endif
+#ifdef HAVE_SYS_FCNTL_H
+#include <sys/fcntl.h>
+#endif
 #endif /* HAVE_FCNTL_H */
 
 #include <stdarg.h>
@@ -116,35 +116,34 @@ extern char	thing_star[4];
 #include "newio.h"
 
 /* these define what characters do, inverse, underline, bold and all off */
-#define REV_TOG			'\026'	/* ^V */
-#define REV_TOG_STR		"\026"
-#define UND_TOG			'\037'	/* ^_ */
-#define UND_TOG_STR		"\037"
-#define BOLD_TOG		'\002'	/* ^B */
-#define BOLD_TOG_STR	"\002"
-#define ALL_OFF			'\017'	/* ^O */
-#define ALL_OFF_STR		"\017"
-#define BLINK_TOG		'\006'	/* ^F (think flash) */
-#define BLINK_TOG_STR	"\006"
-#define ROM_CHAR		'\022'	/* ^R */
-#define ROM_CHAR_STR	"\022"
-#define ALT_TOG			'\005'	/* ^E (think Extended) */
-#define ALT_TOG_STR		"\005"
-#define ND_SPACE		'\023'	/* ^S */
-#define ND_SPACE_STR	"\023"
-#define COLOR_CHAR		'\003'	/* ^C */
-#define COLOR_CHAR_STR	"\003"
-#define BELL_CHAR		'\007'	/* ^G */
-#define BELL_CHAR_STR	"\007"
+#define REV_TOG '\026' /* ^V */
+#define REV_TOG_STR "\026"
+#define UND_TOG '\037' /* ^_ */
+#define UND_TOG_STR "\037"
+#define BOLD_TOG '\002' /* ^B */
+#define BOLD_TOG_STR "\002"
+#define ALL_OFF '\017' /* ^O */
+#define ALL_OFF_STR "\017"
+#define BLINK_TOG '\006' /* ^F (think flash) */
+#define BLINK_TOG_STR "\006"
+#define ROM_CHAR '\022' /* ^R */
+#define ROM_CHAR_STR "\022"
+#define ALT_TOG '\005' /* ^E (think Extended) */
+#define ALT_TOG_STR "\005"
+#define ND_SPACE '\023' /* ^S */
+#define ND_SPACE_STR "\023"
+#define COLOR_CHAR '\003' /* ^C */
+#define COLOR_CHAR_STR "\003"
+#define BELL_CHAR '\007' /* ^G */
+#define BELL_CHAR_STR "\007"
 
-#define IRCD_BUFFER_SIZE	512
-#define BIG_BUFFER_SIZE		(4 * IRCD_BUFFER_SIZE)
-#define MAX_PROTOCOL_SIZE	(IRCD_BUFFER_SIZE - 2)
+#define IRCD_BUFFER_SIZE 512
+#define BIG_BUFFER_SIZE (4 * IRCD_BUFFER_SIZE)
+#define MAX_PROTOCOL_SIZE (IRCD_BUFFER_SIZE - 2)
 
 #ifndef INPUT_BUFFER_SIZE
-#define INPUT_BUFFER_SIZE	(IRCD_BUFFER_SIZE - 20)
+#define INPUT_BUFFER_SIZE (IRCD_BUFFER_SIZE - 20)
 #endif
-
 
 #define REFNUM_MAX 10
 
@@ -158,17 +157,17 @@ extern char	thing_star[4];
 #define PATH_LEN 1024
 
 #ifndef MIN
-#define MIN(a,b) ((a < b) ? (a) : (b))
+#define MIN(a, b) ((a < b) ? (a) : (b))
 #endif
 
 #ifndef MAX
-#define MAX(a,b) ((a > b) ? (a) : (b))
+#define MAX(a, b) ((a > b) ? (a) : (b))
 #endif
 
 /* send_text flag values */
 #define STXT_NOTICE 0x0001U /* Send as a NOTICE rather than PRIVMSG. */
-#define STXT_QUIET  0x0002U /* Do not run hooks or screen output. */
-#define STXT_LOG    0x0004U /* Add sent message to the log file. */
+#define STXT_QUIET 0x0002U  /* Do not run hooks or screen output. */
+#define STXT_LOG 0x0004U    /* Add sent message to the log file. */
 
 /* This section is for keeping track internally
  * the CVS revision info of the running client.
@@ -176,11 +175,8 @@ extern char	thing_star[4];
  * for debugging purposes it's good to know what
  * file revisions they are running.
  */
-#define CVS_REVISION(id) \
-void id (char *buf)                 \
-{                       \
-    strcpy(buf, cvsrevision);       \
-}
+#define CVS_REVISION(id)                                                       \
+  void id(char *buf) { strcpy(buf, cvsrevision); }
 
 void alias_c(char *);
 void alist_c(char *);
@@ -247,101 +243,100 @@ void window_c(char *);
 void words_c(char *);
 
 /*
- * declared in irc.c 
+ * declared in irc.c
  */
-extern	int	current_numeric;
-extern	char	*cut_buffer;
-extern	char	oper_command;
-extern	int	irc_port;
-extern	int	current_on_hook;
-extern	int	use_flow_control;
-extern	char	*joined_nick;
-extern	char	*public_nick;
-extern	char	empty_string[];
-extern	char	zero[];
-extern	char	one[];
-extern	char	on[];
-extern	char	off[];
-extern	char	space[];
-extern	char	space_plus[];
-extern	char	space_minus[];
-extern	char	dot[];
-extern	char	star[];
-extern	char	comma[];
-extern	char	nickname[NICKNAME_LEN + 1];
-extern	char	*ircrc_file;
-extern	char	*bircrc_file;
-extern	char	*LocalHostName;
-extern	char	hostname[NAME_LEN + 1];
-extern	char	userhost[(NAME_LEN + 1) * 2];
-extern	char	realname[REALNAME_LEN + 1];
-extern	char	username[NAME_LEN + 1];
-extern	char	*send_umode;
-extern	char	*last_notify_nick;
-extern	int	away_set;
-extern	int	background;
-extern	char	*my_path;
-extern	char	*irc_path;
-extern	char	*irc_lib;
-extern	char	*args_str;
-extern	char	*invite_channel;
-extern	int	who_mask;
-extern	char	*who_name;
-extern	char	*who_host;
-extern	char	*who_server;
-extern	char	*who_file;
-extern	char	*who_nick;
-extern	char	*who_real;
-extern	int	dumb_mode;
-extern	int	use_input;
-extern	time_t	idle_time;
-extern	time_t	now;
-extern  time_t  start_time;
-extern	int	waiting_out;
-extern	int	waiting_in;
-extern	char	wait_nick[];
-extern	char	whois_nick[];
-extern	char	lame_wait_nick[];
-extern	char	**environ;
-extern	int	cuprent_numeric;
-extern	int	quick_startup;
-extern	char	version[];
-extern 	fd_set	readables, writables;
-extern	int	strip_ansi_in_echo;
-extern	int	loading_global;
-extern	const unsigned long bitchx_numver;
-extern	const	char *unknown_userhost;
-extern	char	*forwardnick;
-extern	int	inhibit_logging;
+extern int current_numeric;
+extern char *cut_buffer;
+extern char oper_command;
+extern int irc_port;
+extern int current_on_hook;
+extern int use_flow_control;
+extern char *joined_nick;
+extern char *public_nick;
+extern char empty_string[];
+extern char zero[];
+extern char one[];
+extern char on[];
+extern char off[];
+extern char space[];
+extern char space_plus[];
+extern char space_minus[];
+extern char dot[];
+extern char star[];
+extern char comma[];
+extern char nickname[NICKNAME_LEN + 1];
+extern char *ircrc_file;
+extern char *bircrc_file;
+extern char *LocalHostName;
+extern char hostname[NAME_LEN + 1];
+extern char userhost[(NAME_LEN + 1) * 2];
+extern char realname[REALNAME_LEN + 1];
+extern char username[NAME_LEN + 1];
+extern char *send_umode;
+extern char *last_notify_nick;
+extern int away_set;
+extern int background;
+extern char *my_path;
+extern char *irc_path;
+extern char *irc_lib;
+extern char *args_str;
+extern char *invite_channel;
+extern int who_mask;
+extern char *who_name;
+extern char *who_host;
+extern char *who_server;
+extern char *who_file;
+extern char *who_nick;
+extern char *who_real;
+extern int dumb_mode;
+extern int use_input;
+extern time_t idle_time;
+extern time_t now;
+extern time_t start_time;
+extern int waiting_out;
+extern int waiting_in;
+extern char wait_nick[];
+extern char whois_nick[];
+extern char lame_wait_nick[];
+extern char **environ;
+extern int cuprent_numeric;
+extern int quick_startup;
+extern char version[];
+extern fd_set readables, writables;
+extern int strip_ansi_in_echo;
+extern int loading_global;
+extern const unsigned long bitchx_numver;
+extern const char *unknown_userhost;
+extern char *forwardnick;
+extern int inhibit_logging;
 
-extern	char	MyHostName[];
-extern	struct	sockaddr_foobar MyHostAddr;
-extern	struct	sockaddr_foobar LocalHostAddr;
-extern	int	cpu_saver;
-extern	struct	sockaddr_foobar	local_ip_address;
+extern char MyHostName[];
+extern struct sockaddr_foobar MyHostAddr;
+extern struct sockaddr_foobar LocalHostAddr;
+extern int cpu_saver;
+extern struct sockaddr_foobar local_ip_address;
 
+int BX_is_channel(const char *);
+void BX_irc_exit(int, char *, char *, ...);
+void BX_beep_em(int);
+void got_initial_version(char *);
+void parse_notice(char *, char **);
+void irc_quit(char, char *);
+char get_a_char(void);
+void load_scripts(void);
+void clear_whowas(void);
+void clear_variables(void);
+void clear_fset(void);
+void start_memdebug(void);
 
-int	BX_is_channel (const char *);
-void	BX_irc_exit (int, char *, char *, ...);
-void	BX_beep_em (int);
-void	got_initial_version (char *);
-void	parse_notice (char *, char **);
-void	irc_quit (char, char *);
-char	get_a_char (void);
-void	load_scripts (void);
-void	clear_whowas (void);
-void	clear_variables (void);
-void	clear_fset (void);
-void	start_memdebug (void);
+void dump_load_stack(int);          /* XXX command.c */
+const char *current_filename(void); /* XXX command.c */
+int current_line(void);             /* XXX command.c */
 
-void	dump_load_stack		(int);	/* XXX command.c */
-const char *  current_filename	(void);	/* XXX command.c */
-int	current_line		(void);	/* XXX command.c */
-	
-char	*getenv (const char *);
-void	get_line_return (char, char *);
-void	get_line (char *, int, void (*)(char, char *));
-void	BX_io (const char *);
+char *getenv(const char *);
+void get_line_return(char, char *);
+void get_line(char *, int, void (*)(char, char *));
+void BX_io(const char *);
 
 #ifdef NEED_OSPEED
 /* We need this for broken linux systems. */

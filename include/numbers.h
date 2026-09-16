@@ -3,9 +3,9 @@
  *
  * written by michael sandrof
  *
- * copyright(c) 1990 
+ * copyright(c) 1990
  *
- * see the copyright file, or do a help ircii copyright 
+ * see the copyright file, or do a help ircii copyright
  *
  * @(#)$Id$
  */
@@ -14,5 +14,5 @@
 
 char *numeric_banner(void);
 void numbered_command(char *, int, char **);
-		
+
 #endif /* NUMBERS_H_ */

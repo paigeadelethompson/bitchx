@@ -5,7 +5,7 @@
  *
  * Done by Carl v. Loesch <lynx@dm.unirm1.it>
  * Based on the 'classic' config.h by Michael Sandrof.
- * Copyright(c) 1991 - See the COPYRIGHT file, or do a HELP IRCII COPYRIGHT 
+ * Copyright(c) 1991 - See the COPYRIGHT file, or do a HELP IRCII COPYRIGHT
  *
  * Warning!  You will most likely have to make changes to your .ircrc file to
  * use this version of IRCII!  Please read the INSTALL and New2.2 files
@@ -18,8 +18,8 @@
 
 #include "defs.h"
 
-#define OFF	0
-#define ON	1
+#define OFF 0
+#define ON 1
 
 /*
  * Set your favorite default server list here.  This list should be a
@@ -29,74 +29,75 @@
  * file and the ircII can find it, this setting is overridden.
  */
 #ifndef DEFAULT_SERVER
-/* 
+/*
  * some caution is required here. the \ is a continuation char and is required
- * on any servers you add into this list. also the very last server should not 
+ * on any servers you add into this list. also the very last server should not
  * have a continuation char.
  *
  * List last updated: 01-Nov-2014 (caf).
  */
-#define DEFAULT_SERVER  "[efnet US] "\
-				"irc.eversible.com "\
-				"irc.choopa.net "\
-				"irc.servercentral.net "\
-				"irc.umich.edu "\
-				"irc.mzima.net "\
-				"irc.paraphysics.net "\
-				"irc.colosolutions.net "\
-				"irc2.choopa.net "\
-			"[efnet CA] "\
-				"irc.teksavvy.ca "\
-				"irc.arcti.ca "\
-				"irc.shaw.ca "\
-			"[efnet EU] "\
-				"irc.inet.tele.dk "\
-				"irc.efnet.fr "\
-				"irc.du.se "\
-				"irc.homelien.no "\
-				"irc.efnet.pl "\
-				"irc.swepipe.se "\
-				"irc.underworld.no "\
-				"efnet.portlane.se "\
-			"[ircnet US] "\
-				"ircnet.eversible.com "\
-				"ircnet.blacklotus.net "\
-				"irc.ca.ircnet.net "\
-			"[ircnet EU] "\
-				"irc.dotsrc.org "\
-				"irc.belwue.de "\
-				"irc.atw-inter.net "\
-				"irc.snt.utwente.nl "\
-				"ircnet.nerim.fr "\
-				"irc1.tiscali.it "\
-				"irc.portlane.se "\
-				"krakow.irc.pl "\
-				"irc.fast.net.il "\
-				"irc.cs.hut.fi "\
-				"atw.irc.hu "\
-			"[dalnet] "\
-				"irc.dal.net "\
-			"[Undernet US] "\
-				"Chicago.IL.US.Undernet.org "\
-				"Denver.CO.US.Undernet.Org "\
-				"Mesa.AZ.US.Undernet.Org "\
-			"[Undernet EU] "\
-				"Bucharest.RO.EU.Undernet.Org "\
-				"Budapest.HU.EU.UnderNet.org "\
-			"[Anynet] "\
-				"irc.irule.net "\
-				"irc.plugh.us "\
-				"irc.ninjaneering.net "\
-			"[AfterNet] "\
-				"irc.afternet.org "\
-			"[oftc] "\
-				"irc.oftc.net "\
-			"[SlashNET] "\
-				"abstract.slashnet.org "\
-				"bees.slashnet.org "\
-				"concrete.slashnet.org "\
-				"moo.slashnet.org "\
-				"spaniels.slashnet.org "
+#define DEFAULT_SERVER                                                         \
+  "[efnet US] "                                                                \
+  "irc.eversible.com "                                                         \
+  "irc.choopa.net "                                                            \
+  "irc.servercentral.net "                                                     \
+  "irc.umich.edu "                                                             \
+  "irc.mzima.net "                                                             \
+  "irc.paraphysics.net "                                                       \
+  "irc.colosolutions.net "                                                     \
+  "irc2.choopa.net "                                                           \
+  "[efnet CA] "                                                                \
+  "irc.teksavvy.ca "                                                           \
+  "irc.arcti.ca "                                                              \
+  "irc.shaw.ca "                                                               \
+  "[efnet EU] "                                                                \
+  "irc.inet.tele.dk "                                                          \
+  "irc.efnet.fr "                                                              \
+  "irc.du.se "                                                                 \
+  "irc.homelien.no "                                                           \
+  "irc.efnet.pl "                                                              \
+  "irc.swepipe.se "                                                            \
+  "irc.underworld.no "                                                         \
+  "efnet.portlane.se "                                                         \
+  "[ircnet US] "                                                               \
+  "ircnet.eversible.com "                                                      \
+  "ircnet.blacklotus.net "                                                     \
+  "irc.ca.ircnet.net "                                                         \
+  "[ircnet EU] "                                                               \
+  "irc.dotsrc.org "                                                            \
+  "irc.belwue.de "                                                             \
+  "irc.atw-inter.net "                                                         \
+  "irc.snt.utwente.nl "                                                        \
+  "ircnet.nerim.fr "                                                           \
+  "irc1.tiscali.it "                                                           \
+  "irc.portlane.se "                                                           \
+  "krakow.irc.pl "                                                             \
+  "irc.fast.net.il "                                                           \
+  "irc.cs.hut.fi "                                                             \
+  "atw.irc.hu "                                                                \
+  "[dalnet] "                                                                  \
+  "irc.dal.net "                                                               \
+  "[Undernet US] "                                                             \
+  "Chicago.IL.US.Undernet.org "                                                \
+  "Denver.CO.US.Undernet.Org "                                                 \
+  "Mesa.AZ.US.Undernet.Org "                                                   \
+  "[Undernet EU] "                                                             \
+  "Bucharest.RO.EU.Undernet.Org "                                              \
+  "Budapest.HU.EU.UnderNet.org "                                               \
+  "[Anynet] "                                                                  \
+  "irc.irule.net "                                                             \
+  "irc.plugh.us "                                                              \
+  "irc.ninjaneering.net "                                                      \
+  "[AfterNet] "                                                                \
+  "irc.afternet.org "                                                          \
+  "[oftc] "                                                                    \
+  "irc.oftc.net "                                                              \
+  "[SlashNET] "                                                                \
+  "abstract.slashnet.org "                                                     \
+  "bees.slashnet.org "                                                         \
+  "concrete.slashnet.org "                                                     \
+  "moo.slashnet.org "                                                          \
+  "spaniels.slashnet.org "
 #endif
 
 /*
@@ -115,7 +116,7 @@
  * Uncomment the following if the gecos field of your /etc/passwd has other
  * information in it that you don't want as the user name (such as office
  * locations, phone numbers, etc).  The default delimiter is a comma, change
- * it if you need to. If commented out, the entire gecos field is used. 
+ * it if you need to. If commented out, the entire gecos field is used.
  */
 #define GECOS_DELIMITER ','
 
@@ -130,8 +131,8 @@
  * the ircII.servers file in the ircII library. This file should be
  * whitespace separated hostname:portnum*password (with the portnum and
  * password being optional). This server list will supercede the
- * DEFAULT_SERVER. 
-*/
+ * DEFAULT_SERVER.
+ */
 #if defined(WINNT) || defined(__EMX__)
 #define SERVERS_FILE "irc-serv"
 #else
@@ -140,7 +141,7 @@
 
 /*
  * Certain versions of Tcl lib have a PLUS version which preloads the scripts
- * into the binary so that the script directory is not required to run the 
+ * into the binary so that the script directory is not required to run the
  * tcllib. This offers some benefit at the expense of a slightly larger binary.
  */
 #undef TCL_PLUS
@@ -149,7 +150,7 @@
  * we define the default network type for server groups. Do not just
  * undefine this.
  */
- #define DEFAULT_NETWORK "efnet"
+#define DEFAULT_NETWORK "efnet"
 
 /*
  * Below are the IRCII variable defaults.  For boolean variables, use 1 for
@@ -159,6 +160,15 @@
  * proper compilation.
  */
 
+#if !defined(__EMX__) && !defined(WINNT)
+/* Optional local overrides; only included when the file exists. */
+#if defined(__has_include)
+#if __has_include("../.config.h")
+#include "../.config.h"
+#endif
+#endif
+#endif
+
 #if !defined(_USE_LOCAL_CONFIG)
 /* NO _USE_LOCAL_CONFIG so use these instead */
 
@@ -167,8 +177,7 @@
  * mode compressor to the client. It reduces the duplicate modes that
  * might occur on a channel.. it's explained in names.c much better.
  */
- #define COMPRESS_MODES
-
+#define COMPRESS_MODES
 
 /*
  * Define this if you want the $glob() function to be in your client.
@@ -191,17 +200,17 @@
 #undef WANT_HEBREW
 
 /* if you use cidentd the filename is called .authlie instead of .noident.
- * as well some modifications to the format of the file were made. So we 
- * require some pre-knowledge of what to expect. WinNT identd servers will 
+ * as well some modifications to the format of the file were made. So we
+ * require some pre-knowledge of what to expect. WinNT identd servers will
  * also require this.
  */
 /* one or the other of these. not both */
 #undef CIDENTD
 #undef WDIDENT
 
-/* 
+/*
  * Define this if your using a hacked ident and want to fake your username.
- * maybe we could also use this to specify what file to write this hack to. 
+ * maybe we could also use this to specify what file to write this hack to.
  * Some examples are ~/.noident and ~/.authlie
  */
 #undef IDENT_FAKE
@@ -236,7 +245,7 @@
  */
 #define USE_FLOW_CONTROL ON
 
-/* 
+/*
  * Make ^Z stop the irc process by default, if undefined, ^Z will self-insert
  * by default
  */
@@ -245,7 +254,7 @@
 /* And here is the port number for default client connections.  */
 #define IRC_PORT 6667
 
-/* 
+/*
  * If you define UNAME_HACK, the uname information displayed in the
  * CTCP VERSION info will appear as "*IX" irregardless of any other
  * settings.  Useful for paranoid users who dont want others to know
@@ -253,17 +262,17 @@
  */
 #undef UNAME_HACK
 
-/* 
+/*
  * If you define ONLY_STD_CHARS, only "normal" characters will displayed.
  * This is recommended when you want to start BitchX in an xterm without
- * the usage of the special "vga"-font. 
+ * the usage of the special "vga"-font.
  */
 #undef ONLY_STD_CHARS
 
 /*
  * Normally BitchX uses only the IBMPC (cp437) charset.
  * Define LATIN1, if you want to see the standard Latin1 characters
- * (i.e. � � � � � � � <-> "A "O "U "a "o "u \qs ).
+ * (i.e. ─ ╓ ▄ Σ ÷ ⁿ ▀ <-> "A "O "U "a "o "u \qs ).
  *
  * You will still be able to see ansi graphics, but there will be some
  * smaller problems (i.e. after a PageUp).
@@ -284,10 +293,10 @@
  */
 #undef CHARSET_CUSTOM
 
-/* 
+/*
  * If you want the non-ansi BitchX logo only define this ASCII_LOGO
  *
- * Note: On the console ansi graphics can be displayed just fine, even 
+ * Note: On the console ansi graphics can be displayed just fine, even
  * when you've defined LATIN1. The problem is that ansi graphics will look
  * ugly if you use the scroll up feature (PageUp/PageDown)
  */
@@ -297,7 +306,7 @@
  * white color are revepsed. (%W, %w is bold black and black, %K, %k is bold
  * white and white). This way the default format-strings are readable on
  * a display with white background and black foreground.
- */ 
+ */
 #undef REVERSE_WHITE_BLACK
 
 /*
@@ -410,14 +419,15 @@
 #define DEFAULT_DCC_AUTORESUME OFF
 #define DEFAULT_DCC_AUTORENAME_ON_NICKNAME OFF
 #define DEFAULT_DCC_BAR_TYPE 0 /* 0 or 1 */
-#define DEFAULT_DOUBLE_STATUS_LINE 1 /* 0: never, 1: first window only, 2: always */
+#define DEFAULT_DOUBLE_STATUS_LINE                                             \
+  1 /* 0: never, 1: first window only, 2: always */
 #define DEFAULT_FTP_GRAB OFF
 #define DEFAULT_HTTP_GRAB OFF
 #define DEFAULT_HELP_WINDOW OFF
 #define DEFAULT_NICK_COMPLETION ON
 #define DEFAULT_NICK_COMPLETION_CHAR ':'
 #define DEFAULT_NICK_COMPLETION_LEN 2
-#define DEFAULT_NICK_COMPLETION_TYPE 0  /* 0 1 2 */
+#define DEFAULT_NICK_COMPLETION_TYPE 0 /* 0 1 2 */
 #define DEFAULT_NOTIFY ON
 #define DEFAULT_QUEUE_SENDS 0
 #define DEFAULT_MAX_SERVER_RECONNECT 2
@@ -459,7 +469,7 @@
 #define DEFAULT_DEOP_ON_DEOPFLOOD 3
 #define DEFAULT_DEOP_ON_KICKFLOOD 3
 #define DEFAULT_KICK_IF_BANNED OFF
-#define DEFAULT_HACKING 0  /* 0 1 2 */
+#define DEFAULT_HACKING 0 /* 0 1 2 */
 #define DEFAULT_JOINFLOOD ON
 #define DEFAULT_JOINFLOOD_TIME 50
 #define DEFAULT_KICKFLOOD ON
@@ -495,38 +505,41 @@
 #define DEFAULT_CPU_SAVER_AFTER 0
 #define DEFAULT_CPU_SAVER_EVERY 0
 #define DEFAULT_NO_FAIL_DISCONNECT OFF
-#define DEFAULT_MAX_URLS 20	/* this defines the MAX number of urls saved */
+#define DEFAULT_MAX_URLS 20 /* this defines the MAX number of urls saved */
 #undef BITCHX_LITE
-#undef EMACS_KEYBINDS	       /* change this is you have problems with 
-				* your keyboard
-				*/
+#undef EMACS_KEYBINDS /* change this is you have problems with                 \
+                       * your keyboard                                         \
+                       */
 #define EXEC_COMMAND
-#undef PUBLIC_ACCESS		/* 
-				 * this define removes /load /exec commands
-				 */
-#define DEFAULT_OPERVIEW_HIDE 0 /* defines the operview window. if hidden or not */ 
+#undef PUBLIC_ACCESS /*                                                        \
+                      * this define removes /load /exec commands               \
+                      */
+#define DEFAULT_OPERVIEW_HIDE                                                  \
+  0 /* defines the operview window. if hidden or not */
 #define WANT_OPERVIEW ON
-#define WANT_EPICHELP 	ON	/* epic help command. /ehelp. */
-#define WANT_LLOOK	ON	/* do we want built-in llooker. */
-#define WANT_CDCC	ON	/* do we want the cdcc system */
-#define WANT_FTP	ON	/* do we want the ftp dcc comamnd */
-#if defined(HAVE_RESOLV) && defined(HAVE_ARPA_NAMESER_H) && defined(HAVE_RESOLV_H)
-#define WANT_NSLOOKUP	ON
+#define WANT_EPICHELP ON /* epic help command. /ehelp. */
+#define WANT_LLOOK ON    /* do we want built-in llooker. */
+#define WANT_CDCC ON     /* do we want the cdcc system */
+#define WANT_FTP ON      /* do we want the ftp dcc comamnd */
+#if defined(HAVE_RESOLV) && defined(HAVE_ARPA_NAMESER_H) &&                    \
+    defined(HAVE_RESOLV_H)
+#define WANT_NSLOOKUP ON
 #else
 #undef WANT_NSLOOKUP
 #endif
-#define WANT_TABKEY	ON
-#define WANT_CHELP	ON
-#define WANT_USERLIST	ON
-#undef HUMBLE			/* define this for a hades look */
+#define WANT_TABKEY ON
+#define WANT_CHELP ON
+#define WANT_USERLIST ON
+#undef HUMBLE /* define this for a hades look */
 
-#define WANT_DETACH OFF	/* this is here for the detach/re-attach code
-			   which is essentially a mini-screen */
+#define WANT_DETACH                                                            \
+  OFF /* this is here for the detach/re-attach code                            \
+         which is essentially a mini-screen */
 
 #define ALLOW_DETACH ON
 #define DEFAULT_DETACH_ON_HUP OFF
 
-#undef OLD_RANDOM_BEHAVIOR   /* semi randomness for random() */
+#undef OLD_RANDOM_BEHAVIOR /* semi randomness for random() */
 
 #ifdef WANT_OPERVIEW
 #define DEFAULT_OPER_VIEW OFF
@@ -538,7 +551,7 @@
 #define DEFAULT_DCC_FAST OFF
 #endif
 
-#endif 
+#endif
 /* _USE_LOCAL_CONFIG */
 
 #define DEFAULT_KICK_REASON "Bitch-X BaBy!"
@@ -557,13 +570,16 @@
 #define DEFAULT_XTERM "rxvt"
 #define DEFAULT_XTERM_OPTIONS "-bg black -fg white"
 #define DEFAULT_DCC_DLDIR "~"
-#define DEFAULT_LAG_CHECK_INTERVAL 30	/* Time between lag check pings, in seconds */
+#define DEFAULT_LAG_CHECK_INTERVAL                                             \
+  30 /* Time between lag check pings, in seconds */
 #define DEFAULT_PAD_CHAR ' '
-#define DEFAULT_USERMODE "+iw"  /* change this to the default usermode */
+#define DEFAULT_USERMODE "+iw" /* change this to the default usermode */
 #define DEFAULT_OPERMODE "swfck"
 #define DEFAULT_CHANMODE "+nt" /* default channel mode */
 
-#define DEFAULT_SWATCH "KILLS,CLIENTS,TRAFFIC,REHASH,KLINE,BOTS,OPER,SQUIT,SERVER,CONNECT,FLOOD,USER,STATS,NICK,ACTIVEK"
+#define DEFAULT_SWATCH                                                         \
+  "KILLS,CLIENTS,TRAFFIC,REHASH,KLINE,BOTS,OPER,SQUIT,SERVER,CONNECT,FLOOD,"   \
+  "USER,STATS,NICK,ACTIVEK"
 
 #define DEFAULT_WORD_BREAK " \t"
 
@@ -587,11 +603,11 @@
 #define DEFAULT_FONT "-fn vga11x19"
 #endif
 
-/*#define CLOAKED  "emacs"*/	/*
-				 * define this to the program you want to
-				 * show up in "ps" and "top" to hide irc
-				 * from evil sys-admins.
-				 */
+/*#define CLOAKED  "emacs"*/ /*
+                              * define this to the program you want to
+                              * show up in "ps" and "top" to hide irc
+                              * from evil sys-admins.
+                              */
 
 #if !defined(NON_BLOCKING_CONNECTS) && defined(DEFAULT_DCC_FAST)
 #undef DEFAULT_DCC_FAST
@@ -641,7 +657,7 @@
 #define DEFAULT_IDENT_HACK ".noident"
 #endif
 
-#undef PARANOID		/* #define this if your paranoid about dcc hijacking */
+#undef PARANOID /* #define this if your paranoid about dcc hijacking */
 
 /* new epic stuff */
 #define OLD_STATUS_S_EXPANDO_BEHAVIOR
@@ -649,7 +665,6 @@
 #define DEFAULT_RANDOM_LOCAL_PORTS 0
 #define DEFAULT_RANDOM_SOURCE 0
 #define DEFAULT_TERM_DOES_BRIGHT_BLINK 0
-
 
 #if defined(BITCHX_LITE) && defined(WANT_TCL)
 #undef BITCHX_LITE
@@ -675,8 +690,8 @@
 #endif
 
 #define DEFAULT_TKLINE_TIME 10
-#define DEFAULT_BOTCHAR '.'		/* default char to enter dcc chat. */
-					/* oper serv's tend to send .'s */
+#define DEFAULT_BOTCHAR '.' /* default char to enter dcc chat. */
+                            /* oper serv's tend to send .'s */
 
 #define WANT_CORE
 

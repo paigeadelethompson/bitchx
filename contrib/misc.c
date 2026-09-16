@@ -158,19 +158,19 @@ BUILT_IN_COMMAND(do_uptime)
 	put_it("%s",convert_output_format("%G| %cTotal Users on Shitlist: %K[%R$0%K]","%d",shit_count));
 
 #else
-	put_it("%s",convert_output_format("%GÚÄ[ %WBitchX%gÄ%wClient%gÄ%RStatistics %G]ÄÄÄÄ---%gÄ--ÄÄ%K-%gÄÄÄÄÄ--%GÄ--ÄÄ%K-%gÄÄÄÄÄÄÄ--- %K--%g  -",NULL));
+	put_it("%s",convert_output_format("%Gâ”Œâ”€[ %WBitchX%gâ”€%wClient%gâ”€%RStatistics %G]â”€â”€â”€â”€---%gâ”€--â”€â”€%K-%gâ”€â”€â”€â”€â”€--%Gâ”€--â”€â”€%K-%gâ”€â”€â”€â”€â”€â”€â”€--- %K--%g  -",NULL));
 	put_it("%s",convert_output_format("%G| %CClient Version: %W$0 $1","%s %s", irc_version, internal_version));
-	put_it("%s",convert_output_format("%G³ %CClient Running Since %W$0-","%s",my_ctime(start_time)));
+	put_it("%s",convert_output_format("%Gâ”‚ %CClient Running Since %W$0-","%s",my_ctime(start_time)));
 	put_it("%s",convert_output_format("%G| %CClient Uptime: %W$0-","%s",convert_time(now-start_time)));
-	put_it("%s",convert_output_format("%G³ %CCurrent UserName: %W$0-","%s", username));
+	put_it("%s",convert_output_format("%Gâ”‚ %CCurrent UserName: %W$0-","%s", username));
 	put_it("%s",convert_output_format("%G: %CCurrent RealName: %W$0-","%s", realname));
 	put_it("%s",convert_output_format("%G. %CLast Recv Message: %W$0-","%s",last_msg[0].last_msg?last_msg[0].last_msg:"None"));
 	put_it("%s",convert_output_format("%G: %CLast Recv Notice: %W$0-","%s",last_notice[0].last_msg?last_notice[0].last_msg:"None"));
 	put_it("%s",convert_output_format("%G. %CLast Sent Msg: %W$0-","%s",last_sent_msg[0].last_msg?last_sent_msg[0].last_msg:"None"));
 	put_it("%s",convert_output_format("%G: %CLast Sent Notice: %W$0-","%s",last_sent_notice[0].last_msg?last_sent_notice[0].last_msg:"None"));
-	put_it("%s",convert_output_format("%G³ %CLast Channel invited to: %R$0-","%s",invite_channel?invite_channel:"None"));
+	put_it("%s",convert_output_format("%Gâ”‚ %CLast Channel invited to: %R$0-","%s",invite_channel?invite_channel:"None"));
 	put_it("%s",convert_output_format("%G| %cTotal Users on Userlist: %K[%R$0%K]","%d",user_count));
-	put_it("%s",convert_output_format("%G³ %cTotal Users on Shitlist: %K[%R$0%K]","%d",shit_count));
+	put_it("%s",convert_output_format("%Gâ”‚ %cTotal Users on Shitlist: %K[%R$0%K]","%d",shit_count));
 
 #endif
 }
@@ -873,11 +873,11 @@ struct rusage r_usage;
 		put_it("%s",convert_output_format("%G| %CSignals %W$[-8]0   %CContext %cVol. %W$[-8]1   %cInvol %W$[-8]2","%l %l %l", r_usage.ru_nsignals, r_usage.ru_nvcsw, r_usage.ru_nivcsw));
 
 #else
-		put_it("%s", convert_output_format("%GÚÄ%WBitchX%GÄ%WUsage%GÄ%WStatistics%GÄÄÄÄ%g---%GÄ%g--%GÄÄ%g-%GÄÄÄÄÄÄ%g---%KÄ%g--%KÄÄ%g-%KÄÄÄÄÄÄÄÄ", NULL));
+		put_it("%s", convert_output_format("%Gâ”Œâ”€%WBitchX%Gâ”€%WUsage%Gâ”€%WStatistics%Gâ”€â”€â”€â”€%g---%Gâ”€%g--%Gâ”€â”€%g-%Gâ”€â”€â”€â”€â”€â”€%g---%Kâ”€%g--%Kâ”€â”€%g-%Kâ”€â”€â”€â”€â”€â”€â”€â”€", NULL));
 		put_it("%s",convert_output_format("%G| %CCPU %cUsage:  Secs %W$[-2]0%n:%W$[-2]1%n     %K[%CU%cser %W$[-2]2%n:%W$[-2]3   %CS%cystem %W$[-2]4%n:%W$[-2]5%K]","%d %d %d %d %d %d", secs/60,secs%60,r_usage.ru_utime.tv_sec/60, r_usage.ru_utime.tv_sec%60,r_usage.ru_stime.tv_sec/60, r_usage.ru_stime.tv_sec%60));
-		put_it("%s",convert_output_format("%g³ %CMEM %cUsage:  MaXRSS %W$0   %cShMem %W$1  %cData %W$2  %cStack %W$3","%l %l %l %l", r_usage.ru_maxrss, r_usage.ru_ixrss, r_usage.ru_idrss,r_usage.ru_isrss));
+		put_it("%s",convert_output_format("%gâ”‚ %CMEM %cUsage:  MaXRSS %W$0   %cShMem %W$1  %cData %W$2  %cStack %W$3","%l %l %l %l", r_usage.ru_maxrss, r_usage.ru_ixrss, r_usage.ru_idrss,r_usage.ru_isrss));
 		put_it("%s",convert_output_format("%g| %CSwaps %W$[-8]0   %CReclaims %W$[-8]1   %CFaults %W$[-8]2","%l %l %l", r_usage.ru_nswap, r_usage.ru_minflt, r_usage.ru_majflt));
-		put_it("%s",convert_output_format("%K³ %CBlock %K[%cin  %W$[-8]0  %cout %W$[-8]1%K]","%l %l", r_usage.ru_inblock, r_usage.ru_oublock));
+		put_it("%s",convert_output_format("%Kâ”‚ %CBlock %K[%cin  %W$[-8]0  %cout %W$[-8]1%K]","%l %l", r_usage.ru_inblock, r_usage.ru_oublock));
 		put_it("%s",convert_output_format("%K: %CMsg   %K[%cRcv %W$[-8]0 %cSend %W$[-8]1%K]","%l %l", r_usage.ru_msgrcv, r_usage.ru_msgsnd));
 		put_it("%s",convert_output_format("%K. %CSignals %W$[-8]0   %CContext %cVol. %W$[-8]1   %cInvol %W$[-8]2","%l %l %l", r_usage.ru_nsignals, r_usage.ru_nvcsw, r_usage.ru_nivcsw));
 #endif
@@ -4221,7 +4221,7 @@ int	count = 0,
 							nicks->userlist ? convert_flags(nicks->userlist->flags) : nicks->shitlist?ltoa(nicks->shitlist->level):"n/a            ",
 							chan->channel, nicks->nick,
 							nicks->host,
-							nicks->chanop ? "@" : (nicks->voice? "v" : "ÿ")));
+							nicks->chanop ? "@" : (nicks->voice? "v" : "Â ")));
 					}
 				}
 			}
@@ -4762,7 +4762,7 @@ void show_server_map (void)
 #ifdef ONLY_STD_CHARS
 	char *ascii="-> ";
 #else
-	char *ascii = "ÀÄ> ";
+	char *ascii = "â””â”€> ";
 #endif			    
 	if (map) prevdist = map->hopcount;
 

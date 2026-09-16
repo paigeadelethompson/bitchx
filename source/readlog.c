@@ -1,7 +1,7 @@
-/* 
+/*
  * Copyright Colten Edwards 1996
  */
- 
+
 #include "irc.h"
 static char cvsrevision[] = "$Id$";
 CVS_REVISION(readlog_c)
@@ -24,111 +24,103 @@ CVS_REVISION(readlog_c)
 #include "hebrew.h"
 #endif
 
-FILE * msg_fp = NULL;
+FILE *msg_fp = NULL;
 
-static  Window  *msg_window = NULL;
-static  int     finished_msg_paging = 0;
-static  Screen  *msg_screen = NULL;
-static  int     use_msg_window = 0;
-static	void log_prompt (char *name, char *line);
-static	void set_msg_screen (Screen *);
-static	char	*(*read_log_func) (char *, int, FILE *);
-	
-BUILT_IN_COMMAND(remove_log)
-{
-	char *expand;
-	char *filename = NULL;
-	int old_display = window_display;
+static Window *msg_window = NULL;
+static int finished_msg_paging = 0;
+static Screen *msg_screen = NULL;
+static int use_msg_window = 0;
+static void log_prompt(char *name, char *line);
+static void set_msg_screen(Screen *);
+static char *(*read_log_func)(char *, int, FILE *);
 
-	int  reset_logptr = 0;
+BUILT_IN_COMMAND(remove_log) {
+  char *expand;
+  char *filename = NULL;
+  int old_display = window_display;
 
-	if ((get_string_var(MSGLOGFILE_VAR) == NULL) || (get_string_var(CTOOLZ_DIR_VAR) == NULL))
-		return;
-	malloc_sprintf(&filename, "%s/%s", get_string_var(CTOOLZ_DIR_VAR), get_string_var(MSGLOGFILE_VAR));
-	expand = expand_twiddle(filename);
-	new_free(&filename);
-	window_display = 0;	
-	reset_logptr = logmsg(LOG_CURRENT, NULL, 3, NULL);
-	log_toggle(0, NULL);
-	window_display = old_display;
-	if (unlink(expand)) 
-	{
-		bitchsay("Error unlinking: %s", expand);
-		new_free(&expand);
-		return;
-	}
-	window_display = 0;
-	set_int_var(MSGCOUNT_VAR, 0);
-	if (reset_logptr)
-		log_toggle(1, NULL);
-	window_display = old_display;
-	bitchsay("Removed %s.", expand);
-	status_update(1);
-	new_free(&expand);
+  int reset_logptr = 0;
+
+  if ((get_string_var(MSGLOGFILE_VAR) == NULL) ||
+      (get_string_var(CTOOLZ_DIR_VAR) == NULL))
+    return;
+  malloc_sprintf(&filename, "%s/%s", get_string_var(CTOOLZ_DIR_VAR),
+                 get_string_var(MSGLOGFILE_VAR));
+  expand = expand_twiddle(filename);
+  new_free(&filename);
+  window_display = 0;
+  reset_logptr = logmsg(LOG_CURRENT, NULL, 3, NULL);
+  log_toggle(0, NULL);
+  window_display = old_display;
+  if (unlink(expand)) {
+    bitchsay("Error unlinking: %s", expand);
+    new_free(&expand);
+    return;
+  }
+  window_display = 0;
+  set_int_var(MSGCOUNT_VAR, 0);
+  if (reset_logptr)
+    log_toggle(1, NULL);
+  window_display = old_display;
+  bitchsay("Removed %s.", expand);
+  status_update(1);
+  new_free(&expand);
 }
 
 static int in_read_log = 0;
 
-BUILT_IN_COMMAND(readlog)
-{
-	char *expand;
-	struct stat stat_buf;
-	char *filename = NULL;
-	
-	read_log_func = fgets;
+BUILT_IN_COMMAND(readlog) {
+  char *expand;
+  struct stat stat_buf;
+  char *filename = NULL;
 
-	if (msg_window)
-		return;
-	
-	if (command)
-	{
-		in_read_log = 1;
-		if (my_stricmp(command, "MORE"))
-		{
-			if (args && !my_strnicmp(args, "-resume", 2))
-			{
-				next_arg(args, &args);
-				read_log_func = rfgets;
-			}
-		}
-	}
+  read_log_func = fgets;
 
-	if (args && *args)
-	{
-		malloc_sprintf(&filename, "%s", args);
-	}
-	else
-	{
-		const char *ctoolz_dir = get_string_var(CTOOLZ_DIR_VAR);
-		const char *msglogfile = get_string_var(MSGLOGFILE_VAR);
+  if (msg_window)
+    return;
 
-		if (!ctoolz_dir || !msglogfile)
-			return;
+  if (command) {
+    in_read_log = 1;
+    if (my_stricmp(command, "MORE")) {
+      if (args && !my_strnicmp(args, "-resume", 2)) {
+        next_arg(args, &args);
+        read_log_func = rfgets;
+      }
+    }
+  }
 
-		malloc_sprintf(&filename, "%s/%s", get_string_var(CTOOLZ_DIR_VAR), get_string_var(MSGLOGFILE_VAR));
+  if (args && *args) {
+    malloc_sprintf(&filename, "%s", args);
+  } else {
+    const char *ctoolz_dir = get_string_var(CTOOLZ_DIR_VAR);
+    const char *msglogfile = get_string_var(MSGLOGFILE_VAR);
 
-	}
+    if (!ctoolz_dir || !msglogfile)
+      return;
 
-	expand = expand_twiddle(filename);
-	new_free(&filename);
+    malloc_sprintf(&filename, "%s/%s", get_string_var(CTOOLZ_DIR_VAR),
+                   get_string_var(MSGLOGFILE_VAR));
+  }
 
-	if (stat(expand, &stat_buf) == 0 && !(stat_buf.st_mode & S_IFDIR))
-		msg_fp = fopen(expand, "r");
+  expand = expand_twiddle(filename);
+  new_free(&filename);
 
-	if (msg_fp == NULL)
-	{
-		log_put_it("%s Error Opening Log file %s", thing_ansi, expand);
-		new_free(&expand);
-		return;
-	}
+  if (stat(expand, &stat_buf) == 0 && !(stat_buf.st_mode & S_IFDIR))
+    msg_fp = fopen(expand, "r");
 
-	if (read_log_func == &rfgets)
-		fseek(msg_fp, 0, SEEK_END);
+  if (msg_fp == NULL) {
+    log_put_it("%s Error Opening Log file %s", thing_ansi, expand);
+    new_free(&expand);
+    return;
+  }
 
-	msg_window = current_window;
-	msg_screen = current_window->screen;
-	log_prompt(expand, NULL);
-	new_free(&expand);
+  if (read_log_func == rfgets)
+    fseek(msg_fp, 0, SEEK_END);
+
+  msg_window = current_window;
+  msg_screen = current_window->screen;
+  log_prompt(expand, NULL);
+  new_free(&expand);
 }
 
 /*
@@ -138,71 +130,56 @@ BUILT_IN_COMMAND(readlog)
  * to indicate this.
  *
  * Based on show_help()
- */ 
-static	int show_log(Window *window, char *name)
-{
-	Window	*old_window;
-	int	rows = 0;
-	char	line[500];
+ */
+static int show_log(Window *window, char *name __attribute__((unused))) {
+  int rows = 0;
+  char line[500];
 
-	if (window)
-	{
-		old_window = current_window;
-		current_window = window;
-	}
-	else
-	{
-		old_window = NULL;
-		window = current_window;
-	}
-	if (get_int_var(HELP_PAGER_VAR))
-		rows = window->display_size - (window->double_status + 2);
-	while (--rows)
-	{
- 		if ((*read_log_func)(line, 499, msg_fp))
-		{
-			if (*(line + strlen(line) - 1) == '\n')
-			*(line + strlen(line) - 1) = (char) 0;
-			#ifdef WANT_HEBREW
-			if (get_int_var(HEBREW_TOGGLE_VAR))
-				hebrew_process(line);
-			#endif
-			log_put_it("%s", line);
-		}
-		else
-		{
-			if (msg_fp) fclose(msg_fp);
-			set_msg_screen(NULL);
-			msg_fp = NULL;
-			return (0);
-		}
-	}
-	return (1);
+  if (window)
+    current_window = window;
+  else
+    window = current_window;
+  if (get_int_var(HELP_PAGER_VAR))
+    rows = window->display_size - (window->double_status + 2);
+  while (--rows) {
+    if ((*read_log_func)(line, 499, msg_fp)) {
+      if (*(line + strlen(line) - 1) == '\n')
+        *(line + strlen(line) - 1) = (char)0;
+#ifdef WANT_HEBREW
+      if (get_int_var(HEBREW_TOGGLE_VAR))
+        hebrew_process(line);
+#endif
+      log_put_it("%s", line);
+    } else {
+      if (msg_fp)
+        fclose(msg_fp);
+      set_msg_screen(NULL);
+      msg_fp = NULL;
+      return (0);
+    }
+  }
+  return (1);
 }
 
-void remove_away_log(char *stuff, char *line)
-{
-	if ((line && toupper(*line) == 'Y'))
-		remove_log(NULL, NULL, NULL, NULL);
-	in_read_log = 0;
+void remove_away_log(char *stuff __attribute__((unused)), char *line) {
+  if ((line && toupper(*line) == 'Y'))
+    remove_log(NULL, NULL, NULL, NULL);
+  in_read_log = 0;
 }
-                         
-static	void set_msg_screen(Screen *screen)
-{
-	msg_screen = screen;
-	if (!msg_screen && msg_window)
-	{
-		if (use_msg_window)
-		{
-			int display = window_display;
 
-			window_display = 0;
-			delete_window(msg_window);
-			window_display = display;
-		}
-		msg_window = NULL;
-		update_all_windows();
-	}
+static void set_msg_screen(Screen *screen) {
+  msg_screen = screen;
+  if (!msg_screen && msg_window) {
+    if (use_msg_window) {
+      int display = window_display;
+
+      window_display = 0;
+      delete_window(msg_window);
+      window_display = display;
+    }
+    msg_window = NULL;
+    update_all_windows();
+  }
 }
 
 /*
@@ -213,37 +190,33 @@ static	void set_msg_screen(Screen *screen)
  * there is nothing left to show.  If line is 'q' or 'Q', exit the
  * log pager, clean up, etc..  If all is cool for now, we call
  * show_help, and either if its finished, exit, or prompt for the
- * next page.   
+ * next page.
  */
 
-static	void log_prompt(char *name, char *line)
-{
+static void log_prompt(char *name, char *line) {
 
-	if (line && *line && (toupper(*line) == 'Q'))
-	{
-		finished_msg_paging = 1;
-		if (msg_fp) 
-			fclose(msg_fp);
-		msg_fp = NULL;
-		set_msg_screen(NULL);
-		if (!in_read_log)
-			add_wait_prompt("Delete msg log [y/N]? ", remove_away_log, empty_string, WAIT_PROMPT_LINE,1);
-		return;
-	}
+  if (line && *line && (toupper(*line) == 'Q')) {
+    finished_msg_paging = 1;
+    if (msg_fp)
+      fclose(msg_fp);
+    msg_fp = NULL;
+    set_msg_screen(NULL);
+    if (!in_read_log)
+      add_wait_prompt("Delete msg log [y/N]? ", remove_away_log, empty_string,
+                      WAIT_PROMPT_LINE, 1);
+    return;
+  }
 
-	if (show_log(msg_window, name))
-	{
-		add_wait_prompt("*** Hit any key for more, 'q' to quit ***",
-			log_prompt, name, WAIT_PROMPT_KEY,1);
-	}
-	else 
-	{
-		if (msg_fp) 
-			fclose(msg_fp);
-		set_msg_screen(NULL);
-		msg_fp = NULL;
-		if (!in_read_log)
-			add_wait_prompt("Delete msg log [y/N]? ", remove_away_log, empty_string, WAIT_PROMPT_LINE,1);
-	}
+  if (show_log(msg_window, name)) {
+    add_wait_prompt("*** Hit any key for more, 'q' to quit ***", log_prompt,
+                    name, WAIT_PROMPT_KEY, 1);
+  } else {
+    if (msg_fp)
+      fclose(msg_fp);
+    set_msg_screen(NULL);
+    msg_fp = NULL;
+    if (!in_read_log)
+      add_wait_prompt("Delete msg log [y/N]? ", remove_away_log, empty_string,
+                      WAIT_PROMPT_LINE, 1);
+  }
 }
-

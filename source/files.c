@@ -36,197 +36,172 @@ CVS_REVISION(files_c)
  */
 
 struct FILE___ {
-	FILE *file;
-	struct FILE___ *next;
+  FILE *file;
+  struct FILE___ *next;
 };
 typedef struct FILE___ File;
 
 static File *FtopEntry = NULL;
 
-File *new_file (void)
-{
-	File *tmp = FtopEntry;
-	File *tmpfile = (File *)new_malloc(sizeof(File));
+File *new_file(void) {
+  File *tmp = FtopEntry;
+  File *tmpfile = (File *)new_malloc(sizeof(File));
 
-	if (FtopEntry == NULL)
-		FtopEntry = tmpfile;
-	else
-	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = tmpfile;
-	}
-	return tmpfile;
+  if (FtopEntry == NULL)
+    FtopEntry = tmpfile;
+  else {
+    while (tmp->next)
+      tmp = tmp->next;
+    tmp->next = tmpfile;
+  }
+  return tmpfile;
 }
 
-void remove_file (File *file)
-{
-	File *tmp = FtopEntry;
+void remove_file(File *file) {
+  File *tmp = FtopEntry;
 
-	if (file == FtopEntry)
-		FtopEntry = file->next;
-	else
-	{
-		while (tmp->next && tmp->next != file)
-			tmp = tmp->next;
-		if (tmp->next)
-			tmp->next = tmp->next->next;
-	}
-	fclose(file->file);
-	new_free((char **)&file);
+  if (file == FtopEntry)
+    FtopEntry = file->next;
+  else {
+    while (tmp->next && tmp->next != file)
+      tmp = tmp->next;
+    if (tmp->next)
+      tmp->next = tmp->next->next;
+  }
+  fclose(file->file);
+  new_free((char **)&file);
 }
 
-	
-int open_file_for_read (char *filename)
-{
-	char *dummy_filename = NULL;
-	FILE *file;
+int open_file_for_read(char *filename) {
+  char *dummy_filename = NULL;
+  FILE *file;
 
-	malloc_strcpy(&dummy_filename, filename);
-	file = uzfopen(&dummy_filename, ".", 0);
-	new_free(&dummy_filename);
-	if (file)
-	{
-		File *nfs = new_file();
-		nfs->file = file;
-		nfs->next = NULL;
-		return fileno(file);
-	}
-	else
-		return -1;
+  malloc_strcpy(&dummy_filename, filename);
+  file = uzfopen(&dummy_filename, ".", 0);
+  new_free(&dummy_filename);
+  if (file) {
+    File *nfs = new_file();
+    nfs->file = file;
+    nfs->next = NULL;
+    return fileno(file);
+  } else
+    return -1;
 }
 
-int open_file_for_write (char *filename)
-{
-	/* patch by Scott H Kilau so expand_twiddle works */
-	char *expand = NULL;
-	FILE *file;
+int open_file_for_write(char *filename) {
+  /* patch by Scott H Kilau so expand_twiddle works */
+  char *expand = NULL;
+  FILE *file;
 
-	if (!(expand = expand_twiddle(filename)))
-		malloc_strcpy(&expand, filename);
-	file = fopen(expand, "a");
-	new_free(&expand);
-	if (file)
-	{
-		File *nfs = new_file();
-		nfs->file = file;
-		nfs->next = NULL;
-		return fileno(file);
-	}
-	else 
-		return -1;
+  if (!(expand = expand_twiddle(filename)))
+    malloc_strcpy(&expand, filename);
+  file = fopen(expand, "a");
+  new_free(&expand);
+  if (file) {
+    File *nfs = new_file();
+    nfs->file = file;
+    nfs->next = NULL;
+    return fileno(file);
+  } else
+    return -1;
 }
 
-int open_file_for_bwrite (char *filename)
-{
-	/* patch by Scott H Kilau so expand_twiddle works */
-	char *expand = NULL;
-	FILE *file;
+int open_file_for_bwrite(char *filename) {
+  /* patch by Scott H Kilau so expand_twiddle works */
+  char *expand = NULL;
+  FILE *file;
 
-	if (!(expand = expand_twiddle(filename)))
-		malloc_strcpy(&expand, filename);
-	file = fopen(expand, "wb");
-	new_free(&expand);
-	if (file)
-	{
-		File *nfs = new_file();
-		nfs->file = file;
-		nfs->next = NULL;
-		return fileno(file);
-	}
-	else 
-		return -1;
+  if (!(expand = expand_twiddle(filename)))
+    malloc_strcpy(&expand, filename);
+  file = fopen(expand, "wb");
+  new_free(&expand);
+  if (file) {
+    File *nfs = new_file();
+    nfs->file = file;
+    nfs->next = NULL;
+    return fileno(file);
+  } else
+    return -1;
 }
 
-File *lookup_file (int fd)
-{
-	File *ptr = FtopEntry;
+File *lookup_file(int fd) {
+  File *ptr = FtopEntry;
 
-	while (ptr)
-	{
-		if (fileno(ptr->file) == fd)
-			return ptr;
-		else
-			ptr = ptr -> next;
-	}
-	return NULL;
+  while (ptr) {
+    if (fileno(ptr->file) == fd)
+      return ptr;
+    else
+      ptr = ptr->next;
+  }
+  return NULL;
 }
 
-int file_write (int fd, char *stuff)
-{
-	File *ptr = lookup_file(fd);
-	int ret;
-	if (!ptr)
-		return -1;
-	ret = fprintf(ptr->file, "%s\n", stuff);
-	fflush(ptr->file);
-	return ret;
+int file_write(int fd, char *stuff) {
+  File *ptr = lookup_file(fd);
+  int ret;
+  if (!ptr)
+    return -1;
+  ret = fprintf(ptr->file, "%s\n", stuff);
+  fflush(ptr->file);
+  return ret;
 }
 
-int file_writeb (int fd, char *stuff)
-{
-	File *ptr = lookup_file(fd);
-	int ret;
-	if (!ptr)
-		return -1;
-	ret = fwrite(stuff, 1, strlen(stuff), ptr->file);
-	fflush(ptr->file);
-	return ret;
+int file_writeb(int fd, char *stuff) {
+  File *ptr = lookup_file(fd);
+  int ret;
+  if (!ptr)
+    return -1;
+  ret = fwrite(stuff, 1, strlen(stuff), ptr->file);
+  fflush(ptr->file);
+  return ret;
 }
 
-char *file_read (int fd)
-{
-	File *ptr = lookup_file(fd);
-	if (!ptr)
-		return m_strdup(empty_string);
-	else
-	{
-		char blah[10240];
-		if ((fgets(blah, 10239, ptr->file)))
-			chop(blah, 1);
-		else
-			blah[0] = 0;
-		return m_strdup(blah);
-	}
+char *file_read(int fd) {
+  File *ptr = lookup_file(fd);
+  if (!ptr)
+    return m_strdup(empty_string);
+  else {
+    char blah[10240];
+    if ((fgets(blah, 10239, ptr->file)))
+      chop(blah, 1);
+    else
+      blah[0] = 0;
+    return m_strdup(blah);
+  }
 }
 
-char *file_readb (int fd, int numb)
-{
-	File *ptr = lookup_file(fd);
-	if (!ptr)
-		return m_strdup(empty_string);
-	else
-	{
-		char *blah = (char *)new_malloc(numb+1);
-		if ((fread(blah, 1, numb, ptr->file)))
-			blah[numb] = 0;
-		else
-			blah[0] = 0;
-		return blah;
-	}
+char *file_readb(int fd, int numb) {
+  File *ptr = lookup_file(fd);
+  if (!ptr)
+    return m_strdup(empty_string);
+  else {
+    char *blah = (char *)new_malloc(numb + 1);
+    if ((fread(blah, 1, numb, ptr->file)))
+      blah[numb] = 0;
+    else
+      blah[0] = 0;
+    return blah;
+  }
 }
 
-
-int	file_eof (int fd)
-{
-	File *ptr = lookup_file (fd);
-	if (!ptr)
-		return -1;
-	else
-		return feof(ptr->file);
+int file_eof(int fd) {
+  File *ptr = lookup_file(fd);
+  if (!ptr)
+    return -1;
+  else
+    return feof(ptr->file);
 }
 
-int	file_close (int fd)
-{
-	File *ptr = lookup_file (fd);
-	if (!ptr)
-		return -1;
-	else
-		remove_file (ptr);
-	return 0;
+int file_close(int fd) {
+  File *ptr = lookup_file(fd);
+  if (!ptr)
+    return -1;
+  else
+    remove_file(ptr);
+  return 0;
 }
 
-/* 
+/*
 ** by: Walter Bright via Usenet C newsgroup
 **
 ** modified by: Bob Stout based on a recommendation by Ray Gardner
@@ -237,52 +212,45 @@ int	file_close (int fd)
 ** for files larger than a few bytes (the trick is to use large disk buffers):
 */
 
-int file_copy(int from,int to)
-{
-	int bufsiz;
-	if (from < 0)
-		return 1;
-	if (to < 0)
-		return 1;
-		
-	if (!fork())
-	{
-	        /* Use the largest buffer we can get    */
-		for (bufsiz = 0x4000; bufsiz >= 128; bufsiz >>= 1)
-		{
-			register char *buffer;
-		
-			buffer = (char *) malloc(bufsiz);
-			if (buffer)
-			{
-				while (1)
-				{
-					register int n;
+int file_copy(int from, int to) {
+  int bufsiz;
+  if (from < 0)
+    return 1;
+  if (to < 0)
+    return 1;
 
-					n = read(from,buffer,bufsiz);
-					if (n == -1)                /* if error             */
-						break;
-					if (n == 0)                 /* if end of file       */
-					{   
-						free(buffer);
-						_exit(0);
-					}
-					if (n != write(to,buffer,(unsigned) n))
-						break;
-				}
-				free(buffer);
-				break;
-			}
-		}
-		_exit(1);
-	}
-	return 0;
+  if (!fork()) {
+    /* Use the largest buffer we can get    */
+    for (bufsiz = 0x4000; bufsiz >= 128; bufsiz >>= 1) {
+      register char *buffer;
+
+      buffer = (char *)malloc(bufsiz);
+      if (buffer) {
+        while (1) {
+          register int n;
+
+          n = read(from, buffer, bufsiz);
+          if (n == -1) /* if error             */
+            break;
+          if (n == 0) /* if end of file       */
+          {
+            free(buffer);
+            _exit(0);
+          }
+          if (n != write(to, buffer, (unsigned)n))
+            break;
+        }
+        free(buffer);
+        break;
+      }
+    }
+    _exit(1);
+  }
+  return 0;
 }
 
-int	file_valid (int fd)
-{
-	if (lookup_file(fd))
-		return 1;
-	return 0;
+int file_valid(int fd) {
+  if (lookup_file(fd))
+    return 1;
+  return 0;
 }
-  

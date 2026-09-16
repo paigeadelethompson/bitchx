@@ -1,4 +1,4 @@
-/* 
+/*
  * dlfcn.h --
  *
  *	This file provides a replacement for the header file "dlfcn.h"
@@ -32,22 +32,22 @@
 /*
  * Mode flags for the dlopen routine.
  */
-#define RTLD_LAZY	1	/* lazy function call binding */
-#define RTLD_NOW	2	/* immediate function call binding */
-#define RTLD_GLOBAL	0x100	/* allow symbols to be global */
+#define RTLD_LAZY 1       /* lazy function call binding */
+#define RTLD_NOW 2        /* immediate function call binding */
+#define RTLD_GLOBAL 0x100 /* allow symbols to be global */
 
 /*
  * To be able to intialize, a library may provide a dl_info structure
  * that contains functions to be called to initialize and terminate.
  */
 struct dl_info {
-	void (*init) (void);
-	void (*fini) (void);
+  void (*init)(void);
+  void (*fini)(void);
 };
 
-void *dlopen (const char *path, int mode);
-void *dlsym (void *handle, const char *symbol);
-char *dlerror (void);
-int dlclose (void *handle);
+void *dlopen(const char *path, int mode);
+void *dlsym(void *handle, const char *symbol);
+char *dlerror(void);
+int dlclose(void *handle);
 
 #endif /* __dlfcn_h__ */

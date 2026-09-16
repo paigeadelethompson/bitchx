@@ -1,11 +1,11 @@
 /*
- * encrypt.h: header for encrypt.c 
+ * encrypt.h: header for encrypt.c
  *
  * Written By Michael Sandrof
  *
- * Copyright(c) 1990 
+ * Copyright(c) 1990
  *
- * See the COPYRIGHT file, or do a HELP IRCII COPYRIGHT 
+ * See the COPYRIGHT file, or do a HELP IRCII COPYRIGHT
  *
  * @(#)$Id$
  */
