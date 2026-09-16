@@ -72,7 +72,6 @@ char *_modname_ = NULL;
 Packages *install_pack = NULL;
 #endif /* WANT_DLL */
 
-extern int BX_read_sockets();
 extern int identd;
 extern int doing_notice;
 

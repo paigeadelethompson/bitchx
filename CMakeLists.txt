@@ -111,7 +111,7 @@ include(CheckSymbolExists)
 include(CheckCSourceCompiles)
 
 if(CMAKE_C_COMPILER_ID MATCHES "GNU|Clang")
-  add_compile_options(-Wall -Wextra -Werror -fno-strict-aliasing)
+  add_compile_options(-Wall -Wextra -Werror -Wno-invalid-source-encoding -fno-strict-aliasing)
 endif()
 
 # ---------------------------------------------------------------------------

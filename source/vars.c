@@ -1101,7 +1101,7 @@ void do_stack_set(int type, char *args) {
       if (irc_variable[var_index].string)
         aptr->set->string = m_strdup(irc_variable[var_index].string);
       aptr->var_index = var_index;
-    } else if ((cnt == 0))
+    } else if (cnt == 0)
       say("No such Set [%s]", args);
     else
       say("Set is ambiguous %s", args);

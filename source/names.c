@@ -1181,7 +1181,7 @@ void BX_rename_nick(char *old_nick, char *new_nick, int server) {
   int t = 0;
 
   for (chan = get_server_channels(server); chan; chan = chan->next) {
-    if ((chan->server == server)) {
+    if (chan->server == server) {
       if ((tmp = find_nicklist_in_channellist(old_nick, chan,
                                               REMOVE_FROM_LIST))) {
         tmp->stat_nicks++;

@@ -1841,8 +1841,6 @@ char *get_term_capability(char *name, int querytype, int mangle) {
 char eolbuf[200];
 
 #ifndef WTERM_C
-extern	char	*getenv();
-
 static	int	term_CE_clear_to_eol 	(void);
 static	int	term_CS_scroll 		(int, int, int);
 static 	int	term_null_function 	(void);

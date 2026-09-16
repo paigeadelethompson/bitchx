@@ -1798,7 +1798,6 @@ char *BX_m_e3cat(char **one, const char *yes1, const char *yes2) {
   return *one;
 }
 
-double strtod();
 extern int BX_check_val(char *sub) {
   long sval;
   char *endptr;
@@ -2530,8 +2529,6 @@ char *BX_strcpy_nocolorcodes(char *dest, const char *source) {
 
   return save;
 }
-
-char *crypt();
 
 char *BX_cryptit(const char *string) {
   static char saltChars[] =

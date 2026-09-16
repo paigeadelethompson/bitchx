@@ -536,7 +536,7 @@ static int glob3(Char *pathbuf, Char *pathend, Char *pattern, Char *restpattern,
    * and dirent.h as taking pointers to differently typed opaque
    * structures.
    */
-  struct dirent *(*readdirfunc)();
+  struct dirent *(*readdirfunc)(void *);
 
   *pathend = EOS;
   errno = 0;
@@ -557,12 +557,12 @@ static int glob3(Char *pathbuf, Char *pathend, Char *pattern, Char *restpattern,
   if (pglob->gl_flags & GLOB_ALTDIRFUNC)
     readdirfunc = pglob->gl_readdir;
   else
-    readdirfunc = readdir;
+    readdirfunc = (struct dirent *(*)(void *))readdir;
 
   if (pglob->gl_flags & GLOB_INSENSITIVE)
     nocase = 1;
 
-  while ((dp = (*readdirfunc)(dirp))) {
+  while ((dp = (*readdirfunc)((void *)dirp))) {
     register u_char *sc;
     register Char *dc;
 

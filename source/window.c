@@ -2226,8 +2226,7 @@ void BX_set_scrollback_size(Window *w __attribute__((unused)), char *unused __at
  * is_window_name_unique: checks the given name vs the names of all the
  * windows and returns true if the given name is unique, false otherwise
  */
-int BX_is_window_name_unique(name)
-char *name;
+int BX_is_window_name_unique(char *name)
 {
   Window *tmp = NULL;
 

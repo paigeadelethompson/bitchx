@@ -40,8 +40,6 @@ static int xlink_commands = 0;
 extern int in_add_to_tcl;
 extern char *FromUserHost;
 
-int BX_get_max_fd();
-
 extern cmd_t C_dcc[];
 
 cmd_t C_tandbot[] = {{"zapf", tand_zapf, 0, NULL},

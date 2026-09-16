@@ -142,7 +142,7 @@ static void start_dcc_chat(int);
 static unsigned char byte_order_test(void);
 static void dcc_update_stats(int);
 
-static void update_transfer();
+static void update_transfer(void);
 
 static char *strip_path(char *);
 static void dcc_getfile_resume_demanded(char *, char *, char *, char *);
@@ -2448,17 +2448,17 @@ static const char *get_stat_format(double pcomplete) {
       STAT_FORMAT_PREFIX "%K-=*%1%K=-. %R.-=%n" STAT_FORMAT_SUFFIX}; /* 100 */
 #else
   static const char *const bar_format[] = {
-      STAT_FORMAT_PREFIX "%K±°°°°°°°°°%n" STAT_FORMAT_SUFFIX,           /*  0 */
-      STAT_FORMAT_PREFIX "%K±°°°°°°°°°%n" STAT_FORMAT_SUFFIX,           /* 10 */
-      STAT_FORMAT_PREFIX "%K±²°°°°°°°°%n" STAT_FORMAT_SUFFIX,           /* 20 */
-      STAT_FORMAT_PREFIX "%K±²Û°°°°°°°%n" STAT_FORMAT_SUFFIX,           /* 30 */
-      STAT_FORMAT_PREFIX "%K±²Û%1%K²%0%K°°°°°°%n" STAT_FORMAT_SUFFIX,   /* 40 */
-      STAT_FORMAT_PREFIX "%K±²Û%1%K²±%0%K°°°°°%n" STAT_FORMAT_SUFFIX,   /* 50 */
-      STAT_FORMAT_PREFIX "%K±²Û%1%K²±°%0%K°°°°%n" STAT_FORMAT_SUFFIX,   /* 60 */
-      STAT_FORMAT_PREFIX "%K±²Û%1%K²±°ÿ%0%K°°°%n" STAT_FORMAT_SUFFIX,   /* 70 */
-      STAT_FORMAT_PREFIX "%K±²Û%1%K²±°ÿ%R°%0%K°°%n" STAT_FORMAT_SUFFIX, /* 80 */
-      STAT_FORMAT_PREFIX "%K±²Û%1%K²±°ÿ%R°±%0%K°%n" STAT_FORMAT_SUFFIX, /* 90 */
-      STAT_FORMAT_PREFIX "%K±²Û%1%K²±°ÿ%R°±²%n" STAT_FORMAT_SUFFIX}; /* 100 */
+      STAT_FORMAT_PREFIX "%Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%n" STAT_FORMAT_SUFFIX,           /*  0 */
+      STAT_FORMAT_PREFIX "%Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%n" STAT_FORMAT_SUFFIX,           /* 10 */
+      STAT_FORMAT_PREFIX "%Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%n" STAT_FORMAT_SUFFIX,           /* 20 */
+      STAT_FORMAT_PREFIX "%Kï¿½ï¿½Û°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%n" STAT_FORMAT_SUFFIX,           /* 30 */
+      STAT_FORMAT_PREFIX "%Kï¿½ï¿½ï¿½%1%Kï¿½%0%Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%n" STAT_FORMAT_SUFFIX,   /* 40 */
+      STAT_FORMAT_PREFIX "%Kï¿½ï¿½ï¿½%1%Kï¿½ï¿½%0%Kï¿½ï¿½ï¿½ï¿½ï¿½%n" STAT_FORMAT_SUFFIX,   /* 50 */
+      STAT_FORMAT_PREFIX "%Kï¿½ï¿½ï¿½%1%Kï¿½ï¿½ï¿½%0%Kï¿½ï¿½ï¿½ï¿½%n" STAT_FORMAT_SUFFIX,   /* 60 */
+      STAT_FORMAT_PREFIX "%Kï¿½ï¿½ï¿½%1%Kï¿½ï¿½ï¿½ï¿½%0%Kï¿½ï¿½ï¿½%n" STAT_FORMAT_SUFFIX,   /* 70 */
+      STAT_FORMAT_PREFIX "%Kï¿½ï¿½ï¿½%1%Kï¿½ï¿½ï¿½ï¿½%Rï¿½%0%Kï¿½ï¿½%n" STAT_FORMAT_SUFFIX, /* 80 */
+      STAT_FORMAT_PREFIX "%Kï¿½ï¿½ï¿½%1%Kï¿½ï¿½ï¿½ï¿½%Rï¿½ï¿½%0%Kï¿½%n" STAT_FORMAT_SUFFIX, /* 90 */
+      STAT_FORMAT_PREFIX "%Kï¿½ï¿½ï¿½%1%Kï¿½ï¿½ï¿½ï¿½%Rï¿½ï¿½ï¿½%n" STAT_FORMAT_SUFFIX}; /* 100 */
 #endif
   const int idx = pcomplete * 10;
 
@@ -2501,14 +2501,14 @@ void dcc_glist(char *command __attribute__((unused)), char *args __attribute__((
 #else
     put_it("%s",
            convert_output_format(
-               "%G#  %W³%n %GT%gype  %W³%n %GN%gick      %W³%n %GP%gercent "
-               "%GC%gomplete        %W³%n %GK%g/s   %W³%n %GF%gile",
+               "%G#  %Wï¿½%n %GT%gype  %Wï¿½%n %GN%gick      %Wï¿½%n %GP%gercent "
+               "%GC%gomplete        %Wï¿½%n %GK%g/s   %Wï¿½%n %GF%gile",
                NULL, NULL));
     put_it(
         "%s",
         convert_output_format(
-            "%KÄÄ%nÄ%WÄ%nÄ%KÄÄÄÄÄ%nÄ%WÄ%nÄ%KÄÄÄÄÄÄÄÄÄ%nÄ%WÄ%nÄ%KÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ"
-            "%nÄ%WÄ%nÄ%KÄÄÄÄÄ%nÄ%WÄ%nÄ%KÄÄÄÄÄ%nÄ%WÄ%nÄ%KÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ",
+            "%Kï¿½ï¿½%nï¿½%Wï¿½%nï¿½%Kï¿½ï¿½ï¿½ï¿½ï¿½%nï¿½%Wï¿½%nï¿½%Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%nï¿½%Wï¿½%nï¿½%Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
+            "%nï¿½%Wï¿½%nï¿½%Kï¿½ï¿½ï¿½ï¿½ï¿½%nï¿½%Wï¿½%nï¿½%Kï¿½ï¿½ï¿½ï¿½ï¿½%nï¿½%Wï¿½%nï¿½%Kï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½",
             NULL, NULL));
 #endif
   }
@@ -2532,7 +2532,7 @@ void dcc_glist(char *command __attribute__((unused)), char *args __attribute__((
                 n->encrypt ? "E" : empty_string)) {
       put_it("%s", convert_output_format(DCC_FORMAT_STAT_PENDING,
                                          "%d %s %s %s %s %s %s", n->dccnum,
-                                         type_name, n->encrypt ? "E" : "ÿ",
+                                         type_name, n->encrypt ? "E" : "ï¿½",
                                          c->sock.server, dcc_get_state(s),
                                          "N/A", strip_path(filename)));
     }
@@ -2571,7 +2571,7 @@ void dcc_glist(char *command __attribute__((unused)), char *args __attribute__((
                   n->encrypt ? "E" : empty_string))
         put_it("%s", convert_output_format(
                          DCC_FORMAT_STAT, "%d %s %s %s %s %s %s %s", n->dccnum,
-                         type_name, n->encrypt ? "E" : "ÿ", s->server,
+                         type_name, n->encrypt ? "E" : "ï¿½", s->server,
                          dcc_get_state(s), convert_time(xtime), "N/A",
                          strip_path(filename)));
     }
@@ -2619,7 +2619,7 @@ void dcc_glist(char *command __attribute__((unused)), char *args __attribute__((
 
         put_it("%s", convert_output_format(
                          stat_format, "%d %s %s %s %s %s %s %s %s", n->dccnum,
-                         type_name, n->encrypt ? "E" : "ÿ", s->server,
+                         type_name, n->encrypt ? "E" : "ï¿½", s->server,
                          dcc_get_state(s), percent, eta, kilobytes,
                          strip_path(filename)));
       }
@@ -2956,51 +2956,51 @@ void dcc_stats(char *command __attribute__((unused)), char *unused __attribute__
 #else
 
     put_it("%s",
-           convert_output_format("       %GÕÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ%K[%Cdcc "
-                                 "transfer stats%K]%GÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¸",
+           convert_output_format("       %Gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%K[%Cdcc "
+                                 "transfer stats%K]%Gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¸",
                                  NULL));
-    put_it("%s", convert_output_format("       %G³                             "
-                                       "                                    ³",
+    put_it("%s", convert_output_format("       %Gï¿½                             "
+                                       "                                    ï¿½",
                                        NULL));
     put_it("%s",
            convert_output_format(
-               "       %G³%gÖÄ%K[%Cx%cferd %Ci%cn%K]%gÄÖ-%K[%Cx%cferd "
-               "%Co%cut%K]%gÄ·Ä%K[%Ct%cotal "
-               "%Cf%ciles%K]%gÄÖÄ%K[%Ca%cctive%K]%gÄ·Ä[%Cl%cimit%K]%gÄ·%G³",
+               "       %Gï¿½%gï¿½ï¿½%K[%Cx%cferd %Ci%cn%K]%gï¿½ï¿½-%K[%Cx%cferd "
+               "%Co%cut%K]%gÄ·ï¿½%K[%Ct%cotal "
+               "%Cf%ciles%K]%gï¿½ï¿½ï¿½%K[%Ca%cctive%K]%gÄ·ï¿½[%Cl%cimit%K]%gÄ·%Gï¿½",
                NULL));
     put_it("%s",
            convert_output_format(
-               "       %G³%gº %W$[-10]0 %gº  %W$[-10]1 %gº    %W$[-10]2 %gº "
-               "%W$[-8]3 %gº %W$[-7]4 %gº%G³",
+               "       %Gï¿½%gï¿½ %W$[-10]0 %gï¿½  %W$[-10]1 %gï¿½    %W$[-10]2 %gï¿½ "
+               "%W$[-8]3 %gï¿½ %W$[-7]4 %gï¿½%Gï¿½",
                "%s %s %d %d %d", in, out, send_count_stat + get_count_stat,
                get_active_count(), get_int_var(DCC_SEND_LIMIT_VAR)));
     put_it("%s", convert_output_format("       "
-                                       "%G³%gÓÄÄÄÄÄÄÄÄÄÄÄÄ½ÄÄÄÄÄÄÄÄÄÄÄÄÄÓÄÄÄÄÄÄ"
-                                       "ÄÄÄÄÄÄÄÄÄ½ÄÄÄÄÄÄÄÄÄÄÓÄÄÄÄÄÄÄÄÄ½%G³",
+                                       "%Gï¿½%gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
+                                       "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½%Gï¿½",
                                        NULL));
-    put_it("%s", convert_output_format("       %G³                             "
-                                       "                                    ³",
+    put_it("%s", convert_output_format("       %Gï¿½                             "
+                                       "                                    ï¿½",
                                        NULL));
     put_it("%s",
            convert_output_format(
-               "       %gÖÄÄÄÄ%K[%Ci%cn %Cs%ctats%K]%gÄÄÄÖÄÄÄ%K[%Co%cut "
-               "%Cs%ctats%K]%gÄÄÄ·ÄÄÄÄÄÄÄÄÄÄ%K[%Ct%coggles%K]%gÄÄÄÄÄÄÄÄÄÄ·",
+               "       %gï¿½ï¿½ï¿½ï¿½ï¿½%K[%Ci%cn %Cs%ctats%K]%gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%K[%Co%cut "
+               "%Cs%ctats%K]%gï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½%K[%Ct%coggles%K]%gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·",
                NULL));
     put_it("%s", convert_output_format(
-                     "       %gº %Cm%nax: %W$[-6]0%n%Rkb/s %gº %Cm%nax: "
-                     "%W$[-6]1%n%Rkb/s %gº   %Ca%nutoget: %W$[-3]2%n   "
-                     "%Cp%naths: %W$[-3]3 %gº",
+                     "       %gï¿½ %Cm%nax: %W$[-6]0%n%Rkb/s %gï¿½ %Cm%nax: "
+                     "%W$[-6]1%n%Rkb/s %gï¿½   %Ca%nutoget: %W$[-3]2%n   "
+                     "%Cp%naths: %W$[-3]3 %gï¿½",
                      "%s %s %s %s", max_rate_in, max_rate_out,
                      on_off(get_int_var(DCC_AUTOGET_VAR)), on_off(dcc_paths)));
     put_it("%s",
-           convert_output_format("       %gº %Cm%nin: %W$[-6]0%n%Rkb/s %gº "
-                                 "%Cm%nin: %W$[-6]1%n%Rkb/s %gº %Co%nverwrite: "
-                                 "%W$[-3]2%n   %Cq%nuiet: %W$[-3]3 %gº",
+           convert_output_format("       %gï¿½ %Cm%nin: %W$[-6]0%n%Rkb/s %gï¿½ "
+                                 "%Cm%nin: %W$[-6]1%n%Rkb/s %gï¿½ %Co%nverwrite: "
+                                 "%W$[-3]2%n   %Cq%nuiet: %W$[-3]3 %gï¿½",
                                  "%s %s %s %s", min_rate_in, min_rate_out,
                                  on_off(dcc_overwrite_var), on_off(dcc_quiet)));
     put_it("%s", convert_output_format("       "
-                                       "%gÓÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ½ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÓ"
-                                       "ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ½",
+                                       "%gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½"
+                                       "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½",
                                        NULL));
 
 #endif

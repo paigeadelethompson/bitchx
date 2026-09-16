@@ -1782,7 +1782,7 @@ NickTab *BX_getnextnick(int which, char *input_nick, char *oldnick,
   NickList *cnick = NULL;
   NickTab *tmp = (which == 1) ? autoreply_array : tabkey_array;
   int server = from_server;
-  static NickTab sucks = {NULL};
+  static NickTab sucks = {NULL, NULL, NULL};
 
   if (tmp && (in_completion == STATE_NORMAL || in_completion == STATE_TABKEY)) {
     if (!oldnick && !nick) {
@@ -2279,7 +2279,7 @@ BUILT_IN_KEYBINDING(tab_completion) {
     old_p = p = extract(inp, 0, 0);
     if (wcount > 1)
       old_pos = possible = extract(inp, wcount - 1, EOS);
-    if ((*p == *cmdchar))
+    if (*p == *cmdchar)
       p++;
     if (possible && (*possible == '"')) {
       possible++;
@@ -2390,7 +2390,7 @@ do_more_tab:
       if (wcount > 1) {
         if (!got_space) {
           old = last_arg(&inp);
-          if ((*old == '"')) {
+          if (*old == '"') {
             old++;
             chop(old, 1);
           }

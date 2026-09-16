@@ -785,7 +785,7 @@ static BuiltInFunctions built_in_functions[] = {
 #include "hash2.h"
 
 #define FUNCTION_HASHSIZE 251
-HashEntry functions[FUNCTION_HASHSIZE] = {{NULL}};
+HashEntry functions[FUNCTION_HASHSIZE] = {{NULL, 0, 0}};
 
 int done_init_functions = 0;
 
@@ -6024,7 +6024,7 @@ BUILT_IN_FUNCTION(function_ajoinitem, input) {
       m_s3cat(&ret, ",", new->name);
       m_s3cat(&ret, space, new->key ? new->key : "<none>");
     }
-    if ((count == ajl_num))
+    if (count == ajl_num)
       break;
     count++;
   }
