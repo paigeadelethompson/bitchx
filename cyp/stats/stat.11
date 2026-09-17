@@ -1,0 +1,50 @@
+alias stat11 {
+^set input_prompt  $(sc4)À$(sc2)Ä$(sc1)Ä$(sc2)Ä$(sc4)>$(cl) 
+^set STATUS_USERS $(hblk)[$(sc1)o$(hblk)/$(sc3)%! $(sc1)n$(hblk)/$(sc3)%! $(sc1)i$(hblk)/$(sc3)%! $(sc1)v$(hblk)/$(sc3)%!$(hblk)]$(cl)
+^set STATUS_VOICE $(sc1)+$(cl)
+^set STATUS_UMODE $(hblk)\($(sc1)+$(sc2)%#$(hblk))$(cl)
+^set STATUS_SERVER $(sc1)s$(sc2)erv$(hblk)\($(sc2)%S$(hblk))$(cl)
+^set STATUS_TOPIC $(cl)%-
+^set STATUS_OPER $(sc2)*$(cl)
+^set STATUS_NICK $(sc2)%N
+^set STATUS_NOTIFY  $(hblk)[$(sc1)a$(sc2)ct$(sc1)/$(cl)%F$(hblk)]$(cl)
+^set STATUS_MODE $(hblk)\($(sc1)+$(sc2)%+$(hblk))$(cl)
+^set STATUS_LAG $(sc1)l$(sc2)ag$(hblk)\($(sc2)%L$(hblk))$(cl)
+^set STATUS_FORMAT3 $(hblk)[$(sc1)t$(hblk)/$(sc2)%C$(hblk)]$(cl) %- %>
+^set STATUS_AWAY  $(hblk)[$(sc1)a$(sc2)way$(hblk)]$(cl)
+^set STATUS_CHANNEL $(sc2)%C$(cl)
+^set STATUS_CHANOP $(sc1)@$(cl)
+^set STATUS_QUERY $(hblk)[$(sc1)q$(hblk)/$(sc2)%Q$(hblk)]$(cl)
+^set STATUS_FORMAT1 $(sc2)Ä$(sc4)³$(sc2)Ä$(sc1)Ä$(sc2)´ %*%=%@%C%+%! $(sc1)w$(sc2)in$(hblk)\($(sc2)%R$(hblk))$(cl)%A%F %T %> $(sc4)Ã$(sc2)Ä$(sc1)Ä$(sc2)³$(sc4)Ä
+^set STATUS_FORMAT2 $(sc1)Ä$(sc2)³$(sc4)Ä$(sc2)Ä$(sc1)´$(cl) %N%# %S %L %Q %> $(sc2)Ã$(sc1)Ä$(sc2)Ä$(sc4)³$(sc1)Ä$(cl)
+^set status_clock $(hblk)[$(sc3)%T$(hblk)]$(cl)
+}
+
+alias wsetupdate {
+^wset * input_prompt $input_prompt
+^wset * status_users $status_users
+^wset * status_voice $status_voice
+^wset * status_umode $status_umode
+^wset * status_server $status_server
+^wset * status_topic $status_topic
+^wset * status_oper $status_oper
+^wset * status_nick $status_nick
+^wset * status_notify $status_notify
+^wset * status_mode $status_mode 
+^wset * status_lag $status_lag
+^wset * status_format3 $status_format3
+^wset * status_away $status_away
+^wset * status_channel $status_channel
+^wset * status_chanop $status_chanop
+^wset * status_format1 $status_format1
+^wset * status_format2 $status_format2
+^wset * status_clock $status_clock
+^wset * status_query $status_query
+}
+stat11
+wsetupdate
+
+^set status_does_expandos OFF
+^window triple off
+dotopwin
+# .:. clogic '98

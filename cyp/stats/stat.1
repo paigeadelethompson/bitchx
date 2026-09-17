@@ -1,0 +1,56 @@
+^set input_prompt $(sc1)\($(cl)$C$(sc1)) 
+
+alias stat1 {
+^set status_oper $(hblk)*
+^fset format_status $0-
+^fset format_status1 $0-
+^fset format_status2 $0-
+^fset format_status3 $0-
+^set status_clock %T
+^set status_format $(sc2)Ú$(sc1)Ä$(hblk)-$(cl)> %*%=%@$(cl)%N $(hwht)%# %C %+ %! $(sc1)\($(cl)lag$(sc1)/$(cl)%L$(sc1)) %F %> $(sc1)-$(sc2)Ä¿
+^set status_format1 $(sc2)Ú$(sc1)Ä$(hblk)-$(cl)> %*%=%@$(cl)%N $(hwht)%# %C %+ %! $(sc1)\($(cl)lag$(sc1)/$(cl)%L$(sc1)) %F %> $(sc1)-$(sc2)Ä¿
+^set status_format2 $(sc2)À$(sc1)Ä$(hblk)-$(cl)> $(cl)time $(hwht)%T%6%A %Q $(sc1)[$(cl)win$(sc1)/$(hwht)%R$(sc1)] %>%B%5%S $(cl)<$(sc1)Ä$(sc2)Ù
+^set status_umode $(sc1)[$(cl)+%#$(sc1)]
+^set status_users $(sc1)[$(cl)o$(sc1)/$(hwht)%! $(cl)n$(sc1)/$(hwht)%! $(cl)i$(sc1)/$(hwht)%! $(cl)v$(sc1)/$(hwht)%!$(sc1)]
+^set status_lag %L
+^set status_channel $(cl)%C
+^set status_mode $(sc1)[$(cl)+%+$(sc1)]  
+^set status_chanop $(sc1)@
+^set status_mail $(hblk) $(hwht)m$(cl)ai$(hblk)l $(hwht)%M
+^set status_server $(sc1)%S
+^set status_nick $(cl)%N
+^set status_voice +
+^set status_away  $(sc1)[$(cl)away$(hwht) %A$(sc1)]
+^set status_notify $(sc1)\($(cl)act$(hwht)%F$(sc1))
+^set status_hold_lines $(hblk)\[$(hwht)%B$(hblk)]
+^set status_query $(hblk)\[$(blu)Q$(wht): $(wht)%Q$(hblk)]
+^set status_format3 $(cl)$(hblk)\[$(sc2)t:$(hblk)­$(hblu)%C$(hblk)]$(cl) %- %>
+}
+alias wsetupdate {
+^wset * status_format $status_format
+^wset * status_format1 $status_format1
+^wset * status_umode $status_umode
+^wset * status_format2 $status_format2
+^wset * status_lag $status_lag
+^wset * status_channel $status_channel
+^wset * status_mode $status_mode
+^wset * status_chanop $status_chanop
+^wset * status_format3 $status_format3
+^wset * status_mail $status_mail
+^wset * status_users $status_users
+^wset * status_server $status_server
+^wset * status_voice $status_voice
+^wset * status_away $status_away 
+^wset * status_notify $status_notify
+^wset * input_prompt $input_prompt
+^wset * status_hold_lines $status_hold_lines
+^wset * status_query $status_query
+^wset * status_format3 $status_format3
+^wset * status_clock $status_clock
+^wset * status_nick $status_nick
+}
+stat1
+wsetupdate
+^set status_does_expandos OFF
+window triple off
+dotopwin

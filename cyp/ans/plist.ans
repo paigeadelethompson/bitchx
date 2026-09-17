@@ -1,0 +1,45 @@
+$G plist formats 1-7.
+
+$(hblk)[$(cl)1$(hblk)]$(cl)
+ ::., [cypress/cdcc] 1 pack(s) offered total.] ,.::
+ % #1  (  30.74kb:   500 gets) cypress
+       -^  test
+ ::., [% leeched 100kb / top speed 100kb %] ,.::
+
+$(hblk)[$(cl)2$(hblk)]$(cl)
+ ..: (cypress.cdcc)  1 pack(s) offered total. ):..
+ % #1  ( 30.74kb:  500 gets) cypress
+        ^  test
+  ..: (! leeched 100kb / top speed 100kb !) :..
+
+$(hblk)[$(cl)3$(hblk)]$(cl)
+.,: <cypress!cdcc>  1 pack(s) offered total.> :,.
+ % #1  (  30.74kb:   500 gets) cypress
+       -^  test
+ .,: <% leeched 100kb / top speed 100kb %> :,.
+
+$(hblk)[$(cl)4$(hblk)]$(cl)
+..[cyp/cdcc].. 1 total pack(s) offered
+% #1  (  30.74kb:  500 gets) cypress
+  ÀÄÄ> test
+..[cyp/cdcc].. stats(top speed[100kb] ! leeched[100kb])
+
+$(hblk)[$(cl)5$(hblk)]$(cl)
+[cdcc] 1 file offered- /ctcp codelogic cdcc send #x for pack #x
+% #1  (  30.74kb:  500 gets) cypress
+    test..
+[cdcc] stats: top speed/100kb % leeched/100kb
+
+$(hblk)[$(cl)6$(hblk)]$(cl)
+(cyp.cdcc) files offered! /ctcp codelogic cdcc help for help!
+(30.74kb[500  gets]) cypress 01c by void and codelogic
+       test..
+(cdcc.stats) [leeched/30.74kb . top speed/30.74kb]
+
+$(hblk)[$(cl)7$(hblk)]$(cl)
+..[cyp/cdcc(1 packs/46.6kb total)]..
+[#1(15 gets) 46.6kb]: cypress 01c by void and codelogic
+     - fixed a *few* bugs.
+..[cyp/cdcc(46.6kb sent/46.6kb top speed)]..
+
+$G current format set to$(hwht) $(plistf))

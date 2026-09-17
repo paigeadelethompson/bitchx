@@ -1,0 +1,315 @@
+6/15/98 -
+Fixed arrays so when /format o or /format p was done they didn't erase
+current setting. 
+Added another sbar on.
+Added two more dcc chat formats.
+Fixed help to show new commands
+added icetrey theme on 
+Fixed scan.1 to go with /color
+Fixed relsm so it just uses the preset format instead of fparse :/
+6/16/98 - 
+updated stuff from what void did
+patched in 4 new echostrs
+redid box in /theme
+added a new sbar
+added away paging
+redid arrays because of paging
+redid config to handle paging
+void fixed some config stuff..
+added another away format
+added theme focus(now 12 themes, and we'll release with that many =])
+fixed color conflicts between sbars..
+miniature format errors, fixed.
+waiting for logos..bleh.
+fixed some small stuff 
+fixed my sbar to work!
+sped up some variables
+6-17-98
+fixed something in /tsave, wasn't putting a ] after the $scdesc
+fixed other bug in /tsave, shouldn't have been saving $bform
+added in drendite's ansi, THANK YOU, also made loading stuff for it.
+added enoxis' ansi, KRAD ELITE SHIZNIT MANG.
+added polders' ansi..k-rad again
+6-21-98
+fixed some stuff with /untheme
+added void's supercyan theme
+changed enoxis's 'cypress by void and codelogic' ansi *just* a little, to go
+better with other cosmetics. :>
+made polder's ansi work (added 'echo' lines)
+fixed sbar 5 to change colors.
+sbar 11 now has full color compatibility.
+added more themes.
+added usay alias, DEDICATED to ANARCH cause HE talks LIKE this.(also capable
+of -flag)
+another polder ans added.
+added cypress (ansi shower) as alias.
+updated chelp
+added cyp.rehash, for scripting..
+6-21-98
+added 3 line sbar
+void made some fset stuff which i was too confused to understand..
+made sbar 8 work fully.
+6-25-98
+lalala, redid the cdcc plist stuff, so it's easier for me to make formats
+for, using variables :>
+6-26-98
+added /country alias..
+fixed a few bugs with away formats, which i think is due to 75a16 :>
+6-27-98
+restructured public formats 
+added another plist
+updated public.ans for new formats.
+added another away format..
+added default BX whois format
+added another sbar
+added another msg format
+void fixed a topwin bug
+i fixed a topwin bug..with it showing status of the window 
+had to remove /wall -flag cause of bug RoboHak pointed out..
+this is only temp. til i decide to write an alias with ^C colors.. :>
+fixed drendite/roque(??)'s /lsay to work with upper case letters, by using tolower ;>
+fixed some small bugs with the old public format aliases not updated with
+my new style
+added tara's ansi
+fixed post release bugs :>
+-- 
+01d --
+---
+7-3-98
+fixed bugs with topwin
+fixed sbar 9 bugs by making a whole new sbar
+added whitedrgn's few formats
+fixed bug with "::" 
+changed fset stuff
+fixed whois.4
+7-4-98
+fixed chops command
+fixed version problem :>
+added 'cyp' logo to /quit
+added much much faster ansi loading. =]
+fixed sbar 9 again :>
+fixed public display error found by PyroSmurf
+found some lurking ${color} stuff, fixed :>
+fixed bug in ansi loader, wasn't closing file :>
+added more version formats
+added |Rain|'s tweaks to fade() .. .5 second faster.
+fixed quit alias to get an actual QUIT reason :>
+7-5-98
+fixed one msg format
+spruced up a few things
+made much much faster loading 
+7-9-98
+changed /theme
+added more stuff
+did more module loading
+added formats
+fixed stuff in formats
+added sbar 17 again
+speeded script up in general..
+7-10-98
+fixed all ansis..
+added more themes :>
+fixed /theme's spacing..
+added argon's /lusers w/ cyp formatting
+went through WHOLE script and fully optimized 'if's
+fixed bug FreeeZ found in /back with "("
+fixed bug FreeeZ found with { } in /away and /back
+added sbar 19
+7-11-98
+fixed a few bugs i found with my new restructured if statements..
+added sbar 20 .. from argon, but hey, psy and shade's formats own :>
+fixed another problem in ansi, they all work now :>
+
+--------------- 01 e --------------------
+7-12-98
+fixed bug syntax found in whois :>
+changed /chelp to be pretty!@
+fixed spelling error :>
+7-13-98
+more complex flood protection added..now use ^D to ignore someone if your
+flood protection isn't toggled automatically...
+changed look of /theme
+7-26-98
+added box support like i said i was gonna
+added more formats
+rewrote nick completion...HEH.
+void redid scans 
+redid my usayfunct alias, it was terribly sad.
+7-31-98 - 8-1-98
+void and i did autobot .. yay.
+added some functions..
+made a functions module for all of them..
+8-2-98
+added formats for autoobot
+added more other formats
+optimized autobot more
+fixed big autobot problem with adding more than one bot per chan..
+8-7-98
+void added public away toggle
+i fixed autobot stuff.
+autobot stable after host fix.
+added a few more pointless functions
+added psykotyk's mixed plastic utensils scan and whois
+THANK YOU for donation of them!#@
+fixed problem with all scans showing #Bitchx
+went through if statements and variables again..
+added more and more formats.
+looks good for release. =]
+8-8-98
+fixed botload alias..now much quicker.. [RoboHak..]
+fixed fade() function to cparse() final output..
+fixed channel synch in autobot to unassign variables at correct time.
+fixed showaway alias..
+01f --
+fixed /sc alias not showing chan name =[
+fixed dict..i borked it
+added void's mass msging and mass noticing..
+<raydawn> i wish you could make like shortcut deals.. /op code*
+..
+good idea..added =]
+8-13-98
+school started..slow devolopement.
+=]
+
+codelogic @ 10-17-98
+fixed everything to work with new bx's
+made my /op nick* deal work..finally..
+been a while hasn't it?
+i almost forgot how to script, but here, it should work fine. =]
+mode comp rox0rz.
+--note--
+this is a final version of cypress.
+it's been fun, but there isn't anything else left to do =]
+codelogic @ 10-18-98
+oops..found a bug with robohak's wall thing, apparently it doesn't work 
+with new bx..i just made it use a serial #, now it works. :>
+added option to show or not show bot passwords in botlist,
+autobot now works with +10 bots.
+
+void
+-note- 10/27/98
+/botlist missing hostnames - done
+broke frelm.m and fixed it - done
+added mmsg mnot and others to help.m -done
+fix or scrap the modecomp.m
+add away toggle to turn off away timer -done
+fixed logging.m to show walls as walls not as notices -done
+added mode load to cyp.bx -done
+/users is fucked up
+redo help.ans -done
+fixed a sbar 20 at the request of know.
+fixed theme.m to save mode formats in /tsave
+took out excess sbar loads for quicker loading and less screen freshing at 
+loadup
+
+void
+-note 11/5/98
+fixed cdcc.m to show speed rate in plist.
+mko with the help of robohak and panasync revision
+codelogic fixed autobot.m 
+took out all but three of the ansis :/
+did some /theme revisions
+codelogic @ 2.28.99
+WELL WELL, it's been a while eh? :)
+- updated to work with 75p3 or above.
+- redid botlist stuff
+- added "/bot" interface for botlist
+- made a few things faster.
+- we had the alias fix.size in there like 6 times, made it only one.
+- ... and life goes on
+void 
+-note 4/1/99
+- redid /dcc to have 2 dcc bar formats
+- put in the <@nick> thing to publics
+void
+-note 8/11/99
+fixed public_ar to show <@nick> in publics
+added kick logging.
+
+codelogic @ 8.11.99
+- added timestamped away..
+--e0f--
+
+void @ 10.19.99
+- removed TS away and changed fsets to go with bitchx's builtin TS option
+
+void @ 10.20.99
+- Davidw2 asked to remove ~/.BitchX from quit msg 
+
+#### SINCE 1.0KB2 #####
+
+void @ 11/28/02
+- removed ansi from logging. 
+
+void @ 12/4/02
+- fixed /lusers to show 6 digits instead of just 5
+
+void @ 12/17/02
+- fixed /dict to actually work..
+
+void @ 4/25/03
+- I didn't log all of the stuff I've done so I'm just diff-ing 1.0kb2 and
+1.0kb3 and listing differences here.
+- removed nick comp setting from bold : to normal :
+- made showaway toggle to off per request of BlackJac
+- added a few aliases cops (powuh owns :)) _center. mw, bkt or qk, massk,
+rkick.
+- fixed sv format var 13 to show lowercase -CURRRENT for FreeBSD
+- removed all instances of $0- and replaced it with $*
+- fixed banner.m to show ansi right
+- redid /chelp to format to screen geom
+- parker gave a patch for a theme and for ncomp
+- fixed mko to deal with new servers not allowing quote kick
+nick1,nick2.....
+- fixed mmsg to just fe one var and not 8 like old servers allowed.
+- kreca submitted a patch that allows /paste /relm /reln /relsm /relsn to
+do number-number like /relw then 1-5 will paste lines 1-5 etc. 
+- added some of hayzus's windowing commands
+- added winhelp.m /winhelp
+- fixed scan.1 by youngdrow to format to screen again
+- redid scan.2-6 to format to screen geom now. 
+- added some oper formats by KroN
+- fixed sbar 19 and 6 to show channel in input_prompt correctly
+- added format_actually to whois's
+
+void @ 04/25/03
+- fixed nick completion
+- fixed scan.5 onjoin's formatting
+- redid stat bars without $(bblk) and found out you need to ^L when
+switching sbars  
+
+void @ 04/27/03
+added /config v - away log choice and made the away log formats work
+according to that.
+
+
+void @ 05/02/03 - 1.0kb5
+added nick completion character to /config (/config w) for drogoh.
+redid /format ans to include colors done through /color
+put set AUTO_AWAY off, for Blackjac's patch to BitchX cvs
+put obv's /fctcp alias in which adds help to it
+added BitchX logo to /quit args
+fixed action.m to show channels instead of just nick/msg
+fixed /dict to exit on 501 syntax error, illegal parameters
+redid /fkeys to include binds for fbsd
+fixed some public formats which some vars were wrong
+added botsave to /saveall
+fixed /mw to seperatly add the status_format 
+added status_notify to most of the sbars
+removed window triple off from all sbars which was turning off the topic bar
+added some format_actually_whois lines to whois formats
+
+
+
+void @ 05/15/03 1.0kb7
+- added /config x and y kick logo and quit logo toggle per request of KrOn
+- added new color var (color5) to /color for modeshow colors @<nick? +<nick>
+pre request of power
+- added some color assigns for SentinelX compat
+- made $scdesc default to stock when using default theme
+- fixed on action again
+- fixed /chelp saying /ohelp 
+- redid /mko so it works now
+- added new rkick by power
+- added power's fix for $channame not seeing &chan
+- fixed /scans to show in correct windows when kicked (jabin)

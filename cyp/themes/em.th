@@ -1,0 +1,38 @@
+:void
+:embryonic
+:em
+@auth=[void]
+@desc=[embryonic]
+@name=[em]
+@scdesc=[ ..embryonic]
+@dccbar=[1]
+@mform=[7]
+@smform=[3]
+@ncomp=[12]
+@echostr=[2]
+@svform=[7]
+@aform=[1]
+@kform=[6]
+@top=[on]
+@plistf=[2]
+@iform=[1]
+@fnum=[4]
+@pub=[1]
+@snform=[6]
+@nform=[1]
+@qform=[1]
+@pform=[1]
+@jform=[3]
+@scform=[1]
+@cform=[1]
+@dccform=[4]
+@snf=[3]
+@statbar=[stat.5]
+@c1=[[0m[34m
+@c2=[[1m[34m
+@c3=[[0m[36m
+@c4=[[1m[36m
+@sc1=[[0m[34m
+@sc2=[[1m[34m
+@sc3=[[0m[36m
+@sc4=[[1m[36m

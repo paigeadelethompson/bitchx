@@ -1,0 +1,31 @@
+	
+
+
+  $(hblk)   $(hwht)c$(hwht) .$(hblk) y$(hwht) . $(hblk)p $(hwht). $(hblk)r $(hwht). $(hblk)e $(hwht). $(hblk)s $(hwht). $(hblk)s $(hwht).  	$(hwht)c $(hwht). $(hblk)o $(hwht). $(hblk)n $(hwht).$(hblk) f $(hwht). $(hblk)i $(hwht). $(hblk)g
+  $(hblk) ÚÄÄÄÄ-Ä-----ÄÄ-ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ---ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ-ÄÄÄÄÄÄÄÄÄÄÄÄÄ--ÄÄÄ-ÄÄ
+  $(hblk) | [$(hwht)a$(hblk)]$(cl) ctcp's it takes to bankick       $(hblk)[$(hwht)$[2]CDCC_FLOOD_AFTER$(hblk)]  $(hblk)[$(hwht)f1$(hblk)]$(cl) $[25]fk1
+  $(hblk) | [$(hwht)b$(hblk)]$(cl) autoaway in minutes              $(hblk)[$(hwht)$[3]awayt$(hblk)] $(hblk)[$(hwht)f2$(hblk)]$(cl) $[25]fk2
+  $(hblk) | [$(hwht)c$(hblk)]$(cl) log msgs                         $(hblk)[$(hwht)$tolower($[3]msgl)$(hblk)] $(hblk)[$(hwht)f3$(hblk)]$(cl) $[25]fk3
+  $(hblk) ³ [$(hwht)d$(hblk)]$(cl) log pages                        $(hblk)[$(hwht)$tolower($[3]page)$(hblk)] $(hblk)[$(hwht)f4$(hblk)]$(cl) $[25]fk4
+  $(hblk) ³ [$(hwht)e$(hblk)]$(cl) log ctcp                         $(hblk)[$(hwht)$tolower($[3]ctcpl)$(hblk)] $(hblk)[$(hwht)f5$(hblk)]$(cl) $[25]fk5
+  $(hblk) ³ [$(hwht)f$(hblk)]$(cl) log dcc                          $(hblk)[$(hwht)$tolower($[3]dccl)$(hblk)] $(hblk)[$(hwht)f6$(hblk)]$(cl) $[25]fk6
+  $(hblk) ³ [$(hwht)g$(hblk)]$(cl) log notices                      $(hblk)[$(hwht)$tolower($[3]notl)$(hblk)]
+  $(hblK) : [$(hwht)h$(hblk)]$(cl) log wallops                      $(hblk)[$(hwht)$tolower($[3]wlog)$(hblk)]
+  $(hblk) | [$(hwht)i$(hblk)]$(cl) away msg            $(hblk)[$(cl)$awayr$(hblk)]  
+  $(hblk) ³ [$(hwht)j$(hblk)]$(cl) back msg            $(hblk)[$(cl)$backr$(hblk)]
+  $(hblk) ³ [$(hwht)k$(hblk)]$(cl) channels not to declare away in  $(hblk)[$(hwht)$silentchans$(hblk)]       
+  $(hblk) ³ [$(hwht)l$(hblk)]$(cl) log public when nick is said     $(hblk)[$(hwht)$tolower($plog)$(hblk)]
+  $(hblk) ³ [$(hwht)m$(hblk)]$(cl) random kick msgs                 $(hblk)[$(hwht)$tolower($kreas)$(hblk)]
+  $(hblk) | [$(hwht)n$(hblk)]$(cl) email address                    $(hblk)[$(cl)$(email)$(hblk)]$(cl)
+  $(hblk) : [$(hwht)o$(hblk)]$(cl) auto connect usermodes           $(hblk)[$(cl)$(getumode)$(hblk)]$(cl)
+  $(hblk) | [$(hwht)p$(hblk)]$(cl) show public away                 $(hblk)[$(cl)$(showaway)$(hblk)]$(cl)
+  $(hblk) | [$(hwht)q$(hblk)]$(cl) show password in autobot list    $(hblk)[$(cl)$msar(g!1!off!2!on!$tr(/!//$showtype))$(hblk)]$(cl)
+  $(hblk) | [$(hwht)r$(hblk)]$(cl) toggles auto away on or off      $(hblk)[$(cl)$(togaway)$(hblk)]$(cl) 
+  $(hblk) ³ [$(hwht)s$(hblk)]$(cl) saves all settings               
+  $(hblk) ³ [$(hwht)t$(hblk)]$(cl) <$(hblk)@$(cl)nick> and <$(hblk)+$(cl)nick> in public    $(hblk)[$(cl)$(showop) $(hblk)]$(cl)                      
+  $(hblk) ³ [$(hwht)u$(hblk)]$(cl) log you being kicked             $(hblk)[$(cl)$(klog)$(hblk)]$(cl) 
+  $(hblk) ³ [$(hwht)v$(hblk)]$(cl) away logging                     $(hblk)[$(cl)$(awayl)$(hblk)]$(cl) 
+  $(hblk) ³ [$(hwht)w$(hblk)]$(cl) nick completion character        $(hblk)[$(cl)$(_ncompc)$(hblk)]$(cl)
+  $(hblk) ³ [$(hwht)x$(hblk)]$(cl) kick logo shown                  $(hblk)[$(cl)$(_klogotog)$(hblk)]$(cl) 
+  $(hblk) ³ [$(hwht)y$(hblk)]$(cl) quit logo shown                  $(hblk)[$(cl)$(_quittog)$(hblk)]$(cl)
+  $(hblk) ÀÄ---ÄÄÄÄÄ--Ä-Ä----ÄÄÄÄÄÄÄÄÄÄÄ--ÄÄÄÄÄÄÄÄÄÄÄÄÄ----ÄÄÄÄÄÄÄÄÄÄÄ-----ÄÄÄÄÄ

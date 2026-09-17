@@ -1,0 +1,52 @@
+# another one stole from argon..
+# :>
+
+alias stat20 {
+^set -status_format
+^set status_format1 $(sc1)Ú$(hblk)Ä ..$(cl)%*%@$(sc1)%N%#$(hblk)Ä%>Ä%F%M$(hblk)Ä\[%C%+$(hblk)\]$(cl)$(hblk)Ä$(sc1)Ä$(sc2)¿ $(cl)
+^set status_format2 $(sc2)À$(sc1)Ä$(hblk)Ä..$(sc1)lag$(hblk)/$(sc1)%L $(hblk)..$(sc1)win$(sc2)/$(sc1)%R  %!  %> %Q%H $(hblk)..\($(sc1)%T$(hblk)\)ÄÄ$(sc1)Ù $(cl)
+^set status_format3 $(cl) $(sc1)topic$(hblk): $(cl)%- %>
+^set status_hold $(c2) ..$(sc1)hold
+^set status_channel $(cl)%C
+^set status_lag %L
+^set status_mail $(hblk)Ä[$(sc1)mail$(hblk)/$(sc2)%M$(hblk)]$(cl)
+^set status_mode $(hblk)\($(sc1)+$(cl)%+$(hblk)\)$(cl)
+^set status_nick $(sc1)%N
+^set status_notify $(hblk)Ä[$(sc1)act$(hblk)/$(sc3)%F$(c.hk)$(hblk)]
+^set status_no_repeat OFF
+^set status_oper $(sc3)*
+^set status_query $(hblk) ..$(sc1)qu$(hblk)/$(sc2)%Q
+^set status_topic $(cl)%-
+^set status_umode $(hblk)\($(sc2)+$(sc1)%#$(hblk)\)$(cl)
+^set status_users $(hblk)..$(sc1)ops$(hblk)/$(sc4)%! $(sc1)nops$(hblk)/$(sc4)%! $(cl)
+^set status_voice $(sc1)+$(cl)
+^set status_chanop $(sc2)@$(cl)
+^set input_prompt $(cl)
+}
+
+alias wsetupdate {
+^wset * status_format $status_format
+^wset * status_format1 $status_format1
+^wset * status_format2 $status_format2
+^wset * status_format3 $status_format3
+^wset * status_hold $status_hold
+^wset * status_lag $status_lag
+^wset * status_mail $status_mail
+^wset * status_mode $status_mode
+^wset * status_nick $status_nick
+^wset * status_notify $status_notify
+^wset * status_oper $status_oper
+^wset * status_query $status_query
+^wset * status_topic $status_topic
+^wset * status_umode $status_umode
+^wset * status_users $status_users
+^wset * status_voice $status_voice
+^wset * status_chanop $status_chanop
+^wset * status_channel $status_channel
+}
+
+^set status_does_expandos OFF
+stat20
+wsetupdate
+^window triple off
+dotopwin

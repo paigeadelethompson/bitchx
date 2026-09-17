@@ -1,0 +1,227 @@
+-format_back
+-format_away
+eval set timestamp_string $(hblk)[$(cl)%I:%M%p$(hblk)] 
+FORMAT_381 $G %WYou%n are now a %cIRC%n operator
+FORMAT_391 $G %K[%c$1%K]%n Channel is full
+FORMAT_443 $G %K[%c$1%K]%n Channel is full
+FORMAT_471 $G %K[%c$1%K]%n Channel is full
+FORMAT_473 $G %K[%c$1%K]%n Invite only channel
+FORMAT_474 $G %K[%c$1%K]%n Banned from channel
+FORMAT_475 $G %K[%c$1%K]%n Bad channel key
+FORMAT_476 $G %K[%c$1%K]%n You are not opped
+FORMAT_ACTION %@%Kð %W$1 %n$4-
+FORMAT_ACTION_AR %@%Kð %C$1 %n$4-
+FORMAT_ACTION_OTHER %@%K* %n>%c$1 %n$3-
+FORMAT_ACTION_OTHER_AR %@%K* %n>%c$1 %n$3-
+FORMAT_ACTION_USER %@%K* %y>%c$1 %n$3-
+FORMAT_ACTION_USER_AR %@%K* %n>%c$1 %n$3-
+FORMAT_ALIAS Alias $[20.]0 $1-
+FORMAT_ASSIGN Assign $[20.]0 $1-
+FORMAT_AWAY  is away: ($3-) $1 $2
+FORMAT_BACK is back from the dead. Gone $1 hrs $2 min $3 secs
+FORMAT_BANS $[2]0 $[10]1 $[10]3 $[-5]numdiff($time() $4)  $2
+FORMAT_BANS_HEADER #  Channel    SetBy        Sec  Ban
+FORMAT_BITCH %RBitch Mode Activated%n $1 $4 $5 on $3
+FORMAT_BOT $[2]0 $[2]1 $[11]2 $[10]3 $4
+FORMAT_BOT_FOOTER There are $1 on the BotList
+FORMAT_BOT_HEADER Aop Prot Bot         Channel    Hostname
+FORMAT_CHANNEL_SIGNOFF $G %nsignoff %W$1%n: $3 %K(%n$4-%K)
+FORMAT_CONNECT $G Connecting to server $1/%c$2%n
+FORMAT_C %r$[-14]1 %R$[-20.]0 %w$[-5]2-
+FORMAT_CTCP $G $(c1)$1 $(hblk)($(c2)$2$(hblk)) $(cl)requested $(c1)$4- $(cl)from $3
+FORMAT_CTCP_CLOAK $G $(hblk)<$(c3)$1$(hblk)!$(wht)$2$(hblk)>$(wht) requested $4- $(cl)from $(hwht)$3
+FORMAT_CTCP_CLOAK_FUNC $(hblk)>$(cl)>$(hwht)> $(hcyn)$1 $(hblk)[$(cyn)$2$(hblk)]$(cyn) requested $4- from $3
+FORMAT_CTCP_CLOAK_FUNC_USER $(hblk)>$(cl)>$(hwht)> $(hcyn)$1 $(hblk)[$(cyn)$2$(hblk)]$(cyn) requested $4- from you
+FORMAT_CTCP_CLOAK_UNKNOWN $(hblk)>$(cl)>$(hwht)> $(hcyn)$1 $(hblk)[$(cyn)$2$(hblk)]$(cyn) requested unknown ctcp $4- from $3
+FORMAT_CTCP_CLOAK_UNKNOWN_USER $G $(hblk)<$(c3)$1$(hblk)!$(hwht)$2$(hblk)> $(cl)requested unknown ctcp $(hwht)$4- $(cl)from $(hwht)$3
+FORMAT_CTCP_CLOAK_USER $(hblk)>$(cl)>$(hwht)> $(hcyn)$1 $(hblk)[$(cyn)$2$(hblk)]$(cyn) requested $4- from you
+FORMAT_CTCP_FUNC $(hblk)>$(cl)>$(hwht)> %G$1 $(hblk)[%g$2$(hblk)]%g requested $4- from $3
+FORMAT_CTCP_FUNC_USER $(hblk)>$(cl)>$(hwht)> %G$1 $(hblk)[%g$2$(hblk)]%g requested $4- from you
+FORMAT_CTCP_REPLY $G $(cl)CTCP $(hwht)$3 $(cl)reply from $(cl)$1: $4-
+FORMAT_CTCP_UNKNOWN $G $(hblk)<$(c3)$1$(hblk)!$(hwht)$2$(hblk)> $(cl)requested unknown ctcp $(hwht)$4- $(cl)from $(hwht)$3
+FORMAT_CTCP_UNKNOWN_USER $(hblk)>$(cl)>$(hwht)> %G$1 $(hblk)[%g$2$(hblk)]%g requested unknown you
+FORMAT_CTCP_FUNC $(hblk)>$(cl)>$(hwht)> %G$1 $(hblk)[%g$2$(hblk)]%g requested $4- from $3
+FORMAT_CTCP_FUNC_USER $(hblk)>$(cl)>$(hwht)> %G$1 $(hblk)[%g$2$(hblk)]%g requested $4- from you
+FORMAT_CTCP_REPLY $G $(cl)CTCP $(hwht)$3 $(cl)reply from $(cl)$1: $4-
+FORMAT_CTCP_UNKNOWN $G $(hblk)<$(c3)$1$(hblk)!$(hwht)$2$(hblk)> $(cl) requested unknown ctcp $(hwht)$4- $(cl)from $(hwht)$3
+FORMAT_CTCP_UNKNOWN_USER $(hblk)>$(cl)>$(hwht)> %G$1 $(hblk)[%g$2$(hblk)]%g requested unknown ctcp $4- from %g$3
+FORMAT_CTCP_USER $G $(c1)$1 $(hblk)($(c2)$2$(hblk)) $(cl)requested $(c3)$4- $(cl)from $3
+FORMAT_DCC
+FORMAT_DCC_CHAT %@%K[$(c2)$1%K($(c1)dcc%K)] %n$3-
+FORMAT_DCC_CONNECT $G $(c2)DCC%n $1 %nconnection with %W$2%K[$(c2)$4, port $5%K]%n established
+FORMAT_DCC_ERROR $G %RDCC%n lost %w$1%w %rto $2 %K[%w$3-%K]
+FORMAT_DCC_LOST $G %@$(c2)DCC%n %W$1%n $(hblk):$(c1)$2%n %K[%C$3%K]%n $4 $5 completed in $6 secs %K(%W$7 $8/sec%K)
+FORMAT_DCC_REQUEST $G %@$(c2)DCC%n $1 %K(%n$2%K)%n request from %W$3%K[$(c1)$4 [$5:$6]%K]%n $8 $7
+FORMAT_DESYNC $G $1 is desynced from $2 at $0
+FORMAT_DISCONNECT $G Use %G/Server%n to connect to a server
+FORMAT_ENCRYPTED_NOTICE %K-%Y$1%K(%p$2%K)-%n $3-
+FORMAT_ENCRYPTED_PRIVMSG %K[%Y$1%K(%p$2%K)]%n $3-
+FORMAT_FLOOD %Y$1%n flood detected from %G$2%K(%g$3%K)%n on %K[%G$4%K]
+FORMAT_FRIEND_JOIN $G %C$1 %K[%c$2%K]%n has joined $3
+FORMAT_HELP $0-
+FORMAT_HOOK $0-
+FORMAT_IGNORE_INVITE %K>%n>%W> You have been invited to $1-
+FORMAT_IGNORE_MSG %K[%P$1%P$2%K(%p$3%K)]%n $4-
+FORMAT_IGNORE_MSG_AWAY %K[%P$1%P$2%K(%p$3%K)]%n $4-
+FORMAT_IGNORE_NOTICE %K-%P$2%K(%p$3%K)-%n $4-
+FORMAT_IGNORE_WALL %K%P$1%n $2-
+FORMAT_INVITE $G $(hblk)<$(c1)$1$(hblk)($(c2)invite$(hblk).$(c1)$2$(hblk))$(hblk)>
+FORMAT_INVITE_USER $G inviting $(hwht)$1$(cl) to $2-
+FORMAT_JOIN $G %C$1 %K[%c$2%K]%n has joined $3
+FORMAT_KICK $G %n$3 was kicked off $2 by %c$1 %K(%n$4-%K)
+FORMAT_KICK_USER %K>%n>%W> %WYou%n have been kicked off %c$2%n by %c$1 %K(%n$4-%K)
+FORMAT_KILL %K>%n>%W> %RYou have been killed by $1 for $2-
+FORMAT_LEAVE $G $1 %K[%w$2%K]%n has left $3 %K[%W$4%K]
+FORMAT_LINKS %K³%n$[24]0%K³ ³%n$[24]1%K³ ³%n$[3]2%K³ ³%n$[13]3%K³
+FORMAT_LIST $[12]1 $[-5]2   $[40]3-
+FORMAT_MAIL %K>%n>%W> You have new Mail
+FORMAT_MODE $G %nmode%K/%c$3 %K[%W$4-%K]%n by %W$1
+FORMAT_MODE_CHANNEL $G %nmode%K/%c$3 %K[%W$4-%K]%n by %W$1
+FORMAT_MSG $(hblk)[$(c2)$1$(hblk)($(c1)$2$(hblk))]$(cl) $3-
+FORMAT_MSGCOUNT [$0-]
+FORMAT_MSGLOG [$[8]0] [$1] - $2-
+FORMAT_MSG_GROUP %K-%P$1%K:%p$2%K-%n $3-
+FORMAT_NAMES $G %K[%GUsers%K(%g$1%K:%g$2%K)]%c $3
+FORMAT_NAMES_BANNER
+FORMAT_NAMES_BOT $G %K[%GBots%K(%g$1%K:%g$2%K)]%c $3
+FORMAT_NAMES_BOTCOLOR %K[%C$0%G$[10]1%K]
+FORMAT_NAMES_FOOTER
+FORMAT_NAMES_FRIEND $G %K[%GFriends%K(%g$1%K:%g$2%K)]%c $3
+FORMAT_NAMES_FRIENDCOLOR %K[%C$0%Y$[10]1%K]
+FORMAT_NAMES_IRCOP $G %K[%GIrcOps%K(%g$1%K:%g$2%K)]%c $3
+FORMAT_NAMES_NICKCOLOR %K[%B $[10]1%K]
+FORMAT_NAMES_NONOP $G %K[%GNonChanOps%K(%g$1%K:%g$2%K)]%c $3
+FORMAT_NAMES_OP $G %K[%GChanOps%K(%g$1%K:%g$2%K)]%c $3
+FORMAT_NAMES_OPCOLOR %K[%C$0%n%B$[10]1%K]
+FORMAT_NAMES_SHIT $G %K[%MShitUsers%K(%m$1%K:%m$2%K)]%c $3
+FORMAT_NAMES_SHITCOLOR %K[%C$0%n%R$[10]1%K]
+FORMAT_NAMES_VOICE $G %K[%MVoiceUsers%K(%m$1%K:%m$2%K)]%c $3
+FORMAT_NAMES_VOICECOLOR %K[%Mv%B$[10]1%K]
+FORMAT_NETADD $G %nAdded: %W$1 $2
+FORMAT_NETSPLIT $G %nnetsplit detected: %W$1%n split from %W$2 %K[%c$0%K]
+FORMAT_NETJOIN $G %Wn%netjoined%W: %c$1 %K->%c $2
+FORMAT_NETSPLIT_HEADER
+FORMAT_NICKNAME $G %W$1 %nis now known as %c$3
+FORMAT_NICKNAME_OTHER $G %W$1 %nis now known as %c$4
+FORMAT_NICKNAME_USER %K>%n>%W> %WYou%K(%n$1%K)%n are now known as %c$3
+FORMAT_NICK_AUTO $0:$1-
+FORMAT_NICK_COMP $0:$1-
+FORMAT_NICK_MSG $0 $1 $2-
+FORMAT_NONICK %W$1%K:%n $3-
+FORMAT_NOTE ($0) ($1) ($2) ($3) ($4) ($5-)
+FORMAT_NOTICE $(hblk)-$(c1)$1$(hblk)($(c2)$2$(hblk))-$(cl) $3-
+FORMAT_NOTIFY_OFF $[10]0 $[35]1 $[-6]2 $[-10]3 $4 $5
+FORMAT_NOTIFY_ON $[10]0 $[35]1 $[-6]2 $[-10]3 $4-
+
+FORMAT_OPER %C$1 %K[%c$2%K]%n is now %Wan%w %cIRC%n operator
+FORMAT_OV [40m%S %>[1;30m[[0;36mOper[1;36mView[1;30;40m] 
+FORMAT_PUBLIC %@$(hblk)<%n$1$(hblk)>%n $3-
+FORMAT_PUBLIC_AR %@%b<%Y$1%b>%n $3-
+FORMAT_PUBLIC_MSG %@%b(%n$1%K/%n$3%b)%n $4-
+FORMAT_PUBLIC_MSG_AR %@%b(%Y$1%K/%Y$3%b)%n $4-
+FORMAT_PUBLIC_NOTICE %@%K-%P$1%K:%p$3%K-%n $4-
+FORMAT_PUBLIC_NOTICE_AR %@%K-%G$1%K:%g$3%K-%n $4-
+FORMAT_PUBLIC_OTHER %@%b<%n$1%K:%n$2%b>%n $3-
+FORMAT_PUBLIC_OTHER_AR %@%b<%Y$1%K:%n$2%b>%n $3-
+FORMAT_REL %K[%rmsg->$1%K]%n $4-
+FORMAT_RELM %K[%P%P$1%K(%p$2%K)]%n $4-
+FORMAT_RELN %K-%P$1%K(%p$2%K)-%n $4-
+FORMAT_RELS $1-
+FORMAT_RELSM %K[%rmsg%K(%R$1%K)] %n$2-
+FORMAT_RELSN %K[%rnotice%K(%R$1%K)] %n$2-
+FORMAT_SEND_ACTION %Kð %W$1 %n$3-
+FORMAT_SEND_ACTION_OTHER %Kð %n-> %W$1%n/%c$2 %n$3-
+FORMAT_SEND_AWAY [Away ($strftime($1 %a %d %I:%M%p))] [Current ($strftime($0 %a $(blu)%d %I:%M%p))] 
+FORMAT_SEND_CTCP $(hblk)¯$(hblk)($(c1)ctcp$(hblk)!$(hwht)$1$(hblk)) $(cl)$2 $3
+FORMAT_SEND_DCC_CHAT %K[$(c3)dcc%K($(c4)$1%K)] %n$2-
+FORMAT_SEND_MSG $(hblk)¯[$(c1)msg$(hblk)($(c2)$1$(hblk))] $(wht)$3-
+format_send_notice  %K¯[$(c1)notice%K($(c2)$1%K)] %n$3-
+FORMAT_SEND_PUBLIC $(c1)<%n$2$(c1)>%n $3-
+FORMAT_SEND_PUBLIC_OTHER %p<%n$2%K:%n$1%p>%n $3-
+FORMAT_SERVER $(c2)$(cl) $1: $2-
+FORMAT_SERVER_MSG1 $(c2)$(cl) $1: $2-
+FORMAT_SERVER_MSG1_FROM $(c2)$(cl) $1: $2-
+FORMAT_SERVER_MSG2 $(c2)$(cl) $1-
+FORMAT_SERVER_MSG2_FROM $(c2)$(cl) $1-
+FORMAT_SERVER_NOTICE $(hblk)!$(c3)$1$(c1)$(cl) $2-
+FORMAT_SERVER_NOTICE_BOT Possible bot: $(hcyn)$1 $(hblk)[$(cyn)$2-$(hblk)]$(cl)
+FORMAT_SERVER_NOTICE_BOT1 Possible $1 bot: $(hcyn)$2 $(hblk)[$(cyn)$3-$(hblk)]$(cl)
+FORMAT_SERVER_NOTICE_BOT_ALARM $1 alarm activated: $(hcyn)$2 $(hblk)[$(cyn)$3-$(hblk)]$(cl)
+FORMAT_SERVER_NOTICE_CLIENT_CO Client Connecting: $(hcyn)$1 $(hblk)[$(cyn)$2-$(hblk)]$(cl)
+FORMAT_SERVER_NOTICE_CLIENT_EX Client Exiting: $(hcyn)$1 $(hblk)[$(cyn)$2-$(hblk)]$(cl)
+FORMAT_SERVER_NOTICE_CLIENT_IN Invalid username: $(hcyn)$1 $(hblk)[$(cyn)$2-$(hblk)]$(cl)
+FORMAT_SERVER_NOTICE_CLIENT_TE Terminating client for excess flood $(hcyn)$1$(hblk) [$(cyn)$2-$(hblk)]$(cl)
+FORMAT_SERVER_NOTICE_FAKE Fake Mode detected on $1 -> $2-
+FORMAT_SERVER_NOTICE_GLINE $(hwht)$1$(cl) added a new K-Line $(hblk)[$(cyn)$2$(hblk)]$(cl) from $3 for $4-
+FORMAT_SERVER_NOTICE_KILL Foreign OperKill: $(hwht)$1$(cl) killed $(cyn)$2$(cl) $(hblk)($(cl)$3-$(hblk))$(cl)
+FORMAT_SERVER_NOTICE_KLINE $(hwht)$1$(cl) added a new K-Line $(hblk)[$(cyn)$2$(hblk)]$(cl) for $3
+FORMAT_SERVER_NOTICE_NICKC Nick collision: $(hwht)$1$(cl) killed $(cyn)$2$(cl) $(hblk)($(cl)$3-$(hblk))$(cl)
+FORMAT_SERVER_NOTICE_OPER $(hcyn)$1 $(hblk)[$(cyn)$2$(hblk)]$(cl) is now $(hwht)a$(wht) %GIRC$(cl) whore
+FORMAT_SERVER_NOTICE_REHASH $(hwht)$1$(cl) is rehashing the Server config file
+FORMAT_SERVER_NOTICE_STATS Stats $1: $(hcyn)$2 $(hblk)[$(cyn)$3-$(hblk)]$(cl)
+FORMAT_SERVER_NOTICE_TRAFFIC_H Entering high-traffic mode $(hblk)($(cl)$1 > $2-$(hblk))$(cl)
+FORMAT_SERVER_NOTICE_TRAFFIC_N Resuming standard operation $(hblk)($(cl)$1 $2 $3-$(hblk))$(cl)
+FORMAT_SERVER_NOTICE_UNAUTH Unauthorized Connection from $1-
+FORMAT_SET %n$tolower($0)%K$repeat(${30-strlen($0)} .)%n $1-
+FORMAT_SET_NOVALUE %n$tolower($0)%K$repeat(${30-strlen($0)} .)%n has no value
+FORMAT_SHITLIST  $[3]0 $[34]1 $[10]2  $3-
+FORMAT_SHITLIST_FOOTER There are $1 users on the shitlist
+FORMAT_SHITLIST_HEADER  lvl nick!user@host                     channels   reason
+FORMAT_SIGNOFF $G %nsignoff: %W$1 %K(%n$3-%K)
+FORMAT_SILENCE $G %RWe are $1 silencing $2 at $0
+FORMAT_SMODE $G $(hblk)<$(c1)$1$(hblk)($(c1)servermode$(hblk).$(c1)$3$(hblk))$(hblk)> $(hblk)[$(hwht)$4-$(hblk)]
+FORMAT_STATUS $0-
+FORMAT_STATUS1 $0-
+FORMAT_STATUS2 $0-
+FORMAT_STATUS3 $0-
+FORMAT_TIMER $G $[-5]0 $[-10]1 $[-6]2 $3-
+FORMAT_TOPIC $G Topic for %c$1%K:%n $2-
+FORMAT_TOPIC_CHANGE $G %W.%n.%K[%Wt%nopic%K/%c$2%K:%n$1%K]:%n $3-
+-FORMAT_TOPIC_CHANGE_HEADER
+FORMAT_TOPIC_BY $G %ntopic set by %c$2%K [%c$stime($3)%K]
+FORMAT_TOPIC_UN $G %ntopic unset by $1 on $2
+FORMAT_TRACE_OPER %R$1%n %K[%n$3%K]
+FORMAT_TRACE_SERVER %R$1%n $2 $3 $4 %K[%n$5%K]%n $6-
+FORMAT_TRACE_USER %R$1%n %K[%n$3%K]
+FORMAT_USAGE $G Usage: /$0  $1-
+FORMAT_USERLIST $[16]0 $[10]1 $[-10]2   $[-25]3 $[10]4
+FORMAT_USERLIST_FOOTER There are $1 users on the userlist
+FORMAT_USERLIST_HEADER level            nick       password     host                      channels
+FORMAT_USERMODE $G %nMode change %K[%W$4-%K]%n for user %c$3
+FORMAT_USERS_BOT
+FORMAT_USERS_HEADER %K[ %WC%nhannel  %K][ %WN%wickname %K][%n %Wu%wser@host                       %K][%n %Wl%wevel         %K]
+FORMAT_USERS_SHIT %K[%n$[10]1%K]%K[%n%C$4%B$[9]2%K]%K[%n%r$[33]3%K]%K[%n$[-16]0%K]
+FORMAT_USERS_USER %K[%n$[10]1%K]%K[%n%C$4%B$[9]2%K]%K[%n%B$[33]3%K]%K[%n$0%K]
+FORMAT_WALL %@$(hblk)!$(c1)$1:$2$(hblk)!%n $3-
+FORMAT_WALLOP %@$(hblk)!$(c1)$1$2$(hblk)!%n $3-
+FORMAT_WALL_AR %@$(hblk)!$(c1)$1:$2$(hblk)!%n $3-
+FORMAT_WHO $(c1)$[10]0 $(c2)$[10]1%w $(c3)$[3]2 %w$3$(c4)@%w$4 ($6-)
+FORMAT_WHOIS_ADMIN %K| %Wa%ndmin    : $0 - $1-
+FORMAT_WHOIS_AWAY %K| %Wa%nway     : $0 - $1-
+FORMAT_WHOIS_BOT %g| %Wb%not      : A:$0 P:$1 [$2] $3-
+FORMAT_WHOIS_CHANNELS %g| %Wc%nhannels : $0-
+FORMAT_WHOIS_FOOTER $(hblk)ÀÄÄÄÄÄÄÄ$(c1)ÄÄÄÄ$(hblk)ÄÄÄÄ$(c1)ÄÄ$(hblk)ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ ÄÄÄÄÄ-
+FORMAT_WHOIS_FRIEND %g| %Wf%nriend   : F:$0 $1-
+FORMAT_WHOIS_HEADER %GÚÄÄÄÄÄ---%gÄ%G--%gÄÄ%G-%gÄÄÄÄÄÄ---%KÄ%g--%KÄÄ%g-%KÄÄÄÄÄÄÄÄÄ--- --  -
+FORMAT_WHOIS_HELP %K| %Wh%nelp     : $0 - $1-
+FORMAT_WHOIS_IDLE %K: %Wi%ndle     : $0 hours $1 mins $2 secs (signon: $stime($3))
+FORMAT_WHOIS_NAME %G³ %Wi%nrcname  : $0-
+FORMAT_WHOIS_NICK %G| %W$0 %K(%n$1@$2%K) %K(%W$3-%K)
+FORMAT_WHOIS_OPER %K| %Wo%nperator : $0 $1-
+FORMAT_WHOIS_REGISTER %K| %Wr%negister : $0 - $1-
+FORMAT_WHOIS_SERVER %K³ %Ws%nerver   : $0 ($1-)
+FORMAT_WHOIS_SERVICE %K| %Ws%nervice  : $0 - $1-
+FORMAT_WHOIS_SHIT %g| %Ws%nhit     : L:$0 [$1] $2 $3-
+FORMAT_WHOIS_SIGNON %K %Ws%nignon   : $0-
+
+FORMAT_WHOLEFT_HEADER   $(hwht)Ú$(cl)Ä$(c1)Ä$(cl)ÄÄÄÄÄ$(c1)ÄÄÄ$(c2)ÄÄÄ$(c1)Ä$(cl)Ä$(hblk)Ä-           -     Ä -$(cl)
+FORMAT_WHOLEFT_FOOTER   $(c1)À$(c3)Ä$(hblk)-                            ÄÄ             -$(cl)
+FORMAT_WHOLEFT_USER $cparse(" %K[%n³%K]%c $[-10]0%K!%n$numdots(20 $1) %K[%c$numdots(12 $2)%K]%n $strip($$ $[20]4) %K[%c$3s%K]%n"))
+FORMAT_WIDELIST $1-
+FORMAT_WINDOW $0-
+FORMAT_SEND_AWAY [Away ($strftime($1 %a %d %I:%M%p))] [Current ($strftime($0 %a $(blu)%d %I:%M%p))] [email:$(email)]
+FORMAT_WHO $(c1)$[10]0 $(c2)$[10]1%w $(c3)$[20]5 %w$3$(c4)@%w$4
+FORMAT_NOTIFY_SIGNOFF $G $(c1)Signoff%n by $(c2)$1$(c1)!$(cl)$msar(gÿ@ÿ$(hblk)@$(cl)ÿ.ÿ$(hblk).$(cl)ÿ$tr(/ÿ//$2))%n $(cyn)@$(cl) $(c1)$0
+FORMAT_NOTIFY_SIGNON $G $(c1)Signon%n by $(c2)$1$(c1)!$(cl)$msar(gÿ@ÿ$(hblk)@$(cl)ÿ.ÿ$(hblk).$(cl)ÿ$tr(/ÿ//$2))%n $(hblk)@$(cl) $(c1)$0
+FORMAT_USERS %K[%n$[10]1%K]%K[%n$(c1)$4$(c2)$[9]2%K]%K[%n$[33]3%K][%n$0%K]
+FORMAT_USERS_USER %K[%n$[10]1%K]%K[%n$(c1)$4$(c2)$[9]2%K]%K[%n$[33]3%K][%n$0%K]

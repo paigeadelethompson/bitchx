@@ -1,0 +1,271 @@
+#
+#           e88~~\ Y88b  / 888-~88e  888-~\  e88~~8e   d88~\  d88~\
+#          d888     Y888/  888  888b 888    d888  88b C888   C888
+#          8888      Y8/   888  8888 888    8888__888  Y88b   Y88b
+#          Y888       Y    888  888P 888    Y888    ,   888D   888D
+#           "88__/   /     888-_88"  888     "88___/  \_88P  \_88P
+#                  _/      888
+#
+#		 cypress % a group project by void and codelogic
+if (!bitchx(1)) { echo well, you need BitchX to run cypress;quit i am lame }
+if (V < 19990221) { echo cypress was designed for BitchX 75p3 or higher, please get this from #BitchX on EFnet}
+
+::color assigns
+
+@ cl    = [\[0m]
+@ blk   = [\[0m\\[30m]
+@ blu   = [\[0m\\[34m]
+@ grn   = [\[0m\\[32m]
+@ cyn   = [\[0m\\[36m]
+@ red   = [\[0m\\[31m]
+@ mag   = [\[0m\\[35m]
+@ yel   = [\[0m\\[33m]
+@ wht   = [\[0m\\[37m]
+@ hblk  = [\[1m\\[30m]
+@ hblu  = [\[1m\\[34m]
+@ hgrn  = [\[1m\\[32m]
+@ hcyn  = [\[1m\\[36m]
+@ hred  = [\[1m\\[31m]
+@ hmag  = [\[1m\\[35m]
+@ hyel  = [\[1m\\[33m]
+@ hwht  = [\[1m\\[37m]
+@ bwht  = [\[47m]
+@ bmag  = [\[45m]
+@ bblu  = [\[44m]
+@ bred  = [\[41m]
+@ bblk  = [\[40m]
+@ bgrn  = [\[42m]
+@ byel  = [\[43m]
+@ bcyn  = [\[46m]
+@ adf=0
+@ percent=0
+# [0m
+^assign clr [0m
+^assign pur [0m[35m
+^assign hpur [1m[35m
+^assign bpur [45m
+
+@_boxhead = [ $(hwht)Ú$(cl)Ä$$(c1)Ä$(cl)ÄÄÄÄÄ$$(c1)ÄÄÄ$$(c2)ÄÄÄ$$(c1)Ä$(cl)Ä$(hblk)Ä-           -     Ä     -$(cl)]
+@_boxfoot = [ $$(c1)À$$(c3)Ä$(hblk)-                            ÄÄ             -$(cl)]
+
+
+alias oof {@adf=adf+1;@percent=percent+5;eval set input_prompt $(hblk)[$(cyn)$[20]repeat($adf þ)$(hblk)] \($(cl)$(percent)$(hwht)%%$(hblk)\)$(cl)}
+
+oof
+oof
+::various sets
+set AUTO_AWAY off
+set msglog off
+set show_channel_names off
+set nick_completion off
+set dcc_bar_type 1
+::various assigns
+@ altnick       = [$(N)_]
+@ getumode      = [+iw]
+@ csavefile     = [~/.cyp.col]
+@ fk1           = [bhelp index]
+@ fk2           = [chelp]
+@ fk3           = [scan]
+@ fk4           = [chops]
+@ fk5           = [nops]
+@ fk6           = [dcc stats]
+@ c1            = cyn
+@ c2            = hcyn
+@ c3            = cyn
+@ c4            = hcyn
+@ c5            = cyn
+@ sc1           = cyn
+@ sc2           = hcyn
+@ sc3           = cyn
+@ sc4           = hcyn
+@ cyplog        = [cyp.log]
+@ awayl         = [on]
+@ awayr         = [not here]
+@ backr         = [back again]
+@ awayt         = 15
+@ email         = [cypress@owns.me.org]
+@ plog          = [on]
+@ ctcpl         = [on]
+@ msgl          = [on]
+@ notl          = [on]
+@ dccl          = [on]
+@ wlog          = [on]
+@ kreas         = [on]
+@ showop        = [off]
+@ klog          = [on]
+@ _ncompc       = [:]
+@ _klogotog     = [on]
+@_quittog       = [on]
+@ snf           = 3
+@ mform         = 2
+@ smform        = 2
+@ ncomp         = 14
+@ echostr       = 2
+@ svform        = 4
+@ aform         = 1
+@ kform         = 5
+@ plistf        = 2
+@ nform         = 1
+@ snform        = 6
+@ qform         = 1
+@ jform         = 3
+@ iform         = 1
+@ pform         = 1
+@ bform         = 1
+@ page          = [on]
+@ fnum          = 4
+@ cform         = 1
+@ scform        = 1
+@ dccform       = 1
+@ pub           = 1
+@ top           = [on]
+@ qlogo         = 1
+@ abot          = 1
+@ showtype      = 1
+@ mdform        = 1
+@ statbar       = [stat.1]
+@ savefile      = [~/.cpsave]
+@ fsavefile     = [~/.cyp.fsave]
+@ scriptname    = [cypress]
+@ scriptversion = [1.0k]
+@ scdesc        = [stock]
+@ showaway      = [off]
+@ togaway       = [on]
+@ dccbar        = 1
+@ tstamp        = 1
+^eval load $csavefile
+^eval load $fsavefile
+
+^eval fset format_version $tolower($J) $tolower($2 $3)\($uname(%n)\) $(scriptname).$(scriptversion)
+@ loadpath      = [/cyp/]
+
+
+::minor alias's
+
+alias aop {if ([$*]) {
+	fe ($mychannels()) chan {
+		if (ischanop($N $chan) && onchannel($0 $chan) && !ischanop($0 $chan)) {
+			mode $chan o $0}
+				}} {xecho -b -l crap usage: /aop <nick>;xecho -b -l crap description: ops a user on all your common channels}
+}
+
+
+
+## because I love power 
+alias cops {
+	^on who -*
+		^on ^who * {
+			if ([$[2]2]==[G*] ^^ [$[2]2]==[H*]) {
+				xecho -w $winchan $cparse($(c1) $[9]0) $cparse($(c2) $[9]1) $cparse($(c1) $[20]5) $(cl)$3$cparse($(c1)@)$(cl)$4  
+			}
+		}
+			who $C
+				wait 
+				^on who -*
+					^on ^who * {
+						xecho -w $winchan $cparse($(c1) $[9]0) $cparse($(c2) $[9]1) $cparse($(c1) $[20]5) $(cl)$3$cparse($(c1)@)$(cl)$4  
+					}
+}
+
+alias _center {
+@ number = (word(0 $geom()) - printlen($stripansicodes($1-))) / 2
+xecho -w $0 $repeat($number  )$1-
+}
+alias n names $C
+alias cfparse {eval return $(cparse("$($0))")}
+alias bankick bk
+alias v voice
+alias rn randnick
+alias csc clear;sc
+alias cig ignore $C all
+alias not untopic
+alias 4v mode $C +vvvv $0 $0 $0 $0
+alias mreop {
+op $chops()
+}
+alias fctcp if (![$0]) {
+	xecho -b usage: /fctcp nick/channel <arguements>
+	}{
+	notice $0 $chr(1)$1-$chr(1)
+}
+
+alias sync {
+        @ :cmodes=M
+        /c +m - $cmodes;/c -m + $cmodes}
+alias oecho echo $cparse("$*")
+alias owecho xecho -w $winnum() $cparse("$*")
+alias obecho xecho -b $cparse("$*")
+
+oof
+oof
+oof
+oof
+oof
+oof
+oof
+/* module load */
+^eval load $savefile
+^eval load $twiddle($HOME)$(loadpath)sc/scan.$snf
+^eval load $twiddle($HOME)$(loadpath)sc/scan
+oof
+
+alias _moduleload {
+fe ($glob(~/cyp/modules\/*.m)) mod {
+        ^load $mod}}
+
+^_moduleload
+
+oof
+oof
+alias _fsetload {
+
+if (fexist(~/cyp/formats/fsets)) {
+        @fsets = open(~/cyp/formats/fsets R T)
+        while (!eof($fsets)) {
+                ^fset $read($fsets)
+        }
+}}
+
+^_fsetload
+oof
+^eval load $twiddle($HOME)$(loadpath)formats/dccformats
+^eval load $twiddle($HOME)$(loadpath)formats/fsets  
+oof
+oof
+^eval load $twiddle($HOME)$(loadpath)formats/arrays
+oof
+^eval load $twiddle($HOME)$(loadpath)wis/whois
+^eval dccform$(dccform)
+^eval load $twiddle($HOME)$(loadpath)wis/whois.$fnum
+
+oof
+oof
+oof
+oof
+^randcl
+@ adf = 0
+^do.formatupdate
+fset -format_away
+fset -format_back
+alias quit {
+	if ([$0]) { 	
+		if (_quittog==[on]) {
+		eval //quit BitchX: $$quitlogo $*
+		}{
+		eval //quit $*
+		echo test
+		}
+	}{
+		if (_quittog==[on]) {
+		eval //quit $$quitlogo $getreason($N BitchX.quit)
+		}{
+		eval //quit $getreason($N BitchX.quit) 
+		}
+
+	}
+}
+
+^set CDCC_PROMPT $(c4)C$(c3)DCC
+^set SERVER_PROMPT $(hblk)[$(c3)$0$(hblk)] 
+cypress
+eval _center $winnum() $(scriptname).$(scriptversion) by void[void@mindcryme.com] and codelogic<clogic@hwy5.net> loaded.

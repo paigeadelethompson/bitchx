@@ -1,0 +1,39 @@
+:void^
+:jungle
+:jungle
+@auth=[void^]
+@desc=[jungle]
+@name=[jungle]
+@scdesc=[ ..jungle]
+@dccbar=[1]
+@mform=[6]
+@smform=[3]
+@ncomp=[5]
+@echostr=[13]
+@svform=[4]
+@aform=[2]
+@kform=[4]
+@top=[on]
+@plistf=[1]
+@iform=[5]
+@fnum=[1]
+@pub=[1]
+@snform=[6]
+@nform=[6]
+@qform=[3]
+@pform=[3]
+@jform=[3]
+@scform=[7]
+@cform=[8]
+@dccform=[4]
+@snf=[1]
+@statbar=[stat.1]
+@fnum=[1]
+@c1=[[0m[32m
+@c2=[[1m[32m
+@c3=[[0m[33m
+@c4=[[0m
+@sc1=[[0m[32m
+@sc2=[[1m[32m
+@sc3=[[0m[32m
+@sc4=[[1m[32m

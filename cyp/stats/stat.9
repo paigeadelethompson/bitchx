@@ -1,0 +1,53 @@
+## had to replace sbar 9, cause of lots of problems that weren't worth fixing
+## codelogic.
+
+^set input_prompt $(hblk)À$(sc1)Ä$(sc2)ÄÄÄ$(sc1)Ä$(hblk)Á$(sc1)Ä$(sc2)>$(cl) 
+alias stat9 {
+^set -status_format
+^set status_format1 $(hblk)Ú$(sc1)Ä$(sc2)ÄÄÄ$(sc1)Ä$(hblk)Â$(sc1)Ä$(hblk) [$(cl)%N$(hwht)/$(hblk)+$(cl)%#$(hblk)]Ä[$(cl)%@%=%*$(hwht)%C$(hwht)/$(hblk)+$(cl)%+$(hblk)]$(hblk)Ä%>Ä%A %!
+^set status_format2 $(sc1)³  $(cyn)ë  $(sc1)³ $(hblk) [$(hwht)l$(cl)ag$(hwht)/$(cl) %L$(hblk)]ÄÄ[$(hwht)w$(cl)in$(hwht)/$(cl)%R$(hblk)]Ä%>Ä$(cl)%T%Q%F%S
+^set status_nick $(cl)%N$(cl)
+^set status_umode $(cl)%#$(cl)
+^set status_chanop $(hwht)@$(cl)
+^set status_voice $(cl)+$(cl)
+^set status_oper $(sc2)*$(cl)
+^set status_channel $(cl)%C$(cl)
+^set status_mode $(cl)%+$(cl)
+^set status_clock $(hblk)[$(hwht)t$(cl)ime$(hwht)/$(cl)%T$(hblk)]
+^set status_dcccount $(hblk)\($(hwht)d$(cl)cc$(hblk)[$(cl)g$(hwht)/$(cl)%& $(cl)s$(hwht)/$(cl)%&$(hblk)]\)$(cl)
+^set status_lag $(cl)%L$(cl)
+^set status_away $(hblk)[$(hwht)a$(cl)way$(hwht)/$(cl)%A$(hblk)]$(cl)
+^set status_no_repeat off
+^set status_query  $(hblk)[$(cl)q$(hwht)/$(cl)%Q$(hblk)]$(cl)
+^set status_notify  $(hblk)[$(hwht)a$(cl)ct$(hwht)/$(cl)%F$(hblk)]$(cl)
+^set status_server  $(hblk)[$(hwht)s$(cl)erv$(hwht)/$(cl)%S$(hblk)]$(cl)
+^set status_format3 $(hblk)[$(cl)t$(hwht)/$(cl)%C$(hblk)]$(cl) %- %>
+^set status_users $(hblk)[$(hwht)+$(cl)o$(hwht)/$(cl)%! $(hwht)-$(cl)o$(hwht)/$(cl)%! $(hwht)+$(cl)i$(hwht)/$(cl)%! $(hwht)+$(cl)v$(hwht)/$(cl)%!$(hblk)]$(cl)
+}
+alias wsetupdate {
+^wset * status_format $status_format
+^wset * status_format1 $status_format1
+^wset * status_format2 $status_format2
+^wset * status_nick $status_nick
+^wset * status_umode $status_umode
+^wset * status_chanop $status_chanop
+^wset * status_voice $status_voice
+^wset * status_oper $status_oper
+^wset * status_channel $status_channel
+^wset * status_mode $status_mode
+^wset * status_clock $status_clock
+^wset * status_dcccount $status_dcccount
+^wset * status_lag $status_lag
+^wset * status_away $status_away
+^wset * status_query $status_query
+^wset * status_notify $status_notify
+^wset * status_server $status_server
+^wset * status_format3 $status_format3
+^wset * status_users $status_users
+}
+stat9
+wsetupdate
+^window triple off
+dotopwin
+^set status_does_expandos OFF 
+# .:. clogic '98

@@ -1,0 +1,40 @@
+:codelogic
+:faded
+:faded
+@auth=[codelogic]
+@desc=[faded]
+@name=[faded]
+@scdesc=[ ..faded]
+@dccbar=[2]
+@mform=14
+@smform=14
+@ncomp=13
+@echostr=23
+@svform=15
+@aform=10
+@kform=3
+@top=[on]
+@plistf=7
+@iform=8
+@fnum=8
+@pub=4
+@snform=2
+@nform=7
+@qform=2
+@pform=8
+@jform=8
+@scform=8
+@cform=8
+@dccform=7
+@snf=5
+@statbar = [stat.17]
+@fnum=8
+@qlogo=8
+@c1=[[0m[36m
+@c2=[[1m[36m
+@c3=[[0m[36m
+@c4=[[1m[36m
+@sc1=[[0m[36m
+@sc2=[[0m[37m
+@sc3=[[1m[37m
+@sc4=[[1m[36m

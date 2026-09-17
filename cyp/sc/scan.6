@@ -1,0 +1,137 @@
+alias scano sco
+alias scanv scv
+alias scann scn
+
+^on ^channel_synch - "*"
+alias sc scan
+
+alias fix.scan if ([$0]) {@_t=[$[11]0]
+@_t=msar(g/@/$(cyn)@$(cl)/+/$(mag)+$(cl)/./ /$strip(/ $(_t)))
+@function_return=_t}{@function_return=[$[11]empty_string]}
+
+
+## propz to robohak for clueing me into this way of scanning :)
+on raw_irc -"% 366 *"
+on ^353 * {@nicks#=[$3-]}
+on ^raw_irc "% 366 *" {
+	^local scan1
+	^push scan1 $pattern(*@* $nicks)
+	^push scan1 $pattern(*+* $nicks)
+	^push scan1 $filter(*+* $filter(*@* $nicks))	
+    @nicks.ops=pattern(*@* $nicks)
+    @nicks.voc=pattern(*+* $nicks)
+    @nicks.non=filter(*+* $filter(*@* $nicks))
+	@chan=C         		
+		_center $chanwin($3) $(hblk)³ $(cl)users$(hblk)\($(cl)$chan$(hblk)) ú $(cyn)o$(cl)ps$(hblk)\($(cl)$#nicks.ops$(hblk)) $(cyn)v$(cl)oc$(hblk)\($(cl)$#nicks.voc$(hblk)) $(cyn)n$(cl)on$(hblk)\($(cl)$#nicks.non$(hblk))
+		@_swidth=(word(0 $geom()) - 4)  / 14.7
+		@_bwidth=(before(. $_swidth) - 4) * 14
+			^xecho -w $chanwin($3)  Ä$(cl)Ä$(cl)Ä$repeat($_bwidth $(hblk)Ä)$(hblk)ÄÄ$(cl)ÄÄÄÄ$(hblk)ÄÄÄÄÄÄÄÄÄÄÄÄ$(cl)Ä$(hblk)ÄÄÄÄ$(cl)ÄÄÄÄÄÄÄ$(hblk)ÄÄ$(cl)ÄÄÄÄÄ$(hblk)Ä$(cl)ÄÄÄ$(hwht)Ä$(cl)ÄÄÄ$(hwht)ÄÄÄ$(cl)Ä$(hwht)ÄÄÄÄ$(cl)ÄÄÄÄÄ¿
+				fe ($jot(1 $_swidth)) n1 {
+				^push _nlist nlist.$n1
+				^push _nlist2 \$fix.scan\(\$nlist\.$n1) $(hblk)ú$(cl)
+				}
+ 					fe ($scan1) $_nlist {   
+						eval xecho -w $chanwin($3)  $(hblk)³$(cl) $_nlist2   $(cl)³
+					}
+						^xecho -w $chanwin($3)   $(hblk)ÀÄÄ$(cl)Ä$repeat($_bwidth $(hblk)Ä)$(cl)ÄÄÄÄÄÄÄ$(hblk)Ä$(cl)ÄÄÄÄÄÄÄ$(hblk)ÄÄÄÄÄÄÄ$(hblk)ÄÄ$(cl)ÄÄÄÄÄÄ$(hwht)ÄÄÄÄÄ$(cl)ÄÄÄÄ$(hwht)ÄÄÄ$(cl)ÄÄÄ$(hblk)ÄÄÄÄ$(cl)ÄÄ$(hblk)ÄÄ³ÄÄ
+        					^assign -nicks;^assign -scan1;^assign -_nlist;^assign -_nlist2
+}
+    
+
+alias scan {
+	if ([$0]) {@ chan = [$0]}{@ chan = C}
+	^local ops 0
+	^local voc 0
+	^local non 0
+	@ blah = sar(g/\*//$channel($chan))
+	^push scan1 $pattern(*@* $blah)
+	^push scan1 $pattern(*+* $blah)
+	^push scan1 $pattern(*.* $blah)
+	@nicks.ops=pattern(*@* $channel($chan))
+	@nicks.voc=pattern(*+* $channel($chan))
+	@nicks.non=pattern(*.* $channel($chan))
+		_center $winchan() $(hblk)³ $(cl)users$(hblk)\($(cl)$chan$(hblk)) ú $(cyn)o$(cl)ps$(hblk)\($(cl)$#nicks.ops$(hblk)) $(cyn)v$(cl)oc$(hblk)\($(cl)$#nicks.voc$(hblk)) $(cyn)n$(cl)on$(hblk)\($(cl)$#nicks.non$(hblk))
+		@_swidth=(word(0 $geom()) - 4)  / 14.7
+		@_bwidth=(before(. $_swidth) - 4) * 14
+			^xecho  Ä$(cl)Ä$(cl)Ä$repeat($_bwidth $(hblk)Ä)$(hblk)ÄÄ$(cl)ÄÄÄÄ$(hblk)ÄÄÄÄÄÄÄÄÄÄÄÄ$(cl)Ä$(hblk)ÄÄÄÄ$(cl)ÄÄÄÄÄÄÄ$(hblk)ÄÄ$(cl)ÄÄÄÄÄ$(hblk)Ä$(cl)ÄÄÄ$(hwht)Ä$(cl)ÄÄÄ$(hwht)ÄÄÄ$(cl)Ä$(hwht)ÄÄÄÄ$(cl)ÄÄÄÄÄ¿
+				fe ($jot(1 $_swidth)) n1 {
+				^push _nlist nlist.$n1
+				^push _nlist2 \$fix.scan\(\$nlist\.$n1) $(hblk)ú$(cl)
+				}
+ 					fe ($scan1) $_nlist {   
+						eval xecho   $(hblk)³$(cl) $_nlist2   $(cl)³
+					}
+						^xecho   $(hblk)ÀÄÄ$(cl)Ä$repeat($_bwidth $(hblk)Ä)$(cl)ÄÄÄÄÄÄÄ$(hblk)Ä$(cl)ÄÄÄÄÄÄÄ$(hblk)ÄÄÄÄÄÄÄ$(hblk)ÄÄ$(cl)ÄÄÄÄÄÄ$(hwht)ÄÄÄÄÄ$(cl)ÄÄÄÄ$(hwht)ÄÄÄ$(cl)ÄÄÄ$(hblk)ÄÄÄÄ$(cl)ÄÄ$(hblk)ÄÄ³ÄÄ
+        					^assign -nicks;^assign -scan1;^assign -_nlist;^assign -_nlist2
+}
+    
+
+
+
+alias sco {
+	if ([$0]) {@chan=[$0]}{@ chan = C}
+	^local nicks.ops 0
+	@ blah=sar(g/\*//$channel($chan))
+	^push scan1 $pattern(*@* $blah)
+	@ nicks.ops = pattern(*@* $channel($chan))        
+		_center $winchan() $(hblk)³ $(cl)users$(hblk)\($(cl)$chan$(hblk)) ú $(cyn)o$(cl)ps$(hblk)\($(cl)$#nicks.ops$(hblk)) $(cyn)v$(cl)oc$(hblk)\($(cl)$#nicks.voc$(hblk)) $(cyn)n$(cl)on$(hblk)\($(cl)$#nicks.non$(hblk))
+		@_swidth=(word(0 $geom()) - 4)  / 14.7
+		@_bwidth=(before(. $_swidth) - 4) * 14
+			^xecho  Ä$(cl)Ä$(cl)Ä$repeat($_bwidth $(hblk)Ä)$(hblk)ÄÄ$(cl)ÄÄÄÄ$(hblk)ÄÄÄÄÄÄÄÄÄÄÄÄ$(cl)Ä$(hblk)ÄÄÄÄ$(cl)ÄÄÄÄÄÄÄ$(hblk)ÄÄ$(cl)ÄÄÄÄÄ$(hblk)Ä$(cl)ÄÄÄ$(hwht)Ä$(cl)ÄÄÄ$(hwht)ÄÄÄ$(cl)Ä$(hwht)ÄÄÄÄ$(cl)ÄÄÄÄÄ¿
+				fe ($jot(1 $_swidth)) n1 {
+				^push _nlist nlist.$n1
+				^push _nlist2 \$fix.scan\(\$nlist\.$n1) $(hblk)ú$(cl)
+				}
+ 					fe ($scan1) $_nlist {   
+						eval xecho   $(hblk)³$(cl) $_nlist2   $(cl)³
+					}
+						^xecho   $(hblk)ÀÄÄ$(cl)Ä$repeat($_bwidth $(hblk)Ä)$(cl)ÄÄÄÄÄÄÄ$(hblk)Ä$(cl)ÄÄÄÄÄÄÄ$(hblk)ÄÄÄÄÄÄÄ$(hblk)ÄÄ$(cl)ÄÄÄÄÄÄ$(hwht)ÄÄÄÄÄ$(cl)ÄÄÄÄ$(hwht)ÄÄÄ$(cl)ÄÄÄ$(hblk)ÄÄÄÄ$(cl)ÄÄ$(hblk)ÄÄ³ÄÄ
+        					^assign -nicks;^assign -scan1;^assign -_nlist;^assign -_nlist2
+}
+    
+
+
+alias scn {
+	if ([$0]) {@chan=[$0]}{@ chan = C}
+	^local nicks.non 0
+	@ blah = sar(g/\*//$channel($chan))
+	^push scan1 $pattern(*.* $blah)
+ 	@nicks.non=pattern(*.* $channel($chan))        
+		_center $winchan() $(hblk)³ $(cl)users$(hblk)\($(cl)$chan$(hblk)) ú $(cyn)o$(cl)ps$(hblk)\($(cl)$#nicks.ops$(hblk)) $(cyn)v$(cl)oc$(hblk)\($(cl)$#nicks.voc$(hblk)) $(cyn)n$(cl)on$(hblk)\($(cl)$#nicks.non$(hblk))
+		@_swidth=(word(0 $geom()) - 4)  / 14.7
+		@_bwidth=(before(. $_swidth) - 4) * 14
+			^xecho  Ä$(cl)Ä$(cl)Ä$repeat($_bwidth $(hblk)Ä)$(hblk)ÄÄ$(cl)ÄÄÄÄ$(hblk)ÄÄÄÄÄÄÄÄÄÄÄÄ$(cl)Ä$(hblk)ÄÄÄÄ$(cl)ÄÄÄÄÄÄÄ$(hblk)ÄÄ$(cl)ÄÄÄÄÄ$(hblk)Ä$(cl)ÄÄÄ$(hwht)Ä$(cl)ÄÄÄ$(hwht)ÄÄÄ$(cl)Ä$(hwht)ÄÄÄÄ$(cl)ÄÄÄÄÄ¿
+				fe ($jot(1 $_swidth)) n1 {
+				^push _nlist nlist.$n1
+				^push _nlist2 \$fix.scan\(\$nlist\.$n1) $(hblk)ú$(cl)
+				}
+ 					fe ($scan1) $_nlist {   
+						eval xecho   $(hblk)³$(cl) $_nlist2   $(cl)³
+					}
+						^xecho   $(hblk)ÀÄÄ$(cl)Ä$repeat($_bwidth $(hblk)Ä)$(cl)ÄÄÄÄÄÄÄ$(hblk)Ä$(cl)ÄÄÄÄÄÄÄ$(hblk)ÄÄÄÄÄÄÄ$(hblk)ÄÄ$(cl)ÄÄÄÄÄÄ$(hwht)ÄÄÄÄÄ$(cl)ÄÄÄÄ$(hwht)ÄÄÄ$(cl)ÄÄÄ$(hblk)ÄÄÄÄ$(cl)ÄÄ$(hblk)ÄÄ³ÄÄ
+        					^assign -nicks;^assign -scan1;^assign -_nlist;^assign -_nlist2
+}
+    
+
+
+alias scv {
+	if ([$0]) {@chan=[$0]}{@ chan = C}
+	^local nicks.voc 0
+	@ blah = sar(g/\*//$channel($chan))  
+	^push scan1 $pattern(*+* $blah)	
+	@ nicks.voc = pattern(*+* $channel($chan))
+		_center $winchan() $(hblk)³ $(cl)users$(hblk)\($(cl)$chan$(hblk)) ú $(cyn)o$(cl)ps$(hblk)\($(cl)$#nicks.ops$(hblk)) $(cyn)v$(cl)oc$(hblk)\($(cl)$#nicks.voc$(hblk)) $(cyn)n$(cl)on$(hblk)\($(cl)$#nicks.non$(hblk))
+		@_swidth=(word(0 $geom()) - 4)  / 14.7
+		@_bwidth=(before(. $_swidth) - 4) * 14
+			^xecho  Ä$(cl)Ä$(cl)Ä$repeat($_bwidth $(hblk)Ä)$(hblk)ÄÄ$(cl)ÄÄÄÄ$(hblk)ÄÄÄÄÄÄÄÄÄÄÄÄ$(cl)Ä$(hblk)ÄÄÄÄ$(cl)ÄÄÄÄÄÄÄ$(hblk)ÄÄ$(cl)ÄÄÄÄÄ$(hblk)Ä$(cl)ÄÄÄ$(hwht)Ä$(cl)ÄÄÄ$(hwht)ÄÄÄ$(cl)Ä$(hwht)ÄÄÄÄ$(cl)ÄÄÄÄÄ¿
+				fe ($jot(1 $_swidth)) n1 {
+					^push _nlist nlist.$n1
+					^push _nlist2 \$fix.scan\(\$nlist\.$n1) $(hblk)ú$(cl)
+				}
+ 						fe ($scan1) $_nlist {   
+							eval xecho   $(hblk)³$(cl) $_nlist2   $(cl)³
+						}
+				^xecho   $(hblk)ÀÄÄ$(cl)Ä$repeat($_bwidth $(hblk)Ä)$(cl)ÄÄÄÄÄÄÄ$(hblk)Ä$(cl)ÄÄÄÄÄÄÄ$(hblk)ÄÄÄÄÄÄÄ$(hblk)ÄÄ$(cl)ÄÄÄÄÄÄ$(hwht)ÄÄÄÄÄ$(cl)ÄÄÄÄ$(hwht)ÄÄÄ$(cl)ÄÄÄ$(hblk)ÄÄÄÄ$(cl)ÄÄ$(hblk)ÄÄ³ÄÄ
+        			^assign -nicks;^assign -scan1;^assign -_nlist;^assign -_nlist2
+}
+

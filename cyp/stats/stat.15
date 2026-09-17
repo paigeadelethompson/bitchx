@@ -1,0 +1,52 @@
+## for sellfone! :>
+
+^on -connect * { wsetupdate } 
+
+^window triple on
+^window split off
+^set input_prompt [1;30mğ 
+^set -status_format
+^set status_format1 [1;30mÚÄ%>Ä¿
+^set status_format2 [1;30m³([0m%T[1;30m) ([0m%@%=%*%N[1;30m)[[0m%#[1;30m] ([0mmail[1;30m:[0m %M[1;30m) ([0m%S[40m[1;30m:[0m%1[1;30m[1;30m) ([0mlag[1;30m:[0m %L[1;30m)[1;30m %> ³
+^set status_format3 [1;30mÀÄÄ([0m%C[1;30m)[%+[1;30m] [0m%![1;30m ([0m%2[1;30m)Ä%>ÄÙ
+^set status_no_repeat OFF
+^set status_chanop [0m@
+^set status_voice [0m+
+^set status_oper [0m*
+^set status_nick [0m%N
+^set status_umode [1;30m+[0m%#
+^set status_mail [0m%M
+^set status_server [0m%S
+^set status_lag [0m%L
+^set status_channel [0m%C
+^set status_mode [1;30m+[0m%+[0m
+^set status_users [1;30m([0mo[1;30m:[0m%! [0mn[1;30m:[0m%! [0mi[1;30m:[0m%! [0mv[1;30m:[0m%![1;30m)[0m
+^set status_clock [0m%T
+
+alias wsetupdate { 
+^eval set status_user1 $s
+^eval set status_user2 $hostname
+^wset * status_format $status_format 
+^wset * status_format1 $status_format1
+^wset * status_format2 $status_format2
+^wset * status_format3 $status_format3
+^wset * status_chanop $status_chanop
+^wset * status_voice $status_voice
+^wset * status_oper $status_oper
+^wset * status_nick $status_nick
+^wset * status_umode $status_umode
+^wset * status_mail $status_mail
+^wset * status_server $status_server
+^wset * status_lag $status_lag
+^wset * status_channel $status_channel
+^wset * status_mode $status_mode
+^wset * status_users $status_users
+^wset * status_clock $status_clock
+^wset * status_user1 $status_user1
+^wset * status_user2 $status_user2
+}
+^wsetupdate
+^set status_does_expandos OFF
+
+
+# .:. clogic '98

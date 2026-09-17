@@ -1,0 +1,55 @@
+## # 13 -- codelogic
+^set input_prompt $(hblk)[$(sc1)$C$(hblk)]$(cl) 
+
+Alias stat13 { 
+^set STATUS_AWAY  $(hblk)\($(sc2)a$(sc1)way$(hblk)/$(sc1)%A$(hblk)\)$(cl)
+^set STATUS_CHANNEL $(sc1)%C$(cl)
+^set STATUS_CHANOP $(sc2)@$(cl)
+^set STATUS_CLOCK $(hblk)\(time/%T$(hblk)\)$(cl)
+^set STATUS_DOES_EXPANDOS ON
+^set -STATUS_FORMAT 
+^set STATUS_FORMAT1 $(hblk)Ú$(sc1)Ä$(sc2)Ä$(cl) %C$(hblk)\($(sc1)%+$(hblk)\) $(hblk) Ä%>Ä $(cl) %! %S $(sc2)Ä$(sc1)Ä$(hblk)¿$(cl)
+^set STATUS_FORMAT2 $(hblk)À$(sc1)Ä$(sc2)Ä$(cl) %@%=%*%N$(hblk)\($(sc1)%#$(hblk)\) $(hblk) Ä%>Ä $(cl) %L$(hblk)\)%Q%A %F $(hblk)\($(sc2)w$(sc1)in$(hblk)/$(sc1)%R$(hblk)\)$(cl) $(sc2)Ä$(sc1)Ä$(hblk)Ù$(cl)
+^set STATUS_FORMAT3 $(hblk)[$(sc2)t$(hblK)/$(sc1)%C$(hblk)]$(cl) %- %>
+^set STATUS_HALFOP $(sc1)%$(cl)
+^set STATUS_LAG $(hblk)\($(sc2)L$(sc1)ag$(hblk)/$(sc1)%L$(hblk)\)$(cl)
+^set STATUS_MODE $(sc2)+$(sc1)%+$(cl)
+^set STATUS_NICK $(sc1)%N$(cl)
+^set STATUS_NOTIFY $(hblk)\($(sc2)a$(sc1)ct$(hblk)/$(sc1)%F$(hblk)\)$(cl)
+^set STATUS_OPER $(hwht)*$(cl)
+^set STATUS_QUERY  $(hblk)\($(sc2)q$(sc1)uery$(hblk)/$(sc1)%Q$(hblk)\)$(cl)
+^set STATUS_SERVER  $(sc1)%S
+^set STATUS_UMODE $(sc2)+$(sc1)%#$(cl)
+^set STATUS_USERS $(hblk)\($(sc2)o$(hblk)/$(sc1)%! $(sc2)n$(hblk)/$(sc1)%! $(sc2)i$(hblk)/$(sc1)%! $(sc2)v$(hblk)/$(sc1)%!$(hblk)\)$(cl)
+^set STATUS_NO_REPEAT OFF
+^set STATUS_VOICE $(sc2)+$(cl)
+}
+
+alias wsetupdate { 
+^wset * STATUS_AWAY $STATUS_AWAY
+^wset * STATUS_CHANNEL $STATUS_CHANNEL
+^wset * STATUS_CHANOP $STATUS_CHANOP
+^wset * STATUS_CLOCK $STATUS_CLOCK
+^wset * STATUS_FORMAT $STATUS_FORMAT
+^wset * STATUS_FORMAT1 $STATUS_FORMAT1
+^wset * STATUS_FORMAT2 $STATUS_FORMAT2
+^wset * STATUS_FORMAT3 $STATUS_FORMAT3
+^wset * STATUS_HALFOP $STATUS_HALFOP
+^wset * STATUS_LAG $STATUS_LAG
+^wset * STATUS_MODE $STATUS_MODE
+^wset * STATUS_NICK $STATUS_NICK
+^wset * STATUS_NOTIFY $STATUS_NOTIFY
+^wset * STATUS_OPER $STATUS_OPER
+^wset * STATUS_QUERY $STATUS_QUERY
+^wset * STATUS_SERVER $STATUS_SERVER
+^wset * STATUS_UMODE $STATUS_UMODE
+^wset * STATUS_USERS $STATUS_USERS
+^wset * STATUS_VOICE $STATUS_VOICE
+}
+stat13
+wsetupdate
+
+^set status_does_expandos OFF
+^window triple off
+dotopwin
+# .:. clogic '98

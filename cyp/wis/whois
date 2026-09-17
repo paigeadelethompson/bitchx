@@ -1,0 +1,9 @@
+@ whois.max = 10
+alias wformat if ([$0] && ([$0] <= whois.max)) {
+	@fwhois = [whois.$0]
+	@fnum = [$0]
+	load $twiddle($HOME)$(loadpath)wis/${fwhois}
+	xecho -b cypress whois set to ${hwht}$fnum
+	xecho -b type /fsave to save whois format
+} { xecho -b cypress usage: /wformat <1-$(whois.max)>
+}

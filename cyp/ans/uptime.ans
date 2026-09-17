@@ -1,0 +1,15 @@
+
+
+eval echo      ${hwht}u . ${hblk}p ${hwht}. ${hblk}t ${hwht}.${hblk} i ${hwht}. ${hblk}m ${hwht}. ${hblk}e   ${hwht} s ${hwht}. ${hblk}t ${hwht}. ${hblk}a ${hwht}. ${hblk}t ${hwht}. ${hblk}s
+eval echo   ${hblk}ÚÄÄÄÄÄÄ-----ÄÄ-ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ---ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ-ÄÄÄÄÄÄÄÄÄÄÄÄÄ--ÄÄÄ-ÄÄ
+eval echo   ${hblk}| ${cl}Client Version${hblk}: ${hwht}$J $V
+eval echo   ${hblk}| ${cl}Client Running Since${hblk}:${hwht} $stime($F)
+eval echo   ${hblk}| ${cl}Client Uptime${hblk}: ${hwht}$tdiff2(${time() - F})
+eval echo   ${hblk}³ ${cl}Current UserName${hblk}: ${hwht}$USER
+eval echo   ${hblk}³ ${cl}Current RealName${hblk}: ${hwht}$realname
+eval echo   ${hblk}³ ${cl}Last Recv Message${hblk}: ${hwht}$lrm 
+eval echo   ${hblk}³ ${cl}Last Recv Notice${hblk}: ${hwht}$lrn
+eval echo   ${hblk}| ${cl}Last Sent Msg${hblk}: ${hwht}$lsm
+eval echo   ${hblk}³ ${cl}Last Sent Notice${hblk}: ${hwht}$lsn 
+eval echo   ${hblk}³ ${cl}Last Channel invited to${hblk}: ${hwht}$I
+eval echo   ${hblk}ÀÄ---ÄÄÄÄÄ--Ä-Ä----ÄÄÄÄÄÄÄÄÄÄÄ--ÄÄÄÄÄÄÄÄÄÄÄÄÄ----ÄÄÄÄÄÄÄÄÄÄÄ-----ÄÄÄÄÄ

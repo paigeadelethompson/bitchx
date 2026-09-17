@@ -1,0 +1,41 @@
+:codelogic
+:labryinth
+:labryinth
+@auth=[codelogic]
+@desc=[labryinth]
+@name=[labryinth]
+@scdesc=[ ..labryinth]
+@dccbar=[2]
+@mform=20
+@smform=20
+@ncomp=1
+@echostr=20
+@svform=10
+@aform=9
+@kform=11
+@top=[on]
+@plistf=5
+@iform=8
+@fnum=8
+@pub=4
+@snform=5
+@nform=1
+@qform=9
+@pform=10
+@jform=9
+@scform=11
+@cform=11
+@dccform=4
+@snf=6
+@statbar = [stat.20]
+@fnum=8
+@qlogo=2
+@abot=4
+@c1=[[0m[36m
+@c2=[[1m[36m
+@c3=[[0m[36m
+@c4=[[1m[37m
+@sc1=[[0m[37m
+@sc2=[[1m[37m
+@sc3=[[0m[37m
+@sc4=[[1m[37m

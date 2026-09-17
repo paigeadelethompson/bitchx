@@ -1,0 +1,38 @@
+:Da5id
+:extra.terrestrial
+:et
+@auth=[Da5id]
+@desc=[extra.terrestrial]
+@name=[et]
+@scdesc=[ ..extra.terrestrial]
+@dccbar=[2]
+@mform=[1]
+@smform=[1]
+@ncomp=[3]
+@echostr=[1]
+@svform=[1]
+@aform=[4]
+@kform=[2]
+@top=[on]
+@plistf=[3]
+@iform=[5]
+@fnum=[5]
+@pub=[1]
+@snform=[5]
+@nform=[1]
+@qform=[3]
+@pform=[1]
+@jform=[1]
+@scform=[8]
+@cform=[8]
+@dccform=[2]
+@snf=[1]
+@statbar=[stat.3]
+@c1=[[0m[32m
+@c2=[[1m[32m
+@c3=[[0m[32m
+@c4=[[1m[32m
+@sc1=[[0m[32m
+@sc2=[[1m[32m
+@sc3=[[0m[32m
+@sc4=[[1m[32m

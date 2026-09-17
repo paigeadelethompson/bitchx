@@ -1,0 +1,16 @@
+FSET FORMAT_WHOIS_AWAY $(hblk)| $(hwht)a$(cl)way     : $0 - $1-
+FSET FORMAT_WHOIS_BOT $(c1)| $(hwht)b$(cl)ot      : A:$0 P:$1 [$2] $3-
+FSET FORMAT_WHOIS_CHANNELS $(c1)| $(hwht)c$(cl)hannels : $0-
+FSET FORMAT_WHOIS_FOOTER $(hblk)ÀÄÄÄÄÄÄÄ$(c1)ÄÄÄÄ$(hblk)ÄÄÄÄ$(c1)ÄÄ$(hblk)ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ ÄÄÄÄÄ-
+FSET FORMAT_WHOIS_FRIEND $(c1)| $(hwht)f$(cl)riend   : F:$0 $1-
+FSET FORMAT_WHOIS_HEADER $(c1)ÚÄÄÄÄÄ$(hblk)---$(c1)Ä$(hblk)--$(c1)ÄÄ$(hblk)-$(c1)ÄÄÄÄÄÄ---$(c1)Ä$(c1)--$(hblk)ÄÄ$(c1)-$(hblk)ÄÄÄÄÄÄÄÄÄ--- --
+FSET FORMAT_WHOIS_IDLE $(hblk): $(hwht)i$(cl)dle     : $0 hours $1 mins $2 secs (signon: $stime($3))
+FSET FORMAT_WHOIS_NAME $(c1)³ $(hwht)i$(cl)rcname  : $0-
+FSET FORMAT_WHOIS_NICK $(c1)| $(hwht)$0 $(hblk)($(cl)$1@$2$(hblk)) $(hblk)($(hwht)$3-$(hblk))
+FSET FORMAT_WHOIS_OPER $(hblk)| $(hwht)o$(cl)perator : $0 $1-
+FSET FORMAT_WHOIS_SERVER $(hblk)³ $(hwht)s$(cl)erver   : $0 ($1-)
+FSET FORMAT_WHOIS_SHIT $(c1)| $(hwht)s$(cl)hit     : L:$0 [$1] $2 $3-
+FSET FORMAT_WHOIS_SIGNON $(hblk) $(hwht)s$(cl)ignon   : $0-
+FSET FORMAT_WHOWAS_HEADER $(c1)ÚÄÄÄÄÄ$(hblk)---$(c1)Ä$(hblk)--$(c1)ÄÄ$(hblk)-$(c1)ÄÄÄÄÄÄ---$(hblk)Ä$(c1)--$(hblk)ÄÄ $(c1)-$(hblk)ÄÄÄÄÄÄÄÄÄ---
+FSET FORMAT_WHOWAS_NICK $(c1)| $(hwht)$0$(cl) was $(hblk)($(cl)$1@$2$(hblk)])
+FSET FORMAT_WHOIS_ACTUALLY $(c1)³ $(hwht)a$(cl)ctual   : $3-

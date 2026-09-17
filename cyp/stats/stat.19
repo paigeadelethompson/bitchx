@@ -1,0 +1,53 @@
+alias stat19 {
+^eval set STATUS_AWAY $(sc3)[$(hwht)a$(cl)way$(sc3)]$(cl) 
+^eval set STATUS_CHANNEL $(sc1)%C$(cl)
+^eval set STATUS_CHANOP $(sc2)@$(cl)
+^eval set STATUS_CLOCK $(sc1)%T$(cl)
+^eval set -STATUS_FORMAT
+^eval set STATUS_LAG %L
+^eval set STATUS_MODE $(sc2)+$(cl)$(sc1)%+$(cl)
+^eval set STATUS_NOTIFY $(sc3)[$(hwht)a$(cl)ct$(hwht)!$(cl)$(sc1)%F$(sc3)]$(cl)
+^eval set STATUS_QUERY $(sc3)[$(cl)q$(hwht)!$(cl)$(sc1)%Q$(sc3)]$(cl)
+^eval set STATUS_SERVER $(hblk)\($(hwht)s$(cl)erv$(hwht)!$(cl)$(sc1)%S$(hblk)\)$(cl) 
+^eval set STATUS_FORMAT3 $(hblk)\($(hwht)t$(cl)opic$(hwht)!$(cl)$(sc1)$(C)$(hblk)\)$(cl)%- %>
+^eval set STATUS_UMODE $(sc2)+$(cl)$(sc1)%#$(cl)
+^eval set STATUS_USERS $(hblk)\($(cl)o$(hwht)!$(cl)$(sc1)%! $(cl)n$(hwht)!$(cl)$(sc1)%! $(cl)i$(hwht)!$(cl)$(sc1)%! $(cl)v$(hwht)!$(cl)$(sc1)%!$(hblk)\)$(cl)
+^eval set STATUS_VOICE $(sc1)+$(cl)
+^eval set INPUT_PROMPT $(sc3).$(hwht)!$(cl)$(sc3).$(hblk) \($(cl)$C$(hblk))$(cl) 
+^eval set STATUS_FORMAT1 $(cl)$(sc3)Ú$(cl)$(sc4)Ä$(cl)$(hwht)Ä$(cl) $(hgrn)%*$(cl)$(sc1)%=$(cl)$(sc2)%@$(sc1)%N$(hblk)\($(cl)%#$(hblk)\)$(cl)$(hwht)!$(cl)%C$(hblk)\($(cl)%+$(hblk)\)$(cl) %! %Q %A
+^eval set STATUS_FORMAT2    %S $(hblk)\($(hwht)w$(cl)in$(hwht)!$(cl)$(sc1)%R$(cl)$(hblk)\)$(cl) %F $(hblk)\($(cl)t$(hwht)!$(cl)$(sc1)%T$(hblk)\) \($(cl)l$(hwht)!$(cl)$(sc1)%L$(hblk)\)$(cl) %> $(hwht)Ä$(cl)$(sc2)Ä$(cl)$(sc1)Ù$(cl)
+^eval set status_topic  %-
+}
+
+alias wsetupdate {
+^wset * status_topic $status_topic
+^wset * status_format $status_format
+^wset * status_format1 $status_format1
+^wset * status_umode $status_umode
+^wset * status_format2 $status_format2
+^wset * status_lag $status_lag
+^wset * status_channel $status_channel
+^wset * status_mode $status_mode
+^wset * status_chanop $status_chanop
+^wset * status_format3 $status_format3
+^wset * status_mail $status_mail
+^wset * status_users $status_users
+^wset * status_server $status_server
+^wset * status_voice $status_voice
+^wset * status_away $status_away
+^wset * status_notify $status_notify
+^wset * input_prompt $input_prompt
+^wset * status_hold_lines $status_hold_lines
+^wset * status_query $status_query
+^wset * status_format3 $status_format3
+^wset * server_prompt $server_prompt
+^wset * input_prompt $input_prompt
+^wset * status_oper $status_oper
+^wset * status_voice $status_voice
+^wset * show_numerics_str $show_numerics_str
+}
+^set status_does_expandos OFF
+stat19
+wsetupdate
+^window triple off
+dotopwin

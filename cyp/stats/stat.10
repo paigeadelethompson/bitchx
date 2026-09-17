@@ -1,0 +1,54 @@
+^set input_prompt $(hblk)\($(sc1)$C$(hblk)) 
+
+alias stat10 {
+^set status_oper $(hblk)*
+^fset format_status $0-
+^fset format_status1 $0-
+^fset format_status2 $0-
+^fset format_status3 $0-
+^set status_clock %T
+^set status_format1 $(sc1)Ú$(sc2)¿$(sc1)Ä$(sc2)¿ %*%=%@$(cl)%N $(hwht)%# %C %+ %! $(hblk)[$(cl)lag$(hblk)/$(cl)%L$(hblk)] %> $(sc1)Ú$(sc2)ÄÚ$(sc1)¿
+^set status_format2 $(hblk)À$(sc2)Ù$(sc1)ÄÙ %S%6 $(sc1)time$(hblk)/$(sc1)%T %Q %B %> $(hblk)[$(sc1)win$(hblk)/$(sc1)%R$(hblk)] %F %A %5 $(sc1)ÀÄ$(sc2)À$(hblk)Ù
+^set status_umode $(hblk)\($(sc1)+%#$(hblk))
+^set status_users $(hblk)[$(sc1)o$(hblk)/$(cl)%! $(sc1)n$(hblk)/$(cl)%! $(sc1)i$(hblk)/$(cl)%! $(sc1)v$(hblk)/$(cl)%!$(hblk)]
+^set status_nick $(cl)%N
+^set status_lag %L
+^set status_channel $(cl)%C
+^set status_mode $(hblk)\($(sc1)+%+$(hblk))  
+^set status_chanop $(sc1)@
+#^set status_format3 %> %4
+^set status_mail $(hblk) $(hwht)m$(cl)ai$(hblk)l $(hwht)%M
+^set status_server $(sc1)s$(hblk)/$(sc1)%S
+^set status_voice +
+^set status_away  $(hblk)[$(sc1)away %A$(hblk)]
+^set status_notify $(hblk)\[$(sc1)act$%F$(hblk)]
+^set status_hold_lines $(hblk)\[$(hwht)%B$(hblk)]
+^set status_query $(hblk)\[$(blu)Q$(wht): $(wht)%Q$(hblk)]
+^set status_format3 $(cl)$(hblk)\[$(sc1)t:$(hblk)­$(hblu)%C$(hblk)]$(cl) %- %>
+}
+alias wsetupdate {
+^wset * status_format $status_format
+^wset * status_format1 $status_format1
+^wset * status_umode $status_umode
+^wset * status_format2 $status_format2
+^wset * status_lag $status_lag
+^wset * status_channel $status_channel
+^wset * status_mode $status_mode
+^wset * status_chanop $status_chanop
+^wset * status_mail $status_mail
+^wset * status_users $status_users
+^wset * status_server $status_server
+^wset * status_voice $status_voice
+^wset * status_away $status_away 
+^wset * status_notify $status_notify
+^wset * input_prompt $input_prompt
+^wset * status_hold_lines $status_hold_lines
+^wset * status_query $status_query
+^wset * status_format3 $status_format3
+^wset * status_clock $status_clock
+^wset * status_nick $status_nick
+}
+stat10
+wsetupdate
+^window triple off                           
+dotopwin

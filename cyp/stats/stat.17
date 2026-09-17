@@ -1,0 +1,45 @@
+alias stat17 {
+^eval set status_no_repeat off
+^eval set status_format1 $(cl)$(sc2)Ú$(sc1)Ä$(hblk)Äú\($(cl)%=%*%@$(cl)%N$(hblk)%#$(hblk)\)Ä[$(hblk)\($(cl)%C%+$(hblk)\)]Ä%>Ä%LÄ$(sc1)Ä$(sc2)Ä$(sc3)¿$(cl)
+^eval set status_format2 $(cl)$(sc3)À$(sc2)Ä$(sc1)Ä$(hblk)ú%! %&%M$(hblk)Ä%>Ä\($(cl)%T$(hblk)\)Ä\($(hblk)$(sc3)c$(cl)yp$(cl).$(sc3).$(hblk)\)%QúÄ$(sc1)Ä$(sc2)Ù$(cl)
+^eval set status_format3 $(sc1)topic$(hblk)\: $(cl)%- %>
+^eval set input_prompt $(cl)
+^eval set status_oper $(sc3)*$(cl)
+^eval set status_chanop $(sc3)@$(cl)
+^eval set status_voice $(sc1)+$(cl)
+^eval set status_nick $(cl)%N
+^eval set status_umode $(hblk)..$(sc4)+$(sc1)%#$(hblk)$(cl)
+^eval set status_channel %C$(cl)
+^eval set status_mode $(hblk)..$(sc4)+$(sc1)%+$(hblk)$(cl)
+^eval set status_notify $(sc1) act$(hblk)\($(cl)%F$(hblk)\) ù$(cl)
+^eval set status_mail $(sc1)mail$(hblk)\($(cl)%M$(hblk)\)$(cl)
+^eval set status_clock %T$(cl)
+^eval set status_query $(hblk)Ä$(sc1)qu$(hblk)\($(sc2)%Q$(hblk)\) ù$(hblk)
+^eval set status_users $(hblk)ù $(sc1)o$(hblk)\($(cl)%!$(hblk)\) $(sc1)n$(hblk)\($(cl)%!$(hblk)\) ù$(cl)
+^eval set status_lag $(hblk)\($(cl)lag$(hblk)..$(sc3)%L$(hblk)\)
+^eval set status_dcccount $(hblk)[$(sc4)d$(sc1)cc$(hblk)\($(cl)g$(hblk)..$(sc1)%& $(cl)s$(hblk)..$(sc1)%&$(hblk)\)]$(cl) 
+}
+alias wsetupdate {
+^eval wset * status_format1 $status_format1
+^eval wset * status_format2 $status_format2
+^eval wset * status_format3 $status_format3
+^eval wset * status_oper $status_oper
+^eval wset * status_chanop $status_chanop
+^eval wset * status_nick $status_nick
+^eval wset * status_umode $status_umode
+^eval wset * status_channel $status_channel
+^eval wset * status_mode $status_mode
+^eval wset * status_notify $status_notify
+^eval wset * status_mail $status_mail
+^eval wset * status_clock $status_clock
+^eval wset * status_query $status_query
+^eval wset * status_users $status_users
+^eval wset * status_lag $status_lag
+^eval wset * status_dcccount $status_dcccount
+^eval wset * status_voice $status_voice
+}
+^set status_does_expandos OFF
+stat17
+wsetupdate
+^window triple off
+dotopwin

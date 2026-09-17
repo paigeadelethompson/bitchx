@@ -1,0 +1,216 @@
+## border pieces must be 10 char width except for 3 for the basic left/right
+## constants used in the pieces:
+##  _wid     how many spaces to print on each side of the titling
+##  sc.nicksperline     obvious
+##  _win     window for the channel
+
+@ sc.border.left     = [ $(c3)Ё$(cl) ]
+@ sc.border.right    = [ $(c3)Ё$(cl) ]
+@ sc.border.topleft  = [ $(c4)зд$(c3)д$(hblk)д$(cl)     ]
+@ sc.border.topright = [       $(hblk)д$(c3)©$(cl) ]
+@ sc.border.subleft  = [ $(c4)ц$(c3)д$(hblk)д$(cl)      ]
+@ sc.border.subright = [      $(hblk)д$(c3)д$(c4)╢$(cl) ]
+@ sc.border.botleft  = [ $(c3)ю$(hblk)-$(cl)       ]
+@ sc.border.botright = [     $(hblk)д$(c3)д$(c4)ды$(cl) ]
+
+@ oppre      = [$(c2)@$(c1)]
+@ operoppre  = [$(c2)@]
+@ vocpre     = [$(c3)+$(c1)]
+@ opervocpre = [$(c3)+$(c2)]
+@ nonpre     = [ $(c1)]
+@ opernonpre = [ $(c2)]
+
+alias sc.doops {
+    ^local line
+    ^local ix 0
+    xecho -w $_win      $(sc.border.subleft)$pad($_wid  )$(hwht)o$(cl)ps$(hwht):$(cl) $pad(5 $#*)$pad($_wid  )$sc.border.subright
+    @line = []
+    fe ($*) foof {
+        if (ix == sc.nicksperline)
+            {xecho -w $_win      $(sc.border.left) $(line)$(sc.border.right);@ix=0;@line=[]}
+        if (left(1 $foof) == [*])
+            {@push(line $operoppre$right(10 $[11]foof))}
+            {@push(line $oppre$[10]foof)}
+        @ix++
+    }
+    while (ix < sc.nicksperline)
+        {@push(line $pad(11  ));@ix++}
+    xecho -w $_win      $(sc.border.left) $(line)$(sc.border.right)
+}
+
+alias sc.dovoc {
+    ^local line
+    ^local ix 0
+    xecho -w $_win      $(sc.border.subleft)$pad($_wid  )$(hwht)v$(cl)oc$(hwht):$(cl) $pad(5 $#*)$pad($_wid  )$sc.border.subright
+    @line = []
+    fe ($*) foof {
+        if (ix == sc.nicksperline)
+            {xecho -w $_win      $(sc.border.left) $(line)$(sc.border.right);@ix=0;@line=[]}
+        if (left(1 $foof) == [*])
+            {@push(line $opervocpre$right(10 $[11]foof))}
+            {@push(line $vocpre$[10]foof)}
+        @ix++
+    }
+    while (ix < sc.nicksperline)
+        {@push(line $pad(11  ));@ix++}
+    xecho -w $_win      $(sc.border.left) $(line)$(sc.border.right)
+}
+
+alias sc.donon {
+    ^local line
+    ^local ix 0
+    xecho -w $_win      $(sc.border.subleft)$pad($_wid  )$(hwht)n$(cl)on$(hwht):$(cl) $pad(5 $#*)$pad($_wid  )$sc.border.subright
+    ^assign -line
+    fe ($*) foof {
+        if (ix == sc.nicksperline)
+            {xecho -w $_win      $(sc.border.left) $(line)$(sc.border.right);@ix=0;@line=[]}
+        if (left(1 $foof) == [*])
+            {@push(line $opernonpre$right(10 $[11]foof))}
+            {@push(line $nonpre$[10]foof)}
+        @ix++
+    }
+    while (ix < sc.nicksperline)
+        {@push(line $pad(11  ));@ix++}
+    xecho -w $_win      $(sc.border.left) $(line)$(sc.border.right)
+}
+
+on raw_irc -"% 366 *"
+on ^353 * {@nicks#=[$3-]}
+on ^raw_irc "% 366 *" {
+    @ nl.ops = pattern(*@* $nicks);@ nl.ops = sar(g/@//$nl.ops)
+    @ nl.voc = pattern(*+* $nicks);@ nl.voc = sar(g/+//$nl.voc)
+    @ nl.non = filter(*+* $filter(*@* $nicks))
+    @ sc.nicksperline = [$before(. ${(word(0 $geom()) - 12)/12}.)]
+    @ _wid = [${((sc.nicksperline*12)-24) / 2}]
+    @ _win = chanwin($3)
+    xecho -w $_win      $(sc.border.topleft)$pad(${_wid*2+10} $3$pad(${_wid+5-strlen($3)/2}  ))$(sc.border.topright)
+    if ([$#nl.ops]>0) {@ sc.doops($nl.ops)}
+    if ([$#nl.voc]>0) {@ sc.dovoc($nl.voc)}
+    if ([$#nl.non]>0) {@ sc.donon($nl.non)}
+    xecho -w $_win      $(sc.border.botleft)$pad(${(_wid*2)+10}  )$(sc.border.botright)
+    ^assign -nl.ops;^assign -nl.voc;^assign -nl.non;^assign -nicks
+}
+
+alias sc scan
+alias scan {
+    ^local chan;
+    if ([$0])
+        {@ chan = channame($0)}
+        {@ chan= C}
+    if (match($chan $mychannels())) {
+        @ nl.chan = channel($chan)
+        @ nl.ops = pattern(*@* $nl.chan);@ nl.ops = sar(g/@//$nl.ops)
+        @ nl.voc = pattern(*+* $nl.chan);@ nl.voc = sar(g/+//$nl.voc)
+        @ nl.non = pattern(*.* $nl.chan);@ nl.non = sar(g/.//$nl.non)
+        @ sc.nicksperline = [$before(. ${(word(0 $geom()) - 12)/12}.)]
+        @ _wid = [${((sc.nicksperline*12)-24) / 2}]
+        @ _win = chanwin($chan)
+        xecho -w $_win      $(sc.border.topleft)$pad(${_wid*2+10} $chan$pad(${_wid+5-strlen($chan)/2}  ))$(sc.border.topright)
+        if ([$#nl.ops]>0) {@sc.doops($nl.ops)}
+        if ([$#nl.voc]>0) {@sc.dovoc($nl.voc)}
+        if ([$#nl.non]>0) {@sc.donon($nl.non)}
+        xecho -w $_win      $(sc.border.botleft)$pad(${(_wid*2)+10}  )$(sc.border.botright)
+    }
+    {echo $G you are not in that channel.}
+}
+
+alias sco scano
+alias scano {
+    ^local chan;
+    if ([$0])
+        {@ chan = channame($0)}
+        {@ chan = C}
+    if (match($chan $mychannels())) {
+        @ nl.ops = pattern(*@* $channel($chan));@ nl.ops = sar(g/@//$nl.ops)
+        if ([$#nl.ops]>0) {
+            @ sc.nicksperline = [$before(. ${(word(0 $geom()) - 12)/12}.)]
+            @ _wid = [${((sc.nicksperline*12)-24) / 2}]
+            @ _win = chanwin($chan)
+            xecho -w $_win      $(sc.border.topleft)$pad(${_wid*2+10} $chan$pad(${_wid+5-strlen($chan)/2}  ))$(sc.border.topright)
+            @sc.doops($nl.ops)
+            xecho -w $_win      $(sc.border.botleft)$pad(${(_wid*2)+10}  )$(sc.border.botright)
+        }
+    }
+    {echo $G you are not in that channel.}
+}
+
+alias scv scanv
+alias scanv {
+    ^local chan;
+    if ([$0])
+        {@ chan = channame($0)}
+        {@ chan = C}
+    if (match($chan $mychannels())) {
+        @ nl.voc = pattern(*+* $channel($chan));@ nl.voc = sar(g/+//$nl.voc)
+        if ([$#nl.voc]>0) {
+            @ sc.nicksperline = [$before(. ${(word(0 $geom()) - 12)/12}.)]
+            @ _wid = [${((sc.nicksperline*12)-24) / 2}]
+            @ _win = chanwin($chan)
+            xecho -w $_win      $(sc.border.topleft)$pad(${_wid*2+10} $chan$pad(${_wid+5-strlen($chan)/2}  ))$(sc.border.topright)
+            @sc.dovoc($nl.voc)
+            xecho -w $_win      $(sc.border.botleft)$pad(${(_wid*2)+10}  )$(sc.border.botright)
+        }
+    }
+    {echo $G you are not in that channel.}
+}
+
+alias scn scann
+alias scann {
+    ^local chan;
+    if ([$0])
+        {@ chan = channame($0)}
+        {@ chan = C}
+    if (match($chan $mychannels())) {
+        @ nl.non = pattern(*.* $channel($chan));@ nl.non = sar(g/.//$nl.non)
+        if ([$#nl.non]>0) {
+            @ sc.nicksperline = [$before(. ${(word(0 $geom()) - 12)/12}.)]
+            @ _wid = [${((sc.nicksperline*12)-24) / 2}]
+            @ _win = chanwin($chan)
+            xecho -w $_win      $(sc.border.topleft)$pad(${_wid*2+10} $chan$pad(${_wid+5-strlen($chan)/2}  ))$(sc.border.topright)
+            @sc.donon($nl.non)
+            xecho -w $_win      $(sc.border.botleft)$pad(${(_wid*2)+10}  )$(sc.border.botright)
+        }
+    }
+    {echo $G you are not in that channel.}
+}
+
+alias sc.doopers {
+    ^local line
+    ^local ix 0
+    xecho -w $_win      $(sc.border.subleft)$pad(${_wid-1}  )$(hwht)o$(cl)pers$(hwht):$(cl) $pad(5 $#*)$pad(${_wid-1}  )$sc.border.subright
+    ^assign -line
+    fe ($*) foof {
+        if (ix == sc.nicksperline)
+            {xecho -w $_win      $(sc.border.left) $(line)$(sc.border.right);@ix=0;@line=[]}
+        if (left(1 $foof) == [@])
+            {@push(line $operoppre$right(10 $[11]foof))}
+        if  (left(1 $foof) == [*])
+                {@push(line $opervocre$right(10 $[11]foof))}
+        if        (left(1 $foof) == [.])
+                    {@push(line $opernonpre$right(10 $[11]foof))}
+        @ix++
+    }
+    while (ix < sc.nicksperline)
+        {@push(line $pad(11  ));@ix++}
+    xecho -w $_win      $(sc.border.left) $(line)$(sc.border.right)
+}
+
+alias sci scani
+alias scani {
+    ^local chan;
+    if ([$0])
+        {@ chan = channame($0)}
+        {@ chan = C}
+    if (match($chan $mychannels())) {
+        @ nl.opers = pattern(\\** $channel($chan));@ nl.opers = sar(g/\*//$nl.opers)
+        if ([$#nl.opers]>0) {
+            @ sc.nicksperline = [$before(. ${(word(0 $geom()) - 12)/12}.)]
+            @ _wid = [${((sc.nicksperline*12)-24) / 2}]
+            @ _win = chanwin($chan)
+            xecho -w $_win      $(sc.border.topleft)$pad(${_wid*2+10} $chan$pad(${_wid+5-strlen($chan)/2}  ))$(sc.border.topright)
+            @sc.doopers($nl.opers)
+            xecho -w $_win      $(sc.border.botleft)$pad(${(_wid*2)+10}  )$(sc.border.botright)
+        }
+    }
+    {echo $G you are not in that channel.}
+}

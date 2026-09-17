@@ -1,0 +1,10 @@
+^fset format_whois_header $(hwht) ÚÄÄ$(c2)Ä$(hwht)Ä$(c2)ÄÄÄÄ$(c1)Ä$(c2)ÄÄ$(c1)ÄÄ-$(hblk)  -      -           ú
+^fset format_whois_nick $(hblk)[$(c2)³$(hblk)] ($(hwht)$0$(hblk)!$(c1)$1$(c2)@$(c1)$2$(hblk))$(cl)
+^fset format_whois_name $(hblk)[$(c1)³$(hblk)]  $(c2)r$(c1)ealname  $(hblk)..$(cl) $0-
+^fset format_whois_channels $(hblk)[$(c1)³$(hblk)]  $(c2)c$(c1)hannels  $(hblk)..$(cl) $sar(g/@/$(hwht)@$(cl)/$0-)
+^fset format_whois_server $(hblk)[$(c1)³$(hblk)]  $(c2)s$(c1)erver    $(hblk)..$(cl) $0 $(hblk)($(cl)$1-$(hblk))$(cl)
+^fset format_whois_idle $(hblk)[$(c1)³$(hblk)]  $(c2)i$(c1)dle      $(hblk)..$(cl) $0 hours $1 mins $2 secs
+^fset format_whois_away $(hblk)[$(c1)³$(hblk)]  $(c2)a$(c1)way      $(hblk)..$(cl) $0 - $1-
+^fset format_whois_oper $(hblk)[$(c1)³$(hblk)]  $(c2)o$(c1)per      $(hblk)..$(cl) $0 $1-
+^fset format_whois_actually $(hblk)[$(c1)³$(hblk)]  $(c2)a$(c1)ctual    $(hblk)..$(cl) $3-
+^fset format_whois_footer $(c1) À-$(hblk) -Ä- -     -              -          -

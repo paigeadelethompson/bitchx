@@ -1,0 +1,12 @@
+  dcc bar formats 
+  $(hblk)[$(cl)1$(hblk)]
+  $cparse($(c1)ÚÄÄÄÄÄÄÄÄÄÄÄ)$(hblk)----$cparse($(c1)ÄÄÄÄÄÄÄÄ)$(hblk)-$cparse($(c1)ÄÄ)$(hblk)-$cparse($(c1)ÄÄÄÄÄÄ-)$(hblk)ÄÄ-ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ        Ä
+ $(hblk)[$cparse($(c1)³)$(hblk)]$(cl) #   type   nick        status   complete    perc  kb$(hblk)/$(cl)s      file 
+ $(hblk)[$cparse($(c1)³)$(hblk)]$(cl) 1   GET    void        Active   $(hblk)±°°°°°°°°°$(cl)  2%    1.426   cyp01hr3.tar.gz
+ $(hblk) À---Ä-Ä-ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+  $(hblk)[$(cl)2$(hblk)]
+  $(hwht)ÚÄÄ$(cl)Ä$(hwht)-$(cl)- $(hblk)-$(cl)    ú$(cl)ú$(hblk)--$(cl)ÄÄ$(hblk)ÄÄÄÄ$(cl)ÄÄ$(hblk)Ä$(cl)ÄÄÄ$(hblk)ÄÄÄ$(cl)ÄÄÄÄÄÄ$(hblk)Ä$(cl)ÄÄÄÄÄÄÄ$(hwht)ÄÄ$(cl)ÄÄ$(hwht)ÄÄÄÄ$(cl)ÄÄ$(hwht)ÄÄ$(cl)ÄÄÄÄ$(hwht)ÄÄÄÄÄ$(cl)ÄÄ$(hwht)ÄÄ¿
+ $(cl) ³ $(hblk)[$(hcyn)t$(cyn)ype$(hblk) ] [$(hcyn)n$(cyn)ick$(hblk)      ] [$(hcyn)c$(cyn)omplete$(hblk)          ] [$(hcyn)f$(cyn)ile $(hblk)          ] [$(hcyn)k$(cyn)b/s $(hblk)]$(cl) ³
+ $(hblk) ³ [$(cl)GET$(hblk)  ] [$(cl)void $(hblk)     ] [$(cl)11.43kb$(hblk)/$(cl)59.15kb $(hblk)  ] [$(cl)cyp01hr3.tar.gz$(hblk)] [$(cl)1.904$(hblk)]$(cl) ³
+ $(hblk) ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ

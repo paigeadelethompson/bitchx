@@ -1,0 +1,54 @@
+## design from evolver, sorta...
+## cl
+
+alias stat18 {
+^set status_format1 $(hblk)Ú$(sc1)ÄÄÄÄÄ$(sc2)Ä$(hblk)¿ %@%*%=%N$(hblk)\($(cl)%#$(hblk)\) %C$(hblk)\($(cl)%+$(hblk)\) %M %> $(cl) %! $(hblk)-Ä$(sc1)¿
+^set status_format2 $(sc2)³ $(hblk)Ú$(hwht)³³$(hblk)¿ $(sc1)³ %S $(hblk)\($(sc1)l$(sc1)ag$(hblk)/$(hwht)%L$(hblk)\) \($(sc1)t$(sc1)ime$(hblk)/$(hwht)%T$(hblk)\) %> $(hblk)\($(sc1)win$(hblk)/$(hwht)%R$(hblk)\)$(cl)         $(sc1)³
+^set status_format3 $(sc1)³ $(hblk)À$(hwht)³³$(hblk)Ù $(sc2)³%& %M %A $(cl)  %Q %> %F $(hblk)--ÄÄÄÄÙ
+^set input_prompt $(hblk)À$(sc1)ÄÄÄÄÄ$(sc2)Ä$(hblk)Ù 
+^set status_chanop $(sc1)@$(cl)
+^set status_oper $(hwht)*$(cl)
+^set status_voice $(sc1)+$(cl)
+^set status_nick $(cl)%N
+^set status_umode $(hwht)+$(cl)%#$(cl)
+^set status_channel $(cl)%C$(cl)
+^set status_mode $(hwht)+$(cl)%+$(cl)
+^set status_users $(hblk)\($(hwht)o$(hblk)/$(sc1)%! $(hwht)n$(hblk)/$(sc1)%! $(hwht)i$(hblk)/$(sc1)%! $(hwht)v$(hblk)/$(sc1)%!$(hblk)\)$(cl)
+^set status_server $(sc1)%S$(cl)
+^set status_lag $(hwht)%L$(cl)
+^set status_away $(hblk)[$(sc2)a$(sc1)way $(sc2)%A$(hblk)]$(cl) 
+^set status_query $(hblk)[$(sc2)q$(sc1)uery$(sc2) %Q$(hblk)]$(cl)
+^set status_clock $(hwht)%T$(cl)
+^set status_notify $(hblk)[$(sc1)act$(hblk)/$(sc1)%F$(hblk)]$(cl)
+^set status_dcccount  $(hblk)[$(sc1)dcc$(hblk)/$(sc1)gets$(hblk):$(hwht) %& $(sc1)sends$(hblk):$(hwht) %&$(hblk)]$(cl)
+^set status_mail $(hblk)\($(sc2)m$(sc1)ail$(sc2) %M$(hblk)\)$(cl)
+^set status_oper_kills $(hblk)[$(sc2)n$(sc1)k$(hblk)/$(sc1)%K $(sc2)o$(sc1)k$(hblk)/$(sc1)%K$(hblk)]$(cl)
+}
+
+alias wsetupdate {
+^wset * status_format1 $status_format1
+^wset * status_format2 $status_format2
+^wset * status_format3 $status_format3
+^wset * status_chanop $status_chanop
+^wset * status_oper $status_oper
+^wset * status_voice $status_voice
+^wset * status_nick $status_nick
+^wset * status_umode $status_umode
+^wset * status_channel $status_channel
+^wset * status_mode $status_mode
+^wset * status_users $status_users
+^wset * status_server $status_server
+^wset * status_lag $status_lag
+^wset * status_away $status_away
+^wset * status_query $status_query
+^wset * status_clock $status_clock
+^wset * status_notify $status_notify
+^wset * status_dcccount $status_dcccount
+^wset * status_mail $status_mail
+^set status_does_expandos ON
+^window split off
+^window triple on
+}
+stat18
+wsetupdate
+^set status_does_expandos OFF

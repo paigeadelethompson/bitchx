@@ -1,0 +1,97 @@
+@maxdccform=7
+alias dccformat if ([$0]) {
+	if ([$0]<=[$maxdccform]) {do.dccform $0}{xecho -b cypress usage: /format n <1-$maxdccform> current format is $(hwht)$dccform$(cl) }
+}
+alias do.dccform {
+switch ($0) {
+	(1) {dccform1;xecho -b dcc format set to $(hwht)$dccform}
+	(2) {dccform2;xecho -b dcc format set to $(hwht)$dccform}
+	(3) {dccform3;xecho -b dcc format set to $(hwht)$dccform}
+	(4) {dccform4;xecho -b dcc format set to $(hwht)$dccform}
+	(5) {dccform5;xecho -b dcc format set to $(hwht)$dccform}
+	(6) {dccform6;xecho -b dcc format set to $(hwht)$dccform}
+	(7) {dccform7;xecho -b dcc format set to $(hwht)$dccform}
+	(*) {format r}}
+}
+
+alias do.dccload {
+switch ($0) {
+        (1) {dccform1}
+        (2) {dccform2}
+        (3) {dccform3}
+        (4) {dccform4}
+        (5) {dccform5}
+	(6) {dccform6}
+	(7) {dccform7}
+	(*) {format r}}
+}
+
+alias dccform1 { 
+@ dccform = 1
+^fset FORMAT_DCC_CHAT %@%K.%c.%K[%w$$1%K\(%Wd%ncc%K)] %n$$3-
+^fset FORMAT_DCC_CONNECT $$G %K.%c.%K[%Wd%ncc%K] %c$$1 %nconnection with %C$$2%K[%c$$4%K:%c$$5%K]%n established
+^fset FORMAT_DCC_ERROR $$G %K.%c.%K[%Wd%ncc%K]%c lost %W$$1%n to %W$$2%K [%n$$3-%K]%n
+^fset FORMAT_DCC_LOST $$G %@%K.%c.%K[%Wd%ncc%K]%c $$1 %K:%n$$2 %K[%n$$3%K]%n $$4 $$5 completed in $$6 secs %K(%n$7 $8%K/%nsec%K)%n
+^fset FORMAT_DCC_REQUEST $$G %@%K.%c.%K[%Wd%ncc%K]%c $$1 %K(%n$2%K)%n request from %W$$3%K[%n$$4 %K(%n$5%K:%n$6%K)]%n $$8 $$7
+^fset FORMAT_SEND_DCC_CHAT %K.%c.%K[%Wd%ncc%K\(%n\$1%K)]%n $$2-
+}
+
+alias dccform2 {
+@ dccform = 2
+^fset FORMAT_DCC_CHAT %@$(hblk).$(c1).$(hblk)[$(c1)$$1$(hblk)\($(c2)dcc$(hblk))] %n$$3-
+^fset FORMAT_DCC_CONNECT $$G $(c1).$(hblk).[$(c2)dcc$(hblk)]$(c1) $$1 $(cl)connection with $(c1)$$2$(hblk)[$(c1)$$4$(c2):$(c1)$$5$(hblk)]$(cl) established
+^fset FORMAT_DCC_ERROR $$G $(c1).$(hblk).[$(c2)dcc$(hblk)]$(cl) lost $(c1)$$1$(cl) to $(c1)$$2$(hblk) [$(c2)$$3-$(hblk)]$(cl)
+^fset FORMAT_DCC_LOST $$G %@$(c1).$(hblk).[$(c2)dcc$(hblk)]$(c1) $$1 $(c2):$(c1)$$2 $(hblk)[$(c1)$$3$(hblk)]$(c1) $$4 $$5 $(cl)completed in $(c1)$$6$(cl) secs $(hblk)($(c1)$7 $8$(hblk)/$(cl)sec$(hblk))$(cl)
+^fset FORMAT_DCC_REQUEST $$G %@$(c1).$(hblk).[$(c2)dcc$(hblk)]$(c1) $$1 $(hblk)($(c1)$2$(hblk))$(cl) request from $(c2)$$3$(hblk)[$(c1)$4$(hblk)($(c1)$5$(c2):$(c1)$6$(hblk))]$(cl) $$8 $$7
+^fset FORMAT_SEND_DCC_CHAT $(c1).$(hblk).[$(c2)dcc$(hblk)\($(c1)\$1$(hblk))]$(cl) $$2-
+}
+
+alias dccform3 {
+@ dccform = 3
+^fset FORMAT_DCC_CHAT %@%K[%G$$1%K(%gdcc%K)] %n$$3-
+^fset FORMAT_DCC_CONNECT $$G %RDCC%n $$1 with %W$$2%K[%c$$4:$$5%K]%n established
+^fset FORMAT_DCC_ERROR $$G %RDCC%n lost %w$$1%w %rto $$2 %K[%w$$3-%K]
+^fset FORMAT_DCC_LOST $$G %@%RDCC%n %W$$1%n:%g$$2%n %K[%C$$3%K]%n $$4 $$5 completed in $$6 secs %K(%W$7 $8/sec%K)
+^fset FORMAT_DCC_REQUEST $$G %@%RDCC%n $$1 %K\(%n\$2%K)%n request from %W$$3%K[%c$$4 [$$5:$$6]%K]%n $$8 $$7
+^fset FORMAT_SEND_DCC_CHAT %K[%rdcc%K\(%R\$1%K)] %n$$2-
+}
+
+alias dccform4 {
+@ dccform = 4
+^fset FORMAT_DCC_CHAT %@%K[$(c2)$$1%K\($(c1)dcc%K)] %n$$3-
+^fset FORMAT_DCC_CONNECT $$G $(c2)DCC%n $$1 %nconnection with %W$$2%K[$(c2)$$4, port $$5%K]%n established
+^fset FORMAT_DCC_ERROR $$G %RDCC%n lost %w$$1%w %rto $$2 %K[%w$$3-%K]
+^fset FORMAT_DCC_LOST $$G %@$(c2)DCC%n %W$$1%n $(hblk):$(c1)$$2%n %K[%C$$3%K]%n $$4 $$5 completed in $$6 secs %K(%W$7 $8/sec%K)
+^fset FORMAT_DCC_REQUEST $G %@$(c2)DCC%n \$1 %K\(%n\$2%K)%n request from %W$$3%K[$(c1)$$4 [$$5:$$6]%K]%n $$8 $$7
+^fset FORMAT_SEND_DCC_CHAT %K[$(c3)dcc%K\($(c4)\$1%K)] %n$$2-
+}
+
+alias dccform5 {
+@ dccform = 5
+^fset FORMAT_DCC_CHAT %@%K\($(c2)dcc%K!$(hwht)$$1%K) %n$$3-
+^fset FORMAT_DCC_CONNECT $$G $(c2)DCC%n $$1 %nconnection with %W$$2%K\($(c2)$$4, port $$5%K)%n established
+^fset FORMAT_DCC_ERROR $$G %RDCC%n lost %w$$1%w %rto $$2 %K[%w$$3-%K]
+^fset FORMAT_DCC_LOST $$G %@$(c2)DCC%n %W$$1%n $(hblk):$(c1)$$2%n %K[%C$$3%K]%n $$4 $$5 completed in $$6 secs %K(%W$7 $8/sec%K)
+^fset FORMAT_DCC_REQUEST $G %@$(c2)DCC%n \$1 %K\(%n\$2%K)%n request from %W$$3%K[$(c1)$$4 [$$5:$$6]%K]%n $$8 $$7
+^fset FORMAT_SEND_DCC_CHAT %K¯\($(c2)dcc%K!$(hwht)\$1%K) %n$$2-
+}
+
+alias dccform6 {
+@ dccform = 6
+^fset FORMAT_DCC_CHAT %@$(cl)dcc%K!$(hwht)$$1 $(hblk)­  %n$$3-
+^fset FORMAT_DCC_CONNECT $$G $(c1)DCC%n $$1 %nconnection with %W$$2%K\($(c2)$$4, port $$5%K)%n established
+^fset FORMAT_DCC_ERROR $$G %RDCC%n lost %w$$1%w %rto $$2 %K[%w$$3-%K]
+^fset FORMAT_DCC_LOST $$G %@$(c2)DCC%n %W$$1%n $(hblk):$(c1)$$2%n %K[%C$$3%K]%n $$4 $$5 completed in $$6 secs %K(%W$7 $8/sec%K)
+^fset FORMAT_DCC_REQUEST $G %@$(c2)DCC%n \$1 %K\(%n\$2%K)%n request from %W$$3%K[$(c1)$$4 [$$5:$$6]%K]%n $$8 $$7
+^fset FORMAT_SEND_DCC_CHAT %K¯\$(cl)dcc%K!$(hwht)\$1 $(hblk)­ %n$$2-
+}
+
+alias dccform7 {
+@ dccform = 7
+^fset format_Dcc_chat $$G %@$(hblk)[$(grn)$$1$(hblk)\($(hgrn)dcc$(hblk)\)]$(cl) $$3-
+^fset format_dcc_connect $$G %K.%c.%K[%Wd%ncc%K] %c$$1 %nconnection with %C$$2%K[%c$$4%K:%c$$5%K]%n established
+^fset FORMAT_DCC_ERROR $$G %K.%c.%K[%Wd%ncc%K]%c lost %W$$1%n to %W$$2%K [%n$$3-%K]%n
+^fset FORMAT_DCC_LOST $$G %@%K.%c.%K[%Wd%ncc%K]%c $$1 %K:%n$$2 %K[%n$$3%K]%n $$4 $$5 completed in $$6 secs %K(%n$7 $8%K/%nsec%K)%n
+^fset FORMAT_DCC_REQUEST $$G %@%K.%c.%K[%Wd%ncc%K]%c $$1 %K(%n$2%K)%n request from %W$$3%K[%n$$4 %K(%n$5%K:%n$6%K)]%n $$8 $$7
+^fset format_send_dcc_chat $$G $(hblk)[$(hgrn)dcc$(hblk)\($(grn)$$1$(hblk)\)]$(cl) $$2-
+}

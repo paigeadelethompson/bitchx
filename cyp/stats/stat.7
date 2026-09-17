@@ -1,0 +1,54 @@
+^set input_prompt $(sc2).$(sc1).$(sc3)[$(cl)$C$(sc3)]$(cl) 
+alias stat7 {
+^set status_clock %T
+^set status_format $(sc2)Ú$(sc1)Ä$(sc3)-$(cl) %@%=%*$(sc4)%N$(sc3)[$(cl)%#$(sc3)]$(cl) $(sc4)%C)$(sc3)[$(sc1)%+$(sc3)] $(sc3)-$(sc1)Ä$(sc2)Ä$(sc1)Ä$(sc3)-$(cl) %M%! %> $(sc2)-$(sc1)Ä$(sc3)¿$(cl)
+^set status_format1 $(sc2)Ú$(sc1)Ä$(sc3)-$(cl) %@%=%*$(sc4)%N$(sc3)[$(cl)%#$(sc3)] $(sc4)%C$(sc3)[$(sc1)%+$(sc3)]$(cl) $(sc3)-$(sc1)Ä$(sc2)Ä$(sc1)Ä$(sc3)-$(cl) %! %> %A $(sc2)-$(sc1)Ä$(sc3)¿$(cl)
+^set status_format2 $(sc3)À$(sc1)Ä$(sc2)-$(sc4) $(sc2)s$(sc1)erv$(sc3)[$(sc4)%S$(sc3)]$(sc2) w$(sc1)in$(sc3)[$(sc1) %R$(sc3)]$(cl) $(sc2)-$(sc1)Ä$(sc3)Ä$(sc1)Ä$(sc2)-$(cl)  %L %Q %> $(sc2)t$(sc1)ime$(hblk)/$(sc2)%T $(sc3)-$(sc1)Ä$(sc2)Ù$(cl)
+^set status_users $(sc3)[$(sc1)o$(sc3)/$(sc2)%! $(sc1)n$(sc3)/$(sc2)%! $(sc1)i$(sc3)/$(sc2)%! $(sc1)v$(sc3)/$(sc2)%!$(sc3)]$(cl)
+^set status_chanop $(sc2)@$(cl)
+^set status_voice $(sc1)+$(cl)
+^set status_oper $(hcyn)*$(cl)
+^set status_nick $(cl)%N
+^set status_umode $(sc2)+$(sc1)%#$(cl)
+^set status_server $(sc4)%S$(cl)
+^set status_channel %C
+^set status_mode $(sc2)+$(sc1)%+$(cl)
+^set status_query $(sc3)[$(sc1)q$(sc3)/$(sc2)%Q$(sc3)]$(cl)
+^set status_notify $(sc3)[$(sc2)a$(sc1)ct$(sc3)/$(sc2)%F$(sc3)]$(cl)
+^set status_away $(sc3)[$(sc2)a$(sc1)way$(sc3)/$(sc2)%A$(sc3)]$(cl)
+^set status_dcccount [dcc\(sends/%& gets/%&\)]
+^set status_lag $(sc3)[$(sc2)l$(sc1)ag$(sc3)/$(sc2)%L$(sc3)]$(cl)
+^set status_mail $(sc3)[$(sc2)m$(sc1)ail$(sc3)/$(sc2)%M$(sc3)]$(cl)
+^set status_format3 $(sc1).$(sc3).[$(sc2)t$(sc1)opic$(sc3).$(sc1)%C$(sc3)]$(cl) %- %>
+}
+
+alias wsetupdate {
+^wset * status_format $status_format
+^wset * status_format1 $status_format1
+^wset * status_umode $status_umode
+^wset * status_format2 $status_format2
+^wset * status_lag $status_lag
+^wset * status_channel $status_channel
+^wset * status_mode $status_mode
+^wset * status_chanop $status_chanop
+^wset * status_format3 $status_format3
+^wset * status_mail $status_mail
+^wset * status_users $status_users
+^wset * status_server $status_server
+^wset * status_voice $status_voice
+^wset * status_away $status_away
+^wset * status_notify $status_notify
+^wset * input_prompt $input_prompt
+^wset * status_hold_lines $status_hold_lines
+^wset * status_query $status_query
+^wset * status_format3 $status_format3
+^wset * status_dcccount $status_dcccount
+^wset * status_clock $status_clock
+^wset * status_nick $status_nick
+}
+stat7
+wsetupdate
+# .:. clogic '98
+^set status_does_expandos OFF
+^window triple off
+dotopwin

@@ -1,0 +1,132 @@
+
+alias scano sco
+alias scanv scv
+alias scann scn
+
+
+^on ^channel_synch - "*"
+alias sc scan
+
+alias fix.scan if ([$0]) {@_t=[$[11]0]
+@_t=msar(g/@/$(hcyn)@$(hblu)/+/$(hmag)+$(hblu)/./ /$strip(/ $(_t)))
+@function_return=_t}{@function_return=[$[11]empty_string]}
+
+
+## propz to robohak for clueing me into this way of scanning :)
+on raw_irc -"% 366 *"
+on ^353 * {@nicks#=[$3-]}
+on ^raw_irc "% 366 *" {
+	^local scan1
+	^push scan1 $pattern(*@* $nicks)
+	^push scan1 $pattern(*+* $nicks)
+	^push scan1 $filter(*+* $filter(*@* $nicks))	
+         @nicks.ops=pattern(*@* $nicks)
+         @nicks.voc=pattern(*+* $nicks)
+         @nicks.non=filter(*+* $filter(*@* $nicks))
+         @chan=C
+        	^xecho -b -w $chanwin($3) $(hblk)[$(hgrn)Users$(hblk)\($(grn)$chan$(hblk):$(grn)${#nicks.ops + #nicks.non}$(hblk))] 
+				@_swidth=(word(0 $geom()) - 4) / 13.6
+					fe ($jot(1 $_swidth)) n1 {
+					^push _nlist nlist.$n1
+					^push _nlist2 $(hblk)[$(hblu)\$fix.scan\(\$nlist\.$n1)$(hblk)]
+					}
+ 						fe ($scan1) $_nlist {   
+							eval xecho -w $chanwin($3)  $_nlist2
+						}
+
+        					^assign -nicks;^assign -scan1;^assign -_nlist;^assign -_nlist2
+}
+
+
+
+alias scan {
+	if ([$0]) {@ chan = [$0]}{@ chan = C}
+	^local ops 0
+    ^local voc 0
+    ^local non 0
+	@ blah = sar(g/\*//$channel($chan))
+	^push scan1 $pattern(*@* $blah)
+	^push scan1 $pattern(*+* $blah)
+	^push scan1 $pattern(*.* $blah)
+	@ nicks.ops = pattern(*@* $channel($chan))
+	@ nicks.voc = pattern(*+* $channel($chan))
+	@ nicks.non = pattern(*.* $channel($chan))
+		^xecho -b $(hblk)[$(hgrn)Users$(hblk)\($(grn)$chan$(hblk):$(grn)${#nicks.ops + #nicks.non}$(hblk))] 
+		@_swidth=(word(0 $geom()) - 4) / 13.6
+			fe ($jot(1 $_swidth)) n1 {
+			^push _nlist nlist.$n1
+			^push _nlist2 $(hblk)[$(hblu)\$fix.scan\(\$nlist\.$n1)$(hblk)]
+			}
+ 				fe ($scan1) $_nlist {   
+					eval xecho   $_nlist2
+				}
+
+        			^assign -nicks;^assign -scan1;^assign -_nlist;^assign -_nlist2
+}
+
+
+
+
+alias sco {
+	if ([$0]) {@chan=[$0]}{@ chan = C}
+    ^local nicks.ops 0
+	@ blah = sar(g/\*//$channel($chan))
+	^push scan1 $pattern(*@* $blah)
+	@ nicks.ops = pattern(*@* $channel($chan))        
+		^xecho -b $(hblk)[$(hgrn)ChanOps$(hblk)\($(grn)$chan$(hblk):$(grn)$#nicks.ops$(hblk))] 
+		@_swidth=(word(0 $geom()) - 4) / 13.6
+			fe ($jot(1 $_swidth)) n1 {
+				^push _nlist nlist.$n1
+				^push _nlist2 $(hblk)[$(hblu)\$fix.scan\(\$nlist\.$n1)$(hblk)]
+			}
+ 				fe ($scan1) $_nlist {   
+					eval xecho   $_nlist2
+				}
+
+        			^assign -nicks;^assign -scan1;^assign -_nlist;^assign -_nlist2
+}
+
+
+
+
+alias scn {
+	if ([$0]) {@chan=[$0]}{@ chan = C}
+    ^local nicks.non 0
+	@ blah = sar(g/\*//$channel($chan))
+	^push scan1 $pattern(*.* $blah)
+    @ nicks.non = pattern(*.* $channel($chan))        
+		^xecho -b $(hblk)[$(hgrn)NonChanOps$(hblk)\($(grn)$chan$(hblk):$(grn)$#nicks.non$(hblk))] 
+		@_swidth=(word(0 $geom()) - 4) / 13.6
+			fe ($jot(1 $_swidth)) n1 {
+				^push _nlist nlist.$n1
+				^push _nlist2 $(hblk)[$(hblu)\$fix.scan\(\$nlist\.$n1)$(hblk)]
+			}
+ 				fe ($scan1) $_nlist {   
+					eval xecho   $_nlist2
+				}
+
+        			^assign -nicks;^assign -scan1;^assign -_nlist;^assign -_nlist2
+}
+
+
+
+alias scv {
+	if ([$0]) {@chan=[$0]}{@ chan = C}
+    ^local nicks.voc 0
+    @ blah = sar(g/\*//$channel($chan))  
+	^push scan1 $pattern(*+* $blah)	
+	@ nicks.voc = pattern(*+* $channel($chan))
+		^xecho -b $(hblk)[$(hmag)VoiceUsers$(hblk)\($(mag)$chan$(hblk):$(mag)$#nicks.non$(hblk))] 
+		@_swidth=(word(0 $geom()) - 4) / 13.6
+			fe ($jot(1 $_swidth)) n1 {
+			^push _nlist nlist.$n1
+			^push _nlist2 $(hblk)[$(hblu)\$fix.scan\(\$nlist\.$n1)$(hblk)]
+			}
+ 				fe ($scan1) $_nlist {   
+					eval xecho   $_nlist2
+				}
+
+        			^assign -nicks;^assign -scan1;^assign -_nlist;^assign -_nlist2
+}
+
+

@@ -1,0 +1,31 @@
+$scriptname usage: /format r <num>
+
+$G $Cparse(%K[%n1%K]%n)
+$(hblk).$(cyn).$(hblk)[$(cl)codelogic$(hblk)\($(hwht)d$(cl)cc$(hblk)\)] $(cl)will you phear me?
+$G $(hblk).$(cyn).$(hblk)[$(hwht)d$(cl)cc$(hblk)] $(cyn)GET $(cl)connection with $(hcyn)void^$(hblk)[$(cyn)hellfire.liii.com$(hblk):$(cyn)1280$(hblk)]$(cl) established
+
+$G $Cparse(%K[%n2%K]%n)
+$G $(hblk).$(c1).$(hblk)[$(c1)codelogic$(hblk)\($(c2)dcc$(hblk)\)] $(cl)will you phear me?
+$G $(c1).$(hblk).[$(c2)dcc$(hblk)]$(c1) GET $(cl)connection with $(c1)void^$(hblk)[$(c1)hellfire.liii.com$(c2):$(c1)1280$(hblk)]$(cl) established
+
+$G $Cparse(%K[%n3%K]%n)
+$G $(hblk)[$(hgrn)codelogic$(hblk)\($(grn)dcc$(hblk)\)] $(cl)will you phear me?
+$G $(hred)DCC$(cl) GET with $(hwht)void^$(hblk)[$(cyn)hellfire.liii.com:1280$(hblk)]$(cl) established
+
+$G $Cparse(%K[%n4%K]%n)
+$G $(hblk)[$(c2)codelogic$(hblk)\($(c1)dcc$(hblk)\)] $(cl)will you phear me?
+$G $(c2)DCC$(cl) GET $(cl)connection with $(hwht)void^$(hblk)[$(c2)hellfire.liii.com, port 1280$(hblk)]$(cl) established
+
+$G $Cparse(%K[%n5%K]%n)
+$G $(hblk)\($(c2)dcc$(hblk)!$(hwht)codelogic$(hblk)\) $(cl)will you phear me?
+$G $(c2)DCC$(cl) GET $(cl)connection with $(hwht)void^$(hblk)\($(c2)hellfire.liii.com, port 1280$(hblk))$(cl) established
+
+$G $Cparse(%K[%n6%K]%n)
+$G $(cl)dcc$(hblk)!$(hwht)codelogic $(hblk)­ $(cl)will you phear me?
+$G $(c2)DCC$(cl) GET $(cl)connection with $(hwht)void^$(hblk)\($(c2)hellfire.liii.com, port 1280$(hblk))$(cl) established
+
+$G $Cparse(%K[%n7%K]%n)
+$G $(hblk)[$(hgrn)dcc$(hblk)\($(grn)codelogic$(hblk)\)]$(cl) will you phear me?
+$G $(hblk).$(cyn).$(hblk)[$(hwht)d$(cl)cc$(hblk)] $(cyn)GET $(cl)connection with $(hcyn)void^$(hblk)[$(cyn)hellfire.liii.com$(hblk):$(cyn)1280$(hblk)]$(cl) established
+
+$G current dcc format is set to$(hwht) $(dccform))

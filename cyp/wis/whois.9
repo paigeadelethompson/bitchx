@@ -1,0 +1,20 @@
+^fset FORMAT_WHOIS_ADMIN %K   ³ $(c1)a%ndmin       %K³%n is an irc admin.
+^fset FORMAT_WHOIS_AWAY %K   ³ $(c1)a%nway        %K³%n $1-
+^fset FORMAT_WHOIS_BOT %K   ³ $(c1)b%not         %K³%n a%K:%n$0 p%K:%n$1 %K[$(c1)$2%K]%n $3-
+^fset FORMAT_WHOIS_CHANNELS %K   ³ $(c1)c%nhannels    %K³%n $msar(gÿ@ÿ$cparse($(c1)@%n)ÿ+ÿ$cparse(%m+%n)ÿ$tr(/ÿ//$*))
+^fset FORMAT_WHOIS_FOOTER %K   ÀÄ%nÄ%KÄÄÄ%n- Ä-%KÄ%nÄ%KÄÄ%K³%n- %K-
+^fset FORMAT_WHOIS_FRIEND %K   ³ $(c1)f%nriend      %K³%n f%K:%n$0 $1-
+^fset FORMAT_WHOIS_HEADER %K- Ä%n³%KÄÄ%nÄ%KÄ%nÄÄÄ%WÄ%nÄÄÄ%WÄÄ%n¿
+^fset FORMAT_WHOIS_HELP %K   ³ $(c1)h%nelp        %K³%n $0%K:%n$1-
+^fset FORMAT_WHOIS_IDLE %K   ³ $(c1)i%ndle        %K³%n ${[$0]?[$0h]:}${[$1]?[$1m]:}${[$2]?[$2s]:}
+^fset FORMAT_WHOIS_NAME %K   ³ $(c1)n%name        %K³%n $*
+^fset FORMAT_WHOIS_NICK %K   ³$(c1) $[11]0 %K³ [$(c1)$1%n@$(c1)$2%K] [$(c1)$tolower($3-)%K]%n
+^fset FORMAT_WHOIS_OPER %K   ³ $(c1)o%nper        %K³%n is an irc operator.
+^fset FORMAT_WHOIS_REGISTER %K   ³ $(c1)r%negister    %K³%n $0%K:%n$1-
+^fset FORMAT_WHOIS_SERVER %K   ³ $(c1)s%nerver      %K³%n $0 %K[$(c1)$tolower($1-)%K]%n
+^fset FORMAT_WHOIS_SERVICE %K   ³ $(c1)s%nervice     %K³%n $0%K:%n$1-
+^fset FORMAT_WHOIS_SHIT %K   ³ $(c1)s%nhitlist    %K³%n l%K:%n$0 %K[$(c1)$1%K]%n $2 $3-
+^fset FORMAT_WHOIS_SIGNON %K %Ws%nignon   : $0-
+^fset FORMAT_WHOWAS_HEADER %GÚÄÄÄÄÄ---%gÄ%G--%gÄÄ%G-%gÄÄÄÄÄÄ---%KÄ%g--%KÄÄ%g-%KÄÄÄÄÄÄÄÄÄ--- --  -
+^fset FORMAT_WHOWAS_NICK %G| %W$0%n was %K(%n$1@$2%K)
+^fset FORMAT_WHOIS_ACTUALLY %K   ³ $(c1)a%nctual      %K³%n $3 $msar(g/[/%K[$(c1)/]/%K]$(c1)/./%K.$(c1)/$4-)

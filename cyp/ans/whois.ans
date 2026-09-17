@@ -1,0 +1,98 @@
+$G $(hwht)w$(cl)hois $(hwht)f$(cl)ormats
+
+$(hblk)[$(cl)1$(hblk)]
+$(c1)ÚÄÄÄÄÄ$(hblk)---$(c1)Ä$(hblk)--$(c1)ÄÄ$(hblk)-$(c1)ÄÄÄÄÄÄ---Ä--$(hblk)ÄÄ$(c1)-$(hblk)ÄÄÄÄÄÄÄÄÄ--- --
+$(c1)| $(hwht)lamer $(hblk)\($(cl)lamer@lamer.org$(hblk)) \($(hwht)Internic Non-Profit Organization$(hblk))
+$(c1)³ $(hwht)i$(cl)rcname  : hi i am lame
+$(c1)| $(hwht)c$(cl)hannels : #lamer
+$(hblk)³ $(hwht)s$(cl)erver   : irc.emory.edu (Emory University)
+$(hblk): $(hwht)i$(cl)dle     : 0 hours 16 mins 31 secs (signon: Thu Jan 29 09:14:18 1998)
+$(hblk)ÀÄÄÄÄÄÄÄÄÄÄ$(c1)ÄÄÄÄÄ$(hblk)ÄÄÄÄÄ$(c1)ÄÄÄ$(hblk)ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ ÄÄÄÄÄ-
+
+
+$(hblk)[$(cl)2$(hblk)]
+$(c1)ÄÄ$(hblk)-$(c1)Ä$(hblk)-----$(c1)Ä$(c2)ÄÄÄÄÄÄÄÄÄ$(hblk)¿ Ú$(c2)ÄÄÄÄÄÄÄÄÄÄÄÄ----Ä$(c1)Ä$(hblk)-ÄÄÄÄÄ$(c1)ÄÄÄÄÄÄÄÄ
+         $(hwht)lamer        $(hblk)\($(cl)lamer@lamer.org$(hblk))
+         $(hwht)i$(cl)rcname   $(hblk)| |$(cl)  hi i am lame
+         $(hwht)c$(cl)hannels  $(c1)³ ³$(cl)  #lamer
+         $(hwht)s$(cl)erver    $(hblk)³ $(c1)³$(cl)  irc.emory.edu (Emory University)
+         $(hwht)i$(cl)dle      $(hblk)| |  $(cl)0 hours 16 mins 46 secs
+   $(hblk)ÄÄ--Ä$(c2)ÄÄÄÄÄÄ$(c1)ÄÄÄÄÄ$(hblk)Ù À$(c1)ÄÄÄÄ$(c2)ÄÄÄÄÄÄÄÄ$(c1)ÄÄÄÄÄÄ$(hblk)--$(c1)ÄÄÄÄÄÄÄÄÄÄÄ
+
+$(hblk)[$(cl)3$(hblk)]
+   $(hblk)Ú---ÄÄÄÄÄÄÄ$(c1)-Ä-ÄÄ¿ Ú--ÄÄÄÄÄÄÄÄÄÄÄÄ-$(hblk)Ä---ÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+         $(hwht)lamer        $(hblk)\($(cl)lamer@lamer.org$(hblk))
+         $(c2)i$(c1)rcname   $(hblk)| |  $(cl)hi i am lame
+         $(c2)c$(c1)hannels  ³ ³ $(cl) #lamer
+         $(c2)s$(c1)erver   $(hblk) ³ $(c1)³ $(cl) irc.emory.edu (Emory University)
+         $(c2)i$(c1)dle      $(hblk)| | $(cl) 0 hours 16 mins 57 secs
+$(hblk)ÄÄÄÄÄÄÄÄÄÄ$(c1)-Ä$(hblk)--$(c1)Ä-$(hblk)ÄÄÄÙ $(c1)ÀÄ$(hblk)--$(c1)Ä$(hblk)-$(c1)Ä-ÄÄÄ-ÄÄÄÄÄÄÄÄÄÄÄÄÄ$(c2)ÄÄÄÄÄÄÄÄÄÄ$(c1)Ù
+
+$(hblk)[$(cl)4$(hblk)]
+$(hblk)ÚÄÄ$(c3)ÄÄÄÄÄÄÄÄÄÄÄÄ$(c4)-$(c3)Ä--Ä-$(c4)ÄÄÄÄÄÄÄ$(c3)-ÄÄÄÄÄÄÄÄÄÄÄ
+$(c3)| $(hwht)lamer $(hblk)<$(c3)lamer@lamer.org$(hblk)> $(hblk)\($(hwht)Internic Non-Profit Organization$(hblk))
+$(c3)³ $(c4)i$(c3)rcname $(hblk) / $(cl)hi i am lame
+$(c3)| $(c4)c$(c3)hannels $(hblk)/ $(cl)#lamer
+$(hblk)³ $(c4)s$(c3)erver $(hblk)  / $(cl)irc.emory.edu (Emory University)
+$(hblk): $(c4)i$(c3)dle  $(hblk)   / $(cl)0 hours 17 mins 9 secs (signon: Thu Jan 29 09:14:18 1998)
+$(hblk)ÀÄÄÄ$(c4)ÄÄÄÄÄÄÄÄ$(c3)ÄÄÄÄ---$(c4)Ä$(c3)-$(c4)ÄÄÄÄÄÄÄÄÄ$(c3)---$(c4)ÄÄ$(c3)-ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+
+$(hblk)[$(cl)5$(hblk)]
+$(hblk)ÚÄÄÄ$(c1)ÄÄÄÄÄ$(hblk)--ÚÄÄÄ$(c2)ÄÄÄÄÄÄÄÄÄÄ$(c1)ÄÄÄÄÄÄÄÄÄ
+$(c1)| $(hwht)lamer  $(hblk)   <$(c1)lamer@lamer.org$(hblk)> \($(hwht)Internic Non-Profit Organization$(hblk))
+$(c1)³ $(c2)i$(c1)rcname  $(hblk)|$(cl) hi i am lame
+$(c1)| $(c2)c$(c1)hannels $(hblk)³ $(cl)#lamer
+$(hblk)³ $(c2)s$(c1)erver $(hblk)  | $(cl)irc.emory.edu (Emory University)
+$(hblk): $(c2)i$(c1)dle  $(hblk)   ³ $(cl)0 hours 17 mins 22 secs \(signon: Thu Jan 29 09:14:18 1998)
+$(hblk)ÀÄÄÄÄÄÄ$(c2)ÄÄÄÄÄÄÄÄÄÄÄÄ$(c1)Ä$(c2)Ä$(c1)Ä$(c2)Ä$(c1)ÄÄÄÄÄÄÄÄÄÄ
+          $(hblk)ÀÄÄÄ$(c2)ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ$(c1)-$(c2)--$(c1)-ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+
+$(hblk)[$(cl)6$(hblk)]
+$(hblk)ÚÄ    $(cl)Ä$(cyn) Ä$(cl) Ä Ä$(hwht)Ä¿ÚÄ$(cl)ÄÄÄ $(cyn)Ä$(hblk)         Ä     Ä  $(cl)Ä$(hwht)Ä       $(cl)Ä$(cyn)Ä$(hblk)   Ä$(hblk)
+$(hblk)³ $(hblk)[$(hwht)l$(cl)amer$(cyn)...$(hblk)]  $(cl)³$(hwht)³$(cl) lamer$(hblk)@$(cl)lamer$(hblk).$(cl)org $(hblk)[$(cl)InterNic Non Profit Organization$(hblk)]$(cl)
+$(cl)³ $(hblk)[$(hwht)i$(cl)rcname$(cyn).$(hblk)]  $(cl)³$(hwht)³$(cl) hi i am lame
+$(hwht)³ $(hblk)[$(hwht)c$(cl)hannels$(hblk)]  $(cl)³$(hwht)³$(cl) #lamer
+$(cl)³ $(hblk)[$(hwht)s$(cl)erver$(cyn)..$(hblk)]  $(cl)³$(hwht)³$(cl) irc$(hblk).$(cl)emory$(hblk).$(cl)edu $(hblk)\($(cl)Emory University$(hblk))$(cl)
+$(hblk)³ $(hblk)[$(hwht)i$(cl)dle$(cyn)....$(hblk)]  $(cl)³$(hwht)³$(cl) 0 hours 17 mins 9 seconds $(hblk)\($(cl)signon: Thu Jan 29 09:14:18 1998$(hblk))$(cl)
+$(hblk)ÀÄ   ÄÄ $(cl)Ä  ÄÄ$(cyn)Ä$(cl)ÙÀÄÄ$(hblk)ÄÄ$(cl)Ä$(cyn)ÄÄ  Ä$(hblk)  ÄÄÄ                   $(cl)Ä$(hwht)Ä       $(hblk)  Ä$(cl)
+
+$(hblk)[$(cl)7$(hblk)]$(cl)
+$cparse("%GÚÄÄÄÄÄ---%gÄ%G--%gÄÄ%G-%gÄÄÄÄÄÄ---%KÄ%g--%KÄÄ%g-%KÄÄÄÄÄÄÄÄÄ--- --  -")
+$cparse("%G| %Wlamer %K\(%nlamer@lamer.org%K\) \(%WInternic Network%K\)")
+$cparse("%G³ %Wi%nrcname  : hi i am lame")
+$cparse("%g| %Wc%nhannels : #lamer")
+$cparse("%K³ %Ws%nerver   : irc.emory.edu \(Emory University\)")
+$cparse("%K: %Wi%ndle     : 0 hours 0 mins 28 secs \(signon: Sun Jun 28 10:16:06 1998\)")
+
+$(hblk)[$(cl)8$(hblk)]$(cl)
+$(hwht) ÚÄÄ$(c2)Ä$(hwht)Ä$(c2)ÄÄÄÄ$(c1)Ä$(c2)ÄÄ$(c1)ÄÄ-$(hblk)  -      -           ú$(cl)
+$(hblk)[$(c2)³$(hblk)] \($(hwht)lamer$(hblk)!$(c1)lamer$(c2)@$(c1)lamer.org$(hblk)\)$(cl)
+$(hblk)[$(c1)³$(hblk)]$(c2)  r$(c1)ealname  $(hblk)..$(cl) hi i am lame
+$(hblk)[$(c1)³$(hblk)]$(c2)  c$(c1)hannels  $(hblk)..$(cl) $(hwht)@$(cl)#lamer
+$(hblk)[$(c1)³$(hblk)]$(c2)  s$(c1)erver    $(hblk)..$(cl) irc.emory.edu $(hblk)\($(cl)Emory University$(hblk)\)$(cl)
+$(hblk)[$(c1)³$(hblk)]$(c2)  i$(c1)dle      $(hblk)..$(cl) 0 hours 0 mins 22 secs
+$(c1) À-$(hblk) -Ä- -     -              -          -$(cl)
+
+$(hblk)[$(cl)9$(hblk)]$(cl)
+$cparse("%K- Ä%n³%KÄÄ%nÄ%KÄ%nÄÄÄ%WÄ%nÄÄÄ%WÄÄ%n¿")
+$cparse("%K   ³ %clamerboi    %K³ %K[%clamer%n@%cwhore.com%K] [%cinternic commercial%K]%n")
+$cparse("%K   ³ %cn%name        %K³%n lamer boi")
+$cparse("%K   ³ %cc%nhannels   %K ³%c @%n#whores %m+%n#leet")
+$cparse("%K   ³ %cs%nerver     %K ³ %nirc.cs.cmu.edu %K[%ccalloc\(1,sizeof\(geek\)\)%K]%n")
+$cparse("%K   ³ %ca%nway       %K ³%n bye!")
+$cparse("%K   ³ %ci%ndle       %K ³%n 2m18s")
+$cparse("%K   ÀÄ%nÄ%KÄÄÄ%n- Ä-%KÄ%nÄ%KÄÄ%K³%n- %K-")
+
+
+$(hblk)[$(cl)10$(hblk)]$(cl)
+$cparse("%CÚÄÄÄÄÄÄÄÄ%cÄ%CÄÄ%cÄÄ%CÄ%cÄÄÄÄÄÄÄÄÄ%KÄ%cÄÄ%KÄÄ%cÄ%KÄÄÄÄÄÄÄÄÄÄ-Ä ÄÄÄ   -")
+$cparse("%C³ %Wcodelogic %K\<%nclogic%K@%ncyanetics.lod.com%K\> \(%nInternic Commercial%K\)%n")
+$cparse("%C³ %Wi%nrcname  %K:%n * I'm to elite to read BitchX.doc *")
+$cparse("%c³ %Wc%nhannels %K:%n @#ti @#bitchx")
+$cparse("%K³ %Ws%nerver   %K:%n irc-e.primenet.com \(Frontier GlobalCenter IRC East Server\)")
+$cparse("%K. %Wi%ndle     %K:%n 0 hours 2 mins 34 secs \(signon: Sat Oct 17 19:12:14 1998\)")
+
+
+
+$G cypress current whois format set to $(fnum))

@@ -1,0 +1,42 @@
+:codelogic
+:<cx>
+:cx
+@auth=[codelogic]
+@desc=[<cx>]
+@name=[cx]
+@scdesc=[ ..<cx>]
+@dccbar=[2]
+@mform=6
+@smform=15
+@ncomp=1
+@echostr=22
+@svform=8
+@aform=11
+@kform=16
+@top=[on]
+@plistf=6
+@iform=9
+@fnum=6
+@pub=4
+@snform=5
+@nform=1
+@qform=5
+@pform=9
+@jform=9
+@scform=9
+@cform=9
+@dccform=2
+@snf=6
+@statbar = [stat.17]
+@fnum=6
+@qlogo=3
+@abot=4
+@mdform=3
+@c1=[[0m[36m
+@c2=[[1m[36m
+@c3=[[0m[36m
+@c4=[[1m[37m
+@sc1=[[0m[36m
+@sc2=[[1m[36m
+@sc3=[[1m[37m
+@sc4=[[1m[36m

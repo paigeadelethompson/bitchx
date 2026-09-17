@@ -1,0 +1,52 @@
+## new design 
+## original!@!@#! :>
+## codelogic
+
+^set input_prompt   $(sc1)À$(hblk)Ä$(sc1)ú$(cl)%C 
+
+alias stat14 {
+^set -status_format
+^set status_format1 $(hblk)Ú$(sc1)Ä$(sc2)Ä$(sc1)ú$(cl) %@%=%*%N$(hblk)/$(cl)%#$(sc2)!$(cl)%C$(hblk)/$(cl)%+$(cl) $(sc2)ú$(hblk)Ä%>Ä$(sc2)ú$(cl) %! $(sc1)ú$(sc2)Ä$(sc1)Ä$(hblk)¿$(cl)
+^set status_format2 $(hblk)À$(sc1)Ä$(sc2)Â$(sc1)ú$(cl) %L%A%Q%F $(sc2).$(sc1).$(hblk)[$(hwht)w$(cl)in$(hblk)/$(sc1)%R$(hblk)]$(cl) $(sc2)ú$(hblk)Ä%>Ä$(sc2)ú$(cl) %T $(sc2).$(sc1).$(hblk)[$(cyn)c$(cl)yp$(hblk)/$(cl)$(scriptversion)$(hblk)]$(cl) $(sc1)ú$(sc2)Ä$(sc1)Ä$(hblk)Ù$(cl)
+^set status_chanop $(sc2)@$(cl)
+^set status_voice $(sc1)+$(cl)
+^set status_oper $(hwht)*$(cl)
+^set status_nick $(cl)%N
+^set status_umode $(sc2)+$(sc1)%#$(cl)
+^set status_channel $(cl)%C
+^set status_mode $(sc2)+$(sc1)%+$(cl)
+^set status_no_repeat OFF
+^set status_users $(hblk)[$(hwht)+$(cl)o$(hblk)/$(sc1)%! $(hwht)-$(cl)o$(hblk)/$(sc1)%! $(hwht)+$(cl)i$(hblk)/$(sc1)%! $(hwht)+$(cl)v$(hblk)/$(sc1)%!$(hblk)]$(cl)
+^set status_clock $(sc2).$(sc1).$(hblk)[$(hwht)t$(hblk)/$(sc1)%T$(hblk)]$(cl)
+^set status_lag $(sc2).$(sc1).$(hblk)[$(hwht)l$(hblk)/$(sc1)%L$(hblk)]$(cl)
+^set status_away  $(sc2).$(sc1).$(hblk)[$(hwht)a$(cl)way$(sc1) %A$(hblk)]$(cl)
+^set status_query  $(sc2).$(sc1).$(hblk)[$(hwht)q$(hblk)/$(sc1)%Q$(hblk)]$(cl)
+^set status_notify  $(sc2).$(sc1).$(hblk)[$(hwht)a$(cl)ct$(hblk)/$(sc1)%F$(hblk)]$(cl)
+^set status_format3 $(sc2).$(sc1).$(hblk)[$(hwht)t$(hblk)/$(sc1)%C$(hblk)]$(cl) %- %>
+}
+
+alias wsetupdate { 
+^wset * status_format $status_format
+^wset * status_format1 $status_format1
+^wset * status_format2 $status_format2
+^wset * status_format3 $status_format3
+^wset * status_chanop $status_chanop
+^wset * status_voice $status_voice
+^wset * status_oper $status_oper
+^wset * status_nick $status_nick
+^wset * status_umode $status_umode
+^wset * status_channel $status_channel
+^wset * status_mode $status_mode
+^wset * status_users $status_users
+^wset * status_clock $status_clock
+^wset * status_lag $status_lag
+^wset * status_away $status_away
+^wset * status_query $status_query
+^wset * status_notify $status_notify
+}
+stat14 
+wsetupdate
+^set status_does_expandos OFF
+^window triple off
+dotopwin
+# .:. clogic '98

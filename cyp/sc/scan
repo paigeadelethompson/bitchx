@@ -1,0 +1,11 @@
+alias sformat {
+	switch ($0) {
+		(1) {@ snf = 1;^eval load $twiddle($HOME)$(loadpath)sc/scan.1}
+		(2) {@ snf = 2;^eval load $twiddle($HOME)$(loadpath)sc/scan.2}
+		(3) {@ snf = 3;^eval load $twiddle($HOME)$(loadpath)sc/scan.3}
+		(4) {@ snf = 4;^eval load $twiddle($HOME)$(loadpath)sc/scan.4}
+		(5) {@ snf = 5;^eval load $twiddle($HOME)$(loadpath)sc/scan.5}
+		(6) {@ snf = 6;^eval load $twiddle($HOME)$(loadpath)sc/scan.6}
+	}
+^xecho -b cypress scan format set to $(hwht)$(snf)$(cl)	
+}

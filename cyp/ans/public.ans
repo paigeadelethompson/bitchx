@@ -1,0 +1,37 @@
+$cparse(%K[%n1%K]%n)
+$cparse("%K<%nvoid^%K>%n i am reeto")
+$cparse("%K<%ncodelogic%K>%n i want to be#!@!")
+
+$cparse(%K[%n2%K]%n)
+$cparse("%K\(%nvoid^%K\)%n i am reeto")
+$cparse("%K\(%ncodelogic%K\)%n i want to be#!@!")
+
+$cparse(%K[%n3%K]%n)
+$cparse("%K[%nvoid^%K]%n i am reeto")
+$cparse("%K[%ncodelogic%K]%n i want to be#!@!")
+
+$cparse(%K[%n4%K]%n)
+$cparse("%K<%nvoid^%K>%n i am reeto")
+$cparse("%K\(%ccodelogic%K\)%n i want to be#!@!")
+
+$cparse(%K[%n5%K]%n)
+$cparse("%c<%Kvoid^%c>%n i am reeto")
+$cparse("%c<%Kcodelogic%c>%n i want to be#!@!")   
+
+$cparse(%K[%n6%K]%n)
+$cparse("%K<%nvoid^%K>%n i am reeto")
+$cparse("$(c1)<%ncodelogic$(c1)>%n i want to be#!@!")
+
+$cparse(%K[%n7%K]%n)
+$cparse("%B<%nvoid^%B>%n i am reeto")
+$cparse("%P<%ncodelogic%P>%n i want to be#!@!")
+
+$cparse(%K[%n8%K]%n)
+$cparse("%b<%nvoid^%b>%n i am reeto")
+$cparse("%K\(%ncodelogic%K\)%n i want to be#!@!")
+
+$cparse(%K[%n9%K]%n)
+$cparse("%p<%nvoid^%p>%n i am reeto")
+$cparse("%b<%ncodelogic%b>%n i want to be#!@!")
+
+cypress: current public format is$(hwht) $(pub))

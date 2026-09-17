@@ -1,0 +1,25 @@
+/* Done WHOIS WHOLEFT WHOWAS */
+^fset FORMAT_WHOIS_AWAY %K³ %Wa%nway     %K:%n $1-
+^fset FORMAT_WHOIS_BOT $(c1)³ %Wb%not      %K:%n A:$0 P:$1 [$2] $3-
+^fset FORMAT_WHOIS_CHANNELS $(c1)³ %Wc%nhannels %K:%n $0-
+^fset FORMAT_WHOIS_FRIEND $(c1)³ %Wf%nriend   %K:%n L:$0 A:$1 P:$2 $3-
+^fset FORMAT_WHOIS_HEADER $(c2)ÚÄÄÄÄÄÄÄÄ$(c1)Ä$(c2)ÄÄ$(c1)ÄÄ$(c2)Ä$(c1)ÄÄÄÄÄÄÄÄÄ%KÄ$(c1)ÄÄ%KÄÄ$(c1)Ä%KÄÄÄÄÄÄÄÄÄÄ-Ä ÄÄ  Ä   -
+^fset FORMAT_WHOIS_IDLE %K. %Wi%ndle     %K:%n $0 hours $1 mins $2 secs (signon: $stime($3))
+^fset FORMAT_WHOIS_SHIT $(c1)³ %Ws%nhit     %K:%n L:$0 [$1] $2 $3-
+^fset FORMAT_WHOIS_SIGNON %K: %Ws%nignon   %K:%n $0-
+^fset FORMAT_WHOIS_NAME $(c2)³ %Wi%nrcname  %K:%n $0-
+^fset FORMAT_WHOIS_NICK $(c2)³ %W$0 %K(%n$1%K@%n$2%K) (%n$3-%K)
+^fset FORMAT_WHOIS_OPER %K| %Wo%nperator %K:%n $0 is a k-rad packet warrior.
+^fset FORMAT_WHOIS_SERVER %K³ %Ws%nerver   %K:%n $0 ($1-)
+^fset FORMAT_WHOLEFT_HEADER %PÚÄÄÄÄÄ %WWho %PÄÄÄÄÄ%pÄÄÄ%PÄÄÄ%pÄÄ%PÄÄÄÄÄ%pÄÄ%PÄÄ %WChannel%p Ä%KÄ %WServer %KÄ%pÄÄÄÄ%KÄÄ%pÄÄ%KÄÄ-- %WSeconds
+^fset FORMAT_WHOLEFT_USER %P³%n $[-10]0!$[20]1 $[10]2 $[20]4 $3
+^fset FORMAT_WHOLEFT_FOOTER %PÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ%pÄÄ%PÄÄÄ%pÄÄÄ%PÄÄ%pÄ%PÄ%pÄÄÄÄÄ%KÄ%pÄÄÄ%KÄÄÄ%pÄÄ%KÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ-- --  -
+^fset FORMAT_WHOWAS_NICK $(c2)³ %W$0%n was %K(%n$1@$2%K)
+^fset FORMAT_WHOIS_ACTUALLY %K³ %Wa%nctual   %K:%n $3-
+/* Not convered in hades*/
+^fset FORMAT_WHOIS_ADMIN   %K| %Wa%ndmin    : $0 - $1-
+^fset FORMAT_WHOIS_SERVICE %K| %Ws%nervice  : $0 - $1-
+^fset FORMAT_WHOIS_HELP    %K| %Wh%nelp     : $0 - $1-
+^fset FORMAT_WHOIS_REGISTER %K| %Wr%negister : $0 - $1-
+^fset -FORMAT_WHOIS_FOOTER
+^fset -FORMAT_WHOWAS_HEADER 

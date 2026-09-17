@@ -1,0 +1,65 @@
+alias stat21 {
+set STATUS_FORMAT $(hblk)з$(wht)%T %*$(hcyn)%N$(wht)%# %@%C%+ %A%W%H%B%M%Q %>%D %L $(hblk)]
+set STATUS_FORMAT1 $(hblk)зд $(hwht)U$(wht)ser$(hblk): %*$(hcyn)%N$(wht)%#%A %^%H%B %>%D %S $(hblk)д©
+set STATUS_FORMAT2 $(hblk)Ё  $(hwht)C$(wht)hannel$(hblk):$(wht) %@%C%+%W %M%Q %>%T %L $(hblk)ды
+set STATUS_AWAY $(hblk)\($(hwht)A$(hblk)\)$(wht)
+set STATUS_CHANNEL $(hcyn)%C$(wht)
+set STATUS_CHANOP $(cyn)@$(wht)
+set STATUS_HALFOP $(cyn)%$(wht)
+set STATUS_CLOCK $(hwht)T$(wht)ime$(hblk): $(hcyn)%T$(wht)
+set STATUS_HOLD  $(hblk)--$(hwht)More$(hblk)--$(wht)
+set STATUS_HOLD_LINES  $(hwht)H$(wht)old$(hblk): $(hcyn)%B$(wht)
+set STATUS_LAG  $(hwht)L$(wht)ag$(hblk): $(hcyn)%L$(wht)
+set STATUS_MODE $(hblk)\($(hwht)%+$(hblk)\)$(wht)
+set STATUS_MAIL  $(hwht)M$(wht)ail$(hblk): $(hcyn)%M$(wht)
+set STATUS_NOTIFY  $(hwht)N$(wht)otify$(hblk): $(hcyn)%F$(wht)
+set STATUS_OPER $(cyn)*$(wht)
+set STATUS_VOICE $(cyn)+$(wht)
+set STATUS_QUERY  $(hwht)Q$(wht)uery$(hblk): $(hcyn)%Q$(wht)
+set STATUS_SERVER $(hwht)S$(wht)erver$(hblk): $(hcyn)%S$(wht)
+set STATUS_UMODE $(hblk)\($(hwht)+%#$(hblk)\)$(wht)
+set STATUS_OPER_KILLS $(hblk)[$(hwht)nk $(hcyn)%d$(hblk):$(hwht)ok $(hcyn)%d$(hblk)]$(wht)
+set STATUS_WINDOW $(hblk)[$(hwht)Ч$(hblk)]$(wht)
+
+^set STATUS_FORMAT3 BitchX by panasync, Hades formats by Humble %>
+^set STATUS_INSERT 
+^set STATUS_MSGCOUNT  $(hwht)M$(wht)sgs$(hblk): ($(hcyn)%^$(hblk))$(wht)
+^set STATUS_NICK %N
+^set STATUS_OVERWRITE (overtype) 
+^set STATUS_TOPIC %-
+^set STATUS_USER  * type /help for help 
+^set STATUS_DCCCOUNT  [DCC  gets/%& sends/%&]
+^set STATUS_CDCCCOUNT [CDCC gets/%| offer/%|]
+^set STATUS_USERS [$(wht)O$(cyn)/$(hwht)%! N$(cyn)/$(hwht)%! I$(cyn)/$(hwht)%! V$(cyn)/$(hwht)%! F$(cyn)/$(hwht)%!]
+^set STATUS_CPU_SAVER  (%J)
+^set INPUT_PROMPT $(hblk)ю-[$(hwht)b$(wht)itch$(cyn)x$(hblk)]д>$(wht) 
+}
+
+alias wsetupdate {
+^wset * status_format $status_format
+^wset * status_format1 $status_format1
+^wset * status_umode $status_umode
+^wset * status_format2 $status_format2
+^wset * status_lag $status_lag
+^wset * status_channel $status_channel
+^wset * status_mode $status_mode
+^wset * status_chanop $status_chanop
+^wset * status_mail $status_mail
+^wset * status_users $status_users
+^wset * status_server $status_server
+^wset * status_voice $status_voice
+^wset * status_away $status_away
+^wset * status_notify $status_notify
+^wset * input_prompt $input_prompt
+^wset * status_hold_lines $status_hold_lines
+^wset * status_query $status_query
+^wset * status_format3 $status_format3
+^wset * status_clock $status_clock
+^wset * status_nick $status_nick
+}
+
+stat21
+wsetupdate
+^set status_does_expandos OFF
+^window triple off
+dotopwin
